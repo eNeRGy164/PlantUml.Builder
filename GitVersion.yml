@@ -1,7 +1,9 @@
 mode: Mainline
 branches:
+  master:
+    regex: ^(?:master|main)
   feature:
-    regex: ^(?!master|pull)
+    regex: ^(?!master|main|pull)
     tag: beta
   pull-request:
     tag: rc
