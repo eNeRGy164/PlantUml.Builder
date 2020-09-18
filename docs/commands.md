@@ -2,16 +2,23 @@
 
 Following the PlantUML source code.
 
+## Common commands
+
+| Command            | Implemented |
+| ------------------ | ----------- |
+| ' [\<COMMENT>]     | no          |
+| /' [\<COMMENT>] '/ | no          |
+
 ## Activity Diagrams
-| Command | Implemented |
-| ------- | ----------- |
-| start; | no |
-| end; | no |
-| [\<COLOR>] [\<STEREO>] :\<LABEL>\<STYLE> | no |
-| [-[\<COLOR>,\<LINESTYLE>]]-> [\<LABEL>]; | no |
-| fork; | no |
-| fork again; | no |
-| end fork [{\<LABEL>}]; | no |
+| Command                                  | Implemented |
+| ---------------------------------------- | ----------- |
+| start;                                   | no          |
+| end;                                     | no          |
+| [\<COLOR>] [\<STEREO>] :\<LABEL>\<STYLE> | no          |
+| [-[\<COLOR>,\<LINESTYLE>]]-> [\<LABEL>]; | no          |
+| fork;                                    | no          |
+| fork again;                              | no          |
+| end fork [{\<LABEL>}];                   | no          |
 
 ## Class Diagrams
 | Command                                                                                                                                                                                             | Implemented |

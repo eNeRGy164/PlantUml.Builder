@@ -47,6 +47,7 @@ namespace PlantUml.Builder
         public const char NewLine = '\n';
         public const char Pipe = '|';
         public const char Quote = '\"';
+        public const char SingleQuote = '\'';
         public const char Space = ' ';
         public const char Underscore = '_';
 
@@ -55,6 +56,10 @@ namespace PlantUml.Builder
         public const char Spacing = Pipe;
         public const char NoteBox = 'r';
         public const char NoteHexagon = 'h';
+        public const char Comment = SingleQuote;
+
+        public const string CommentStart = "/'";
+        public const string CommentEnd = "'/";
 
         public const string SterotypeStart = "<<";
         public const string SterotypeEnd = ">>";
