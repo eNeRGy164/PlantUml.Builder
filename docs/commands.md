@@ -6,8 +6,8 @@ Following the PlantUML source code.
 
 | Command            | Implemented |
 | ------------------ | ----------- |
-| ' [\<COMMENT>]     | no          |
-| /' [\<COMMENT>] '/ | no          |
+| ' [\<COMMENT>]     | yes         |
+| /' [\<COMMENT>] '/ | yes         |
 
 ## Activity Diagrams
 | Command                                  | Implemented |

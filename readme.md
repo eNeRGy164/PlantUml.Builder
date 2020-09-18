@@ -4,7 +4,7 @@
 
 ## Example
 
-The followin code:
+The following code:
 ```csharp
 var stringBuilder = new StringBuilder();
 
