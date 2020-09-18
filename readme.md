@@ -1,5 +1,8 @@
 # PlantUML Builder
 
+![.NET Core](https://github.com/eNeRGy164/PlantUml.Builder/workflows/.NET%20Core/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/eNeRGy164/PlantUml.Builder/badge.svg?branch=main)](https://coveralls.io/github/eNeRGy164/PlantUml.Builder?branch=main)
+
 **PlantUML Builder** is a library with StringBuilder extension methods to make it easier to generate valid PlantUML diagrams using .NET.
 
 ## Example
