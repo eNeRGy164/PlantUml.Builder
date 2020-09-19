@@ -2,87 +2,134 @@
 
 Following the PlantUML source code.
 
+## Diagram commands
+
+| Command                 | Implemented | Method            |
+| ----------------------- | ----------- | ----------------- |
+| @startuml [\<FILENAME>] | yes         | `UmlDiagramStart` |
+| @enduml                 | yes         | `UmlDiagramEnd`   |
+
 ## Common commands
 
-| Command            | Implemented |
-| ------------------ | ----------- |
-| ' [\<COMMENT>]     | yes         |
-| /' [\<COMMENT>] '/ | yes         |
+| Command                             | Implemented | Method         |
+| ----------------------------------- | ----------- | -------------- |
+| \<TEXT>                             | yes         | `Text`         |
+| ' [\<COMMENT>]                      | yes         | `Comment`      |
+| /' [\<COMMENT>] '/                  | yes         | `CommentBlock` |
+| [\<ALIGN>] header \<HEADER>         | partial     | `Header`       |
+| [\<ALIGN>] footer \<FOOTER>         | partial     | `Footer`       |
+| [\<ALIGN>] header                   | no          |                |
+| endheader                           | no          |                |
+| [\<ALIGN>] footer                   | no          |                |
+| endfooter                           | no          |                |
+| scale [max] \<SCALE> [\<DIMENSION>] | no          |                |
+| title \<TITLE>                      | yes         | `Title`        |
+| title                               | no          |                |
+| end title                           | no          |                |
+| caption \<CAPTION>                  | no          |                |
+| legend [\<ALIGN>]                   | no          |                |
+| endlegend                           | no          |                |
 
 ## Activity Diagrams
-| Command                                  | Implemented |
-| ---------------------------------------- | ----------- |
-| start;                                   | no          |
-| end;                                     | no          |
-| [\<COLOR>] [\<STEREO>] :\<LABEL>\<STYLE> | no          |
-| [-[\<COLOR>,\<LINESTYLE>]]-> [\<LABEL>]; | no          |
-| fork;                                    | no          |
-| fork again;                              | no          |
-| end fork [{\<LABEL>}];                   | no          |
+| Command                                  | Implemented | Method |
+| ---------------------------------------- | ----------- | ------ |
+| start;                                   | no          |        |
+| end;                                     | no          |        |
+| [\<COLOR>] [\<STEREO>] :\<LABEL>\<STYLE> | no          |        |
+| [-[\<COLOR>,\<LINESTYLE>]]-> [\<LABEL>]; | no          |        |
+| fork;                                    | no          |        |
+| fork again;                              | no          |        |
+| end fork [{\<LABEL>}];                   | no          |        |
 
 ## Class Diagrams
-| Command                                                                                                                                                                                             | Implemented |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| [\<VISIBILITY>] interface \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]      | yes         |
-| [\<VISIBILITY>] enum \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]           | yes         |
-| annotation \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>]  [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                    | no          |
-| [\<VISIBILITY>] abstract class \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]] | yes         |
-| [\<VISIBILITY>] abstract \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]       | no          |
-| [\<VISIBILITY>] class \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]          | yes         |
-| [\<VISIBILITY>] entity \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]         | yes         |
-| circle \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                         | no          |
-| diamond \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                        | no          |
-| hide [\<NAME>] [empty] \<PORTION>                                                                                                                                                                   | yes         |
-| show [\<NAME>] [empty] \<PORTION>                                                                                                                                                                   | no          |
-| hide \<VISIBILITY>[,\<VISIBILITY>*] \<PORTION>                                                                                                                                                      | yes         |
-| show \<VISIBILITY>[,\<VISIBILITY>*] \<PORTION>                                                                                                                                                      | no          |
-| set namespaceseparator \<SEPARATOR>                                                                                                                                                                 | yes         |
+| Command                                                                                                                                                                                                 | Implemented | Method                  |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ----------------------- |
+| interface \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                          | yes         | `Interface`             |
+| [\<VISIBILITY>] interface \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]] {        | yes         | `InterfaceStart`        |
+| }                                                                                                                                                                                                       | yes         | `InterfaceEnd`          |
+| enum \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                               | yes         | `Enum`                  |
+| [\<VISIBILITY>] enum \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]] {             | yes         | `EnumStart`             |
+| }                                                                                                                                                                                                       | yes         | `EnumEnd`               |
+| annotation \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>]  [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                        | no          |                         |
+| [abstract] class \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                   | yes         | `Class`                 |
+| [\<VISIBILITY>] [abstract] class \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]] { | yes         | `ClassStart`            |
+| }                                                                                                                                                                                                       | yes         | `ClassEnd`              |
+| entity \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                             | yes         | `Entity`                |
+| [\<VISIBILITY>] entity \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]] {           | yes         | `EntityStart`           |
+| }                                                                                                                                                                                                       | yes         | `EntityEnd`             |
+| circle \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                             | no          |                         |
+| diamond \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                            | no          |                         |
+| hide [\<NAME>] [empty] \<PORTION>                                                                                                                                                                       | yes         | `HideEntityPortion`     |
+| show [\<NAME>] [empty] \<PORTION>                                                                                                                                                                       | no          |                         |
+| hide \<VISIBILITY>[,\<VISIBILITY>*] \<PORTION>                                                                                                                                                          | yes         | `HideEntityPortion`     |
+| show \<VISIBILITY>[,\<VISIBILITY>*] \<PORTION>                                                                                                                                                          | no          |                         |
+| set namespaceseparator \<SEPARATOR>                                                                                                                                                                     | yes         | `SetNamespaceSeparator` |
 
 ## Sequence Diagrams
 
-| Command                                                  | Implemented |
-| -------------------------------------------------------- | ----------- |
-| activate \<WHO> [\<BACK>] [\<LINE>]                      | yes         |
-| deactivate \<WHO>                                        | yes         |
-| deactivate \<WHO> [\<BACK>] [\<LINE>]                    | no          |
-| deactivate                                               | yes         |
-| destroy \<WHO> [\<BACK>] [\<LINE>]                       | no          |
-| create \<WHO> [\<BACK>] [\<LINE>]                        | no          |
-| \<NAME>++ [\<COLOR>]                                     | no          |
-| \<NAME>-- [\<COLOR>]                                     | no          |
-| autonewpage                                              | no          |
-| autoactivate off\|on                                     | no          |
-| autonumber \<START> \<STEP> \<FORMAT>                    | no          |
-| autonumber inc                                           | no          |
-| autonumber resume [\<FORMAT>]                            | no          |
-| autonumber stop                                          | no          |
-| end box                                                  | yes         |
-| box [\<NAME>] [\<STEREO>] [\<COLOR>]                     | partial     |
-| delay [\<LABEL>]                                         | yes         |
-| divider [\<LABEL>]                                       | yes         |
-| hide footbox                                             | no          |
-| show footbox                                             | no          |
-| opt [\<COLOR>] [\<COMMENT>]                              | no          |
-| alt [\<COLOR>] [\<COMMENT>]                              | partial     |
-| loop [\<COLOR>] [\<COMMENT>]                             | no          |
-| par [\<COLOR>] [\<COMMENT>]                              | no          |
-| par2 [\<COLOR>] [\<COMMENT>]                             | no          |
-| break [\<COLOR>] [\<COMMENT>]                            | no          |
-| critical [\<COLOR>] [\<COMMENT>]                         | no          |
-| else [\<COLOR>] [\<COMMENT>]                             | partial     |
-| end [\<COLOR>] [\<COMMENT>]                              | no          |
-| also [\<COLOR>] [\<COMMENT>]                             | no          |
-| group [\<COLOR>] [\<COMMENT>]                            | partial     |
-| hspace                                                   | yes         |
-| ignore newpage                                           | no          |
-| newpage [\<LABEL>]                                       | no          |
-| participant \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>] | partial     |
-| actor \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]       | partial     |
-| boundary \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]    | partial     |
-| control \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]     | partial     |
-| entity \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]      | partial     |
-| queue \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]       | partial     |
-| database \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]    | partial     |
-| collections \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>] | partial     |
-| ref[\<COLOR>] over \<NAME> : [\<URL>] [\<TEXT>]          | no          |
-| return [\<COLOR>] \<MESSAGE>                             | no          |
+| Command                                                              | Implemented | Method             |
+| -------------------------------------------------------------------- | ----------- | ------------------ |
+| activate \<WHO> [\<BGCOLOR>] [\<LNCOLOR>]                            | yes         | `Activate`         |
+| deactivate \<WHO> [\<BGCOLOR>] [\<LNCOLOR>]                          | partial     | `Deactivate`       |
+| deactivate                                                           | yes         | `Deactivate`       |
+| destroy \<WHO> [\<BGCOLOR>] [\<LNCOLOR>]                             | partial     | `Destroy`          |
+| \<NAME>++ [\<BGCOLOR>]                                               | no          |                    |
+| \<NAME>-- [\<BGCOLOR>]                                               | no          |                    |
+| autonewpage                                                          | no          |                    |
+| autoactivate off\|on                                                 | yes         | `AutoActivate`     |
+| autonumber [\<START>] [\<STEP>] [\<FORMAT>]                          | yes         | `AutoNumber`       |
+| autonumber inc                                                       | no          |                    |
+| autonumber resume [\<STEP>] [\<FORMAT>]                              | yes         | `ResumeAutoNumber` |
+| autonumber stop                                                      | yes         | `StopAutoNumber`   |
+| box [\<NAME>] [\<STEREO>] [\<COLOR>]                                 | partial     | `BoxStart`         |
+| end box                                                              | yes         | `BoxEnd`           |
+| delay [\<LABEL>]                                                     | yes         | `Delay`            |
+| divider [\<LABEL>]                                                   | yes         | `Divider`          |
+| hide footbox                                                         | no          |                    |
+| show footbox                                                         | no          |                    |
+| opt [\<COLOR>] [\<COMMENT>]                                          | no          |                    |
+| end                                                                  | yes         | `GroupEnd`         |
+| alt [\<COLOR>] [\<COMMENT>]                                          | partial     | `AltStart`         |
+| end                                                                  | yes         | `GroupEnd`         |
+| loop [\<COLOR>] [\<COMMENT>]                                         | partial     | `StartLoop`        |
+| end                                                                  | yes         | `EndLoop`          |
+| par [\<COLOR>] [\<COMMENT>]                                          | no          |                    |
+| end                                                                  | yes         | `GroupEnd`         |
+| par2 [\<COLOR>] [\<COMMENT>]                                         | no          |                    |
+| end                                                                  | yes         | `GroupEnd`         |
+| break [\<COLOR>] [\<COMMENT>]                                        | no          |                    |
+| end                                                                  | yes         | `GroupEnd`         |
+| critical [\<COLOR>] [\<COMMENT>]                                     | no          |                    |
+| end                                                                  | yes         | `GroupEnd`         |
+| else [\<COLOR>] [\<COMMENT>]                                         | partial     | `ElseStart`        |
+| end                                                                  | yes         | `GroupEnd`         |
+| also [\<COLOR>] [\<COMMENT>]                                         | no          |                    |
+| end                                                                  | yes         | `GroupEnd`         |
+| group [\<COLOR>] [\<COMMENT>]                                        | partial     | `GroupStart`       |
+| end                                                                  | yes         | `GroupEnd`         |
+| ignore newpage                                                       | no          |                    |
+| newpage [\<TITLE>]                                                   | yes         | `NewPage`          |
+| create [order \<ORDER>] [\<URL>] [\<COLOR>]                          | partial     | `Create`           |
+| participant \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]             | partial     | `Participant`      |
+| actor \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                   | partial     | `Participant`      |
+| boundary \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                | partial     | `Participant`      |
+| control \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                 | partial     | `Control`          |
+| create control \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]          | partial     | `CreateControl`    |
+| entity \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                  | partial     | `Participant`      |
+| queue \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                   | partial     | `Participant`      |
+| database \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                | partial     | `Participant`      |
+| collections \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]             | partial     | `Participant`      |
+| ref[\<COLOR>] over \<NAME>[,\<NAME>] : [\<URL>] [\<TEXT>]            | partial     | `Ref`              |
+| ref[\<COLOR>] over \<NAME>[,\<NAME>]                                 | partial     | `StartRef`         |
+| end ref                                                              | yes         | `EndRef`           |
+| return [\<COLOR>] \<MESSAGE>                                         | partial     | `Return`           |
+| space                                                                | yes         | `Space`            |
+| [r\|h]note \<POSITION> [\<BGCOLOR>] : \<NOTE>                        | yes         | `Note`             |
+| [r\|h]note over \<PARTICIPANT>,\<PARTICIPANT> [\<BGCOLOR>] : \<NOTE> | yes         | `Note`             |
+| [r\|h]note \<POSITION> of \<PARTICIPANT> [\<BGCOLOR>] : \<NOTE>      | yes         | `Note`             |
+| [r\|h]note \<POSITION> [\<BGCOLOR>]                                  | yes         | `StartNote`        |
+| [r\|h]note over \<PARTICIPANT>,\<PARTICIPANT> [\<BGCOLOR>]           | yes         | `StartNote`        |
+| [r\|h]note \<POSITION> of \<PARTICIPANT> [\<BGCOLOR>]                | yes         | `StartNote`        |
+| end note                                                             | yes         | `EndNote`          |
+| end hnote                                                            | yes         | `EndHNote`         |
+| end rnote                                                            | yes         | `EndRNote`         |
