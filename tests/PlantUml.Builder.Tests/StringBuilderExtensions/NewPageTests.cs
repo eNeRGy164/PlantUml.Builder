@@ -15,13 +15,24 @@ namespace PlantUml.Builder.Tests
             var stringBuilder = (StringBuilder)null;
 
             // Act
-            Action action = () => stringBuilder.NewPage("Page header");
+            Action action = () => stringBuilder.NewPage();
 
             // Assert
             action.Should().ThrowExactly<ArgumentNullException>()
                 .And.ParamName.Should().Be("stringBuilder");
         }
 
+        [TestMethod]
+        public void StringBuilderExtensions_NewPage_NullWithTitle_Should_ThrowArgumentNullException()
+        {
+            // Assign
+            var stringBuilder = (StringBuilder)null;
+            // Act
+            Action action = () => stringBuilder.NewPage("Page header");
+            // Assert
+            action.Should().ThrowExactly<ArgumentNullException>()
+                .And.ParamName.Should().Be("stringBuilder");
+        }
         [TestMethod]
         public void StringBuilderExtensions_NewPage_NullName_Should_ThrowArgumentException()
         {

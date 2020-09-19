@@ -23,6 +23,7 @@ namespace PlantUml.Builder
         /// </summary>
         /// <param name="title">Title of the new page.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="title"/> is <c>null</c>, empty of only white space.</exception>
         public static void NewPage(this StringBuilder stringBuilder, string title)
         {
             if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));

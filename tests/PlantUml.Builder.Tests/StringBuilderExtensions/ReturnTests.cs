@@ -15,8 +15,20 @@ namespace PlantUml.Builder.Tests
             var stringBuilder = (StringBuilder)null;
 
             // Act
-            Action action = () => stringBuilder.Return("Result");
+            Action action = () => stringBuilder.Return();
 
+            // Assert
+            action.Should().ThrowExactly<ArgumentNullException>()
+                .And.ParamName.Should().Be("stringBuilder");
+        }
+
+        [TestMethod]
+        public void StringBuilderExtensions_Return_NullWithMessage_Should_ThrowArgumentNullException()
+        {
+            // Assign
+            var stringBuilder = (StringBuilder)null;
+            // Act
+            Action action = () => stringBuilder.Return("Result");
             // Assert
             action.Should().ThrowExactly<ArgumentNullException>()
                 .And.ParamName.Should().Be("stringBuilder");

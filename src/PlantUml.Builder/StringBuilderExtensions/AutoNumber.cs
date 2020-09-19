@@ -48,6 +48,8 @@ namespace PlantUml.Builder
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
         public static void StopAutoNumber(this StringBuilder stringBuilder)
         {
+            if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+
             stringBuilder.Append(Constant.Auto);
             stringBuilder.Append(Constant.Number);
             stringBuilder.Append(Constant.Space);
@@ -61,8 +63,13 @@ namespace PlantUml.Builder
         /// <param name="step">Optional step size.</param>
         /// <param name="format">Optional format.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="format"/> is empty of only white space.</exception>
         public static void ResumeAutoNumber(this StringBuilder stringBuilder, int? step = null, string format = null)
         {
+            if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+
+            if (!(format is null) && string.IsNullOrWhiteSpace(format)) throw new ArgumentException("A non-empty value should be provided", nameof(format));
+
             stringBuilder.Append(Constant.Auto);
             stringBuilder.Append(Constant.Number);
             stringBuilder.Append(Constant.Space);
@@ -74,7 +81,7 @@ namespace PlantUml.Builder
                 stringBuilder.Append(step.Value);
             }
 
-            if (!string.IsNullOrEmpty(format))
+            if (!(format is null))
             {
                 stringBuilder.Append(Constant.Space);
                 stringBuilder.Append(Constant.Quote);
