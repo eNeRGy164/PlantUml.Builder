@@ -19,7 +19,8 @@ namespace PlantUml.Builder
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
             if (string.IsNullOrWhiteSpace(value)) throw new ArgumentException("A non-empty value should be provided", nameof(value));
 
-            stringBuilder.Append(Constant.SkinParam);
+            stringBuilder.Append(Constant.Skin);
+            stringBuilder.Append(Constant.Param);
             stringBuilder.Append(Constant.Space);
             stringBuilder.Append(name.Trim());
             stringBuilder.Append(Constant.Space);
