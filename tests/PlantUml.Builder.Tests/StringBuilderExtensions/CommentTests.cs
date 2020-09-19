@@ -1,7 +1,7 @@
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Text;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace PlantUml.Builder.Tests
 {
@@ -32,7 +32,7 @@ namespace PlantUml.Builder.Tests
             stringBuilder.Comment();
 
             // Assert
-            stringBuilder.ToString().Should().Be("' \n");
+            stringBuilder.ToString().Should().Be("'\n");
         }
 
         [TestMethod]
@@ -49,16 +49,16 @@ namespace PlantUml.Builder.Tests
         }
 
         [TestMethod]
-        public void StringBuilderExtensions_Comment_WithNewLineComment_Should_ContainMiltilineComment()
+        public void StringBuilderExtensions_Comment_WithNewLineComment_Should_CommentWithEscapedNewLineComment()
         {
             // Assign
             var stringBuilder = new StringBuilder();
 
             // Act
-            stringBuilder.Comment("This is a comment\non two lines");
+            stringBuilder.Comment("This is a comment\non a single line");
 
             // Assert
-            stringBuilder.ToString().Should().Be("/' This is a comment\non two lines '/\n");
+            stringBuilder.ToString().Should().Be("' This is a comment\\non a single line\n");
         }
     }
 }
