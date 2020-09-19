@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 
 namespace PlantUml.Builder
@@ -31,7 +31,7 @@ namespace PlantUml.Builder
 
             if (type.Length < 2) throw new ArgumentException("The arrow type must be at least 2 characters long", nameof(type));
 
-            stringBuilder.Append(left);
+            stringBuilder.Append(left.Replace("\n", "\\n"));
             stringBuilder.Append(Constant.Space);
 
             if (!(color is null))
@@ -48,8 +48,7 @@ namespace PlantUml.Builder
             }
 
             stringBuilder.Append(Constant.Space);
-
-            stringBuilder.Append(right);
+            stringBuilder.Append(right.Replace("\n", "\\n"));
 
             if (activateTarget)
             {

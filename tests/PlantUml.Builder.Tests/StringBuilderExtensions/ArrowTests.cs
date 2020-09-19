@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Text;
@@ -326,6 +326,19 @@ namespace PlantUml.Builder.Tests
 
             // Assert
             stringBuilder.ToString().Should().Be("l -> r !!\n");
+        }
+
+        [TestMethod]
+        public void StringBuilderExtensions_Arrow_WithNewLineInParticipantName_Should_EscapeNewLine()
+        {
+            // Assign
+            var stringBuilder = new StringBuilder();
+
+            // Act
+            stringBuilder.Arrow("l\nl", "->", "r\nr");
+
+            // Assert
+            stringBuilder.ToString().Should().Be("l\\nl -> r\\nr\n");
         }
     }
 }
