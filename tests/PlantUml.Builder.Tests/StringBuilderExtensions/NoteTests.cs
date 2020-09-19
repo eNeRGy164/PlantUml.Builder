@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Text;
@@ -94,7 +94,7 @@ namespace PlantUml.Builder.Tests
             var stringBuilder = new StringBuilder();
 
             // Act
-            stringBuilder.Note(NotePosition.Left, "Note", participant: "actorA");
+            stringBuilder.Note(NotePosition.Left, "actorA", "Note");
 
             // Assert
             stringBuilder.ToString().Should().Be("note left of actorA : Note\n");
@@ -107,6 +107,19 @@ namespace PlantUml.Builder.Tests
             var stringBuilder = new StringBuilder();
 
             // Act
+            stringBuilder.Note(NotePosition.Left, "actorA", "Note", color: NamedColor.AliceBlue);
+
+            // Assert
+            stringBuilder.ToString().Should().Be("note left of actorA #AliceBlue : Note\n");
+        }
+
+        [TestMethod]
+        public void StringBuilderExtensions_Note_WithoutPosition_Should_ContainNoteLineWithOver()
+        {
+            // Assign
+            var stringBuilder = new StringBuilder();
+
+            // Act
             stringBuilder.Note("actorA", "Note");
 
             // Assert
@@ -114,7 +127,7 @@ namespace PlantUml.Builder.Tests
         }
 
         [TestMethod]
-        public void StringBuilderExtensions_Note_AcrossParticipant_Should_ContainNoteLineWithBothParticipants()
+        public void StringBuilderExtensions_Note_TwoParticipants_Should_ContainNoteLineWithBothParticipants()
         {
             // Assign
             var stringBuilder = new StringBuilder();
