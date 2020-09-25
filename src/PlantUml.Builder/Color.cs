@@ -2,7 +2,7 @@ using System;
 
 namespace PlantUml.Builder
 {
-    public class Color
+    public class Color : IFormattable
     {
         private readonly string value;
 
@@ -32,6 +32,16 @@ namespace PlantUml.Builder
 
         public override string ToString()
         {
+            return this.value;
+        }
+
+        public string ToString(string format, IFormatProvider formatProvider = null)
+        {
+            if (format.Equals("B", StringComparison.OrdinalIgnoreCase))
+            {
+                return Constant.ColorStart + this.value + Constant.ColorEnd;
+            }
+
             return this.value;
         }
 

@@ -71,5 +71,31 @@ namespace PlantUml.Builder.Tests
             // Assert
             color.ToString().Should().Be("#AliceBlue");
         }
+
+        [TestMethod]
+        public void Color_ToStringWithFormatEmpty_Should_ReturnColorWithBrackets()
+        {
+            // Assign
+            var color = new Color(NamedColor.AliceBlue);
+
+            // Act
+            var value = color.ToString(string.Empty);
+
+            // Assert
+            value.Should().Be("#AliceBlue");
+        }
+
+        [TestMethod]
+        public void Color_ToStringWithFormatB_Should_ReturnColorWithBrackets()
+        {
+            // Assign
+            var color = new Color(NamedColor.AliceBlue);
+
+            // Act
+            var value = color.ToString("B");
+
+            // Assert
+            value.Should().Be("[#AliceBlue]");
+        }
     }
 }
