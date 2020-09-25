@@ -1,6 +1,7 @@
 using System.Text;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PlantUml.Builder.SequenceDiagrams;
 
 namespace PlantUml.Builder.Examples
 {
@@ -27,11 +28,11 @@ Alice <-- Bob : Another authentication Response
 
             // Act
             stringBuilder.UmlDiagramStart();
-            stringBuilder.Arrow("Alice", "->", "Bob", "Authentication Request");
-            stringBuilder.Arrow("Bob", "-->", "Alice", "Authentication Response");
+            stringBuilder.Arrow("Alice", Arrow.Right, "Bob", "Authentication Request");
+            stringBuilder.Arrow("Bob", Arrow.AsyncReplyRight, "Alice", "Authentication Response");
             stringBuilder.AppendNewLine();
-            stringBuilder.Arrow("Alice", "->", "Bob", "Another authentication Request");
-            stringBuilder.Arrow("Alice", "<--", "Bob", "Another authentication Response");
+            stringBuilder.Arrow("Alice", Arrow.Right, "Bob", "Another authentication Request");
+            stringBuilder.Arrow("Alice", Arrow.AsyncReplyLeft, "Bob", "Another authentication Response");
             stringBuilder.UmlDiagramEnd();
 
             // Assert
@@ -264,7 +265,7 @@ Bob <->o Alice
             // Assign
             var example = @"@startuml
 Bob -[#red]> Alice : hello
-Alice -[#0000FF]-> Bob : ok
+Alice --[#0000FF]> Bob : ok
 @enduml
 ";
 
