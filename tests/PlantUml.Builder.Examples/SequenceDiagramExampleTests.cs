@@ -63,12 +63,12 @@ Foo1 -> Foo6 : To collections
 
             // Act
             stringBuilder.UmlDiagramStart();
-            stringBuilder.Participant("Foo1", type: ParticipantType.Actor);
-            stringBuilder.Participant("Foo2", type: ParticipantType.Boundary);
-            stringBuilder.Participant("Foo3", type: ParticipantType.Control);
-            stringBuilder.Participant("Foo4", type: ParticipantType.Entity);
-            stringBuilder.Participant("Foo5", type: ParticipantType.Database);
-            stringBuilder.Participant("Foo6", type: ParticipantType.Collections);
+            stringBuilder.Actor("Foo1");
+            stringBuilder.Boundary("Foo2");
+            stringBuilder.Control("Foo3");
+            stringBuilder.Entity("Foo4");
+            stringBuilder.Database("Foo5");
+            stringBuilder.Collections("Foo6");
             stringBuilder.Arrow("Foo1", "->", "Foo2", "To boundary");
             stringBuilder.Arrow("Foo1", "->", "Foo3", "To control");
             stringBuilder.Arrow("Foo1", "->", "Foo4", "To entity");
@@ -105,7 +105,7 @@ Bob -> L : Log transaction
 
             // Act
             stringBuilder.UmlDiagramStart();
-            stringBuilder.Participant("Bob", type: ParticipantType.Actor, color: NamedColor.Red);
+            stringBuilder.Actor("Bob", color: NamedColor.Red);
             stringBuilder.Comment("The only difference between actor");
             stringBuilder.Comment("and participant is the drawing");
             stringBuilder.Participant("Alice");
@@ -845,7 +845,7 @@ end ref
             // Act
             stringBuilder.UmlDiagramStart();
             stringBuilder.Participant("Alice");
-            stringBuilder.Participant("Bob", type: ParticipantType.Actor);
+            stringBuilder.Actor("Bob");
             stringBuilder.AppendNewLine();
             stringBuilder.Ref("Alice", "Bob", "init");
             stringBuilder.AppendNewLine();
