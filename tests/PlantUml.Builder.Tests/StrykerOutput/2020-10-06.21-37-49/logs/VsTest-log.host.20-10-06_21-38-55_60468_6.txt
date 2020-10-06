@@ -1,0 +1,1436 @@
+TpTrace Information: 0 : 21308, 1, 2020/10/06, 21:38:55.821, 479256243033, testhost.dll, DefaultEngineInvoker.Invoke: Testhost process started with args :[--port, 54427],[--endpoint, 127.0.0.1:054427],[--role, client],[--parentprocessid, 6264],[--diag, D:\github\eNeRGy164\PlantUml.Builder\tests\PlantUml.Builder.Tests\StrykerOutput\2020-10-06.21-37-49\logs\VsTest-log.host.20-10-06_21-38-55_60468_6.txt],[--tracelevel, 3],[--telemetryoptedin, false]
+TpTrace Information: 0 : 21308, 1, 2020/10/06, 21:38:55.835, 479256293071, testhost.dll, Setting up debug trace listener.
+TpTrace Information: 0 : 21308, 1, 2020/10/06, 21:38:55.836, 479256302972, testhost.dll, DefaultEngineInvoker.SetParentProcessExitCallback: Monitoring parent process with id: '6264'
+TpTrace Information: 0 : 21308, 1, 2020/10/06, 21:38:55.849, 479256439581, testhost.dll, DefaultEngineInvoker.GetConnectionInfo: Initialize communication on endpoint address: '127.0.0.1:054427'
+TpTrace Information: 0 : 21308, 1, 2020/10/06, 21:38:55.877, 479256716068, testhost.dll, SocketClient.Start: connecting to server endpoint: 127.0.0.1:054427
+TpTrace Information: 0 : 21308, 1, 2020/10/06, 21:38:55.885, 479256797066, testhost.dll, DefaultEngineInvoker.Invoke: Start Request Processing.
+TpTrace Information: 0 : 21308, 5, 2020/10/06, 21:38:55.888, 479256830195, testhost.dll, SocketClient.OnServerConnected: connected to server endpoint: 127.0.0.1:054427
+TpTrace Information: 0 : 21308, 9, 2020/10/06, 21:38:55.891, 479256859558, testhost.dll, DefaultEngineInvoker.StartProcessingAsync: Connected to vstest.console, Starting process requests.
+TpTrace Information: 0 : 21308, 5, 2020/10/06, 21:38:56.123, 479259174925, testhost.dll, TestRequestHandler.ProcessRequests: received message: (ProtocolVersion) -> 3
+TpTrace Information: 0 : 21308, 5, 2020/10/06, 21:38:56.174, 479259687136, testhost.dll, TestRequestHandler.ProcessRequests: received message: (TestExecution.Initialize) -> [
+  "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\bin\\Debug\\netcoreapp3.1\\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll"
+]
+TpTrace Information: 0 : 21308, 5, 2020/10/06, 21:38:56.174, 479259688814, testhost.dll, Execution Session Initialize.
+TpTrace Information: 0 : 21308, 5, 2020/10/06, 21:38:56.189, 479259837124, testhost.dll, TestRequestHandler.ProcessRequests: received message: (TestExecution.StartWithTests) -> {
+  "Tests": [
+    {
+      "Properties": [
+        {
+          "Key": {
+            "Id": "TestCase.FullyQualifiedName",
+            "Label": "FullyQualifiedName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.TrimEndTests.StringBuilderExtensions_TrimEnd_WithWhitespace_Should_BeEmpty"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.ExecutorUri",
+            "Label": "Executor Uri",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Uri"
+          },
+          "Value": "executor://MSTestAdapter/v2"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Source",
+            "Label": "Source",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\bin\\Debug\\netcoreapp3.1\\PlantUml.Builder.Tests.dll"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.CodeFilePath",
+            "Label": "File Path",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\StringBuilderExtensions\\TrimEndTests.cs"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.DisplayName",
+            "Label": "Name",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "StringBuilderExtensions_TrimEnd_WithWhitespace_Should_BeEmpty"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Id",
+            "Label": "Id",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Guid"
+          },
+          "Value": "7fcac1c3-32ad-fec3-2560-d8a29d32228b"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.LineNumber",
+            "Label": "Line Number",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Int32"
+          },
+          "Value": 27
+        },
+        {
+          "Key": {
+            "Id": "MSTestDiscoverer.TestClassName",
+            "Label": "ClassName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.TrimEndTests"
+        },
+        {
+          "Key": {
+            "Id": "TestObject.Traits",
+            "Label": "Traits",
+            "Category": "",
+            "Description": "",
+            "Attributes": 5,
+            "ValueType": "System.Collections.Generic.KeyValuePair`2[[System.String],[System.String]][]"
+          },
+          "Value": []
+        }
+      ]
+    },
+    {
+      "Properties": [
+        {
+          "Key": {
+            "Id": "TestCase.FullyQualifiedName",
+            "Label": "FullyQualifiedName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.TrimEndTests.StringBuilderExtensions_TrimEnd_TextWithWhitespace_Should_BeTextOnly"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.ExecutorUri",
+            "Label": "Executor Uri",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Uri"
+          },
+          "Value": "executor://MSTestAdapter/v2"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Source",
+            "Label": "Source",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\bin\\Debug\\netcoreapp3.1\\PlantUml.Builder.Tests.dll"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.CodeFilePath",
+            "Label": "File Path",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\StringBuilderExtensions\\TrimEndTests.cs"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.DisplayName",
+            "Label": "Name",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "StringBuilderExtensions_TrimEnd_TextWithWhitespace_Should_BeTextOnly"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Id",
+            "Label": "Id",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Guid"
+          },
+          "Value": "65b10a64-93d9-c477-807f-963669e59e9e"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.LineNumber",
+            "Label": "Line Number",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Int32"
+          },
+          "Value": 40
+        },
+        {
+          "Key": {
+            "Id": "MSTestDiscoverer.TestClassName",
+            "Label": "ClassName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.TrimEndTests"
+        },
+        {
+          "Key": {
+            "Id": "TestObject.Traits",
+            "Label": "Traits",
+            "Category": "",
+            "Description": "",
+            "Attributes": 5,
+            "ValueType": "System.Collections.Generic.KeyValuePair`2[[System.String],[System.String]][]"
+          },
+          "Value": []
+        }
+      ]
+    },
+    {
+      "Properties": [
+        {
+          "Key": {
+            "Id": "TestCase.FullyQualifiedName",
+            "Label": "FullyQualifiedName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.TrimEndTests.StringBuilderExtensions_TrimEnd_OnlyText_Should_BeUnaltered"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.ExecutorUri",
+            "Label": "Executor Uri",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Uri"
+          },
+          "Value": "executor://MSTestAdapter/v2"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Source",
+            "Label": "Source",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\bin\\Debug\\netcoreapp3.1\\PlantUml.Builder.Tests.dll"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.CodeFilePath",
+            "Label": "File Path",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\StringBuilderExtensions\\TrimEndTests.cs"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.DisplayName",
+            "Label": "Name",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "StringBuilderExtensions_TrimEnd_OnlyText_Should_BeUnaltered"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Id",
+            "Label": "Id",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Guid"
+          },
+          "Value": "0b4a8761-8483-cb09-c721-2b86414b9bae"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.LineNumber",
+            "Label": "Line Number",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Int32"
+          },
+          "Value": 53
+        },
+        {
+          "Key": {
+            "Id": "MSTestDiscoverer.TestClassName",
+            "Label": "ClassName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.TrimEndTests"
+        },
+        {
+          "Key": {
+            "Id": "TestObject.Traits",
+            "Label": "Traits",
+            "Category": "",
+            "Description": "",
+            "Attributes": 5,
+            "ValueType": "System.Collections.Generic.KeyValuePair`2[[System.String],[System.String]][]"
+          },
+          "Value": []
+        }
+      ]
+    },
+    {
+      "Properties": [
+        {
+          "Key": {
+            "Id": "TestCase.FullyQualifiedName",
+            "Label": "FullyQualifiedName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.ClassDiagrams.EntityTests.StringBuilderExtensions_Entity_WithLineStyle_Should_ContainEntityLineWithLineStyle"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.ExecutorUri",
+            "Label": "Executor Uri",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Uri"
+          },
+          "Value": "executor://MSTestAdapter/v2"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Source",
+            "Label": "Source",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\bin\\Debug\\netcoreapp3.1\\PlantUml.Builder.Tests.dll"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.CodeFilePath",
+            "Label": "File Path",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\ClassDiagrams\\EntityTests.cs"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.DisplayName",
+            "Label": "Name",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "StringBuilderExtensions_Entity_WithLineStyle_Should_ContainEntityLineWithLineStyle"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Id",
+            "Label": "Id",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Guid"
+          },
+          "Value": "d81446c5-bdbb-2024-1fad-32b7ccd7309e"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.LineNumber",
+            "Label": "Line Number",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Int32"
+          },
+          "Value": 190
+        },
+        {
+          "Key": {
+            "Id": "MSTestDiscoverer.TestClassName",
+            "Label": "ClassName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.ClassDiagrams.EntityTests"
+        },
+        {
+          "Key": {
+            "Id": "TestObject.Traits",
+            "Label": "Traits",
+            "Category": "",
+            "Description": "",
+            "Attributes": 5,
+            "ValueType": "System.Collections.Generic.KeyValuePair`2[[System.String],[System.String]][]"
+          },
+          "Value": []
+        }
+      ]
+    },
+    {
+      "Properties": [
+        {
+          "Key": {
+            "Id": "TestCase.FullyQualifiedName",
+            "Label": "FullyQualifiedName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.ClassDiagrams.EntityTests.StringBuilderExtensions_Entity_WithLineColor_Should_ContainEntityLineWithLineColor"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.ExecutorUri",
+            "Label": "Executor Uri",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Uri"
+          },
+          "Value": "executor://MSTestAdapter/v2"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Source",
+            "Label": "Source",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\bin\\Debug\\netcoreapp3.1\\PlantUml.Builder.Tests.dll"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.CodeFilePath",
+            "Label": "File Path",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\ClassDiagrams\\EntityTests.cs"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.DisplayName",
+            "Label": "Name",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "StringBuilderExtensions_Entity_WithLineColor_Should_ContainEntityLineWithLineColor"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Id",
+            "Label": "Id",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Guid"
+          },
+          "Value": "8670ad55-0837-9270-b91f-49cfe68f06c9"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.LineNumber",
+            "Label": "Line Number",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Int32"
+          },
+          "Value": 203
+        },
+        {
+          "Key": {
+            "Id": "MSTestDiscoverer.TestClassName",
+            "Label": "ClassName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.ClassDiagrams.EntityTests"
+        },
+        {
+          "Key": {
+            "Id": "TestObject.Traits",
+            "Label": "Traits",
+            "Category": "",
+            "Description": "",
+            "Attributes": 5,
+            "ValueType": "System.Collections.Generic.KeyValuePair`2[[System.String],[System.String]][]"
+          },
+          "Value": []
+        }
+      ]
+    },
+    {
+      "Properties": [
+        {
+          "Key": {
+            "Id": "TestCase.FullyQualifiedName",
+            "Label": "FullyQualifiedName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.ClassDiagrams.EnumTests.StringBuilderExtensions_Enum_WithLineStyle_Should_ContainEnumLineWithLineStyle"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.ExecutorUri",
+            "Label": "Executor Uri",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Uri"
+          },
+          "Value": "executor://MSTestAdapter/v2"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Source",
+            "Label": "Source",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\bin\\Debug\\netcoreapp3.1\\PlantUml.Builder.Tests.dll"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.CodeFilePath",
+            "Label": "File Path",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\ClassDiagrams\\EnumTests.cs"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.DisplayName",
+            "Label": "Name",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "StringBuilderExtensions_Enum_WithLineStyle_Should_ContainEnumLineWithLineStyle"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Id",
+            "Label": "Id",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Guid"
+          },
+          "Value": "89d1a839-3168-7e5f-bed1-638745ef567c"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.LineNumber",
+            "Label": "Line Number",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Int32"
+          },
+          "Value": 190
+        },
+        {
+          "Key": {
+            "Id": "MSTestDiscoverer.TestClassName",
+            "Label": "ClassName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.ClassDiagrams.EnumTests"
+        },
+        {
+          "Key": {
+            "Id": "TestObject.Traits",
+            "Label": "Traits",
+            "Category": "",
+            "Description": "",
+            "Attributes": 5,
+            "ValueType": "System.Collections.Generic.KeyValuePair`2[[System.String],[System.String]][]"
+          },
+          "Value": []
+        }
+      ]
+    },
+    {
+      "Properties": [
+        {
+          "Key": {
+            "Id": "TestCase.FullyQualifiedName",
+            "Label": "FullyQualifiedName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.ClassDiagrams.EnumTests.StringBuilderExtensions_Enum_WithLineColor_Should_ContainEnumLineWithLineColor"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.ExecutorUri",
+            "Label": "Executor Uri",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Uri"
+          },
+          "Value": "executor://MSTestAdapter/v2"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Source",
+            "Label": "Source",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\bin\\Debug\\netcoreapp3.1\\PlantUml.Builder.Tests.dll"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.CodeFilePath",
+            "Label": "File Path",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\ClassDiagrams\\EnumTests.cs"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.DisplayName",
+            "Label": "Name",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "StringBuilderExtensions_Enum_WithLineColor_Should_ContainEnumLineWithLineColor"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Id",
+            "Label": "Id",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Guid"
+          },
+          "Value": "be8b8b27-2296-6581-a414-fabfe58b6f56"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.LineNumber",
+            "Label": "Line Number",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Int32"
+          },
+          "Value": 203
+        },
+        {
+          "Key": {
+            "Id": "MSTestDiscoverer.TestClassName",
+            "Label": "ClassName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.ClassDiagrams.EnumTests"
+        },
+        {
+          "Key": {
+            "Id": "TestObject.Traits",
+            "Label": "Traits",
+            "Category": "",
+            "Description": "",
+            "Attributes": 5,
+            "ValueType": "System.Collections.Generic.KeyValuePair`2[[System.String],[System.String]][]"
+          },
+          "Value": []
+        }
+      ]
+    },
+    {
+      "Properties": [
+        {
+          "Key": {
+            "Id": "TestCase.FullyQualifiedName",
+            "Label": "FullyQualifiedName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.ClassDiagrams.InterfaceTests.StringBuilderExtensions_Interface_WithLineStyle_Should_ContainInterfaceLineWithLineStyle"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.ExecutorUri",
+            "Label": "Executor Uri",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Uri"
+          },
+          "Value": "executor://MSTestAdapter/v2"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Source",
+            "Label": "Source",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\bin\\Debug\\netcoreapp3.1\\PlantUml.Builder.Tests.dll"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.CodeFilePath",
+            "Label": "File Path",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\ClassDiagrams\\InterfaceTests.cs"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.DisplayName",
+            "Label": "Name",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "StringBuilderExtensions_Interface_WithLineStyle_Should_ContainInterfaceLineWithLineStyle"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Id",
+            "Label": "Id",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Guid"
+          },
+          "Value": "6fea8371-a2f8-1112-e9b3-31f66d9d9c30"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.LineNumber",
+            "Label": "Line Number",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Int32"
+          },
+          "Value": 190
+        },
+        {
+          "Key": {
+            "Id": "MSTestDiscoverer.TestClassName",
+            "Label": "ClassName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.ClassDiagrams.InterfaceTests"
+        },
+        {
+          "Key": {
+            "Id": "TestObject.Traits",
+            "Label": "Traits",
+            "Category": "",
+            "Description": "",
+            "Attributes": 5,
+            "ValueType": "System.Collections.Generic.KeyValuePair`2[[System.String],[System.String]][]"
+          },
+          "Value": []
+        }
+      ]
+    },
+    {
+      "Properties": [
+        {
+          "Key": {
+            "Id": "TestCase.FullyQualifiedName",
+            "Label": "FullyQualifiedName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.ClassDiagrams.InterfaceTests.StringBuilderExtensions_Interface_WithLineColor_Should_ContainInterfaceLineWithLineColor"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.ExecutorUri",
+            "Label": "Executor Uri",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Uri"
+          },
+          "Value": "executor://MSTestAdapter/v2"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Source",
+            "Label": "Source",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\bin\\Debug\\netcoreapp3.1\\PlantUml.Builder.Tests.dll"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.CodeFilePath",
+            "Label": "File Path",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\ClassDiagrams\\InterfaceTests.cs"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.DisplayName",
+            "Label": "Name",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "StringBuilderExtensions_Interface_WithLineColor_Should_ContainInterfaceLineWithLineColor"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Id",
+            "Label": "Id",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Guid"
+          },
+          "Value": "280b8063-6ccd-3516-e795-46549030a68a"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.LineNumber",
+            "Label": "Line Number",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Int32"
+          },
+          "Value": 203
+        },
+        {
+          "Key": {
+            "Id": "MSTestDiscoverer.TestClassName",
+            "Label": "ClassName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.ClassDiagrams.InterfaceTests"
+        },
+        {
+          "Key": {
+            "Id": "TestObject.Traits",
+            "Label": "Traits",
+            "Category": "",
+            "Description": "",
+            "Attributes": 5,
+            "ValueType": "System.Collections.Generic.KeyValuePair`2[[System.String],[System.String]][]"
+          },
+          "Value": []
+        }
+      ]
+    },
+    {
+      "Properties": [
+        {
+          "Key": {
+            "Id": "TestCase.FullyQualifiedName",
+            "Label": "FullyQualifiedName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.ClassDiagrams.ClassStartTests.StringBuilderExtensions_ClassStart_Should_ContainClassStartLine"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.ExecutorUri",
+            "Label": "Executor Uri",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Uri"
+          },
+          "Value": "executor://MSTestAdapter/v2"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Source",
+            "Label": "Source",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\bin\\Debug\\netcoreapp3.1\\PlantUml.Builder.Tests.dll"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.CodeFilePath",
+            "Label": "File Path",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\ObjectDiagrams\\ClassStartTests.cs"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.DisplayName",
+            "Label": "Name",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "StringBuilderExtensions_ClassStart_Should_ContainClassStartLine"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Id",
+            "Label": "Id",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Guid"
+          },
+          "Value": "8a194d76-26a0-8f12-8afb-98a7889aeef6"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.LineNumber",
+            "Label": "Line Number",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Int32"
+          },
+          "Value": 28
+        },
+        {
+          "Key": {
+            "Id": "MSTestDiscoverer.TestClassName",
+            "Label": "ClassName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.ClassDiagrams.ClassStartTests"
+        },
+        {
+          "Key": {
+            "Id": "TestObject.Traits",
+            "Label": "Traits",
+            "Category": "",
+            "Description": "",
+            "Attributes": 5,
+            "ValueType": "System.Collections.Generic.KeyValuePair`2[[System.String],[System.String]][]"
+          },
+          "Value": []
+        }
+      ]
+    },
+    {
+      "Properties": [
+        {
+          "Key": {
+            "Id": "TestCase.FullyQualifiedName",
+            "Label": "FullyQualifiedName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.ClassDiagrams.ClassStartTests.StringBuilderExtensions_ClassStart_WithVisibility_Should_ContainClassStartLineWithVisibility"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.ExecutorUri",
+            "Label": "Executor Uri",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Uri"
+          },
+          "Value": "executor://MSTestAdapter/v2"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Source",
+            "Label": "Source",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\bin\\Debug\\netcoreapp3.1\\PlantUml.Builder.Tests.dll"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.CodeFilePath",
+            "Label": "File Path",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\ObjectDiagrams\\ClassStartTests.cs"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.DisplayName",
+            "Label": "Name",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "StringBuilderExtensions_ClassStart_WithVisibility_Should_ContainClassStartLineWithVisibility"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Id",
+            "Label": "Id",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Guid"
+          },
+          "Value": "c7c9fddc-4b77-cc0c-3448-ef0fc71c524d"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.LineNumber",
+            "Label": "Line Number",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Int32"
+          },
+          "Value": 41
+        },
+        {
+          "Key": {
+            "Id": "MSTestDiscoverer.TestClassName",
+            "Label": "ClassName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.ClassDiagrams.ClassStartTests"
+        },
+        {
+          "Key": {
+            "Id": "TestObject.Traits",
+            "Label": "Traits",
+            "Category": "",
+            "Description": "",
+            "Attributes": 5,
+            "ValueType": "System.Collections.Generic.KeyValuePair`2[[System.String],[System.String]][]"
+          },
+          "Value": []
+        }
+      ]
+    },
+    {
+      "Properties": [
+        {
+          "Key": {
+            "Id": "TestCase.FullyQualifiedName",
+            "Label": "FullyQualifiedName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.ClassDiagrams.ClassTests.StringBuilderExtensions_Class_WithLineStyle_Should_ContainClassLineWithLineStyle"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.ExecutorUri",
+            "Label": "Executor Uri",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Uri"
+          },
+          "Value": "executor://MSTestAdapter/v2"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Source",
+            "Label": "Source",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\bin\\Debug\\netcoreapp3.1\\PlantUml.Builder.Tests.dll"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.CodeFilePath",
+            "Label": "File Path",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\ObjectDiagrams\\ClassTests.cs"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.DisplayName",
+            "Label": "Name",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "StringBuilderExtensions_Class_WithLineStyle_Should_ContainClassLineWithLineStyle"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Id",
+            "Label": "Id",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Guid"
+          },
+          "Value": "ba0cdd77-dc2c-d5bf-3e88-0654c1e1d59d"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.LineNumber",
+            "Label": "Line Number",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Int32"
+          },
+          "Value": 203
+        },
+        {
+          "Key": {
+            "Id": "MSTestDiscoverer.TestClassName",
+            "Label": "ClassName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.ClassDiagrams.ClassTests"
+        },
+        {
+          "Key": {
+            "Id": "TestObject.Traits",
+            "Label": "Traits",
+            "Category": "",
+            "Description": "",
+            "Attributes": 5,
+            "ValueType": "System.Collections.Generic.KeyValuePair`2[[System.String],[System.String]][]"
+          },
+          "Value": []
+        }
+      ]
+    },
+    {
+      "Properties": [
+        {
+          "Key": {
+            "Id": "TestCase.FullyQualifiedName",
+            "Label": "FullyQualifiedName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.ClassDiagrams.ClassTests.StringBuilderExtensions_Class_WithLineColor_Should_ContainClassLineWithLineColor"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.ExecutorUri",
+            "Label": "Executor Uri",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Uri"
+          },
+          "Value": "executor://MSTestAdapter/v2"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Source",
+            "Label": "Source",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\bin\\Debug\\netcoreapp3.1\\PlantUml.Builder.Tests.dll"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.CodeFilePath",
+            "Label": "File Path",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "D:\\github\\eNeRGy164\\PlantUml.Builder\\tests\\PlantUml.Builder.Tests\\ObjectDiagrams\\ClassTests.cs"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.DisplayName",
+            "Label": "Name",
+            "Category": "",
+            "Description": "",
+            "Attributes": 0,
+            "ValueType": "System.String"
+          },
+          "Value": "StringBuilderExtensions_Class_WithLineColor_Should_ContainClassLineWithLineColor"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.Id",
+            "Label": "Id",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Guid"
+          },
+          "Value": "bb93d66e-f02b-9e55-b914-703aa18235f5"
+        },
+        {
+          "Key": {
+            "Id": "TestCase.LineNumber",
+            "Label": "Line Number",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.Int32"
+          },
+          "Value": 216
+        },
+        {
+          "Key": {
+            "Id": "MSTestDiscoverer.TestClassName",
+            "Label": "ClassName",
+            "Category": "",
+            "Description": "",
+            "Attributes": 1,
+            "ValueType": "System.String"
+          },
+          "Value": "PlantUml.Builder.Tests.ClassDiagrams.ClassTests"
+        },
+        {
+          "Key": {
+            "Id": "TestObject.Traits",
+            "Label": "Traits",
+            "Category": "",
+            "Description": "",
+            "Attributes": 5,
+            "ValueType": "System.Collections.Generic.KeyValuePair`2[[System.String],[System.String]][]"
+          },
+          "Value": []
+        }
+      ]
+    }
+  ],
+  "RunSettings": "<RunSettings>\r\n  <RunConfiguration>\r\n    <MaxCpuCount>1</MaxCpuCount>\r\n    <TestSessionTimeout>10592</TestSessionTimeout>\r\n    <DesignMode>false</DesignMode>\r\n    <BatchSize>1</BatchSize>\r\n    <TargetFrameworkVersion>.NETCoreApp,Version=v3.1</TargetFrameworkVersion>\r\n    <TargetPlatform>X64</TargetPlatform>\r\n    <CollectSourceInformation>True</CollectSourceInformation>\r\n  </RunConfiguration>\r\n  <InProcDataCollectionRunSettings>\r\n    <InProcDataCollectors>\r\n      <InProcDataCollector friendlyName=\"StrykerCoverage\" uri=\"https://stryker-mutator.io/\" codebase=\"D:\\github\\stryker-net\\src\\Stryker.CLI\\Stryker.CLI\\bin\\Debug\\netcoreapp3.1\\Stryker.DataCollector.dll\" assemblyQualifiedName=\"Stryker.DataCollector.CoverageCollector, Stryker.DataCollector, Version=0.16.1.0, Culture=neutral, PublicKeyToken=null\">\r\n        <Configuration>\r\n          <Parameters>\r\n            <Mutant id=\"33\" tests=\"d81446c5-bdbb-2024-1fad-32b7ccd7309e,8670ad55-0837-9270-b91f-49cfe68f06c9,89d1a839-3168-7e5f-bed1-638745ef567c,be8b8b27-2296-6581-a414-fabfe58b6f56,6fea8371-a2f8-1112-e9b3-31f66d9d9c30,280b8063-6ccd-3516-e795-46549030a68a,ba0cdd77-dc2c-d5bf-3e88-0654c1e1d59d,bb93d66e-f02b-9e55-b914-703aa18235f5\" />\r\n            <Mutant id=\"335\" tests=\"7fcac1c3-32ad-fec3-2560-d8a29d32228b,65b10a64-93d9-c477-807f-963669e59e9e,0b4a8761-8483-cb09-c721-2b86414b9bae,8a194d76-26a0-8f12-8afb-98a7889aeef6,c7c9fddc-4b77-cc0c-3448-ef0fc71c524d\" />\r\n            <MutantControl name=\"Strykerm0Rs5BqcWj6z6do.MutantControl\" />\r\n          </Parameters>\r\n        </Configuration>\r\n      </InProcDataCollector>\r\n    </InProcDataCollectors>\r\n  </InProcDataCollectionRunSettings>\r\n  <LoggerRunSettings>\r\n    <Loggers>\r\n      <Logger friendlyName=\"Console\" uri=\"logger://microsoft/TestPlatform/ConsoleLogger/v1\" assemblyQualifiedName=\"Microsoft.VisualStudio.TestPlatform.CommandLine.Internal.ConsoleLogger, vstest.console, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a\" codeBase=\"C:\\Users\\micha\\.nuget\\packages\\microsoft.testplatform.portable\\16.7.1\\tools\\net451\\vstest.console.exe\" enabled=\"True\" />\r\n    </Loggers>\r\n  </LoggerRunSettings>\r\n</RunSettings>",
+  "TestExecutionContext": {
+    "FrequencyOfRunStatsChangeEvent": 1,
+    "RunStatsChangeEventTimeout": "00:00:01.5000000",
+    "InIsolation": false,
+    "KeepAlive": false,
+    "AreTestCaseLevelEventsRequired": false,
+    "IsDebug": false,
+    "TestCaseFilter": null,
+    "FilterOptions": null
+  },
+  "Package": null
+}
+TpTrace Information: 0 : 21308, 5, 2020/10/06, 21:38:56.190, 479259847159, testhost.dll, Execution started.
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.192, 479259868872, testhost.dll, AssemblyResolver.ctor: Creating AssemblyResolver with searchDirectories D:\github\eNeRGy164\PlantUml.Builder\tests\PlantUml.Builder.Tests\bin\Debug\netcoreapp3.1
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.196, 479259909168, testhost.dll, AssemblyResolver.AddSearchDirectories: Adding more searchDirectories D:\github\eNeRGy164\PlantUml.Builder\tests\PlantUml.Builder.Tests\bin\Debug\netcoreapp3.1
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.203, 479259971610, testhost.dll, AssemblyResolver.OnResolve: Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter: Resolving assembly.
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.206, 479260002215, testhost.dll, AssemblyResolver.OnResolve: Resolved assembly: Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter, from path: D:\github\eNeRGy164\PlantUml.Builder\tests\PlantUml.Builder.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.209, 479260036594, testhost.dll, AssemblyResolver.OnResolve: Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface: Resolving assembly.
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.211, 479260051446, testhost.dll, AssemblyResolver.OnResolve: Resolved assembly: Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface, from path: D:\github\eNeRGy164\PlantUml.Builder\tests\PlantUml.Builder.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.211, 479260054879, testhost.dll, AssemblyResolver.OnResolve: Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices: Resolving assembly.
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.212, 479260070278, testhost.dll, AssemblyResolver.OnResolve: Resolved assembly: Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices, from path: D:\github\eNeRGy164\PlantUml.Builder\tests\PlantUml.Builder.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.229, 479260233697, testhost.dll, AssemblyResolver.AddSearchDirectories: Adding more searchDirectories D:\github\eNeRGy164\PlantUml.Builder\tests\PlantUml.Builder.Tests\bin\Debug\netcoreapp3.1
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.229, 479260235377, testhost.dll, AssemblyResolver.AddSearchDirectories: Adding more searchDirectories D:\github\eNeRGy164\PlantUml.Builder\tests\PlantUml.Builder.Tests\bin\Debug\netcoreapp3.1
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.236, 479260310371, testhost.dll, TestPluginManager.CreateTestExtension: Attempting to load test extension: Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.MSTestExecutor
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.241, 479260357615, testhost.dll, AssemblyResolver.AddSearchDirectories: Adding more searchDirectories D:\github\eNeRGy164\PlantUml.Builder\tests\PlantUml.Builder.Tests\bin\Debug\netcoreapp3.1
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.241, 479260359231, testhost.dll, AssemblyResolver.AddSearchDirectories: Adding more searchDirectories D:\github\eNeRGy164\PlantUml.Builder\tests\PlantUml.Builder.Tests\bin\Debug\netcoreapp3.1
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.243, 479260379404, testhost.dll, TestExecutorService: Loaded the extensions
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.457, 479262518418, testhost.dll, AssemblyResolver.OnResolve: Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.resources: Resolving assembly.
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.458, 479262521477, testhost.dll, AssemblyResolver.OnResolve: Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.resources: Failed to load assembly.
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.458, 479262524490, testhost.dll, AssemblyResolver.OnResolve: Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.resources: Resolving assembly.
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.458, 479262525131, testhost.dll, AssemblyResolver.OnResolve: Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.resources: Resolved from cache.
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.487, 479262820281, testhost.dll, Sending test run statistics
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.579, 479263737101, testhost.dll, AssemblyResolver.OnResolve: Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.resources: Resolving assembly.
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.579, 479263740090, testhost.dll, AssemblyResolver.OnResolve: Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.resources: Failed to load assembly.
+TpTrace Warning: 0 : 21308, 4, 2020/10/06, 21:38:56.612, 479264061747, testhost.dll, TestRunCache: InProgressTests is null
+TpTrace Warning: 0 : 21308, 4, 2020/10/06, 21:38:56.615, 479264097740, testhost.dll, No DataCollection Data set for the test case 7fcac1c3-32ad-fec3-2560-d8a29d32228b
+TpTrace Warning: 0 : 21308, 4, 2020/10/06, 21:38:56.617, 479264119483, testhost.dll, TestRunCache: InProgressTests is null
+TpTrace Warning: 0 : 21308, 4, 2020/10/06, 21:38:56.617, 479264120753, testhost.dll, TestRunCache: No test found corresponding to testResult '' in inProgress list.
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.618, 479264121400, testhost.dll, Sending test run statistics
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.625, 479264197570, testhost.dll, Sending test run statistics
+TpTrace Warning: 0 : 21308, 4, 2020/10/06, 21:38:56.633, 479264278584, testhost.dll, TestRunCache: InProgressTests is null
+TpTrace Warning: 0 : 21308, 4, 2020/10/06, 21:38:56.633, 479264280162, testhost.dll, No DataCollection Data set for the test case 65b10a64-93d9-c477-807f-963669e59e9e
+TpTrace Warning: 0 : 21308, 4, 2020/10/06, 21:38:56.633, 479264280795, testhost.dll, TestRunCache: InProgressTests is null
+TpTrace Warning: 0 : 21308, 4, 2020/10/06, 21:38:56.634, 479264281248, testhost.dll, TestRunCache: No test found corresponding to testResult '' in inProgress list.
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.634, 479264281745, testhost.dll, Sending test run statistics
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.634, 479264286729, testhost.dll, Sending test run statistics
+TpTrace Warning: 0 : 21308, 4, 2020/10/06, 21:38:56.635, 479264292446, testhost.dll, TestRunCache: InProgressTests is null
+TpTrace Warning: 0 : 21308, 4, 2020/10/06, 21:38:56.635, 479264293268, testhost.dll, No DataCollection Data set for the test case 0b4a8761-8483-cb09-c721-2b86414b9bae
+TpTrace Warning: 0 : 21308, 4, 2020/10/06, 21:38:56.635, 479264293786, testhost.dll, TestRunCache: InProgressTests is null
+TpTrace Warning: 0 : 21308, 4, 2020/10/06, 21:38:56.635, 479264294217, testhost.dll, TestRunCache: No test found corresponding to testResult '' in inProgress list.
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.635, 479264294694, testhost.dll, Sending test run statistics
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.635, 479264299237, testhost.dll, Sending test run statistics
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.748, 479265431083, testhost.dll, AssemblyResolver.OnResolve: nspec: Resolving assembly.
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.749, 479265436381, testhost.dll, AssemblyResolver.OnResolve: nspec: Failed to load assembly.
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.752, 479265466918, testhost.dll, AssemblyResolver.OnResolve: nspec: Resolving assembly.
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.752, 479265468179, testhost.dll, AssemblyResolver.OnResolve: nspec: Resolved from cache.
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.752, 479265470718, testhost.dll, AssemblyResolver.OnResolve: nspec: Resolving assembly.
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.753, 479265471561, testhost.dll, AssemblyResolver.OnResolve: nspec: Resolved from cache.
+TpTrace Warning: 0 : 21308, 4, 2020/10/06, 21:38:56.755, 479265494000, testhost.dll, TestRunCache: InProgressTests is null
+TpTrace Warning: 0 : 21308, 4, 2020/10/06, 21:38:56.755, 479265495263, testhost.dll, No DataCollection Data set for the test case d81446c5-bdbb-2024-1fad-32b7ccd7309e
+TpTrace Warning: 0 : 21308, 4, 2020/10/06, 21:38:56.755, 479265496220, testhost.dll, TestRunCache: InProgressTests is null
+TpTrace Warning: 0 : 21308, 4, 2020/10/06, 21:38:56.755, 479265496903, testhost.dll, TestRunCache: No test found corresponding to testResult '' in inProgress list.
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.755, 479265497557, testhost.dll, Sending test run statistics
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.756, 479265504933, testhost.dll, Sending test run statistics
+TpTrace Information: 0 : 21308, 5, 2020/10/06, 21:38:56.758, 479265527308, testhost.dll, TestRequestHandler.ProcessRequests: received message: (TestExecution.Cancel) -> null
+TpTrace Warning: 0 : 21308, 4, 2020/10/06, 21:38:56.759, 479265537679, testhost.dll, TestRunCache: InProgressTests is null
+TpTrace Warning: 0 : 21308, 4, 2020/10/06, 21:38:56.759, 479265539030, testhost.dll, No DataCollection Data set for the test case 8670ad55-0837-9270-b91f-49cfe68f06c9
+TpTrace Warning: 0 : 21308, 4, 2020/10/06, 21:38:56.759, 479265539851, testhost.dll, TestRunCache: InProgressTests is null
+TpTrace Warning: 0 : 21308, 4, 2020/10/06, 21:38:56.759, 479265540589, testhost.dll, TestRunCache: No test found corresponding to testResult '' in inProgress list.
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.760, 479265541356, testhost.dll, Sending test run statistics
+TpTrace Information: 0 : 21308, 4, 2020/10/06, 21:38:56.765, 479265598904, testhost.dll, Sending test run complete
+TpTrace Information: 0 : 21308, 5, 2020/10/06, 21:38:56.783, 479265778073, testhost.dll, TestRequestHandler.ProcessRequests: received message: (TestSession.Terminate) -> null
+TpTrace Information: 0 : 21308, 5, 2020/10/06, 21:38:56.783, 479265779361, testhost.dll, Session End message received from server. Closing the connection.
+TpTrace Information: 0 : 21308, 1, 2020/10/06, 21:38:56.784, 479265784701, testhost.dll, SocketClient.Stop: Stop communication from server endpoint: 127.0.0.1:054427
+TpTrace Information: 0 : 21308, 1, 2020/10/06, 21:38:56.784, 479265786021, testhost.dll, SocketClient: Stop: Cancellation requested. Stopping message loop.
+TpTrace Information: 0 : 21308, 5, 2020/10/06, 21:38:56.784, 479265784883, testhost.dll, SocketClient.Stop: Stop communication from server endpoint: 127.0.0.1:054427
+TpTrace Information: 0 : 21308, 5, 2020/10/06, 21:38:56.784, 479265788110, testhost.dll, SocketClient: Stop: Cancellation requested. Stopping message loop.
+TpTrace Information: 0 : 21308, 5, 2020/10/06, 21:38:56.784, 479265789693, testhost.dll, Closing the connection !
+TpTrace Information: 0 : 21308, 1, 2020/10/06, 21:38:56.784, 479265790440, testhost.dll, Testhost process exiting.
+TpTrace Information: 0 : 21308, 5, 2020/10/06, 21:38:56.785, 479265793482, testhost.dll, SocketClient.PrivateStop: Stop communication from server endpoint: 127.0.0.1:054427, error:

@@ -101,6 +101,19 @@ namespace PlantUml.Builder.Tests
         }
 
         [TestMethod]
+        public void StringBuilderExtensions_Note_WithPositionRelatedToParticipantAndMultiLineNote_Should_ContainNoteLineWithParticipantAndMultilineNotes()
+        {
+            // Assign
+            var stringBuilder = new StringBuilder();
+
+            // Act
+            stringBuilder.Note(NotePosition.Left, "actorA", "Line1\nLine2");
+
+            // Assert
+            stringBuilder.ToString().Should().Be("note left of actorA : Line1\\nLine2\n");
+        }
+
+        [TestMethod]
         public void StringBuilderExtensions_Note_PositionOverParticipant_Should_ContainNoteLineWithOver()
         {
             // Assign

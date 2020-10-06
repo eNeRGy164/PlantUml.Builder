@@ -109,7 +109,7 @@ namespace PlantUml.Builder.Tests.SequenceDiagrams
 
             // Assert
             action.Should().ThrowExactly<ArgumentException>()
-                .WithMessage("The arrow must contain at least 1 arrow head character*")
+                .WithMessage("The arrow must contain at least 1 arrow head character ('>', '<', 'o', '/', '\\', 'x', ']', '[').*")
                 .And.ParamName.Should().Be("arrow");
         }
 
@@ -210,6 +210,56 @@ namespace PlantUml.Builder.Tests.SequenceDiagrams
 
             // Assert
             arrow.ToString().Should().Be("-[#red]>");
+        }
+
+        [TestMethod]
+        public void Arrow_StartWithColor_Should_HaveEmptyLeft()
+        {
+            // Act
+            var arrow = new Arrow("[#red]->");
+
+            // Assert
+            arrow.LeftHead.Should().BeEmpty();
+        }
+
+        [TestMethod]
+        public void Arrow_LeftWithColor_Should_HaveColor()
+        {
+            // Act
+            var arrow = new Arrow("<[#red]-");
+
+            // Assert
+            arrow.Color.ToString().Should().Be("#red");
+        }
+
+        [TestMethod]
+        public void Arrow_ColorStartCharacterAsLastChar_Should_NotBeAColor()
+        {
+            // Act
+            var arrow = new Arrow("<-[");
+
+            // Assert
+            arrow.Color.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void Arrow_ExternalStart_Should_HaveNoColor()
+        {
+            // Act
+            var arrow = new Arrow("[->");
+
+            // Assert
+            arrow.Color.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void Arrow_ExternalEnd_Should_HaveCorrectRightHead()
+        {
+            // Act
+            var arrow = new Arrow("->]");
+
+            // Assert
+            arrow.RightHead.Should().Be(">]");
         }
 
         [TestMethod]

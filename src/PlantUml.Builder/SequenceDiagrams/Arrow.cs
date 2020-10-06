@@ -119,7 +119,7 @@ namespace PlantUml.Builder.SequenceDiagrams
                     {
                         mode = ArrowPart.Body;
                     }
-                    else if (i == 0 && value[0] == Constant.ColorStart && value[1] == Constant.ColorPrefix)
+                    else if (value[i] == Constant.ColorStart && (i < value.Length - 1) && value[i + 1] == Constant.ColorPrefix)
                     {
                         // Left arrow head can start with a '[', but should not be a color.
                         mode = ArrowPart.Color;
@@ -132,7 +132,7 @@ namespace PlantUml.Builder.SequenceDiagrams
 
                 if (mode == ArrowPart.Body)
                 {
-                    if (i < value.Length - 1 && value[i] == Constant.ColorStart && value[i + 1] == Constant.ColorPrefix)
+                    if (value[i] == Constant.ColorStart && (i < value.Length - 1) && value[i + 1] == Constant.ColorPrefix)
                     {
                         mode = ArrowPart.Color;
                     }
