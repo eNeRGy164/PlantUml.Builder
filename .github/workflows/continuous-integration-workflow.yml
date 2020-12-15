@@ -20,7 +20,7 @@ jobs:
     - name: Install GitVersion
       uses: gittools/actions/gitversion/setup@v0.9.7
       with:
-          versionSpec: '5.x'
+          versionSpec: 5.x
 
     - name: Use GitVersion
       id: gitversion
@@ -43,16 +43,16 @@ jobs:
     - name: coverlet
       uses: b3b00/coverlet-action@1.0.91
       with:
-        testProject: 'tests/PlantUml.Builder.Tests/PlantUml.Builder.Tests.csproj'
-        output: 'lcov.info'
-        outputFormat: 'lcov'
+        testProject: tests/PlantUml.Builder.Tests/PlantUml.Builder.Tests.csproj
+        output: lcov.info
+        outputFormat: lcov
         excludes: '[PlantUml.Builder.Tests]*'
 
     - name: coveralls
       uses: coverallsapp/github-action@v1.1.2
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} 
-        path-to-lcov: 'tests/PlantUml.Builder.Tests/lcov.info'
+        path-to-lcov: tests/PlantUml.Builder.Tests/lcov.info
 
     - name: Pack
       run: dotnet pack -v normal --configuration Release --no-restore --include-symbols --include-source -p:PackageVersion=${{ steps.gitversion.outputs.NuGetVersion }} src/PlantUml.Builder/PlantUml.Builder.csproj
@@ -61,4 +61,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: nupkg
-        path: ./src/PlantUml.Builder/bin/Release/*nupkg
+        path: ./src/PlantUml.Builder/bin/Release/*.nupkg
+ 
+    - name: Push NuGet
+      run: dotnet nuget push ./src/PlantUml.Builder/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
