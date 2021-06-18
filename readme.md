@@ -8,6 +8,7 @@
 ## Example
 
 The following code:
+
 ```csharp
 var stringBuilder = new StringBuilder();
 
@@ -23,6 +24,7 @@ stringBuilder.ToString()
 ```
 
 Generates the following output:
+
 ```plantuml
 @startuml
 Alice -> Bob : Authentication Request
