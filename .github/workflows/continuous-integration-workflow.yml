@@ -41,7 +41,7 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
 
     - name: coverlet
-      uses: b3b00/coverlet-action@1.0.91
+      uses: b3b00/coverlet-action@1.1.1
       with:
         testProject: tests/PlantUml.Builder.Tests/PlantUml.Builder.Tests.csproj
         output: lcov.info
