@@ -41,7 +41,7 @@ namespace PlantUml.Builder.SequenceDiagrams
                 stringBuilder.Append(Constant.TargetActivation);
             }
 
-            if (!(activationColor is null))
+            if (activationColor is not null)
             {
                 stringBuilder.Append(Constant.Space);
                 stringBuilder.Append(activationColor);
