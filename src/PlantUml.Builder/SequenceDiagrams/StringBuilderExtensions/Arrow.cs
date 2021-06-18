@@ -11,13 +11,13 @@ namespace PlantUml.Builder.SequenceDiagrams
         /// <param name="left">The left side of the arrow.</param>
         /// <param name="arrow">The arrow configuration.</param>
         /// <param name="right">The right side of the arrow.</param>
-        /// <param name="label">Optional label for the arrow.</param>
+        /// <param name="message">Optional message for the arrow.</param>
         /// <param name="lifeEvents">Optional changes to the life of the <em>source</em> or <em>target</em>.</param>
         /// <param name="activationColor">Optional color for the target activation.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">Thrown when <paramref name="left"/>, <paramref name="arrow"/> or <paramref name="right"/> is <c>null</c>, empty of only white space.</exception>
         /// <exception cref="ArgumentException">Thrown when <paramref name="arrow"/> consists of less then 2 characters.</exception>
-        public static void Arrow(this StringBuilder stringBuilder, string left, Arrow arrow, string right, string label = default, LifeLineEvents lifeEvents = default, Color activationColor = default)
+        public static void Arrow(this StringBuilder stringBuilder, string left, Arrow arrow, string right, string message = default, LifeLineEvents lifeEvents = default, Color activationColor = default)
         {
             if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
 
@@ -43,12 +43,12 @@ namespace PlantUml.Builder.SequenceDiagrams
                 stringBuilder.Append(activationColor);
             }
 
-            if (!string.IsNullOrEmpty(label))
+            if (!string.IsNullOrEmpty(message))
             {
                 stringBuilder.Append(Constant.Space);
                 stringBuilder.Append(Constant.Colon);
                 stringBuilder.Append(Constant.Space);
-                stringBuilder.Append(label.Replace("\n", "\\n"));
+                stringBuilder.Append(message.Replace("\n", "\\n"));
             }
 
             stringBuilder.AppendNewLine();
