@@ -192,7 +192,7 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests
             var stringBuilder = new StringBuilder();
 
             // Act
-            stringBuilder.Arrow("l", "->", "r", label: "label1");
+            stringBuilder.Arrow("l", "->", "r", message: "label1");
 
             // Assert
             stringBuilder.ToString().Should().Be("l -> r : label1\n");
@@ -205,7 +205,7 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests
             var stringBuilder = new StringBuilder();
 
             // Act
-            stringBuilder.Arrow("l", "->", "r", label: "label1\nlabel2");
+            stringBuilder.Arrow("l", "->", "r", message: "label1\nlabel2");
 
             // Assert
             stringBuilder.ToString().Should().Be("l -> r : label1\\nlabel2\n");
