@@ -1065,10 +1065,10 @@ return success
             stringBuilder.Arrow("alice", "->", "bob", "hello");
             stringBuilder.Arrow("bob", "->", "bob", "self call");
             stringBuilder.Arrow("bill", "->", "bob", "hello from thread 2", activationColor: "#005500");
-            stringBuilder.Arrow("bob", "->", "george", "create", createInstanceTarget: true);
+            stringBuilder.Arrow("bob", "->", "george", "create", LifeLineEvents.CreateTargetInstance);
             stringBuilder.Return("done in thread 2");
             stringBuilder.Return("rc");
-            stringBuilder.Arrow("bob", "->", "george", "delete", destroyInstanceTarget: true);
+            stringBuilder.Arrow("bob", "->", "george", "delete", LifeLineEvents.DestroyTargetInstance);
             stringBuilder.Return("success");
             stringBuilder.AppendNewLine();
             stringBuilder.UmlDiagramEnd();
@@ -1163,14 +1163,64 @@ return success
 
             // Act
             stringBuilder.UmlDiagramStart();
-            stringBuilder.Arrow("alice", "->", "bob", "hello", activateTarget: true);
-            stringBuilder.Arrow("bob", "->", "bob", "self call", activateTarget: true);
-            stringBuilder.Arrow("bob", "->", "bib", "hello", activateTarget: true, activationColor: "#005500");
-            stringBuilder.Arrow("bob", "->", "george", "create", createInstanceTarget: true);
+            stringBuilder.Arrow("alice", "->", "bob", "hello", LifeLineEvents.Activate);
+            stringBuilder.Arrow("bob", "->", "bob", "self call", LifeLineEvents.Activate);
+            stringBuilder.Arrow("bob", "->", "bib", "hello", LifeLineEvents.Activate, activationColor: "#005500");
+            stringBuilder.Arrow("bob", "->", "george", "create", LifeLineEvents.Create);
             stringBuilder.Return("done");
             stringBuilder.Return("rc");
-            stringBuilder.Arrow("bob", "->", "george", "delete", destroyInstanceTarget: true);
+            stringBuilder.Arrow("bob", "->", "george", "delete", LifeLineEvents.Destroy);
             stringBuilder.Return("success");
+            stringBuilder.UmlDiagramEnd();
+
+            // Assert
+            stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        }
+
+        [TestMethod]
+        public void MixActivationAndDeactivationOnSameLine01()
+        {
+            // Assign
+            var example = @"@startuml
+alice -> bob ++ : hello1
+bob -> charlie --++ : hello2
+charlie --> alice -- : ok
+@enduml
+";
+
+            var stringBuilder = new StringBuilder();
+
+            // Act
+            stringBuilder.UmlDiagramStart();
+            stringBuilder.Arrow("alice", Arrow.Right, "bob", "hello1", LifeLineEvents.Activate);
+            stringBuilder.Arrow("bob", Arrow.Right, "charlie", "hello2", LifeLineEvents.DeactivateActivate);
+            stringBuilder.Arrow("charlie", Arrow.DottedRight, "alice", "ok", LifeLineEvents.Deactivate);
+            stringBuilder.UmlDiagramEnd();
+
+            // Assert
+            stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        }
+
+        [TestMethod]
+        public void MixActivationAndDeactivationOnSameLine02()
+        {
+            // Assign
+            var example = @"@startuml
+alice -> bob --++ #Gold : hello
+bob -> alice --++ #Gold : you too
+alice -> bob -- : step1
+alice -> bob : step2
+@enduml
+";
+
+            var stringBuilder = new StringBuilder();
+
+            // Act
+            stringBuilder.UmlDiagramStart();
+            stringBuilder.Arrow("alice", Arrow.Right, "bob", "hello", LifeLineEvents.DeactivateSourceActivateTarget, NamedColor.Gold);
+            stringBuilder.Arrow("bob", Arrow.Right, "alice", "you too", LifeLineEvents.DeactivateSourceActivateTarget, NamedColor.Gold);
+            stringBuilder.Arrow("alice", Arrow.Right, "bob", "step1", LifeLineEvents.DeactivateSource);
+            stringBuilder.Arrow("alice", Arrow.Right, "bob", "step2");
             stringBuilder.UmlDiagramEnd();
 
             // Assert
