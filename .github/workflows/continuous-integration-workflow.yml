@@ -64,4 +64,5 @@ jobs:
         path: ./src/PlantUml.Builder/bin/Release/*.nupkg
  
     - name: Push NuGet
+      if: ${{ github.ref == 'refs/heads/main' }}
       run: dotnet nuget push ./src/PlantUml.Builder/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
