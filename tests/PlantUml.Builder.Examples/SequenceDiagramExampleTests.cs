@@ -710,7 +710,7 @@ end rnote
         }
 
         [TestMethod]
-        public void CrealeAndHtml()
+        public void CreoleAndHtml()
         {
             // Assign
             var example = @"@startuml
