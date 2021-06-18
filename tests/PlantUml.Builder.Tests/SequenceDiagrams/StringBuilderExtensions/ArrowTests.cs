@@ -244,7 +244,7 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests
             var stringBuilder = new StringBuilder();
 
             // Act
-            stringBuilder.Arrow("l", "->", "r", activateTarget: true);
+            stringBuilder.Arrow("l", "->", "r", lifeEvents: LifeLineEvents.Activate);
 
             // Assert
             stringBuilder.ToString().Should().Be("l -> r ++\n");
@@ -257,7 +257,7 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests
             var stringBuilder = new StringBuilder();
 
             // Act
-            stringBuilder.Arrow("l", "->", "r", activateTarget: true, activationColor: "Blue");
+            stringBuilder.Arrow("l", "->", "r", lifeEvents: LifeLineEvents.Activate, activationColor: "Blue");
 
             // Assert
             stringBuilder.ToString().Should().Be("l -> r ++ #Blue\n");
@@ -270,7 +270,7 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests
             var stringBuilder = new StringBuilder();
 
             // Act
-            stringBuilder.Arrow("l", "->", "r", activateTarget: true, activationColor: "#Blue");
+            stringBuilder.Arrow("l", "->", "r", lifeEvents: LifeLineEvents.Activate, activationColor: "#Blue");
 
             // Assert
             stringBuilder.ToString().Should().Be("l -> r ++ #Blue\n");
@@ -296,7 +296,7 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests
             var stringBuilder = new StringBuilder();
 
             // Act
-            stringBuilder.Arrow("l", "->", "r", deactivateSource: true);
+            stringBuilder.Arrow("l", "->", "r", lifeEvents: LifeLineEvents.Deactivate);
 
             // Assert
             stringBuilder.ToString().Should().Be("l -> r --\n");
@@ -309,7 +309,7 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests
             var stringBuilder = new StringBuilder();
 
             // Act
-            stringBuilder.Arrow("l", "->", "r", createInstanceTarget: true);
+            stringBuilder.Arrow("l", "->", "r", lifeEvents: LifeLineEvents.Create);
 
             // Assert
             stringBuilder.ToString().Should().Be("l -> r **\n");
@@ -322,7 +322,7 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests
             var stringBuilder = new StringBuilder();
 
             // Act
-            stringBuilder.Arrow("l", "->", "r", destroyInstanceTarget: true);
+            stringBuilder.Arrow("l", "->", "r", lifeEvents: LifeLineEvents.Destroy);
 
             // Assert
             stringBuilder.ToString().Should().Be("l -> r !!\n");
