@@ -187,5 +187,35 @@ namespace PlantUml.Builder.SequenceDiagrams
         /// </summary>
         /// <inheritdoc cref="ThinTopLeft"/>
         public static Arrow DottedThinTopLeft => new(ArrowParts.Top, ArrowParts.Top, ArrowParts.Line, ArrowParts.Line);
+
+        /// <summary>
+        /// A solid arrow to the left and right with a solid line.
+        /// </summary>
+        /// <remarks>
+        /// Symbol <c>⭤</c>.
+        /// Also known as a <em>left right triangle-headed arrow</em>.
+        /// </remarks>
+        public static Arrow LeftRight => new(ArrowParts.Left, ArrowParts.Line, ArrowParts.Right);
+
+        /// <summary>
+        /// A solid arrow to the left and right with a dotted line.
+        /// </summary>
+        /// inheritdoc cref="LeftRight"/>
+        public static Arrow DottedLeftRight => new(ArrowParts.Left, ArrowParts.Line, ArrowParts.Line, ArrowParts.Right);
+
+        /// <summary>
+        /// A thin arrow to the left and right with a solid line.
+        /// </summary>
+        /// <remarks>
+        /// Symbol <c>↔</c>.
+        /// Also known as a <em>left right arrow</em>.
+        /// </remarks>
+        public static Arrow ThinLeftRight => new(ArrowParts.Left, ArrowParts.Left, ArrowParts.Line, ArrowParts.Right, ArrowParts.Right);
+
+        /// <summary>
+        /// A thin arrow to the left and right with a dotted line.
+        /// </summary>
+        /// inheritdoc cref="ThinLeftRight"/>
+        public static Arrow DottedThinLeftRight => new(ArrowParts.Left, ArrowParts.Left, ArrowParts.Line, ArrowParts.Line, ArrowParts.Right, ArrowParts.Right);
     }
 }

@@ -53,6 +53,10 @@ namespace PlantUml.Builder.Tests.SequenceDiagrams
             yield return new[] { "DottedTopLeft", "\\--" };
             yield return new[] { "ThinTopLeft", "\\\\-" };
             yield return new[] { "DottedThinTopLeft", "\\\\--" };
+            yield return new[] { "LeftRight", "<->" };
+            yield return new[] { "DottedLeftRight", "<-->" };
+            yield return new[] { "ThinLeftRight", "<<->>" };
+            yield return new[] { "DottedThinLeftRight", "<<-->>" };
         }
 
         public static string GetDefaultArrowsDisplayName(MethodInfo _, object[] data)
