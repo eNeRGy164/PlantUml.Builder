@@ -2,8 +2,12 @@ using System;
 
 namespace PlantUml.Builder.SequenceDiagrams
 {
-    public static class ArrowExtenstions
+    public static class ArrowExtensions
     {
+        /// <summary>
+        /// Changes the color of the <paramref name="arrow"/> to <paramref name="color"/>.
+        /// </summary>
+        /// <returns>The arrow with the new color applied.</returns>
         public static Arrow Color(this Arrow arrow, Color color)
         {
             if (arrow is null) throw new ArgumentNullException(nameof(arrow));
@@ -11,6 +15,10 @@ namespace PlantUml.Builder.SequenceDiagrams
             return new Arrow(arrow, color);
         }
 
+        /// <summary>
+        /// Makes the line of the <paramref name="arrow"/> solid.
+        /// </summary>
+        /// <returns>The arrow with a solid line.</returns>
         public static Arrow Solid(this Arrow arrow)
         {
             if (arrow is null) throw new ArgumentNullException(nameof(arrow));
@@ -18,6 +26,10 @@ namespace PlantUml.Builder.SequenceDiagrams
             return new Arrow(arrow, dottedLine: false);
         }
 
+        /// <summary>
+        /// Makes the line of the <paramref name="arrow"/> dotted.
+        /// </summary>
+        /// <returns>The arrow with a dotted line.</returns>
         public static Arrow Dotted(this Arrow arrow)
         {
             if (arrow is null) throw new ArgumentNullException(nameof(arrow));
@@ -69,6 +81,11 @@ namespace PlantUml.Builder.SequenceDiagrams
             throw new NotSupportedException("This method only loses an arrow if it is in a clear left or right direction.");
         }
 
+        /// <summary>
+        /// Adds the <em>lost</em> indication to the right side of the <paramref name="arrow"/>.
+        /// </summary>
+        /// <returns>The arrow with the lost indication on the right side.</returns>
+        /// <exception cref="NotSupportedException">The right side is already destroyed.</exception>
         public static Arrow LostRight(this Arrow arrow)
         {
             if (arrow is null) throw new ArgumentNullException(nameof(arrow));
@@ -88,6 +105,11 @@ namespace PlantUml.Builder.SequenceDiagrams
             return new Arrow(arrow.LeftHead, arrow.Dotted, arrow.RightHead + ArrowParts.Lost, arrow.Color);
         }
 
+        /// <summary>
+        /// Adds the <em>lost</em> indication to the left side of the <paramref name="arrow"/>.
+        /// </summary>
+        /// <returns>The arrow with the lost indication on the left side.</returns>
+        /// <exception cref="NotSupportedException">The left side is already destroyed.</exception>
         public static Arrow LostLeft(this Arrow arrow)
         {
             if (arrow is null) throw new ArgumentNullException(nameof(arrow));

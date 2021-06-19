@@ -17,7 +17,7 @@ namespace PlantUml.Builder.Tests.SequenceDiagrams
             // Assign
             Arrow arrow = null;
 
-            var method = typeof(ArrowExtenstions).GetMethod(methodName);
+            var method = typeof(ArrowExtensions).GetMethod(methodName);
             var parameters = new List<object> { arrow };
             parameters.AddRange(methodParameters);
 
