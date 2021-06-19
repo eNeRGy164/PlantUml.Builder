@@ -33,7 +33,9 @@ namespace PlantUml.Builder.Tests.SequenceDiagrams
         private static IEnumerable<object[]> GetArrowExtensionMethods()
         {
             yield return new object[] { "Color", new object[] { (Color)NamedColor.Red } };
+            yield return new object[] { "Destroy", new object[0] };
             yield return new object[] { "Dotted", new object[0] };
+            yield return new object[] { "Lost", new object[0] };
             yield return new object[] { "LostLeft", new object[0] };
             yield return new object[] { "LostRight", new object[0] };
             yield return new object[] { "Solid", new object[0] };
@@ -77,6 +79,8 @@ namespace PlantUml.Builder.Tests.SequenceDiagrams
         }
 
         [TestMethod]
+        [DataRow("x<-", "Lost", DisplayName = "If the left side is already deleted, it can't become lost")]
+        [DataRow("->x", "Lost", DisplayName = "If the right side is already deleted, it can't become lost")]
         [DataRow("x->", "LostLeft", DisplayName = "If the left side is already deleted, it can't become lost")]
         [DataRow("x-x", "LostLeft", DisplayName = "If the left side is already deleted, it can't become lost")]
         [DataRow("<-x", "LostRight", DisplayName = "If the right side is already deleted, it can't become lost")]
@@ -86,48 +90,39 @@ namespace PlantUml.Builder.Tests.SequenceDiagrams
             // Assign
             Arrow originalArrow = original;
 
-            var method = typeof(ArrowExtenstions).GetMethod(methodName);
+            var method = typeof(ArrowExtensions).GetMethod(methodName);
+            var lostFunction = (Func<Arrow, Arrow>)Delegate.CreateDelegate(typeof(Func<Arrow, Arrow>), method);
 
             // Act
-            Action action = () => method.Invoke(null, new object[] { originalArrow });
+            Action action = () => lostFunction(originalArrow);
 
             // Assert
-            action.Should().ThrowExactly<TargetInvocationException>()
-                .WithInnerExceptionExactly<NotSupportedException>()
+            action.Should().ThrowExactly<NotSupportedException>()
                 .WithMessage("You can not combine the lost and deleted message notation in the same arrow head.");
         }
 
         [TestMethod]
-        [DataRow("<-", "o<-", DisplayName = "Become lost")]
-        [DataRow("->", "o->", DisplayName = "Become found")]
-        [DataRow("-->", "o-->", DisplayName = "Become dotted found")]
-        [DataRow("o-->", "o-->", DisplayName = "Stay lost")]
+        [DataRow("<-", "LostLeft", "o<-", DisplayName = "Arrow to the left is lost")]
+        [DataRow("->", "LostLeft", "o->", DisplayName = "Arrow to the right is found")]
+        [DataRow("-->", "LostLeft", "o-->", DisplayName = "Dotted arrow to the right is found")]
+        [DataRow("o-->", "LostLeft", "o-->", DisplayName = "Dotted arrow to the right stays lost")]
+        [DataRow("->", "LostRight", "->o", DisplayName = "Arrow to the right is lost")]
+        [DataRow("<-", "LostRight", "<-o", DisplayName = "Arrow to the left is found")]
+        [DataRow("<--", "LostRight", "<--o", DisplayName = "Dotted arrow to the left is found")]
+        [DataRow("<--o", "LostRight", "<--o", DisplayName = "Dotted arrow to the left stays lost")]
+        [DataRow("->", "Lost", "->o", DisplayName = "Arrow to the right is lost")]
+        [DataRow("<-", "Lost", "o<-", DisplayName = "Arrow to the left is lost")]
 
-        public void AddTheLostNotationOnTheLeftOfTheArrowOnce(string original, string expected)
+        public void AddTheLostNotationOnTheLeftOfTheArrowOnce(string original, string methodName, string expected)
         {
             // Assign
             Arrow originalArrow = original;
 
-            // Act
-            var arrow = originalArrow.LostLeft();
-
-            // Assert
-            arrow.ToString().Should().Be(expected);
-        }
-
-        [TestMethod]
-        [DataRow("->", "->o", DisplayName = "Become lost")]
-        [DataRow("<-", "<-o", DisplayName = "Become found")]
-        [DataRow("<--", "<--o", DisplayName = "Become dotted found")]
-        [DataRow("<--o", "<--o", DisplayName = "Stay lost")]
-
-        public void AddTheLostNotationOnTheRightOfTheArrowOnce(string original, string expected)
-        {
-            // Assign
-            Arrow originalArrow = original;
+            var method = typeof(ArrowExtensions).GetMethod(methodName);
+            var function = (Func<Arrow, Arrow>)Delegate.CreateDelegate(typeof(Func<Arrow, Arrow>), method);
 
             // Act
-            var arrow = originalArrow.LostRight();
+            var arrow = function(originalArrow);
 
             // Assert
             arrow.ToString().Should().Be(expected);
@@ -147,6 +142,53 @@ namespace PlantUml.Builder.Tests.SequenceDiagrams
 
             // Assert
             arrow.ToString().Should().Be(expected);
+        }
+
+        [TestMethod]
+        [DataRow("->", "->x", DisplayName = "A message to the right is deleted")]
+        [DataRow("<-", "x<-", DisplayName = "A message to the left is deleted")]
+        [DataRow("<--", "x<--", DisplayName = "A dotted message is deleted")]
+        [DataRow("//--", "x//--", DisplayName = "A thin bottom message is deleted")]
+        [DataRow("<--o", "x<--o", DisplayName = "A found message is deleted")]
+        [DataRow("x<--o", "x<--o", DisplayName = "A deleted message to the left stays deleted")]
+        [DataRow("x--", "x--", DisplayName = "A deleted message to the left stays deleted")]
+        [DataRow("--x", "--x", DisplayName = "A deleted message to the right stays deleted")]
+        [DataRow("-->x", "-->x", DisplayName = "A deleted message to the right stays deleted")]
+
+        public void DestroyTheMessageInTheDirectionOfTheArrow(string original, string expected)
+        {
+            // Assign
+            Arrow originalArrow = original;
+
+            // Act
+            var arrow = originalArrow.Destroy();
+
+            // Assert
+            arrow.ToString().Should().Be(expected);
+        }
+
+        [TestMethod]
+        [DataRow("<->", "Lost", DisplayName = "A left-right arrow has both directions")]
+        [DataRow("<-->", "Lost", DisplayName = "A dotted left-right arrow has both directions")]
+        [DataRow("x-x", "Lost", DisplayName = "A left-right destroyed arrow has both directions")]
+        [DataRow("<->", "Destroy", DisplayName = "A left-right arrow has both directions")]
+        [DataRow("<-->", "Destroy", DisplayName = "A dotted left-right arrow has both directions")]
+        [DataRow("x-x", "Destroy", DisplayName = "A left-right destroyed arrow has both directions")]
+
+        public void MethodsOnlyWorkIfTheArrowIsToTheLeftOrRight(string original, string methodName)
+        {
+            // Assign
+            Arrow originalArrow = original;
+
+            var method = typeof(ArrowExtensions).GetMethod(methodName);
+            var function = (Func<Arrow, Arrow>)Delegate.CreateDelegate(typeof(Func<Arrow, Arrow>), method);
+
+            // Act
+            Action act = () => function(originalArrow);
+
+            // Assert
+            act.Should().ThrowExactly<NotSupportedException>()
+                .WithMessage("This method only * an arrow if it is in a clear left or right direction.");
         }
     }
 }

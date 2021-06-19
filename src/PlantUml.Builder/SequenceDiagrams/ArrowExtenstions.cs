@@ -25,6 +25,50 @@ namespace PlantUml.Builder.SequenceDiagrams
             return new Arrow(arrow, dottedLine: true);
         }
 
+        public static Arrow Destroy(this Arrow arrow)
+        {
+            if (arrow is null) throw new ArgumentNullException(nameof(arrow));
+
+            if (arrow.Direction == ArrowDirection.Left)
+            {
+                if (arrow.LeftHead[0] == char.ToLowerInvariant(ArrowParts.Destroy))
+                {
+                    return arrow;
+                }
+
+                return new Arrow(ArrowParts.Destroy + arrow.LeftHead, arrow.Dotted, arrow.RightHead, arrow.Color);
+            }
+
+            if (arrow.Direction == ArrowDirection.Right)
+            {
+                if (arrow.RightHead[arrow.RightHead.Length - 1] == char.ToLowerInvariant(ArrowParts.Destroy))
+                {
+                    return arrow;
+                }
+
+                return new Arrow(arrow.LeftHead, arrow.Dotted, arrow.RightHead + ArrowParts.Destroy, arrow.Color);
+            }
+
+            throw new NotSupportedException("This method only destroys an arrow if it is in a clear left or right direction.");
+        }
+
+        public static Arrow Lost(this Arrow arrow)
+        {
+            if (arrow is null) throw new ArgumentNullException(nameof(arrow));
+
+            if (arrow.Direction == ArrowDirection.Left)
+            {
+                return arrow.LostLeft();
+            }
+
+            if (arrow.Direction == ArrowDirection.Right)
+            {
+                return arrow.LostRight();
+            }
+
+            throw new NotSupportedException("This method only loses an arrow if it is in a clear left or right direction.");
+        }
+
         public static Arrow LostRight(this Arrow arrow)
         {
             if (arrow is null) throw new ArgumentNullException(nameof(arrow));
