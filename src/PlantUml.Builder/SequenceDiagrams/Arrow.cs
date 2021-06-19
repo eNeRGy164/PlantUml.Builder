@@ -21,6 +21,7 @@ namespace PlantUml.Builder.SequenceDiagrams
         public readonly string RightHead = string.Empty;
         public readonly bool Dotted = false;
         public readonly Color Color = null;
+        public readonly ArrowDirection Direction = ArrowDirection.None;
 
         public Arrow(params char[] chars)
             : this(new string(chars))
@@ -43,6 +44,11 @@ namespace PlantUml.Builder.SequenceDiagrams
             if (left.Count > 0)
             {
                 this.LeftHead = new string(left.ToArray());
+
+                if (this.LeftHead.TrimStart(ArrowParts.Lost).Length > 0)
+                {
+                    this.Direction |= ArrowDirection.Left;
+                }
             }
 
             if (line.Count > 1)
@@ -58,6 +64,11 @@ namespace PlantUml.Builder.SequenceDiagrams
             if (right.Count > 0)
             {
                 this.RightHead = new string(right.ToArray());
+
+                if (this.RightHead.TrimEnd(ArrowParts.Lost).Length > 0)
+                {
+                    this.Direction |= ArrowDirection.Right;
+                }
             }
         }
 
