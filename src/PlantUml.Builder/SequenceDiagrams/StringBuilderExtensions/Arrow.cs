@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Text;
 
 namespace PlantUml.Builder.SequenceDiagrams
@@ -17,19 +18,19 @@ namespace PlantUml.Builder.SequenceDiagrams
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">Thrown when <paramref name="left"/>, <paramref name="arrow"/> or <paramref name="right"/> is <c>null</c>, empty of only white space.</exception>
         /// <exception cref="ArgumentException">Thrown when <paramref name="arrow"/> consists of less then 2 characters.</exception>
-        public static void Arrow(this StringBuilder stringBuilder, string left, Arrow arrow, string right, string message = default, LifeLineEvents lifeEvents = default, Color activationColor = default)
+        public static void Arrow(this StringBuilder stringBuilder, ParticipantName left, Arrow arrow, ParticipantName right, string message = default, LifeLineEvents lifeEvents = default, Color activationColor = default)
         {
             if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
 
-            if (string.IsNullOrWhiteSpace(left)) throw new ArgumentException("A non-empty value should be provided", nameof(left));
+            if (left is null) throw new ArgumentException("A non-empty value should be provided", nameof(left));
             if (arrow is null) throw new ArgumentException("A non-empty value should be provided", nameof(arrow));
-            if (string.IsNullOrWhiteSpace(right)) throw new ArgumentException("A non-empty value should be provided", nameof(right));
+            if (right is null) throw new ArgumentException("A non-empty value should be provided", nameof(right));
 
-            stringBuilder.Append(left.Replace("\n", "\\n"));
+            stringBuilder.Append(left);
             stringBuilder.Append(Constant.Space);
             stringBuilder.Append(arrow);
             stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(right.Replace("\n", "\\n"));
+            stringBuilder.Append(right);
 
             if (lifeEvents is not null && lifeEvents != LifeLineEvents.None)
             {
