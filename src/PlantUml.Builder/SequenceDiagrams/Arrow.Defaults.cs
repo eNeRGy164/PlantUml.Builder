@@ -8,202 +8,184 @@ namespace PlantUml.Builder.SequenceDiagrams
         /// A solid arrow to the right with a solid line.
         /// </summary>
         /// <remarks>
-        /// Also known as a <c>rightwards triangle-headed arrow</c>.
+        /// Symbol: <c>➝</c>.
+        /// Also known as a <em>rightwards triangle-headed arrow</em>.
         /// </remarks>
-        public static Arrow Right = new Arrow(ArrowParts.Line, ArrowParts.Right);
+        public static Arrow Right => new(ArrowParts.Line, ArrowParts.Right);
 
-        /// <summary>
-        /// A solid arrow to the right with a solid line.
-        /// </summary>
-        public static Arrow AsyncRight = Right;
+        /// <inheritdoc cref="Right"/>
+        public static Arrow AsyncRight => Right;
 
         /// <summary>
         /// A solid arrow to the right with a dotted line.
         /// </summary>
-        /// <remarks>
-        /// Also known as a <c>rightwards triangle-headed arrow</c>.
-        /// </remarks>
-        public static Arrow DottedRight = new Arrow(ArrowParts.Line, ArrowParts.Line, ArrowParts.Right);
+        /// <inheritdoc cref="Right"/>
+        public static Arrow DottedRight => new(ArrowParts.Line, ArrowParts.Line, ArrowParts.Right);
 
-        /// <summary>
-        /// A solid arrow to the right with a dotted line.
-        /// </summary>
-        public static Arrow AsyncReplyRight = DottedRight;
+        /// <inheritdoc cref="DottedRight"/>
+        public static Arrow AsyncReplyRight => DottedRight;
 
         /// <summary>
         /// A thin arrow to the right with a solid line.
         /// </summary>
         /// <remarks>
-        /// Also known as a <c>rightwards arrow</c>.
+        /// Symbol: <c>→</c>
+        /// Also known as a <em>rightwards arrow</em>.
         /// </remarks>
-        public static Arrow ThinRight = new Arrow(ArrowParts.Line, ArrowParts.Right, ArrowParts.Right);
+        public static Arrow ThinRight => new(ArrowParts.Line, ArrowParts.Right, ArrowParts.Right);
 
-        /// <summary>
-        /// A thin arrow to the right with a solid line.
-        /// </summary>
-        public static Arrow SyncRight = ThinRight;
+        /// <inheritdoc cref="ThinRight"/>
+        public static Arrow SyncRight => ThinRight;
 
         /// <summary>
         /// A thin arrow to the right with a dotted line.
         /// </summary>
-        /// <remarks>
-        /// Also known as a <c>rightwards arrow</c>.
-        /// </remarks>
-        public static Arrow DottedThinRight = new Arrow(ArrowParts.Line, ArrowParts.Line, ArrowParts.Right, ArrowParts.Right);
+        /// <inheritdoc cref="ThinRight"/>
+        public static Arrow DottedThinRight => new(ArrowParts.Line, ArrowParts.Line, ArrowParts.Right, ArrowParts.Right);
 
-        /// <summary>
-        /// A thin arrow to the right with a dotted line.
-        /// </summary>
-        public static Arrow SyncReplyRight = DottedThinRight;
+        /// <inheritdoc cref="DottedThinRight"/>
+        public static Arrow SyncReplyRight => DottedThinRight;
 
         /// <summary>
         /// A bottom half solid arrow to the right with a solid line.
         /// </summary>
-        public static Arrow BottomRight = new Arrow(ArrowParts.Line, ArrowParts.Bottom);
+        public static Arrow BottomRight => new(ArrowParts.Line, ArrowParts.Bottom);
 
         /// <summary>
         /// A bottom half solid arrow to the right with a dotted line.
         /// </summary>
-        public static Arrow DottedBottomRight = new Arrow(ArrowParts.Line, ArrowParts.Line, ArrowParts.Bottom);
+        public static Arrow DottedBottomRight => new(ArrowParts.Line, ArrowParts.Line, ArrowParts.Bottom);
 
         /// <summary>
         /// A bottom half thin arrow to the right with a solid line.
         /// </summary>
         /// <remarks>
-        /// Also known as a <c>rightwards harpoon with barb downwards</c>.
+        /// Symbol: <c>⇁</c>
+        /// Also known as a <em>rightwards harpoon with barb downwards</em>.
         /// </remarks>
-        public static Arrow ThinBottomRight = new Arrow(ArrowParts.Line, ArrowParts.Bottom, ArrowParts.Bottom);
+        public static Arrow ThinBottomRight => new(ArrowParts.Line, ArrowParts.Bottom, ArrowParts.Bottom);
 
         /// <summary>
         /// A bottom half solid arrow to the right with a dotted line.
         /// </summary>
-        public static Arrow DottedThinBottomRight = new Arrow(ArrowParts.Line, ArrowParts.Line, ArrowParts.Bottom, ArrowParts.Bottom);
+        /// <inheritdoc cref="ThinBottomRight"/>
+        public static Arrow DottedThinBottomRight => new(ArrowParts.Line, ArrowParts.Line, ArrowParts.Bottom, ArrowParts.Bottom);
 
         /// <summary>
         /// A top half solid arrow to the right with a solid line.
         /// </summary>
-        public static Arrow TopRight = new Arrow(ArrowParts.Line, ArrowParts.Top);
+        public static Arrow TopRight => new(ArrowParts.Line, ArrowParts.Top);
 
         /// <summary>
         /// A top half solid arrow to the right with a dotted line.
         /// </summary>
-        public static Arrow DottedTopRight = new Arrow(ArrowParts.Line, ArrowParts.Line, ArrowParts.Top);
+        public static Arrow DottedTopRight => new(ArrowParts.Line, ArrowParts.Line, ArrowParts.Top);
 
         /// <summary>
         /// A top half thin arrow to the right with a solid line.
         /// </summary>
         /// <remarks>
-        /// Also known as a <c>rightwards harpoon with barb upwards</c>.
+        /// Symbol: <c>⇀</c>
+        /// Also known as a <em>rightwards harpoon with barb upwards</em>.
         /// </remarks>
-        public static Arrow ThinTopRight = new Arrow(ArrowParts.Line, ArrowParts.Top, ArrowParts.Top);
+        public static Arrow ThinTopRight => new(ArrowParts.Line, ArrowParts.Top, ArrowParts.Top);
 
         /// <summary>
         /// A top half thin arrow to the right with a dotted line.
         /// </summary>
-        /// <remarks>
-        /// Also known as a <c>rightwards harpoon with barb upwards</c>.
-        /// </remarks>
-        public static Arrow DottedThinTopRight = new Arrow(ArrowParts.Line, ArrowParts.Line, ArrowParts.Top, ArrowParts.Top);
+        /// <inheritdoc cref="ThinTopRight"/>
+        public static Arrow DottedThinTopRight => new(ArrowParts.Line, ArrowParts.Line, ArrowParts.Top, ArrowParts.Top);
 
         /// <summary>
         /// A solid arrow to the left with a solid line.
         /// </summary>
         /// <remarks>
-        /// Also known as a <c>leftwards triangle-headed arrow</c>.
+        /// Symbol: <c>⭠</c>
+        /// Also known as a <em>leftwards triangle-headed arrow</em>.
         /// </remarks>
-        public static Arrow Left = new Arrow(ArrowParts.Left, ArrowParts.Line);
+        public static Arrow Left => new(ArrowParts.Left, ArrowParts.Line);
 
-        /// <summary>
-        /// A solid arrow to the left with a solid line.
-        /// </summary>
-        public static Arrow AsyncLeft = Left;
+        /// <inheritdoc cref="Left"/>
+        public static Arrow AsyncLeft => Left;
 
         /// <summary>
         /// A solid arrow to the left with a dotted line.
         /// </summary>
-        /// <remarks>
-        /// Also known as a <c>leftwards triangle-headed arrow</c>.
-        /// </remarks>
-        public static Arrow DottedLeft = new Arrow(ArrowParts.Left, ArrowParts.Line, ArrowParts.Line);
+        /// <inheritdoc cref="Left"/>
+        public static Arrow DottedLeft => new(ArrowParts.Left, ArrowParts.Line, ArrowParts.Line);
 
-        /// <summary>
-        /// A solid arrow to the left with a dotted line.
-        /// </summary>
-        public static Arrow AsyncReplyLeft = DottedLeft;
+        /// <inheritdoc cref="DottedLeft"/>
+        public static Arrow AsyncReplyLeft => DottedLeft;
 
         /// <summary>
         /// A thin arrow to the left with a solid line.
         /// </summary>
         /// <remarks>
-        /// Also known as a <c>leftwards arrow</c>.
+        /// Symbol <c>←</c>.
+        /// Also known as a <em>leftwards arrow</em>.
         /// </remarks>
-        public static Arrow ThinLeft = new Arrow(ArrowParts.Left, ArrowParts.Left, ArrowParts.Line);
+        public static Arrow ThinLeft => new(ArrowParts.Left, ArrowParts.Left, ArrowParts.Line);
 
-        /// <summary>
-        /// A thin arrow to the left with a solid line.
-        /// </summary>
-        public static Arrow SyncLeft = ThinLeft;
+        /// <inheritdoc cref="ThinLeft"/>
+        public static Arrow SyncLeft => ThinLeft;
 
         /// <summary>
         /// A thin arrow to the left with a dotted line.
         /// </summary>
-        /// <remarks>
-        /// Also known as a <c>leftwards arrow</c>.
-        /// </remarks>
-        public static Arrow DottedThinLeft = new Arrow(ArrowParts.Left, ArrowParts.Left, ArrowParts.Line, ArrowParts.Line);
+        /// <inheritdoc cref="ThinLeft"/>
+        public static Arrow DottedThinLeft => new(ArrowParts.Left, ArrowParts.Left, ArrowParts.Line, ArrowParts.Line);
 
-        /// <summary>
-        /// A thin arrow to the left with a dotted line.
-        /// </summary>
-        public static Arrow SyncReplyLeft = DottedThinLeft;
+        /// <inheritdoc cref="DottedThinLeft"/>
+        public static Arrow SyncReplyLeft => DottedThinLeft;
 
         /// <summary>
         /// A bottom half solid arrow to the left with a solid line.
         /// </summary>
-        public static Arrow BottomLeft = new Arrow(ArrowParts.Bottom, ArrowParts.Line);
+        public static Arrow BottomLeft => new(ArrowParts.Bottom, ArrowParts.Line);
 
         /// <summary>
         /// A bottom half solid arrow to the left with a dotted line.
         /// </summary>
-        public static Arrow DottedBottomLeft = new Arrow(ArrowParts.Bottom, ArrowParts.Line, ArrowParts.Line);
+        public static Arrow DottedBottomLeft => new(ArrowParts.Bottom, ArrowParts.Line, ArrowParts.Line);
 
         /// <summary>
         /// A bottom half thin arrow to the left with a solid line.
         /// </summary>
         /// <remarks>
-        /// Also known as a <c>leftwards harpoon with barb downwards</c>.
+        /// Symbol <c>↽</c>.
+        /// Also known as a <em>leftwards harpoon with barb downwards</em>.
         /// </remarks>
-        public static Arrow ThinBottomLeft = new Arrow(ArrowParts.Bottom, ArrowParts.Bottom, ArrowParts.Line);
+        public static Arrow ThinBottomLeft => new(ArrowParts.Bottom, ArrowParts.Bottom, ArrowParts.Line);
 
         /// <summary>
         /// A bottom half solid arrow to the left with a dotted line.
         /// </summary>
-        public static Arrow DottedThinBottomLeft = new Arrow(ArrowParts.Bottom, ArrowParts.Bottom, ArrowParts.Line, ArrowParts.Line);
+        /// <inheritdoc cref="ThinBottomLeft"/>
+        public static Arrow DottedThinBottomLeft => new(ArrowParts.Bottom, ArrowParts.Bottom, ArrowParts.Line, ArrowParts.Line);
 
         /// <summary>
         /// A top half solid arrow to the left with a solid line.
         /// </summary>
-        public static Arrow TopLeft = new Arrow(ArrowParts.Top, ArrowParts.Line);
+        public static Arrow TopLeft => new(ArrowParts.Top, ArrowParts.Line);
 
         /// <summary>
         /// A top half solid arrow to the left with a dotted line.
         /// </summary>
-        public static Arrow DottedTopLeft = new Arrow(ArrowParts.Top, ArrowParts.Line, ArrowParts.Line);
+        public static Arrow DottedTopLeft => new(ArrowParts.Top, ArrowParts.Line, ArrowParts.Line);
 
         /// <summary>
         /// A top half thin arrow to the left with a solid line.
         /// </summary>
         /// <remarks>
-        /// Also known as a <c>leftwards harpoon with barb upwards</c>.
+        /// Symbol <c>↼</c>.
+        /// Also known as a <em>leftwards harpoon with barb upwards</em>.
         /// </remarks>
-        public static Arrow ThinTopLeft = new Arrow(ArrowParts.Top, ArrowParts.Top, ArrowParts.Line);
+        public static Arrow ThinTopLeft => new(ArrowParts.Top, ArrowParts.Top, ArrowParts.Line);
 
         /// <summary>
         /// A top half thin arrow to the left with a dotted line.
         /// </summary>
-        /// <remarks>
-        /// Also known as a <c>leftwards harpoon with barb upwards</c>.
-        /// </remarks>
-        public static Arrow DottedThinTopLeft = new Arrow(ArrowParts.Top, ArrowParts.Top, ArrowParts.Line, ArrowParts.Line);
+        /// <inheritdoc cref="ThinTopLeft"/>
+        public static Arrow DottedThinTopLeft => new(ArrowParts.Top, ArrowParts.Top, ArrowParts.Line, ArrowParts.Line);
     }
 }
