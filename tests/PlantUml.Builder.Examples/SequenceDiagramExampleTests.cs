@@ -44,18 +44,21 @@ Alice <-- Bob : Another authentication Response
         {
             // Assign
             var example = @"@startuml
-actor Foo1
-boundary Foo2
-control Foo3
-entity Foo4
-database Foo5
-collections Foo6
-Foo1 -> Foo2 : To boundary
-Foo1 -> Foo3 : To control
-Foo1 -> Foo4 : To entity
-Foo1 -> Foo5 : To database
-Foo1 -> Foo6 : To collections
-
+participant participant as Foo
+actor actor as Foo1
+boundary boundary as Foo2
+control control as Foo3
+entity entity as Foo4
+database database as Foo5
+collections collections as Foo6
+queue queue as Foo7
+Foo -> Foo1 : To actor
+Foo -> Foo2 : To boundary
+Foo -> Foo3 : To control
+Foo -> Foo4 : To entity
+Foo -> Foo5 : To database
+Foo -> Foo6 : To collections
+Foo -> Foo7 : To queue
 @enduml
 ";
 
@@ -63,18 +66,21 @@ Foo1 -> Foo6 : To collections
 
             // Act
             stringBuilder.UmlDiagramStart();
-            stringBuilder.Actor("Foo1");
-            stringBuilder.Boundary("Foo2");
-            stringBuilder.Control("Foo3");
-            stringBuilder.Entity("Foo4");
-            stringBuilder.Database("Foo5");
-            stringBuilder.Collections("Foo6");
-            stringBuilder.Arrow("Foo1", "->", "Foo2", "To boundary");
-            stringBuilder.Arrow("Foo1", "->", "Foo3", "To control");
-            stringBuilder.Arrow("Foo1", "->", "Foo4", "To entity");
-            stringBuilder.Arrow("Foo1", "->", "Foo5", "To database");
-            stringBuilder.Arrow("Foo1", "->", "Foo6", "To collections");
-            stringBuilder.AppendNewLine();
+            stringBuilder.Participant("Foo", "participant");
+            stringBuilder.Actor("Foo1", "actor");
+            stringBuilder.Boundary("Foo2", "boundary");
+            stringBuilder.Control("Foo3", "control");
+            stringBuilder.Entity("Foo4", "entity");
+            stringBuilder.Database("Foo5", "database");
+            stringBuilder.Collections("Foo6", "collections");
+            stringBuilder.Queue("Foo7", "queue");
+            stringBuilder.Arrow("Foo", "->", "Foo1", "To actor");
+            stringBuilder.Arrow("Foo", "->", "Foo2", "To boundary");
+            stringBuilder.Arrow("Foo", "->", "Foo3", "To control");
+            stringBuilder.Arrow("Foo", "->", "Foo4", "To entity");
+            stringBuilder.Arrow("Foo", "->", "Foo5", "To database");
+            stringBuilder.Arrow("Foo", "->", "Foo6", "To collections");
+            stringBuilder.Arrow("Foo", "->", "Foo7", "To queue");
             stringBuilder.UmlDiagramEnd();
 
             // Assert
@@ -162,8 +168,8 @@ Long --> ""Bob()"" : ok
 
             // Act
             stringBuilder.UmlDiagramStart();
-            stringBuilder.Arrow("Alice", "->", "\"Bob()\"", "Hello");
-            stringBuilder.Arrow("\"Bob()\"", "->", "\"This is very\nlong\" as Long");
+            stringBuilder.Arrow("Alice", "->", "Bob()", "Hello");
+            stringBuilder.Arrow("Bob()", "->", "This is very\nlong as Long");
             stringBuilder.Comment("You can also declare:");
             stringBuilder.Comment("\"Bob()\" -> Long as \"This is very\\nlong\"");
             stringBuilder.Arrow("Long", "-->", "\"Bob()\"", "ok");
@@ -174,7 +180,7 @@ Long --> ""Bob()"" : ok
         }
 
         [TestMethod]
-        public void MessageToSelf()
+        public void MessageToSelf01()
         {
             // Assign
             var example = @"@startuml
@@ -194,7 +200,51 @@ Alice -> Alice : This is a signal to self.\nIt also demonstrates\nmultiline \nte
         }
 
         [TestMethod]
-        public void TextAlignment()
+        public void MessageToSelf02()
+        {
+            // Assign
+            var example = @"@startuml
+Alice <- Alice : This is a signal to self.\nIt also demonstrates\nmultiline \ntext
+@enduml
+";
+
+            var stringBuilder = new StringBuilder();
+
+            // Act
+            stringBuilder.UmlDiagramStart();
+            stringBuilder.Arrow("Alice", "<-", "Alice", "This is a signal to self.\nIt also demonstrates\nmultiline \ntext");
+            stringBuilder.UmlDiagramEnd();
+
+            // Assert
+            stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        }
+
+        [TestMethod]
+        public void TextAlignment01()
+        {
+            // Assign
+            var example = @"@startuml
+skinparam sequenceMessageAlignment right
+Bob -> Alice : Request
+Alice -> Bob : Response
+@enduml
+";
+
+            var stringBuilder = new StringBuilder();
+
+            // Act
+            stringBuilder.UmlDiagramStart();
+            stringBuilder.SkinParameter(SkinParameter.SequenceMessageAlignment, "right");
+            stringBuilder.Arrow("Bob", "->", "Alice", "Request");
+            stringBuilder.Arrow("Alice", "->", "Bob", "Response");
+            stringBuilder.UmlDiagramEnd();
+
+            // Assert
+            stringBuilder.ToString().Should().BeEquivalentTo(example.Replace("\r", ""));
+        }
+
+        [TestMethod]
+        public void TextAlignment02()
         {
             // Assign
             var example = @"@startuml
@@ -218,7 +268,7 @@ Alice -> Bob : ok
         }
 
         [TestMethod]
-        public void ChangeArrowStyle()
+        public void ChangeArrowStyle01()
         {
             // Assign
             var example = @"@startuml
@@ -253,6 +303,50 @@ Bob <->o Alice
             stringBuilder.AppendNewLine();
             stringBuilder.Arrow("Bob", "<->", "Alice");
             stringBuilder.Arrow("Bob", "<->o", "Alice");
+            stringBuilder.UmlDiagramEnd();
+
+            // Assert
+            stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        }
+
+        [TestMethod]
+        public void ChangeArrowStyle02()
+        {
+            // Assign
+            var example = @"@startuml
+Bob ->x Alice
+Bob -> Alice
+Bob ->> Alice
+Bob -\ Alice
+Bob \\- Alice
+Bob //-- Alice
+
+Bob ->o Alice
+Bob o\\-- Alice
+
+Bob <-> Alice
+Bob <->o Alice
+@enduml
+";
+
+            var stringBuilder = new StringBuilder();
+            var bob = new Bob();
+            var alice = new Alice();
+
+            // Act
+            stringBuilder.UmlDiagramStart();
+            stringBuilder.Arrow(bob, Arrow.Right.Destroy(), alice);
+            stringBuilder.Arrow(bob, Arrow.Right, alice);
+            stringBuilder.Arrow(bob, Arrow.ThinRight, alice);
+            stringBuilder.Arrow(bob, Arrow.TopRight, alice);
+            stringBuilder.Arrow(bob, Arrow.ThinTopLeft, alice);
+            stringBuilder.Arrow(bob, Arrow.DottedThinBottomLeft, alice);
+            stringBuilder.AppendNewLine();
+            stringBuilder.Arrow(bob, Arrow.Right.Lost(), alice);
+            stringBuilder.Arrow(bob, Arrow.DottedThinTopLeft.Lost(), alice);
+            stringBuilder.AppendNewLine();
+            stringBuilder.Arrow(bob, Arrow.LeftRight, alice);
+            stringBuilder.Arrow(bob, Arrow.LeftRight.LostRight(), alice);
             stringBuilder.UmlDiagramEnd();
 
             // Assert
@@ -1243,6 +1337,20 @@ alice -> bob : step2
 
             // Assert
             stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        }
+
+        public class Bob : ParticipantName
+        {
+            public Bob() : base("Bob")
+            {
+            }
+        }
+
+        public class Alice : ParticipantName
+        {
+            public Alice() : base("Alice")
+            {
+            }
         }
     }
 }
