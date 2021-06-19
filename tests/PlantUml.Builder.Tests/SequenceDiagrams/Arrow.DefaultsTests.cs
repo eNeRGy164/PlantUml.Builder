@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PlantUml.Builder.SequenceDiagrams;
@@ -9,323 +11,53 @@ namespace PlantUml.Builder.Tests.SequenceDiagrams
     public class ArrowDefaultsTests
     {
         [TestMethod]
-        public void Arrow_Default_Right()
+        [DynamicData(nameof(GetDefaultArrows), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetDefaultArrowsDisplayName))]
+        public void ReturnCorrectDefaultArrowNotation(string name, string expected)
         {
-            // Act
-            var arrow = Arrow.Right;
+            var arrow = typeof(Arrow).GetProperty(name).GetValue(null);
 
-            // Assert
-            arrow.ToString().Should().Be("->");
+            arrow.ToString().Should().Be(expected);
         }
 
-        [TestMethod]
-        public void Arrow_Default_DottedRight()
+        private static IEnumerable<object[]> GetDefaultArrows()
         {
-            // Act
-            var arrow = Arrow.DottedRight;
-
-            // Assert
-            arrow.ToString().Should().Be("-->");
+            yield return new[] { "Right", "->" };
+            yield return new[] { "DottedRight", "-->" };
+            yield return new[] { "ThinRight", "->>" };
+            yield return new[] { "DottedThinRight", "-->>" };
+            yield return new[] { "AsyncRight", "->" };
+            yield return new[] { "SyncRight", "->>" };
+            yield return new[] { "AsyncReplyRight", "-->" };
+            yield return new[] { "SyncReplyRight", "-->>" };
+            yield return new[] { "BottomRight", "-/" };
+            yield return new[] { "DottedBottomRight", "--/" };
+            yield return new[] { "ThinBottomRight", "-//" };
+            yield return new[] { "DottedThinBottomRight", "--//" };
+            yield return new[] { "TopRight", "-\\" };
+            yield return new[] { "DottedTopRight", "--\\" };
+            yield return new[] { "ThinTopRight", "-\\\\" };
+            yield return new[] { "DottedThinTopRight", "--\\\\" };
+            yield return new[] { "Left", "<-" };
+            yield return new[] { "DottedLeft", "<--" };
+            yield return new[] { "ThinLeft", "<<-" };
+            yield return new[] { "DottedThinLeft", "<<--" };
+            yield return new[] { "AsyncLeft", "<-" };
+            yield return new[] { "SyncLeft", "<<-" };
+            yield return new[] { "AsyncReplyLeft", "<--" };
+            yield return new[] { "SyncReplyLeft", "<<--" };
+            yield return new[] { "BottomLeft", "/-" };
+            yield return new[] { "DottedBottomLeft", "/--" };
+            yield return new[] { "ThinBottomLeft", "//-" };
+            yield return new[] { "DottedThinBottomLeft", "//--" };
+            yield return new[] { "TopLeft", "\\-" };
+            yield return new[] { "DottedTopLeft", "\\--" };
+            yield return new[] { "ThinTopLeft", "\\\\-" };
+            yield return new[] { "DottedThinTopLeft", "\\\\--" };
         }
 
-        [TestMethod]
-        public void Arrow_Default_ThinRight()
+        public static string GetDefaultArrowsDisplayName(MethodInfo _, object[] data)
         {
-            // Act
-            var arrow = Arrow.ThinRight;
-
-            // Assert
-            arrow.ToString().Should().Be("->>");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_DottedThinRight()
-        {
-            // Act
-            var arrow = Arrow.DottedThinRight;
-
-            // Assert
-            arrow.ToString().Should().Be("-->>");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_AsyncRight()
-        {
-            // Act
-            var arrow = Arrow.AsyncRight;
-
-            // Assert
-            arrow.ToString().Should().Be("->");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_SyncRight()
-        {
-            // Act
-            var arrow = Arrow.SyncRight;
-
-            // Assert
-            arrow.ToString().Should().Be("->>");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_AsyncReplyRight()
-        {
-            // Act
-            var arrow = Arrow.AsyncReplyRight;
-
-            // Assert
-            arrow.ToString().Should().Be("-->");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_SyncReplyRight()
-        {
-            // Act
-            var arrow = Arrow.SyncReplyRight;
-
-            // Assert
-            arrow.ToString().Should().Be("-->>");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_BottomRight()
-        {
-            // Act
-            var arrow = Arrow.BottomRight;
-
-            // Assert
-            arrow.ToString().Should().Be("-/");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_DottedBottomRight()
-        {
-            // Act
-            var arrow = Arrow.DottedBottomRight;
-
-            // Assert
-            arrow.ToString().Should().Be("--/");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_ThinBottomRight()
-        {
-            // Act
-            var arrow = Arrow.ThinBottomRight;
-
-            // Assert
-            arrow.ToString().Should().Be("-//");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_DottedThinBottomRight()
-        {
-            // Act
-            var arrow = Arrow.DottedThinBottomRight;
-
-            // Assert
-            arrow.ToString().Should().Be("--//");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_TopRight()
-        {
-            // Act
-            var arrow = Arrow.TopRight;
-
-            // Assert
-            arrow.ToString().Should().Be("-\\");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_DottedTopRight()
-        {
-            // Act
-            var arrow = Arrow.DottedTopRight;
-
-            // Assert
-            arrow.ToString().Should().Be("--\\");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_ThinTopRight()
-        {
-            // Act
-            var arrow = Arrow.ThinTopRight;
-
-            // Assert
-            arrow.ToString().Should().Be("-\\\\");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_DottedThinTopRight()
-        {
-            // Act
-            var arrow = Arrow.DottedThinTopRight;
-
-            // Assert
-            arrow.ToString().Should().Be("--\\\\");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_Left()
-        {
-            // Act
-            var arrow = Arrow.Left;
-
-            // Assert
-            arrow.ToString().Should().Be("<-");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_DottedLeft()
-        {
-            // Act
-            var arrow = Arrow.DottedLeft;
-
-            // Assert
-            arrow.ToString().Should().Be("<--");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_ThinLeft()
-        {
-            // Act
-            var arrow = Arrow.ThinLeft;
-
-            // Assert
-            arrow.ToString().Should().Be("<<-");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_DottedThinLeft()
-        {
-            // Act
-            var arrow = Arrow.DottedThinLeft;
-
-            // Assert
-            arrow.ToString().Should().Be("<<--");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_AsyncLeft()
-        {
-            // Act
-            var arrow = Arrow.AsyncLeft;
-
-            // Assert
-            arrow.ToString().Should().Be("<-");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_SyncLeft()
-        {
-            // Act
-            var arrow = Arrow.SyncLeft;
-
-            // Assert
-            arrow.ToString().Should().Be("<<-");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_AsyncReplyLeft()
-        {
-            // Act
-            var arrow = Arrow.AsyncReplyLeft;
-
-            // Assert
-            arrow.ToString().Should().Be("<--");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_SyncReplyLeft()
-        {
-            // Act
-            var arrow = Arrow.SyncReplyLeft;
-
-            // Assert
-            arrow.ToString().Should().Be("<<--");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_BottomLeft()
-        {
-            // Act
-            var arrow = Arrow.BottomLeft;
-
-            // Assert
-            arrow.ToString().Should().Be("/-");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_DottedBottomLeft()
-        {
-            // Act
-            var arrow = Arrow.DottedBottomLeft;
-
-            // Assert
-            arrow.ToString().Should().Be("/--");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_ThinBottomLeft()
-        {
-            // Act
-            var arrow = Arrow.ThinBottomLeft;
-
-            // Assert
-            arrow.ToString().Should().Be("//-");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_DottedThinBottomLeft()
-        {
-            // Act
-            var arrow = Arrow.DottedThinBottomLeft;
-
-            // Assert
-            arrow.ToString().Should().Be("//--");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_TopLeft()
-        {
-            // Act
-            var arrow = Arrow.TopLeft;
-
-            // Assert
-            arrow.ToString().Should().Be("\\-");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_DottedTopLeft()
-        {
-            // Act
-            var arrow = Arrow.DottedTopLeft;
-
-            // Assert
-            arrow.ToString().Should().Be("\\--");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_ThinTopLeft()
-        {
-            // Act
-            var arrow = Arrow.ThinTopLeft;
-
-            // Assert
-            arrow.ToString().Should().Be("\\\\-");
-        }
-
-        [TestMethod]
-        public void Arrow_Default_DottedThinTopLeft()
-        {
-            // Act
-            var arrow = Arrow.DottedThinTopLeft;
-
-            // Assert
-            arrow.ToString().Should().Be("\\\\--");
+            return $"The default \"{data[0]}\" should have the \"{data[1]}\" notation";
         }
     }
 }
