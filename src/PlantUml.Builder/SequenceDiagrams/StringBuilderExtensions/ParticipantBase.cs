@@ -10,30 +10,17 @@ namespace PlantUml.Builder.SequenceDiagrams
         /// </summary>
         /// <param name="participantType">The type of participant.</param>
         /// <param name="name">The name of the participant.</param>
-        /// <param name="displayName">Optional display name of the participant.</param>
         /// <param name="color">Optional color of the participant.</param>
         /// <param name="order">Optional order of the participant.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <c>null</c>, empty of only white space.</exception>
-        internal static void ParticipantBase(this StringBuilder stringBuilder, ParticipantType participantType, string name, string displayName, Color color, int? order)
+        internal static void ParticipantBase(this StringBuilder stringBuilder, ParticipantType participantType, ParticipantName name, Color color, int? order)
         {
             if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
-
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
 
             if (participantType >= ParticipantType.Participant)
             {
                 stringBuilder.Append(participantType.ToString().ToLowerInvariant());
-                stringBuilder.Append(Constant.Space);
-            }
-
-            if (!string.IsNullOrEmpty(displayName))
-            {
-                stringBuilder.Append(Constant.Quote);
-                stringBuilder.Append(displayName);
-                stringBuilder.Append(Constant.Quote);
-                stringBuilder.Append(Constant.Space);
-                stringBuilder.Append(Constant.As);
                 stringBuilder.Append(Constant.Space);
             }
 
@@ -47,7 +34,7 @@ namespace PlantUml.Builder.SequenceDiagrams
                 stringBuilder.Append(order.Value);
             }
 
-            if (!(color is null))
+            if (color is not null)
             {
                 stringBuilder.Append(Constant.Space);
                 stringBuilder.Append(color);
@@ -61,17 +48,16 @@ namespace PlantUml.Builder.SequenceDiagrams
         /// </summary>
         /// <param name="name">The name of the participant.</param>
         /// <param name="participantType">The type of participant.</param>
-        /// <param name="displayName">Optional display name of the participant.</param>
         /// <param name="color">Optional color of the participant.</param>/// <param name="order">Optional order of the participant.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <c>null</c>, empty of only white space.</exception>
-        internal static void CreateParticipantBase(this StringBuilder stringBuilder, string name, ParticipantType participantType = ParticipantType.None, string displayName = null, Color color = null, int? order = null)
+        internal static void CreateParticipantBase(this StringBuilder stringBuilder, ParticipantName name, ParticipantType participantType = ParticipantType.None, Color color = null, int? order = null)
         {
             if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
 
             stringBuilder.Append(Constant.Create);
             stringBuilder.Append(Constant.Space);
-            stringBuilder.ParticipantBase(participantType, name, displayName, color, order);
+            stringBuilder.ParticipantBase(participantType, name, color, order);
         }
     }
 }

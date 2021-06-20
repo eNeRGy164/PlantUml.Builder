@@ -16,7 +16,7 @@ namespace PlantUml.Builder.SequenceDiagrams
         /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <c>null</c>, empty of only white space.</exception>
         public static void Database(this StringBuilder stringBuilder, string name, string displayName = null, Color color = null, int? order = null)
         {
-            stringBuilder.ParticipantBase(ParticipantType.Database, name, displayName, color, order);
+            stringBuilder.ParticipantBase(ParticipantType.Database, new ParticipantName(name, displayName), color, order);
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace PlantUml.Builder.SequenceDiagrams
         /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <c>null</c>, empty of only white space.</exception>
         public static void CreateDatabase(this StringBuilder stringBuilder, string name, string displayName = null, Color color = null, int? order = null)
         {
-            stringBuilder.CreateParticipantBase(name, ParticipantType.Database, displayName, color, order);
+            stringBuilder.CreateParticipantBase(new ParticipantName(name, displayName), ParticipantType.Database, color, order);
         }
     }
 }

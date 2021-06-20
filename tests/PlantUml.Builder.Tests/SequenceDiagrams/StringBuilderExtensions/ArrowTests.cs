@@ -38,36 +38,6 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests
         }
 
         [TestMethod]
-        public void StringBuilderExtensions_Arrow_EmptyLeft_Should_ThrowArgumentException()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            Action action = () => stringBuilder.Arrow(string.Empty, "->", "r");
-
-            // Assert
-            action.Should().ThrowExactly<ArgumentException>()
-                .WithMessage("A non-empty value should be provided*")
-                .And.ParamName.Should().Be("left");
-        }
-
-        [TestMethod]
-        public void StringBuilderExtensions_Arrow_WhitespaceLeft_Should_ThrowArgumentException()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            Action action = () => stringBuilder.Arrow(" ", "->", "r");
-
-            // Assert
-            action.Should().ThrowExactly<ArgumentException>()
-                .WithMessage("A non-empty value should be provided*")
-                .And.ParamName.Should().Be("left");
-        }
-
-        [TestMethod]
         public void StringBuilderExtensions_Arrow_NullType_Should_ThrowArgumentException()
         {
             // Assign
@@ -120,36 +90,6 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests
 
             // Act
             Action action = () => stringBuilder.Arrow("l", "->", null);
-
-            // Assert
-            action.Should().ThrowExactly<ArgumentException>()
-                .WithMessage("A non-empty value should be provided*")
-                .And.ParamName.Should().Be("right");
-        }
-
-        [TestMethod]
-        public void StringBuilderExtensions_Arrow_EmptyRight_Should_ThrowArgumentException()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            Action action = () => stringBuilder.Arrow("l", "->", string.Empty);
-
-            // Assert
-            action.Should().ThrowExactly<ArgumentException>()
-                .WithMessage("A non-empty value should be provided*")
-                .And.ParamName.Should().Be("right");
-        }
-
-        [TestMethod]
-        public void StringBuilderExtensions_Arrow_WhitespaceRight_Should_ThrowArgumentException()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            Action action = () => stringBuilder.Arrow("l", "->", " ");
 
             // Assert
             action.Should().ThrowExactly<ArgumentException>()
@@ -338,7 +278,7 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests
             stringBuilder.Arrow("l\nl", "->", "r\nr");
 
             // Assert
-            stringBuilder.ToString().Should().Be("l\\nl -> r\\nr\n");
+            stringBuilder.ToString().Should().Be("\"l\\nl\" -> \"r\\nr\"\n");
         }
     }
 }
