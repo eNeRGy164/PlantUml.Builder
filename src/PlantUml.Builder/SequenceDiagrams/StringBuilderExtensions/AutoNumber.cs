@@ -8,21 +8,28 @@ namespace PlantUml.Builder.SequenceDiagrams
         /// <summary>
         /// Renders the auto number keyword.
         /// </summary>
-        /// <param name="start">Optional start number.</param>
+        /// <param name="start">Start number.</param>
         /// <param name="step">Optional step size.</param>
         /// <param name="format">Optional format.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
-        public static void AutoNumber(this StringBuilder stringBuilder, int? start = null, int? step = null, string format = null)
+        /// <remarks>
+        /// <paramref name="start"/> can also be a 2 or 3 digit sequence using a field delimiter such as <c>.</c>, <c>;</c>, <c>,</c>, <c>:</c> or a mix of these.
+        /// For example: <em>1.1.1</em> or <em>1.1:1</em>.
+        /// </remarks>
+        public static void AutoNumber(this StringBuilder stringBuilder, string start, int? step = null, string format = null)
         {
             if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+
+            if (start is not null && string.IsNullOrWhiteSpace(start)) throw new ArgumentException("A non-empty value should be provided", nameof(start));
+            if (format is not null && string.IsNullOrWhiteSpace(format)) throw new ArgumentException("A non-empty value should be provided", nameof(format));
 
             stringBuilder.Append(Constant.Auto);
             stringBuilder.Append(Constant.Number);
 
-            if (start.HasValue)
+            if (!string.IsNullOrWhiteSpace(start))
             {
                 stringBuilder.Append(Constant.Space);
-                stringBuilder.Append(start.Value);
+                stringBuilder.Append(start);
 
                 if (step.HasValue)
                 {
@@ -40,6 +47,18 @@ namespace PlantUml.Builder.SequenceDiagrams
             }
 
             stringBuilder.AppendNewLine();
+        }
+
+        /// <summary>
+        /// Renders the auto number keyword.
+        /// </summary>
+        /// <param name="start">Optional start number.</param>
+        /// <param name="step">Optional step size.</param>
+        /// <param name="format">Optional format.</param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+        public static void AutoNumber(this StringBuilder stringBuilder, int? start = default, int? step = default, string format = default)
+        {
+            stringBuilder.AutoNumber(start.HasValue ? start.Value.ToString() : default, step, format);
         }
 
         /// <summary>
@@ -68,7 +87,7 @@ namespace PlantUml.Builder.SequenceDiagrams
         {
             if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
 
-            if (!(format is null) && string.IsNullOrWhiteSpace(format)) throw new ArgumentException("A non-empty value should be provided", nameof(format));
+            if (format is not null && string.IsNullOrWhiteSpace(format)) throw new ArgumentException("A non-empty value should be provided", nameof(format));
 
             stringBuilder.Append(Constant.Auto);
             stringBuilder.Append(Constant.Number);
@@ -81,12 +100,37 @@ namespace PlantUml.Builder.SequenceDiagrams
                 stringBuilder.Append(step.Value);
             }
 
-            if (!(format is null))
+            if (format is not null)
             {
                 stringBuilder.Append(Constant.Space);
                 stringBuilder.Append(Constant.Quote);
                 stringBuilder.Append(format);
                 stringBuilder.Append(Constant.Quote);
+            }
+
+            stringBuilder.AppendNewLine();
+        }
+
+        /// <summary>
+        /// Renders the autonumber increase keyword.
+        /// </summary>
+        /// <param name="position">Optional digit to increase. <em>A</em> = first, <em>B</em> = second, etc.</param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+        public static void IncreaseAutoNumber(this StringBuilder stringBuilder, char? position = default)
+        {
+            if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+
+            if (position.HasValue && (char.ToLower(position.Value) < 'a' || char.ToLower(position.Value) > 'z')) throw new ArgumentOutOfRangeException(nameof(position), "Only the characters A - Z are allowed");
+
+            stringBuilder.Append(Constant.Auto);
+            stringBuilder.Append(Constant.Number);
+            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Increase);
+
+            if (position.HasValue)
+            {
+                stringBuilder.Append(Constant.Space);
+                stringBuilder.Append(position);
             }
 
             stringBuilder.AppendNewLine();

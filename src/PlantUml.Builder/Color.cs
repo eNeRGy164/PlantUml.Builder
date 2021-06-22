@@ -37,7 +37,7 @@ namespace PlantUml.Builder
 
         public string ToString(string format, IFormatProvider formatProvider = null)
         {
-            if (format.Equals("B", StringComparison.OrdinalIgnoreCase))
+            if (format != null && format.Equals("B", StringComparison.OrdinalIgnoreCase))
             {
                 return Constant.ColorStart + this.value + Constant.ColorEnd;
             }

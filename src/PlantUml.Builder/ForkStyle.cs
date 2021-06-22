@@ -6,7 +6,7 @@ namespace PlantUml.Builder
     public enum ForkStyle
         : byte
     {
-        None,
+        None = 0,
 
         Fork,
         Split,

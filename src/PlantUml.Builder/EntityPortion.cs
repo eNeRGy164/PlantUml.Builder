@@ -3,7 +3,7 @@ namespace PlantUml.Builder
     public enum EntityPortion
         : byte
     {
-        None,
+        None = 0,
 
         Members,
         Attributes,

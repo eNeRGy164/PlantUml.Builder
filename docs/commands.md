@@ -67,76 +67,88 @@ Following the PlantUML source code.
 
 ## Sequence Diagrams
 
-| Command                                                                         | Implemented | Method              |
-| ------------------------------------------------------------------------------- | ----------- | ------------------- |
-| \<PART1> \<ARROW> \<PART2> [\<ACTIVATION>] [\<LIFECOLOR>] [\<URL>] [\<MESSAGE>] | partial     | `Arrow`             |
-| activate \<WHO> [\<BGCOLOR>] [\<LNCOLOR>]                                       | yes         | `Activate`          |
-| deactivate \<WHO> [\<BGCOLOR>] [\<LNCOLOR>]                                     | partial     | `Deactivate`        |
-| deactivate                                                                      | yes         | `Deactivate`        |
-| destroy \<WHO> [\<BGCOLOR>] [\<LNCOLOR>]                                        | partial     | `Destroy`           |
-| \<NAME>++ [\<BGCOLOR>]                                                          | no          |                     |
-| \<NAME>-- [\<BGCOLOR>]                                                          | no          |                     |
-| autonewpage                                                                     | no          |                     |
-| autoactivate off\|on                                                            | yes         | `AutoActivate`      |
-| autonumber [\<START>] [\<STEP>] [\<FORMAT>]                                     | yes         | `AutoNumber`        |
-| autonumber inc                                                                  | no          |                     |
-| autonumber resume [\<STEP>] [\<FORMAT>]                                         | yes         | `ResumeAutoNumber`  |
-| autonumber stop                                                                 | yes         | `StopAutoNumber`    |
-| box [\<NAME>] [\<STEREO>] [\<COLOR>]                                            | partial     | `BoxStart`          |
-| end box                                                                         | yes         | `BoxEnd`            |
-| delay [\<LABEL>]                                                                | yes         | `Delay`             |
-| divider [\<LABEL>]                                                              | yes         | `Divider`           |
-| hide footbox                                                                    | no          |                     |
-| show footbox                                                                    | no          |                     |
-| opt [\<COLOR>] [\<COMMENT>]                                                     | no          |                     |
-| end                                                                             | yes         | `GroupEnd`          |
-| alt [\<COLOR>] [\<COMMENT>]                                                     | partial     | `AltStart`          |
-| end                                                                             | yes         | `GroupEnd`          |
-| loop [\<COLOR>] [\<COMMENT>]                                                    | partial     | `StartLoop`         |
-| end                                                                             | yes         | `EndLoop`           |
-| par [\<COLOR>] [\<COMMENT>]                                                     | no          |                     |
-| end                                                                             | yes         | `GroupEnd`          |
-| par2 [\<COLOR>] [\<COMMENT>]                                                    | no          |                     |
-| end                                                                             | yes         | `GroupEnd`          |
-| break [\<COLOR>] [\<COMMENT>]                                                   | no          |                     |
-| end                                                                             | yes         | `GroupEnd`          |
-| critical [\<COLOR>] [\<COMMENT>]                                                | no          |                     |
-| end                                                                             | yes         | `GroupEnd`          |
-| else [\<COLOR>] [\<COMMENT>]                                                    | partial     | `ElseStart`         |
-| end                                                                             | yes         | `GroupEnd`          |
-| also [\<COLOR>] [\<COMMENT>]                                                    | no          |                     |
-| end                                                                             | yes         | `GroupEnd`          |
-| group [\<COLOR>] [\<COMMENT>]                                                   | partial     | `GroupStart`        |
-| end                                                                             | yes         | `GroupEnd`          |
-| ignore newpage                                                                  | no          |                     |
-| newpage [\<TITLE>]                                                              | yes         | `NewPage`           |
-| create [order \<ORDER>] [\<URL>] [\<COLOR>]                                     | partial     | `Create`            |
-| participant \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                        | partial     | `Participant`       |
-| actor \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                              | partial     | `Actor`             |
-| create actor \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                       | partial     | `CreateActor`       |
-| boundary \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                           | partial     | `Boundary`          |
-| create boundary \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                    | partial     | `CreateBoundary`    |
-| collections \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                        | partial     | `Collections`       |
-| create collections \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                 | partial     | `CreateCollections` |
-| control \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                            | partial     | `Control`           |
-| create control \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                     | partial     | `CreateControl`     |
-| entity \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                             | partial     | `Entity`            |
-| create entity \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                      | partial     | `CreateEntity`      |
-| database \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                           | partial     | `Database`          |
-| create database \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                    | partial     | `CreateDatabase`    |
-| queue \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                              | partial     | `Queue`             |
-| create queue \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                       | partial     | `CreateQueue`       |
-| ref[\<COLOR>] over \<NAME>[,\<NAME>] : [\<URL>] [\<TEXT>]                       | partial     | `Ref`               |
-| ref[\<COLOR>] over \<NAME>[,\<NAME>]                                            | partial     | `StartRef`          |
-| end ref                                                                         | yes         | `EndRef`            |
-| return [\<COLOR>] \<MESSAGE>                                                    | partial     | `Return`            |
-| space                                                                           | yes         | `Space`             |
-| [r\|h]note \<POSITION> [\<BGCOLOR>] : \<NOTE>                                   | yes         | `Note`              |
-| [r\|h]note over \<PARTICIPANT>,\<PARTICIPANT> [\<BGCOLOR>] : \<NOTE>            | yes         | `Note`              |
-| [r\|h]note \<POSITION> of \<PARTICIPANT> [\<BGCOLOR>] : \<NOTE>                 | yes         | `Note`              |
-| [r\|h]note \<POSITION> [\<BGCOLOR>]                                             | yes         | `StartNote`         |
-| [r\|h]note over \<PARTICIPANT>,\<PARTICIPANT> [\<BGCOLOR>]                      | yes         | `StartNote`         |
-| [r\|h]note \<POSITION> of \<PARTICIPANT> [\<BGCOLOR>]                           | yes         | `StartNote`         |
-| end note                                                                        | yes         | `EndNote`           |
-| end hnote                                                                       | yes         | `EndHNote`          |
-| end rnote                                                                       | yes         | `EndRNote`          |
+| Command                                                                         | Implemented | Method               |
+| ------------------------------------------------------------------------------- | ----------- | -------------------- |
+| \<PART1> \<ARROW> \<PART2> [\<ACTIVATION>] [\<LIFECOLOR>] [\<URL>] [\<MESSAGE>] | partial     | `Arrow`              |
+| activate \<WHO> [\<BGCOLOR>] [\<LNCOLOR>]                                       | yes         | `Activate`           |
+| deactivate \<WHO> [\<BGCOLOR>] [\<LNCOLOR>]                                     | partial     | `Deactivate`         |
+| deactivate                                                                      | yes         | `Deactivate`         |
+| destroy \<WHO> [\<BGCOLOR>] [\<LNCOLOR>]                                        | partial     | `Destroy`            |
+| \<NAME>++ [\<BGCOLOR>]                                                          | no          |                      |
+| \<NAME>-- [\<BGCOLOR>]                                                          | no          |                      |
+| autonewpage                                                                     | no          |                      |
+| autoactivate off\|on                                                            | yes         | `AutoActivate`       |
+| autonumber [\<START>] [\<STEP>] [\<FORMAT>]                                     | yes         | `AutoNumber`         |
+| autonumber inc [\<POSITION>]                                                    | yes         | `IncreaseAutoNumber` |
+| autonumber resume [\<STEP>] [\<FORMAT>]                                         | yes         | `ResumeAutoNumber`   |
+| autonumber stop                                                                 | yes         | `StopAutoNumber`     |
+| box [\<NAME>] [\<STEREO>] [\<COLOR>]                                            | partial     | `BoxStart`           |
+| end box                                                                         | yes         | `BoxEnd`             |
+| delay [\<LABEL>]                                                                | yes         | `Delay`              |
+| divider [\<LABEL>]                                                              | yes         | `Divider`            |
+| hide footbox                                                                    | no          |                      |
+| show footbox                                                                    | no          |                      |
+| opt [\<COLOR>] [\<COMMENT>]                                                     | no          |                      |
+| end                                                                             | yes         | `GroupEnd`           |
+| alt [\<COLOR>] [\<COMMENT>]                                                     | partial     | `AltStart`           |
+| end                                                                             | yes         | `GroupEnd`           |
+| loop [\<COLOR>] [\<COMMENT>]                                                    | partial     | `StartLoop`          |
+| end                                                                             | yes         | `EndLoop`            |
+| par [\<COLOR>] [\<COMMENT>]                                                     | no          |                      |
+| end                                                                             | yes         | `GroupEnd`           |
+| par2 [\<COLOR>] [\<COMMENT>]                                                    | no          |                      |
+| end                                                                             | yes         | `GroupEnd`           |
+| break [\<COLOR>] [\<COMMENT>]                                                   | no          |                      |
+| end                                                                             | yes         | `GroupEnd`           |
+| critical [\<COLOR>] [\<COMMENT>]                                                | no          |                      |
+| end                                                                             | yes         | `GroupEnd`           |
+| else [\<COLOR>] [\<COMMENT>]                                                    | partial     | `ElseStart`          |
+| end                                                                             | yes         | `GroupEnd`           |
+| also [\<COLOR>] [\<COMMENT>]                                                    | no          |                      |
+| end                                                                             | yes         | `GroupEnd`           |
+| group [\<COLOR>] [\<COMMENT>]                                                   | partial     | `GroupStart`         |
+| end                                                                             | yes         | `GroupEnd`           |
+| ignore newpage                                                                  | no          |                      |
+| newpage [\<TITLE>]                                                              | yes         | `NewPage`            |
+| create [order \<ORDER>] [\<URL>] [\<COLOR>]                                     | partial     | `Create`             |
+| participant \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                        | partial     | `Participant`        |
+| actor \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                              | partial     | `Actor`              |
+| create actor \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                       | partial     | `CreateActor`        |
+| boundary \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                           | partial     | `Boundary`           |
+| create boundary \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                    | partial     | `CreateBoundary`     |
+| collections \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                        | partial     | `Collections`        |
+| create collections \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                 | partial     | `CreateCollections`  |
+| control \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                            | partial     | `Control`            |
+| create control \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                     | partial     | `CreateControl`      |
+| entity \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                             | partial     | `Entity`             |
+| create entity \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                      | partial     | `CreateEntity`       |
+| database \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                           | partial     | `Database`           |
+| create database \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                    | partial     | `CreateDatabase`     |
+| queue \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                              | partial     | `Queue`              |
+| create queue \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                       | partial     | `CreateQueue`        |
+| ref[\<COLOR>] over \<NAME>[,\<NAME>] : [\<URL>] [\<TEXT>]                       | partial     | `Ref`                |
+| ref[\<COLOR>] over \<NAME>[,\<NAME>]                                            | partial     | `StartRef`           |
+| end ref                                                                         | yes         | `EndRef`             |
+| return [\<COLOR>] \<MESSAGE>                                                    | partial     | `Return`             |
+| space                                                                           | yes         | `Space`              |
+| note \<POSITION> [\<BGCOLOR>] : \<NOTE>                                         | yes         | `Note`               |
+| note over \<PARTICIPANT>[,\<PARTICIPANT>] [\<BGCOLOR>] : \<NOTE>                  | yes         | `Note`               |
+| note \<POSITION> of \<PARTICIPANT> [\<BGCOLOR>] : \<NOTE>                       | yes         | `Note`               |
+| hnote \<POSITION> [\<BGCOLOR>] : \<NOTE>                                        | yes         | `HNote`              |
+| hnote over \<PARTICIPANT>[,\<PARTICIPANT>] [\<BGCOLOR>] : \<NOTE>                 | yes         | `HNote`              |
+| hnote \<POSITION> of \<PARTICIPANT> [\<BGCOLOR>] : \<NOTE>                      | yes         | `HNote`              |
+| rnote \<POSITION> [\<BGCOLOR>] : \<NOTE>                                        | yes         | `RNote`              |
+| rnote over \<PARTICIPANT>[,\<PARTICIPANT>] [\<BGCOLOR>] : \<NOTE>               | yes         | `RNote`              |
+| rnote \<POSITION> of \<PARTICIPANT> [\<BGCOLOR>] : \<NOTE>                      | yes         | `RNote`              |
+| note \<POSITION> [\<BGCOLOR>]                                                   | yes         | `StartNote`          |
+| note over \<PARTICIPANT>[,\<PARTICIPANT>] [\<BGCOLOR>]                         | yes         | `StartNote`          |
+| note \<POSITION> of \<PARTICIPANT> [\<BGCOLOR>]                                 | yes         | `StartNote`          |
+| hnote \<POSITION> [\<BGCOLOR>]                                                  | yes         | `StartHNote`         |
+| hnote over \<PARTICIPANT>[,\<PARTICIPANT>] [\<BGCOLOR>]                        | yes         | `StartHNote`         |
+| hnote \<POSITION> of \<PARTICIPANT> [\<BGCOLOR>]                                | yes         | `StartHNote`         |
+| rnote \<POSITION> [\<BGCOLOR>]                                                  | yes         | `StartRNote`         |
+| rnote over \<PARTICIPANT>[,\<PARTICIPANT>] [\<BGCOLOR>]                        | yes         | `StartRNote`         |
+| rnote \<POSITION> of \<PARTICIPANT> [\<BGCOLOR>]                                | yes         | `StartRNote`         |
+| end note                                                                        | yes         | `EndNote`            |
+| end hnote                                                                       | yes         | `EndHNote`           |
+| end rnote                                                                       | yes         | `EndRNote`           |
