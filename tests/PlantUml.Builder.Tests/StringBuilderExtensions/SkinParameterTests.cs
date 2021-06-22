@@ -1,6 +1,8 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace PlantUml.Builder.Tests
@@ -9,7 +11,7 @@ namespace PlantUml.Builder.Tests
     public class SkinParameterTests
     {
         [TestMethod]
-        public void StringBuilderExtensions_SkinParameter_Null_Should_ThrowArgumentNullException()
+        public void StringBuilderExtensions_SkinParameter_Null_Should_ThrowExactlyArgumentNullException()
         {
             // Assign
             var stringBuilder = (StringBuilder)null;
@@ -18,102 +20,33 @@ namespace PlantUml.Builder.Tests
             Action action = () => stringBuilder.SkinParameter("a", "b");
 
             // Assert
-            action.Should().Throw<ArgumentNullException>()
+            action.Should().ThrowExactly<ArgumentNullException>()
                 .And.ParamName.Should().Be("stringBuilder");
         }
 
+        [DataRow("name", null, "b", DisplayName = "Name can not be `null`")]
+        [DataRow("name", "", "b", DisplayName = "Name can not be empty")]
+        [DataRow("name", " ", "b", DisplayName = "Name can not be whitespace")]
+        [DataRow("value", "a", null, DisplayName = "Value can not be `null`")]
+        [DataRow("value", "a", "", DisplayName = "Value can not be empty")]
+        [DataRow("value", "a", " ", DisplayName = "Value can not be whitespace")]
         [TestMethod]
-        public void StringBuilderExtensions_SkinParameter_NullName_Should_ThrowArgumentException()
+        public void ParametersHaveToContainAValue(string parameterName, string name, string value)
         {
             // Assign
             var stringBuilder = new StringBuilder();
 
             // Act
-            Action action = () => stringBuilder.SkinParameter(null, "b");
+            Action action = () => stringBuilder.SkinParameter(name, value);
 
             // Assert
-            action.Should().Throw<ArgumentException>()
+            action.Should().ThrowExactly<ArgumentException>()
                 .WithMessage("A non-empty value should be provided*")
-                .And.ParamName.Should().Be("name");
+                .And.ParamName.Should().Be(parameterName);
         }
 
         [TestMethod]
-        public void StringBuilderExtensions_SkinParameter_EmptyName_Should_ThrowArgumentException()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            Action action = () => stringBuilder.SkinParameter(string.Empty, "b");
-
-            // Assert
-            action.Should().Throw<ArgumentException>()
-                .WithMessage("A non-empty value should be provided*")
-                .And.ParamName.Should().Be("name");
-        }
-
-        [TestMethod]
-        public void StringBuilderExtensions_SkinParameter_WhitespaceName_Should_ThrowArgumentException()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            Action action = () => stringBuilder.SkinParameter(" ", "b");
-
-            // Assert
-            action.Should().Throw<ArgumentException>()
-                .WithMessage("A non-empty value should be provided*")
-                .And.ParamName.Should().Be("name");
-        }
-
-        [TestMethod]
-        public void StringBuilderExtensions_SkinParameter_NullValue_Should_ThrowArgumentException()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            Action action = () => stringBuilder.SkinParameter("a", null);
-
-            // Assert
-            action.Should().Throw<ArgumentException>()
-                .WithMessage("A non-empty value should be provided*")
-                .And.ParamName.Should().Be("value");
-        }
-
-        [TestMethod]
-        public void StringBuilderExtensions_SkinParameter_EmptyValue_Should_ThrowArgumentException()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            Action action = () => stringBuilder.SkinParameter("a", string.Empty);
-
-            // Assert
-            action.Should().Throw<ArgumentException>()
-                .WithMessage("A non-empty value should be provided*")
-                .And.ParamName.Should().Be("value");
-        }
-
-        [TestMethod]
-        public void StringBuilderExtensions_SkinParameter_WhitespaceValue_Should_ThrowArgumentException()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            Action action = () => stringBuilder.SkinParameter("a", " ");
-
-            // Assert
-            action.Should().Throw<ArgumentException>()
-                .WithMessage("A non-empty value should be provided*")
-                .And.ParamName.Should().Be("value");
-        }
-
-        [TestMethod]
-        public void StringBuilderExtensions_SkinParameter_EnumOutOfRange_Should_ThrowArgumentException()
+        public void EnumerationValueShouldExist()
         {
             // Assign
             var stringBuilder = new StringBuilder();
@@ -122,61 +55,42 @@ namespace PlantUml.Builder.Tests
             Action action = () => stringBuilder.SkinParameter((SkinParameter)ushort.MaxValue, "b");
 
             // Assert
-            action.Should().Throw<ArgumentException>()
+            action.Should().ThrowExactly<ArgumentOutOfRangeException>()
                 .WithMessage("A defined enum value should be provided*")
                 .And.ParamName.Should().Be("skinParameter");
         }
 
+        [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetValidNotationsDisplayName))]
         [TestMethod]
-        public void StringBuilderExtensions_SkinParameter_Should_ContainSkinParamWithNameAndValue()
+        public void AValidSkinParamNotationIsRendered(object name, object value, string expected)
         {
             // Assign
             var stringBuilder = new StringBuilder();
 
+            var method = typeof(StringBuilderExtensions).GetMethod("SkinParameter", new[] { typeof(StringBuilder), name.GetType(), value.GetType() });
+            var parameters = new[] { stringBuilder, name, value };
+            
             // Act
-            stringBuilder.SkinParameter("monochrome", "true");
+            method.Invoke(null, parameters);
 
             // Assert
-            stringBuilder.ToString().Should().Be("skinparam monochrome true\n");
+            stringBuilder.ToString().Should().Be($"skinparam {expected}\n");
+        }
+        private static IEnumerable<object[]> GetValidNotations()
+        {
+            yield return new object[] { "monochrome", "true", "monochrome true" };
+            yield return new object[] { " monochrome ", "true", "monochrome true" };
+            yield return new object[] { "monochrome", " true ", "monochrome true" };
+            yield return new object[] { SkinParameter.Monochrome, "true", "Monochrome true" };
+            yield return new object[] { "monochrome", true, "monochrome true" };
+            yield return new object[] { SkinParameter.Monochrome, false, "Monochrome false" };
+            yield return new object[] { "minclasswidth", 200, "minclasswidth 200" };
+            yield return new object[] { SkinParameter.MinClassWidth, 400, "MinClassWidth 400" };
         }
 
-        [TestMethod]
-        public void StringBuilderExtensions_SkinParameter_WhitespaceAroundNameShould_ContainTrimmedName()
+        public static string GetValidNotationsDisplayName(MethodInfo _, object[] data)
         {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            stringBuilder.SkinParameter(" monochrome ", "true");
-
-            // Assert
-            stringBuilder.ToString().Should().Be("skinparam monochrome true\n");
-        }
-
-        [TestMethod]
-        public void StringBuilderExtensions_SkinParameter_WhitespaceAroundValue_Should_ContainTrimmedValue()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            stringBuilder.SkinParameter("monochrome", " true ");
-
-            // Assert
-            stringBuilder.ToString().Should().Be("skinparam monochrome true\n");
-        }
-
-        [TestMethod]
-        public void StringBuilderExtensions_SkinParameter_UsingEnumValue_Should_ContainName()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            stringBuilder.SkinParameter(SkinParameter.Monochrome, "true");
-
-            // Assert
-            stringBuilder.ToString().Should().Be("skinparam Monochrome true\n");
+            return $"SkinParameter \"{data[0]}\" ({data[0].GetType().Name}) with value \"{data[1]}\" ({data[1].GetType().Name}) should render as \"skinparam {data[2]}\\n\"";
         }
     }
 }
