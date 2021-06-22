@@ -4,7 +4,7 @@ namespace PlantUml.Builder
     public enum ParticipantType
         : byte
     {
-        None,
+        None = 0,
 
         Participant,
         Actor,

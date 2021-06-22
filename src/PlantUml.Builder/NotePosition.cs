@@ -4,8 +4,10 @@ namespace PlantUml.Builder
     public enum NotePosition
         : byte
     {
-        Left,
+        Left = 0,
+
         Right,
-        Over
+        Over,
+        Across
     }
 }

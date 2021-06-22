@@ -6,7 +6,8 @@ namespace PlantUml.Builder
     public enum NoteStyle
         : byte
     {
-        Normal,
+        Normal = 0,
+
         Hexagonal,
         Box
     }

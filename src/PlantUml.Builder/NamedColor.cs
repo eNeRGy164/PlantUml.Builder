@@ -4,7 +4,7 @@ namespace PlantUml.Builder
     public enum NamedColor
         : byte
     {
-        Transparent,
+        Transparent = 0,
 
         AliceBlue,
         AntiqueWhite,

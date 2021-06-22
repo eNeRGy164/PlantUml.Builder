@@ -3,7 +3,8 @@ namespace PlantUml.Builder
     public enum ClassType
         : byte
     {
-        Annotation,
+        Annotation = 0,
+
         Interface,
         Enum,
         Class,
