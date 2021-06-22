@@ -22,6 +22,7 @@ namespace PlantUml.Builder
         public const string Group = "group";
         public const string Header = "header";
         public const string Hide = "hide";
+        public const string Increase = "inc";
         public const string Interface = "interface";
         public const string Implements = "implements";
         public const string Loop = "loop";
@@ -68,6 +69,7 @@ namespace PlantUml.Builder
         public const char NoteBox = 'r';
         public const char NoteHexagon = 'h';
         public const char Comment = SingleQuote;
+        public const char AlignNote = '/';
 
         public const string CommentStart = "/'";
         public const string CommentEnd = "'/";
