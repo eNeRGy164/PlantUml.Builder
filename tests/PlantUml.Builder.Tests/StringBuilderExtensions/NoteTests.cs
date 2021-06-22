@@ -1,6 +1,9 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace PlantUml.Builder.Tests
@@ -8,148 +11,78 @@ namespace PlantUml.Builder.Tests
     [TestClass]
     public class NoteTests
     {
+        [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetValidNotationsDisplayName))]
         [TestMethod]
-        public void StringBuilderExtensions_Note_Null_Should_ThrowArgumentNullException()
-        {
-            // Assign
-            var stringBuilder = (StringBuilder)null;
-
-            // Act
-            Action action = () => stringBuilder.Note(NotePosition.Left, "Note");
-
-            // Assert
-            action.Should().Throw<ArgumentNullException>()
-                .And.ParamName.Should().Be("stringBuilder");
-        }
-
-        [TestMethod]
-        public void StringBuilderExtensions_Note_WithPosition_Should_ContainNoteLineWithPosition()
+        public void AValidNoteIsRendered(string methodName, object[] methodParameters, string expected)
         {
             // Assign
             var stringBuilder = new StringBuilder();
 
+            var method = typeof(StringBuilderExtensions).FindOverloadedMethod(methodName, methodParameters.Select(p => p.GetType()));
+            var remainingParameters = method.GetParameters().Skip(methodParameters.Length + 1).Select(p => Type.Missing);
+            var parameters = new object[] { stringBuilder }.Concat(methodParameters).Concat(remainingParameters).ToArray();
+
             // Act
-            stringBuilder.Note(NotePosition.Left, "Note");
+            method.Invoke(null, parameters);
 
             // Assert
-            stringBuilder.ToString().Should().Be("note left : Note\n");
+            stringBuilder.ToString().Should().Be($"{expected}\n");
         }
 
-        [TestMethod]
-        public void StringBuilderExtensions_Note_WithNote_Should_ContainNoteLineWithNote()
+        private static IEnumerable<object[]> GetValidNotations()
         {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            stringBuilder.Note(NotePosition.Left, "Note");
-
-            // Assert
-            stringBuilder.ToString().Should().Be("note left : Note\n");
+            yield return new object[] { "Note", new object[] { NotePosition.Left, "Simple note." }, "note left : Simple note." };
+            yield return new object[] { "Note", new object[] { NotePosition.Left, "Line1\nLine2" }, "note left : Line1\\nLine2" };
+            yield return new object[] { "Note", new object[] { NotePosition.Left, "Simple note.", NoteStyle.Hexagonal }, "hnote left : Simple note." };
+            yield return new object[] { "Note", new object[] { NotePosition.Left, "Simple note.", NoteStyle.Box }, "rnote left : Simple note." };
+            yield return new object[] { "Note", new object[] { NotePosition.Left, "actorA", "Simple note." }, "note left of actorA : Simple note." };
+            yield return new object[] { "Note", new object[] { NotePosition.Left, "actorA", "Line1\nLine2" }, "note left of actorA : Line1\\nLine2" };
+            yield return new object[] { "Note", new object[] { NotePosition.Left, "actorA", "Simple note.", default(NoteStyle), (Color)NamedColor.AliceBlue }, "note left of actorA #AliceBlue : Simple note." };
+            yield return new object[] { "Note", new object[] { "actorA", "Simple note." }, "note over actorA : Simple note." };
+            yield return new object[] { "Note", new object[] { "actorA", "actorB", "Simple note." }, "note over actorA,actorB : Simple note." };
+            yield return new object[] { "Note", new object[] { "actorA", "Simple note.", default(NoteStyle), (Color)string.Empty, true }, "/ note over actorA : Simple note." };
+            yield return new object[] { "HNote", new object[] { NotePosition.Left, "Simple note." }, "hnote left : Simple note." };
+            yield return new object[] { "HNote", new object[] { NotePosition.Left, "Line1\nLine2" }, "hnote left : Line1\\nLine2" };
+            yield return new object[] { "HNote", new object[] { NotePosition.Left, "actorA", "Simple note." }, "hnote left of actorA : Simple note." };
+            yield return new object[] { "HNote", new object[] { NotePosition.Left, "actorA", "Line1\nLine2" }, "hnote left of actorA : Line1\\nLine2" };
+            yield return new object[] { "HNote", new object[] { NotePosition.Left, "actorA", "Simple note.", (Color)NamedColor.AliceBlue }, "hnote left of actorA #AliceBlue : Simple note." };
+            yield return new object[] { "HNote", new object[] { "actorA", "Simple note." }, "hnote over actorA : Simple note." };
+            yield return new object[] { "HNote", new object[] { "actorA", "actorB", "Simple note." }, "hnote over actorA,actorB : Simple note." };
+            yield return new object[] { "HNote", new object[] { "actorA", "Simple note.", (Color)string.Empty, true }, "/ hnote over actorA : Simple note." };
+            yield return new object[] { "RNote", new object[] { NotePosition.Left, "Simple note." }, "rnote left : Simple note." };
+            yield return new object[] { "RNote", new object[] { NotePosition.Left, "Line1\nLine2" }, "rnote left : Line1\\nLine2" };
+            yield return new object[] { "RNote", new object[] { NotePosition.Left, "actorA", "Simple note." }, "rnote left of actorA : Simple note." };
+            yield return new object[] { "RNote", new object[] { NotePosition.Left, "actorA", "Line1\nLine2" }, "rnote left of actorA : Line1\\nLine2" };
+            yield return new object[] { "RNote", new object[] { NotePosition.Left, "actorA", "Simple note.", (Color)NamedColor.AliceBlue }, "rnote left of actorA #AliceBlue : Simple note." };
+            yield return new object[] { "RNote", new object[] { "actorA", "Simple note." }, "rnote over actorA : Simple note." };
+            yield return new object[] { "RNote", new object[] { "actorA", "actorB", "Simple note." }, "rnote over actorA,actorB : Simple note." };
+            yield return new object[] { "RNote", new object[] { "actorA", "Simple note.", (Color)string.Empty, true }, "/ rnote over actorA : Simple note." };
+            yield return new object[] { "StartNote", new object[] { NotePosition.Left }, "note left" };
+            yield return new object[] { "StartNote", new object[] { NotePosition.Left, string.Empty, NoteStyle.Hexagonal }, "hnote left" };
+            yield return new object[] { "StartNote", new object[] { NotePosition.Left, string.Empty, NoteStyle.Box }, "rnote left" };
+            yield return new object[] { "StartNote", new object[] { NotePosition.Left, "actorA" }, "note left of actorA" };
+            yield return new object[] { "StartNote", new object[] { "actorA" }, "note over actorA" };
+            yield return new object[] { "StartNote", new object[] { "actorA", "actorB" }, "note over actorA,actorB" };
+            yield return new object[] { "StartHNote", new object[] { NotePosition.Left }, "hnote left" };
+            yield return new object[] { "StartHNote", new object[] { NotePosition.Left, "actorA" }, "hnote left of actorA" };
+            yield return new object[] { "StartHNote", new object[] { "actorA" }, "hnote over actorA" };
+            yield return new object[] { "StartHNote", new object[] { "actorA", "actorB" }, "hnote over actorA,actorB" };
+            yield return new object[] { "StartRNote", new object[] { NotePosition.Left }, "rnote left" };
+            yield return new object[] { "StartRNote", new object[] { NotePosition.Left, "actorA" }, "rnote left of actorA" };
+            yield return new object[] { "StartRNote", new object[] { "actorA" }, "rnote over actorA" };
+            yield return new object[] { "StartRNote", new object[] { "actorA", "actorB" }, "rnote over actorA,actorB" };
+            yield return new object[] { "EndNote", new object[0], "end note" };
+            yield return new object[] { "EndHNote", new object[0], "end hnote" };
+            yield return new object[] { "EndRNote", new object[0], "end rnote" };
         }
 
-        [TestMethod]
-        public void StringBuilderExtensions_Note_WithMultiLineNote_Should_ContainNoteLineWithMultilineNotes()
+        public static string GetValidNotationsDisplayName(MethodInfo _, object[] data)
         {
-            // Assign
-            var stringBuilder = new StringBuilder();
+            var parameters = ((object[])data[1]).Select(p => (Type: p.GetType().Name, Value: $"\"{p}\""));
+            var types = string.Join(", ", parameters.Select(p => p.Type));
+            var values = string.Join(", ", parameters.Select(p => p.Value));
 
-            // Act
-            stringBuilder.Note(NotePosition.Left, "Line1\nLine2");
-
-            // Assert
-            stringBuilder.ToString().Should().Be("note left : Line1\\nLine2\n");
-        }
-
-        [TestMethod]
-        public void StringBuilderExtensions_Note_WithHexagonalStyle_Should_ContainNoteLineWithHexagonalStyle()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            stringBuilder.Note(NotePosition.Left, "Note", style: NoteStyle.Hexagonal);
-
-            // Assert
-            stringBuilder.ToString().Should().Be("hnote left : Note\n");
-        }
-
-        [TestMethod]
-        public void StringBuilderExtensions_Note_WithBoxStyle_Should_ContainNoteLineWithBoxStyle()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            stringBuilder.Note(NotePosition.Left, "Note", style: NoteStyle.Box);
-
-            // Assert
-            stringBuilder.ToString().Should().Be("rnote left : Note\n");
-        }
-
-        [TestMethod]
-        public void StringBuilderExtensions_Note_WithPositionRelatedToParticipant_Should_ContainNoteLineWithParticipant()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            stringBuilder.Note(NotePosition.Left, "actorA", "Note");
-
-            // Assert
-            stringBuilder.ToString().Should().Be("note left of actorA : Note\n");
-        }
-
-        [TestMethod]
-        public void StringBuilderExtensions_Note_WithPositionRelatedToParticipantAndMultiLineNote_Should_ContainNoteLineWithParticipantAndMultilineNotes()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            stringBuilder.Note(NotePosition.Left, "actorA", "Line1\nLine2");
-
-            // Assert
-            stringBuilder.ToString().Should().Be("note left of actorA : Line1\\nLine2\n");
-        }
-
-        [TestMethod]
-        public void StringBuilderExtensions_Note_PositionOverParticipant_Should_ContainNoteLineWithOver()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            stringBuilder.Note(NotePosition.Left, "actorA", "Note", color: NamedColor.AliceBlue);
-
-            // Assert
-            stringBuilder.ToString().Should().Be("note left of actorA #AliceBlue : Note\n");
-        }
-
-        [TestMethod]
-        public void StringBuilderExtensions_Note_WithoutPosition_Should_ContainNoteLineWithOver()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            stringBuilder.Note("actorA", "Note");
-
-            // Assert
-            stringBuilder.ToString().Should().Be("note over actorA : Note\n");
-        }
-
-        [TestMethod]
-        public void StringBuilderExtensions_Note_TwoParticipants_Should_ContainNoteLineWithBothParticipants()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            stringBuilder.Note("actorA", "actorB", "Note");
-
-            // Assert
-            stringBuilder.ToString().Should().Be("note over actorA,actorB : Note\n");
+            return $"Method \"{data[0]}({types})\" with parameters {values} should render as \"{data[2]}\\n\"";
         }
     }
 }
