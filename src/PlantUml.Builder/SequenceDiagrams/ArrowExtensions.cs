@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace PlantUml.Builder.SequenceDiagrams
 {
@@ -90,19 +91,32 @@ namespace PlantUml.Builder.SequenceDiagrams
         {
             if (arrow is null) throw new ArgumentNullException(nameof(arrow));
 
+            string newRightHead;
+
             if (arrow.RightHead.Length > 0)
             {
-                if (arrow.RightHead[arrow.RightHead.Length - 1] == char.ToLowerInvariant(ArrowParts.Lost))
+                var lastChar = arrow.RightHead[arrow.RightHead.Length - 1];
+
+                if (arrow.RightHead.ToLowerInvariant().Count(c => c == ArrowParts.Lost) == 1)
                 {
                     return arrow;
                 }
-                if (arrow.RightHead[arrow.RightHead.Length - 1] == char.ToLowerInvariant(ArrowParts.Destroy))
+
+                if (arrow.RightHead.ToLowerInvariant().IndexOf(ArrowParts.Destroy) > -1)
                 {
                     throw new NotSupportedException("You can not combine the lost and deleted message notation in the same arrow head.");
                 }
+
+                newRightHead = lastChar == ArrowParts.RightExternal
+                    ? arrow.RightHead.Substring(0, Math.Max(0, arrow.RightHead.Length - 1)) + ArrowParts.Lost + ArrowParts.RightExternal
+                    : arrow.RightHead + ArrowParts.Lost;
+            }
+            else
+            {
+                newRightHead = new string(ArrowParts.Lost, 1);
             }
 
-            return new Arrow(arrow.LeftHead, arrow.Dotted, arrow.RightHead + ArrowParts.Lost, arrow.Color);
+            return new Arrow(arrow.LeftHead, arrow.Dotted, newRightHead, arrow.Color);
         }
 
         /// <summary>
@@ -114,20 +128,30 @@ namespace PlantUml.Builder.SequenceDiagrams
         {
             if (arrow is null) throw new ArgumentNullException(nameof(arrow));
 
+            string newLeftHead;
+
             if (arrow.LeftHead.Length > 0)
             {
-                if (arrow.LeftHead[0] == char.ToLowerInvariant(ArrowParts.Lost))
+                if (arrow.LeftHead.ToLowerInvariant().Count(c => c == ArrowParts.Lost) == 1)
                 {
                     return arrow;
                 }
 
-                if (arrow.LeftHead[0] == char.ToLowerInvariant(ArrowParts.Destroy))
+                if (arrow.LeftHead.ToLowerInvariant().IndexOf(ArrowParts.Destroy) > -1)
                 {
                     throw new NotSupportedException("You can not combine the lost and deleted message notation in the same arrow head.");
                 }
+
+                newLeftHead = arrow.LeftHead[0] == ArrowParts.LeftExternal
+                    ? string.Empty + ArrowParts.LeftExternal + ArrowParts.Lost + arrow.LeftHead.Substring(1)
+                    : ArrowParts.Lost + arrow.LeftHead;
+            }
+            else
+            {
+                newLeftHead = new string(ArrowParts.Lost, 1);
             }
 
-            return new Arrow(ArrowParts.Lost + arrow.LeftHead, arrow.Dotted, arrow.RightHead, arrow.Color);
+            return new Arrow(newLeftHead, arrow.Dotted, arrow.RightHead, arrow.Color);
         }
     }
 }

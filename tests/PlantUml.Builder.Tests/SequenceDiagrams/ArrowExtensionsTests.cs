@@ -50,6 +50,7 @@ namespace PlantUml.Builder.Tests.SequenceDiagrams
         [DataRow("->", null, "->", DisplayName = "A `null` color should change nothing")]
         [DataRow("->", NamedColor.Red, "-[#Red]>", DisplayName = "The arrow should become colored")]
         [DataRow("-[#Orange]>", NamedColor.Blue, "-[#Blue]>", DisplayName = "The arrow should change colors")]
+        [DataRow("[->", NamedColor.Yellow, "[-[#Yellow]>", DisplayName = "The incoming arrow should change color")]
         public void ChangeTheColorOfTheArrow(string original, NamedColor? color, string expected)
         {
             // Assign
@@ -66,6 +67,7 @@ namespace PlantUml.Builder.Tests.SequenceDiagrams
         [DataRow("->", "-->", DisplayName = "A solid arrow line should become a dotted line")]
         [DataRow("-->", "-->", DisplayName = "A dotted arrow line should stay a dotted line")]
         [DataRow("--->", "-->", DisplayName = "A long dotted arrow line should become a short dotted line")]
+        [DataRow("[->", "[-->", DisplayName = "An incoming solid arrow line should become a dotted line")]
         public void EnsureTheLineIsDotted(string original, string expected)
         {
             // Assign
@@ -80,10 +82,14 @@ namespace PlantUml.Builder.Tests.SequenceDiagrams
 
         [TestMethod]
         [DataRow("x<-", "Lost", DisplayName = "If the left side is already deleted, it can't become lost")]
+        [DataRow("[x<-", "Lost", DisplayName = "If the left side is already deleted, it can't become lost")]
         [DataRow("->x", "Lost", DisplayName = "If the right side is already deleted, it can't become lost")]
+        [DataRow("->x]", "Lost", DisplayName = "If the right side is already deleted, it can't become lost")]
         [DataRow("x->", "LostLeft", DisplayName = "If the left side is already deleted, it can't become lost")]
+        [DataRow("[x->", "LostLeft", DisplayName = "If the left side is already deleted, it can't become lost")]
         [DataRow("x-x", "LostLeft", DisplayName = "If the left side is already deleted, it can't become lost")]
         [DataRow("<-x", "LostRight", DisplayName = "If the right side is already deleted, it can't become lost")]
+        [DataRow("<-x]", "LostRight", DisplayName = "If the right side is already deleted, it can't become lost")]
         [DataRow("x-x", "LostRight", DisplayName = "If the right side is already deleted, it can't become lost")]
         public void TheDeletedSideCannotBecomeLost(string original, string methodName)
         {
@@ -105,11 +111,15 @@ namespace PlantUml.Builder.Tests.SequenceDiagrams
         [DataRow("<-", "LostLeft", "o<-", DisplayName = "Arrow to the left is lost")]
         [DataRow("->", "LostLeft", "o->", DisplayName = "Arrow to the right is found")]
         [DataRow("-->", "LostLeft", "o-->", DisplayName = "Dotted arrow to the right is found")]
+        [DataRow("[->", "LostLeft", "[o->", DisplayName = "Incomming arrow to the right is lost")]
         [DataRow("o-->", "LostLeft", "o-->", DisplayName = "Dotted arrow to the right stays lost")]
+        [DataRow("[o->", "LostLeft", "[o->", DisplayName = "Incomming arrow to the right stays lost")]
         [DataRow("->", "LostRight", "->o", DisplayName = "Arrow to the right is lost")]
         [DataRow("<-", "LostRight", "<-o", DisplayName = "Arrow to the left is found")]
         [DataRow("<--", "LostRight", "<--o", DisplayName = "Dotted arrow to the left is found")]
+        [DataRow("<-]", "LostRight", "<-o]", DisplayName = "Incomming arrow to the left is lost")]
         [DataRow("<--o", "LostRight", "<--o", DisplayName = "Dotted arrow to the left stays lost")]
+        [DataRow("<-o]", "LostRight", "<-o]", DisplayName = "Incomming arrow to the left stays lost")]
         [DataRow("->", "Lost", "->o", DisplayName = "Arrow to the right is lost")]
         [DataRow("<-", "Lost", "o<-", DisplayName = "Arrow to the left is lost")]
 
@@ -132,6 +142,7 @@ namespace PlantUml.Builder.Tests.SequenceDiagrams
         [DataRow("->", "->", DisplayName = "A solid arrow line should stay a solid line")]
         [DataRow("-->", "->", DisplayName = "A dotted arrow line should become a solid line")]
         [DataRow("--->", "->", DisplayName = "A long dotted arrow line should become a short solid line")]
+        [DataRow("[-->", "[->", DisplayName = "An incomming dotted arrow line should become a solid line")]
         public void EnsureTheLineIsSolid(string original, string expected)
         {
             // Assign
