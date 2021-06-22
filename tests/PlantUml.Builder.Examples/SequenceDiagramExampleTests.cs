@@ -536,6 +536,64 @@ Bob <- Alice : Yet another authentication Response
         }
 
         [TestMethod]
+        public void MessageSequenceNumbering05()
+        {
+            // Assign
+            var example = @"@startuml
+autonumber 1.1.1
+Alice -> Bob : Authentication request
+Bob --> Alice : Response
+
+autonumber inc A
+' Now we have 2.1.1
+Alice -> Bob : Another authentication request
+Bob --> Alice : Response
+
+autonumber inc B
+' Now we have 2.2.1
+Alice -> Bob : Another authentication request
+Bob --> Alice : Response
+
+autonumber inc A
+' Now we have 3.1.1
+Alice -> Bob : Another authentication request
+autonumber inc B
+' Now we have 3.2.1
+Bob --> Alice : Response
+@enduml
+";
+
+            var stringBuilder = new StringBuilder();
+
+            // Act
+            stringBuilder.UmlDiagramStart();
+            stringBuilder.AutoNumber(start: "1.1.1");
+            stringBuilder.Arrow("Alice", "->", "Bob", "Authentication request");
+            stringBuilder.Arrow("Bob", "-->", "Alice", "Response");
+            stringBuilder.AppendNewLine();
+            stringBuilder.IncreaseAutoNumber('A');
+            stringBuilder.Comment("Now we have 2.1.1");
+            stringBuilder.Arrow("Alice", "->", "Bob", "Another authentication request");
+            stringBuilder.Arrow("Bob", "-->", "Alice", "Response");
+            stringBuilder.AppendNewLine();
+            stringBuilder.IncreaseAutoNumber('B');
+            stringBuilder.Comment("Now we have 2.2.1");
+            stringBuilder.Arrow("Alice", "->", "Bob", "Another authentication request");
+            stringBuilder.Arrow("Bob", "-->", "Alice", "Response");
+            stringBuilder.AppendNewLine();
+            stringBuilder.IncreaseAutoNumber('A');
+            stringBuilder.Comment("Now we have 3.1.1");
+            stringBuilder.Arrow("Alice", "->", "Bob", "Another authentication request");
+            stringBuilder.IncreaseAutoNumber('B');
+            stringBuilder.Comment("Now we have 3.2.1");
+            stringBuilder.Arrow("Bob", "-->", "Alice", "Response");
+            stringBuilder.UmlDiagramEnd();
+
+            // Assert
+            stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        }
+
+        [TestMethod]
         public void PageTitleHeaderAndFooter()
         {
             // Assign
@@ -676,6 +734,42 @@ end
         }
 
         [TestMethod]
+        public void SecondaryGroupLabel()
+        {
+            // Assign
+            var example = @"@startuml
+Alice -> Bob : Authentication Request
+Bob -> Alice : Authentication Failure
+group My own label [My own label 2]
+Alice -> Log : Log attack start
+loop 1000 times
+Alice -> Bob : DNS Attack
+end
+Alice -> Log : Log attack end
+end
+@enduml
+";
+
+            var stringBuilder = new StringBuilder();
+
+            // Act
+            stringBuilder.UmlDiagramStart();
+            stringBuilder.Arrow("Alice", "->", "Bob", "Authentication Request");
+            stringBuilder.Arrow("Bob", "->", "Alice", "Authentication Failure");
+            stringBuilder.GroupStart(label: "My own label", text: "My own label 2");
+            stringBuilder.Arrow("Alice", "->", "Log", "Log attack start");
+            stringBuilder.StartLoop("1000 times");
+            stringBuilder.Arrow("Alice", "->", "Bob", "DNS Attack");
+            stringBuilder.EndLoop();
+            stringBuilder.Arrow("Alice", "->", "Log", "Log attack end");
+            stringBuilder.GroupEnd();
+            stringBuilder.UmlDiagramEnd();
+
+            // Assert
+            stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        }
+
+        [TestMethod]
         public void NotesOnMessages()
         {
             // Assign
@@ -783,6 +877,16 @@ rnote over server
  ""r"" as rectangle
  ""h"" as hexagon
 end rnote
+rnote over server
+ this is
+ on several
+ lines
+end rnote
+hnote over caller
+ this is
+ on several
+ lines
+end hnote
 @enduml
 ";
 
@@ -797,6 +901,94 @@ end rnote
             stringBuilder.Text(" \"r\" as rectangle");
             stringBuilder.Text(" \"h\" as hexagon");
             stringBuilder.EndRNote();
+            stringBuilder.StartRNote("server");
+            stringBuilder.Text(" this is");
+            stringBuilder.Text(" on several");
+            stringBuilder.Text(" lines");
+            stringBuilder.EndRNote();
+            stringBuilder.StartHNote("caller");
+            stringBuilder.Text(" this is");
+            stringBuilder.Text(" on several");
+            stringBuilder.Text(" lines");
+            stringBuilder.EndHNote();
+            stringBuilder.UmlDiagramEnd();
+
+            // Assert
+            stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        }
+
+        [TestMethod]
+        public void NoteOverAllParticipants()
+        {
+            // Assign
+            var example = @"@startuml
+Alice -> Bob : m1
+Bob -> Charlie : m2
+note over Alice,Charlie : Old method for note over all part. with:\n """"note over //FirstPart, LastPart//"""".
+note across : New method with:\n""""note across""""
+Bob -> Alice
+hnote across : Note across all part.
+@enduml
+";
+
+            var stringBuilder = new StringBuilder();
+
+            // Act
+            stringBuilder.UmlDiagramStart();
+            stringBuilder.Arrow("Alice", "->", "Bob", "m1");
+            stringBuilder.Arrow("Bob", "->", "Charlie", "m2");
+            stringBuilder.Note("Alice", "Charlie", "Old method for note over all part. with:\n \"\"note over //FirstPart, LastPart//\"\".");
+            stringBuilder.Note(NotePosition.Across, "New method with:\n\"\"note across\"\"");
+            stringBuilder.Arrow("Bob", "->", "Alice");
+            stringBuilder.HNote(NotePosition.Across, "Note across all part.");
+            stringBuilder.UmlDiagramEnd();
+
+            // Assert
+            stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        }
+
+        [TestMethod]
+        public void SeveralNotesAlignedAtTheSameLevel01()
+        {
+            // Assign
+            var example = @"@startuml
+note over Alice : initial state of Alice
+note over Bob : initial state of Bob
+Bob -> Alice : hello
+@enduml
+";
+
+            var stringBuilder = new StringBuilder();
+
+            // Act
+            stringBuilder.UmlDiagramStart();
+            stringBuilder.Note(NotePosition.Over, "Alice", "initial state of Alice");
+            stringBuilder.Note(NotePosition.Over, "Bob", "initial state of Bob");
+            stringBuilder.Arrow("Bob", "->", "Alice", "hello");
+            stringBuilder.UmlDiagramEnd();
+
+            // Assert
+            stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        }
+
+        [TestMethod]
+        public void SeveralNotesAlignedAtTheSameLevel02()
+        {
+            // Assign
+            var example = @"@startuml
+note over Alice : initial state of Alice
+/ note over Bob : initial state of Bob
+Bob -> Alice : hello
+@enduml
+";
+
+            var stringBuilder = new StringBuilder();
+
+            // Act
+            stringBuilder.UmlDiagramStart();
+            stringBuilder.Note(NotePosition.Over, "Alice", "initial state of Alice");
+            stringBuilder.Note(NotePosition.Over, "Bob", "initial state of Bob", alignWithPrevious: true);
+            stringBuilder.Arrow("Bob", "->", "Alice", "hello");
             stringBuilder.UmlDiagramEnd();
 
             // Assert
@@ -876,7 +1068,7 @@ end note
         }
 
         [TestMethod]
-        public void Divider()
+        public void DividerOrSeparator()
         {
             // Assign
             var example = @"@startuml
@@ -965,7 +1157,7 @@ Alice -> Bob : Authentication Request
 ...
 Bob --> Alice : Authentication Response
 ...5 minutes later...
-Bob --> Alice : Bye !
+Bob --> Alice : Good Bye !
 
 @enduml
 ";
@@ -979,8 +1171,36 @@ Bob --> Alice : Bye !
             stringBuilder.Delay();
             stringBuilder.Arrow("Bob", "-->", "Alice", "Authentication Response");
             stringBuilder.Delay("5 minutes later");
-            stringBuilder.Arrow("Bob", "-->", "Alice", "Bye !");
+            stringBuilder.Arrow("Bob", "-->", "Alice", "Good Bye !");
             stringBuilder.AppendNewLine();
+            stringBuilder.UmlDiagramEnd();
+
+            // Assert
+            stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        }
+
+        [TestMethod]
+        public void TextWrapping()
+        {
+            // Assign
+            var example = @"@startuml
+skinparam MaxMessageSize 50
+participant a
+participant b
+a -> b : this\nis\nmanually\ndone
+a -> b : this is a very long message on several words
+@enduml
+";
+
+            var stringBuilder = new StringBuilder();
+
+            // Act
+            stringBuilder.UmlDiagramStart();
+            stringBuilder.SkinParameter(SkinParameter.MaxMessageSize, 50);
+            stringBuilder.Participant("a");
+            stringBuilder.Participant("b");
+            stringBuilder.Arrow("a", "->", "b", "this\nis\nmanually\ndone");
+            stringBuilder.Arrow("a", "->", "b", "this is a very long message on several words");
             stringBuilder.UmlDiagramEnd();
 
             // Assert
