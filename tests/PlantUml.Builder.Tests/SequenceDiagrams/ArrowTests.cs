@@ -109,7 +109,7 @@ namespace PlantUml.Builder.Tests.SequenceDiagrams
 
             // Assert
             action.Should().ThrowExactly<ArgumentException>()
-                .WithMessage("The arrow must contain at least 1 arrow head character ('>', '<', 'o', '/', '\\', 'x', ']', '[').*")
+                .WithMessage("The arrow must contain at least 1 arrow head character ('>', '<', 'o', '/', '\\', 'x', ']', '[', '?').*")
                 .And.ParamName.Should().Be("arrow");
         }
 

@@ -12,14 +12,14 @@ namespace PlantUml.Builder.Tests.SequenceDiagrams
     {
         [TestMethod]
         [DynamicData(nameof(GetArrowExtensionMethods), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetArrowExtensionMethodsDisplayName))]
-        public void ExtensionMethodsShouldNotWorkOnANullArrow(string methodName, object[] methodParameters)
+        public void ExtensionMethodsShouldNotWorkOnANullArrow(string methodName, object[] methodParameters = null)
         {
             // Assign
             Arrow arrow = null;
 
             var method = typeof(ArrowExtensions).GetMethod(methodName);
             var parameters = new List<object> { arrow };
-            parameters.AddRange(methodParameters);
+            parameters.AddRange(methodParameters ?? new object[0]);
 
             // Act
             Action action = () => method.Invoke(null, parameters.ToArray());
@@ -32,13 +32,17 @@ namespace PlantUml.Builder.Tests.SequenceDiagrams
 
         private static IEnumerable<object[]> GetArrowExtensionMethods()
         {
-            yield return new object[] { "Color", new object[] { (Color)NamedColor.Red } };
-            yield return new object[] { "Destroy", new object[0] };
-            yield return new object[] { "Dotted", new object[0] };
-            yield return new object[] { "Lost", new object[0] };
-            yield return new object[] { "LostLeft", new object[0] };
-            yield return new object[] { "LostRight", new object[0] };
-            yield return new object[] { "Solid", new object[0] };
+            yield return new object[] { nameof(ArrowExtensions.Color), new object[] { (Color)NamedColor.Red } };
+            yield return new object[] { nameof(ArrowExtensions.Destroy) };
+            yield return new object[] { nameof(ArrowExtensions.Dotted) };
+            yield return new object[] { nameof(ArrowExtensions.ExternalLeft) };
+            yield return new object[] { nameof(ArrowExtensions.ExternalRight) };
+            yield return new object[] { nameof(ArrowExtensions.IsExternalLeft) };
+            yield return new object[] { nameof(ArrowExtensions.IsExternalRight) };
+            yield return new object[] { nameof(ArrowExtensions.Lost) };
+            yield return new object[] { nameof(ArrowExtensions.LostLeft) };
+            yield return new object[] { nameof(ArrowExtensions.LostRight) };
+            yield return new object[] { nameof(ArrowExtensions.Solid) };
         }
 
         public static string GetArrowExtensionMethodsDisplayName(MethodInfo _, object[] data)
@@ -112,12 +116,14 @@ namespace PlantUml.Builder.Tests.SequenceDiagrams
         [DataRow("->", "LostLeft", "o->", DisplayName = "Arrow to the right is found")]
         [DataRow("-->", "LostLeft", "o-->", DisplayName = "Dotted arrow to the right is found")]
         [DataRow("[->", "LostLeft", "[o->", DisplayName = "Incomming arrow to the right is lost")]
+        [DataRow("?->", "LostLeft", "?o->", DisplayName = "Short incomming arrow to the right is lost")]
         [DataRow("o-->", "LostLeft", "o-->", DisplayName = "Dotted arrow to the right stays lost")]
         [DataRow("[o->", "LostLeft", "[o->", DisplayName = "Incomming arrow to the right stays lost")]
         [DataRow("->", "LostRight", "->o", DisplayName = "Arrow to the right is lost")]
         [DataRow("<-", "LostRight", "<-o", DisplayName = "Arrow to the left is found")]
         [DataRow("<--", "LostRight", "<--o", DisplayName = "Dotted arrow to the left is found")]
         [DataRow("<-]", "LostRight", "<-o]", DisplayName = "Incomming arrow to the left is lost")]
+        [DataRow("<-?", "LostRight", "<-o?", DisplayName = "Short incomming arrow to the left is lost")]
         [DataRow("<--o", "LostRight", "<--o", DisplayName = "Dotted arrow to the left stays lost")]
         [DataRow("<-o]", "LostRight", "<-o]", DisplayName = "Incomming arrow to the left stays lost")]
         [DataRow("->", "Lost", "->o", DisplayName = "Arrow to the right is lost")]
@@ -200,6 +206,32 @@ namespace PlantUml.Builder.Tests.SequenceDiagrams
             // Assert
             act.Should().ThrowExactly<NotSupportedException>()
                 .WithMessage("This method only * an arrow if it is in a clear left or right direction.");
+        }
+
+        [TestMethod]
+        [DataRow("->", "ExternalRight", "->]", DisplayName = "The message will leave the diagram on the right")]
+        [DataRow("<-", "ExternalRight", "<-]", DisplayName = "The message will come in from the right")]
+        [DataRow("<---]", "ExternalRight", "<--]", DisplayName = "The message keeps comming in from the right")]
+        [DataRow("<-?", "ExternalRight", "<-?", DisplayName = "The short message keeps comming in from the right")]
+        [DataRow("<[#Blue]---]", "ExternalRight", "<--[#Blue]]", DisplayName = "The colored message keeps comming in from the right")]
+        [DataRow("<-", "ExternalLeft", "[<-", DisplayName = "The message will leave the diagram on the left")]
+        [DataRow("->", "ExternalLeft", "[->", DisplayName = "The message will come in from the left")]
+        [DataRow("[--->", "ExternalLeft", "[-->", DisplayName = "The message keeps comming in from the left")]
+        [DataRow("?-->", "ExternalLeft", "?-->", DisplayName = "The short message keeps comming in from the left")]
+
+        public void MakeArrowIncommingOrOutgoing(string original, string methodName, string expected)
+        {
+            // Assign
+            Arrow originalArrow = original;
+
+            var method = typeof(ArrowExtensions).GetMethod(methodName);
+            var function = (Func<Arrow, Arrow>)Delegate.CreateDelegate(typeof(Func<Arrow, Arrow>), method);
+
+            // Act
+            var arrow = function(originalArrow);
+
+            // Assert
+            arrow.ToString().Should().Be(expected);
         }
     }
 }

@@ -12,6 +12,8 @@ namespace PlantUml.Builder.SequenceDiagrams
 
         public string Alias { get; private set; } = string.Empty;
 
+        internal static readonly ParticipantName Outside = new(string.Empty + ArrowParts.LeftExternal + ArrowParts.RightExternal);
+
         public ParticipantName(string name)
             : this(name, default)
         {
@@ -34,6 +36,11 @@ namespace PlantUml.Builder.SequenceDiagrams
 
         public static implicit operator ParticipantName(string input)
         {
+            if (input is null)
+            {
+                return default;
+            }
+
             var match = nameAlias.Match(input.Replace("\n", "\\n"));
 
             var name = match.Groups["Name"].Value;

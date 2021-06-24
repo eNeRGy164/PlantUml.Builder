@@ -107,8 +107,8 @@ namespace PlantUml.Builder.SequenceDiagrams
                     throw new NotSupportedException("You can not combine the lost and deleted message notation in the same arrow head.");
                 }
 
-                newRightHead = lastChar == ArrowParts.RightExternal
-                    ? arrow.RightHead.Substring(0, Math.Max(0, arrow.RightHead.Length - 1)) + ArrowParts.Lost + ArrowParts.RightExternal
+                newRightHead = (lastChar == ArrowParts.RightExternal || lastChar == ArrowParts.ShortExternal)
+                    ? arrow.RightHead.Substring(0, Math.Max(0, arrow.RightHead.Length - 1)) + ArrowParts.Lost + lastChar
                     : arrow.RightHead + ArrowParts.Lost;
             }
             else
@@ -142,8 +142,8 @@ namespace PlantUml.Builder.SequenceDiagrams
                     throw new NotSupportedException("You can not combine the lost and deleted message notation in the same arrow head.");
                 }
 
-                newLeftHead = arrow.LeftHead[0] == ArrowParts.LeftExternal
-                    ? string.Empty + ArrowParts.LeftExternal + ArrowParts.Lost + arrow.LeftHead.Substring(1)
+                newLeftHead = (arrow.LeftHead[0] == ArrowParts.LeftExternal || arrow.LeftHead[0] == ArrowParts.ShortExternal)
+                    ? string.Empty + arrow.LeftHead[0] + ArrowParts.Lost + arrow.LeftHead.Substring(1)
                     : ArrowParts.Lost + arrow.LeftHead;
             }
             else
@@ -152,6 +152,70 @@ namespace PlantUml.Builder.SequenceDiagrams
             }
 
             return new Arrow(newLeftHead, arrow.Dotted, arrow.RightHead, arrow.Color);
+        }
+
+        /// <summary>
+        /// Adds the <em>external</em> indication to the left side of the <paramref name="arrow"/>.
+        /// </summary>
+        /// <returns>The arrow with the external indication on the left side.</returns>
+        public static Arrow ExternalLeft(this Arrow arrow)
+        {
+            if (arrow.IsExternalLeft())
+            {
+                return arrow;
+            }
+
+            return new Arrow(ArrowParts.LeftExternal + arrow.LeftHead, arrow.Dotted, arrow.RightHead, arrow.Color);
+        }
+
+        /// <summary>
+        /// Adds the <em>external</em> indication to the right side of the <paramref name="arrow"/>.
+        /// </summary>
+        /// <returns>The arrow with the external indication on the right side.</returns>
+        public static Arrow ExternalRight(this Arrow arrow)
+        {
+            if (arrow.IsExternalRight())
+            {
+                return arrow;
+            }
+
+            return new Arrow(arrow.LeftHead, arrow.Dotted, arrow.RightHead + ArrowParts.RightExternal, arrow.Color);
+        }
+
+        /// <summary>
+        /// Determines if the left side is outside the diagram.
+        /// </summary>
+        /// <returns><c>true</c> if the left side is outside the diagram.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="arrow"/> is <c>null</c>.</exception>
+        public static bool IsExternalLeft(this Arrow arrow)
+        {
+            if (arrow is null) throw new ArgumentNullException(nameof(arrow));
+
+            if (arrow.LeftHead.Length > 0)
+            {
+                var leftChar = arrow.LeftHead[0];
+                return leftChar == ArrowParts.LeftExternal || leftChar == ArrowParts.ShortExternal;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Determines if the right side is outside the diagram.
+        /// </summary>
+        /// <returns><c>true</c> if the right side is outside the diagram.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="arrow"/> is <c>null</c>.</exception>
+        public static bool IsExternalRight(this Arrow arrow)
+        {
+            if (arrow is null) throw new ArgumentNullException(nameof(arrow));
+
+            if (arrow.RightHead.Length > 0)
+            {
+                var rightChar = arrow.RightHead[arrow.RightHead.Length - 1];
+                return rightChar == ArrowParts.RightExternal || rightChar == ArrowParts.ShortExternal;
+            }
+
+            return false;
         }
     }
 }
