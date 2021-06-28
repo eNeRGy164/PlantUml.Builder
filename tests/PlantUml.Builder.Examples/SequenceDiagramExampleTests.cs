@@ -1542,6 +1542,142 @@ alice -> bob : step2
         }
 
         [TestMethod]
+        public void IncomingAndOutgoingMessages01()
+        {
+            // Assign
+            var example = @"@startuml
+[-> A : DoWork
+
+activate A
+
+A -> A : Internal call
+activate A
+
+A ->] : << createRequest >>
+
+A <--] : RequestCreated
+deactivate A
+[<- A : Done
+deactivate A
+@enduml
+";
+
+            var stringBuilder = new StringBuilder();
+
+            // Act
+            stringBuilder.UmlDiagramStart();
+            stringBuilder.Arrow(Participant.Outside, "->", "A", "DoWork");
+            stringBuilder.AppendNewLine();
+            stringBuilder.Activate("A");
+            stringBuilder.AppendNewLine();
+            stringBuilder.Arrow("A", "->", "A", "Internal call");
+            stringBuilder.Activate("A");
+            stringBuilder.AppendNewLine();
+            stringBuilder.Arrow("A", "->", Participant.Outside, "<< createRequest >>");
+            stringBuilder.AppendNewLine();
+            stringBuilder.Arrow("A", "<--]", default, "RequestCreated");
+            stringBuilder.Deactivate("A");
+            stringBuilder.Arrow(default, "[<-", "A", "Done");
+            stringBuilder.Deactivate("A");
+            stringBuilder.UmlDiagramEnd();
+
+            // Assert
+            stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        }
+
+        [TestMethod]
+        public void IncomingAndOutgoingMessages02()
+        {
+            // Assign
+            var example = @"@startuml
+participant Alice
+participant Bob #lightblue
+Alice -> Bob
+Bob -> Carol
+...
+[-> Bob
+[o-> Bob
+[o->o Bob
+[x-> Bob
+...
+[<- Bob
+[x<- Bob
+...
+Bob ->]
+Bob ->o]
+Bob o->o]
+Bob ->x]
+...
+Bob <-]
+Bob x<-]
+
+@enduml
+";
+
+            var stringBuilder = new StringBuilder();
+
+            // Act
+            stringBuilder.UmlDiagramStart();
+            stringBuilder.Participant("Alice");
+            stringBuilder.Participant("Bob", color: "lightblue");
+            stringBuilder.Arrow("Alice", "->", "Bob");
+            stringBuilder.Arrow("Bob", "->", "Carol");
+            stringBuilder.Delay();
+            stringBuilder.Arrow(default, "->", "Bob");
+            stringBuilder.Arrow(default, "o->", "Bob");
+            stringBuilder.Arrow(default, "o->o", "Bob");
+            stringBuilder.Arrow(default, "x->", "Bob");
+            stringBuilder.Delay();
+            stringBuilder.Arrow(default, "<-", "Bob");
+            stringBuilder.Arrow(default, "x<-", "Bob");
+            stringBuilder.Delay();
+            stringBuilder.Arrow("Bob", "->", default);
+            stringBuilder.Arrow("Bob", "->o", default);
+            stringBuilder.Arrow("Bob", "o->o", default);
+            stringBuilder.Arrow("Bob", "->x", default);
+            stringBuilder.Delay();
+            stringBuilder.Arrow("Bob", "<-", default);
+            stringBuilder.Arrow("Bob", "x<-", default);
+            stringBuilder.AppendNewLine();
+            stringBuilder.UmlDiagramEnd();
+
+            // Assert
+            stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        }
+
+        [TestMethod]
+        public void ShortArrowsForIncomingAndOutgoingMessages()
+        {
+            // Assign
+            var example = @"@startuml
+?-> Alice : """"?->""""\n**short** to actor1
+[-> Alice : """"[->""""\n**from start** to actor1
+[-> Bob : """"[->""""\n**from start** to actor2
+?-> Bob : """"?->""""\n**short** to actor2
+Alice ->] : """"->]""""\nfrom actor1 **to end**
+Alice ->? : """"->?""""\n**short** from actor1
+Alice -> Bob : """"->"""" \nfrom actor1 to actor2
+@enduml
+";
+
+            var stringBuilder = new StringBuilder();
+
+            // Act
+            stringBuilder.UmlDiagramStart();
+            stringBuilder.Arrow(default, "?->", "Alice", "\"\"?->\"\"\n**short** to actor1");
+            stringBuilder.Arrow(default, "->", "Alice", "\"\"[->\"\"\n**from start** to actor1");
+            stringBuilder.Arrow(default, "->", "Bob", "\"\"[->\"\"\n**from start** to actor2");
+            stringBuilder.Arrow(default, "?->", "Bob", "\"\"?->\"\"\n**short** to actor2");
+            stringBuilder.Arrow("Alice", "->", default, "\"\"->]\"\"\nfrom actor1 **to end**");
+            stringBuilder.Arrow("Alice", "->?", default, "\"\"->?\"\"\n**short** from actor1");
+            stringBuilder.Arrow("Alice", "->", "Bob", "\"\"->\"\" \nfrom actor1 to actor2");
+            stringBuilder.UmlDiagramEnd();
+
+            // Assert
+            stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        }
+
+        [TestMethod]
         public void Template()
         {
             // Assign

@@ -14,7 +14,8 @@ namespace PlantUml.Builder.SequenceDiagrams
             ArrowParts.Top,
             ArrowParts.Destroy,
             ArrowParts.RightExternal,
-            ArrowParts.LeftExternal
+            ArrowParts.LeftExternal,
+            ArrowParts.ShortExternal
         };
 
         public readonly string LeftHead = string.Empty;

@@ -1,4 +1,4 @@
-﻿namespace PlantUml.Builder.SequenceDiagrams
+namespace PlantUml.Builder.SequenceDiagrams
 {
     internal class ArrowParts
     {
@@ -11,5 +11,6 @@
         public const char Lost = 'o';
         public const char LeftExternal = '[';
         public const char RightExternal = ']';
+        public const char ShortExternal = '?';
     }
 }

@@ -23,21 +23,6 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests
         }
 
         [TestMethod]
-        public void StringBuilderExtensions_Arrow_NullLeft_Should_ThrowArgumentException()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
-
-            // Act
-            Action action = () => stringBuilder.Arrow(null, "->", "r");
-
-            // Assert
-            action.Should().ThrowExactly<ArgumentException>()
-                .WithMessage("A non-empty value should be provided*")
-                .And.ParamName.Should().Be("left");
-        }
-
-        [TestMethod]
         public void StringBuilderExtensions_Arrow_NullType_Should_ThrowArgumentException()
         {
             // Assign
@@ -82,19 +67,23 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests
                 .And.ParamName.Should().Be("arrow");
         }
 
+        [DataRow(default, "->", default, DisplayName = "Both side are not defined")]
+        [DataRow(default, "->]", "B", DisplayName = "Left side is not defined and arrow indicates an outgoing meesage to the right")]
+        [DataRow("B", "[->", default, DisplayName = "Right side is not defined and arrow indicates an incomming message from the left")]
+        [DataRow(default, "->?", "B", DisplayName = "Left side is not defined and arrow indicates a short outgoing meesage to the right")]
+        [DataRow("B", "?->", default, DisplayName = "Right side is not defined and arrow indicates a short incomming message from the left")]
         [TestMethod]
-        public void StringBuilderExtensions_Arrow_NullRight_Should_ThrowArgumentException()
+        public void NotPossibleToHaveBothParticipantsOutsideTheDiagram(string left, string arrow, string right)
         {
             // Assign
             var stringBuilder = new StringBuilder();
 
             // Act
-            Action action = () => stringBuilder.Arrow("l", "->", null);
+            Action action = () => stringBuilder.Arrow(left, arrow, right);
 
             // Assert
-            action.Should().ThrowExactly<ArgumentException>()
-                .WithMessage("A non-empty value should be provided*")
-                .And.ParamName.Should().Be("right");
+            action.Should().ThrowExactly<NotSupportedException>()
+                .WithMessage("It is not possible for both partipants to be outside the diagram.");
         }
 
         [TestMethod]
@@ -279,6 +268,32 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests
 
             // Assert
             stringBuilder.ToString().Should().Be("\"l\\nl\" -> \"r\\nr\"\n");
+        }
+
+        [TestMethod]
+        public void StringBuilderExtensions_Arrow_NullLeft_Should_MakeArrowComeFromTheOutside()
+        {
+            // Assign
+            var stringBuilder = new StringBuilder();
+
+            // Act
+            stringBuilder.Arrow(default, "->", "r");
+
+            // Assert
+            stringBuilder.ToString().Should().Be("[-> r\n");
+        }
+
+        [TestMethod]
+        public void StringBuilderExtensions_Arrow_NullRight_Should_MakeArrowGoToTheOutside()
+        {
+            // Assign
+            var stringBuilder = new StringBuilder();
+
+            // Act
+            stringBuilder.Arrow("l", "->", default);
+
+            // Assert
+            stringBuilder.ToString().Should().Be("l ->]\n");
         }
     }
 }
