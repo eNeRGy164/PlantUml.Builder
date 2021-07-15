@@ -31,6 +31,7 @@ Following the PlantUML source code.
 | endlegend                           | no          |                |
 
 ## Activity Diagrams
+
 | Command                                  | Implemented | Method |
 | ---------------------------------------- | ----------- | ------ |
 | start;                                   | no          |        |
@@ -42,6 +43,7 @@ Following the PlantUML source code.
 | end fork [{\<LABEL>}];                   | no          |        |
 
 ## Class Diagrams
+
 | Command                                                                                                                                                                                                 | Implemented | Method                  |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ----------------------- |
 | interface \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                          | yes         | `Interface`             |
@@ -58,12 +60,26 @@ Following the PlantUML source code.
 | [\<VISIBILITY>] entity \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]] {           | yes         | `EntityStart`           |
 | }                                                                                                                                                                                                       | yes         | `EntityEnd`             |
 | circle \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                             | no          |                         |
-| diamond \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                            | no          |                         |
 | hide [\<NAME>] [empty] \<PORTION>                                                                                                                                                                       | yes         | `HideEntityPortion`     |
 | show [\<NAME>] [empty] \<PORTION>                                                                                                                                                                       | no          |                         |
 | hide \<VISIBILITY>[,\<VISIBILITY>*] \<PORTION>                                                                                                                                                          | yes         | `HideEntityPortion`     |
 | show \<VISIBILITY>[,\<VISIBILITY>*] \<PORTION>                                                                                                                                                          | no          |                         |
 | set namespaceseparator \<SEPARATOR>                                                                                                                                                                     | yes         | `SetNamespaceSeparator` |
+
+## Object Diagrams
+
+| Command                                                                                                                                                                      | Implemented | Method              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------------------- |
+| object \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>]                                                                                         | yes         | `Object`            |
+| \<OBJECT> : [\<VISIBILITY>] \<MEMBER>                                                                                                                                        | yes         | `MemberDeclaration` |
+| object \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] {                                                                                       | yes         | `ObjectStart`       |
+| [\<VISIBILITY>] \<MEMBER>                                                                                                                                                    | yes         | `InlineClassMember` |
+| }                                                                                                                                                                            | yes         | `ObjectEnd`         |
+| diamond \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]] | yes         | `Diamond`           |
+| map \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] {                                                                                          | yes         | `MapStart`          |
+| \<COLUMNA> => \<COLUMNB>                                                                                                                                                     | yes         | `InlineClassMember` |
+| \<COLUMN> *-> \<OBJECT>                                                                                                                                                      | yes         | `InlineClassMember` |
+| }                                                                                                                                                                            | yes         | `MapEnd`            |
 
 ## Sequence Diagrams
 
@@ -132,22 +148,22 @@ Following the PlantUML source code.
 | return [\<COLOR>] \<MESSAGE>                                                    | partial     | `Return`             |
 | space                                                                           | yes         | `Space`              |
 | note \<POSITION> [\<BGCOLOR>] : \<NOTE>                                         | yes         | `Note`               |
-| note over \<PARTICIPANT>[,\<PARTICIPANT>] [\<BGCOLOR>] : \<NOTE>                  | yes         | `Note`               |
+| note over \<PARTICIPANT>[,\<PARTICIPANT>] [\<BGCOLOR>] : \<NOTE>                | yes         | `Note`               |
 | note \<POSITION> of \<PARTICIPANT> [\<BGCOLOR>] : \<NOTE>                       | yes         | `Note`               |
 | hnote \<POSITION> [\<BGCOLOR>] : \<NOTE>                                        | yes         | `HNote`              |
-| hnote over \<PARTICIPANT>[,\<PARTICIPANT>] [\<BGCOLOR>] : \<NOTE>                 | yes         | `HNote`              |
+| hnote over \<PARTICIPANT>[,\<PARTICIPANT>] [\<BGCOLOR>] : \<NOTE>               | yes         | `HNote`              |
 | hnote \<POSITION> of \<PARTICIPANT> [\<BGCOLOR>] : \<NOTE>                      | yes         | `HNote`              |
 | rnote \<POSITION> [\<BGCOLOR>] : \<NOTE>                                        | yes         | `RNote`              |
 | rnote over \<PARTICIPANT>[,\<PARTICIPANT>] [\<BGCOLOR>] : \<NOTE>               | yes         | `RNote`              |
 | rnote \<POSITION> of \<PARTICIPANT> [\<BGCOLOR>] : \<NOTE>                      | yes         | `RNote`              |
 | note \<POSITION> [\<BGCOLOR>]                                                   | yes         | `StartNote`          |
-| note over \<PARTICIPANT>[,\<PARTICIPANT>] [\<BGCOLOR>]                         | yes         | `StartNote`          |
+| note over \<PARTICIPANT>[,\<PARTICIPANT>] [\<BGCOLOR>]                          | yes         | `StartNote`          |
 | note \<POSITION> of \<PARTICIPANT> [\<BGCOLOR>]                                 | yes         | `StartNote`          |
 | hnote \<POSITION> [\<BGCOLOR>]                                                  | yes         | `StartHNote`         |
-| hnote over \<PARTICIPANT>[,\<PARTICIPANT>] [\<BGCOLOR>]                        | yes         | `StartHNote`         |
+| hnote over \<PARTICIPANT>[,\<PARTICIPANT>] [\<BGCOLOR>]                         | yes         | `StartHNote`         |
 | hnote \<POSITION> of \<PARTICIPANT> [\<BGCOLOR>]                                | yes         | `StartHNote`         |
 | rnote \<POSITION> [\<BGCOLOR>]                                                  | yes         | `StartRNote`         |
-| rnote over \<PARTICIPANT>[,\<PARTICIPANT>] [\<BGCOLOR>]                        | yes         | `StartRNote`         |
+| rnote over \<PARTICIPANT>[,\<PARTICIPANT>] [\<BGCOLOR>]                         | yes         | `StartRNote`         |
 | rnote \<POSITION> of \<PARTICIPANT> [\<BGCOLOR>]                                | yes         | `StartRNote`         |
 | end note                                                                        | yes         | `EndNote`            |
 | end hnote                                                                       | yes         | `EndHNote`           |
