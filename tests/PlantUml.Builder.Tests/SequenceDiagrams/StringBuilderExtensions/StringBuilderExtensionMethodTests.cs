@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Text;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PlantUml.Builder.Tests;
 
 namespace PlantUml.Builder.SequenceDiagrams.Tests
 {
