@@ -26,6 +26,7 @@ namespace PlantUml.Builder
         public const string Interface = "interface";
         public const string Implements = "implements";
         public const string Loop = "loop";
+        public const string Map = "map";
         public const string Mixing = "mixing";
         public const string Namespace = "namespace";
         public const string New = "new";
@@ -99,6 +100,9 @@ namespace PlantUml.Builder
 
         public const char ObjectStart = '{';
         public const char ObjectEnd = '}';
+
+        public const char MapStart = '{';
+        public const char MapEnd = '}';
 
         public const char GenericsStart = '<';
         public const char GenericsEnd = '>';
