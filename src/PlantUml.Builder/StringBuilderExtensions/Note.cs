@@ -191,8 +191,6 @@ namespace PlantUml.Builder
         /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <c>null</c>.</exception>
         public static void StartNote(this StringBuilder stringBuilder, NotePosition position, string participant = null, NoteStyle style = NoteStyle.Normal, Color color = null, bool alignWithPrevious = false)
         {
-            if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
-
             stringBuilder.NoteBase(position, participant, style, color, alignWithPrevious);
             stringBuilder.AppendNewLine();
         }
@@ -234,8 +232,6 @@ namespace PlantUml.Builder
         /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <c>null</c>.</exception>
         public static void StartHNote(this StringBuilder stringBuilder, NotePosition position, string participant = null, Color color = null, bool alignWithPrevious = false)
         {
-            if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
-
             stringBuilder.NoteBase(position, participant, NoteStyle.Hexagonal, color, alignWithPrevious);
             stringBuilder.AppendNewLine();
         }
@@ -275,8 +271,6 @@ namespace PlantUml.Builder
         /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <c>null</c>.</exception>
         public static void StartRNote(this StringBuilder stringBuilder, NotePosition position, string participant = null, Color color = null, bool alignWithPrevious = false)
         {
-            if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
-
             stringBuilder.NoteBase(position, participant, NoteStyle.Box, color, alignWithPrevious);
             stringBuilder.AppendNewLine();
         }

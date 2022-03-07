@@ -22,7 +22,7 @@ namespace PlantUml.Builder.ObjectDiagrams
             stringBuilder.Append(Constant.Object);
             stringBuilder.Append(Constant.Space);
 
-            if (!(displayName is null))
+            if (displayName is not null)
             {
                 stringBuilder.Append(Constant.Quote);
                 stringBuilder.Append(displayName);
@@ -34,13 +34,13 @@ namespace PlantUml.Builder.ObjectDiagrams
 
             stringBuilder.Append(name);
 
-            if (!(stereotype is null))
+            if (stereotype is not null)
             {
                 stringBuilder.Append(Constant.Space);
                 stringBuilder.StereoType(stereotype);
             }
 
-            if (!(url is null))
+            if (url is not null)
             {
                 stringBuilder.Append(Constant.Space);
                 stringBuilder.Append(Constant.UrlStart);
@@ -48,7 +48,7 @@ namespace PlantUml.Builder.ObjectDiagrams
                 stringBuilder.Append(Constant.UrlEnd);
             }
 
-            if (!(backgroundColor is null))
+            if (backgroundColor is not null)
             {
                 stringBuilder.Append(Constant.Space);
                 stringBuilder.Append(backgroundColor);
@@ -67,8 +67,6 @@ namespace PlantUml.Builder.ObjectDiagrams
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
         public static void ObjectStart(this StringBuilder stringBuilder, string name, string displayName = default, string stereotype = default, Uri url = default, Color backgroundColor = default)
         {
-            if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
-
             stringBuilder.Object(name, displayName, stereotype, url, backgroundColor);
 
             if (char.IsWhiteSpace(stringBuilder[stringBuilder.Length - 1]))

@@ -43,8 +43,6 @@ namespace PlantUml.Builder.SequenceDiagrams
         /// <exception cref="ArgumentException">Thrown when <paramref name="participantB"/> is <c>null</c>, empty of only white space.</exception>
         public static void Ref(this StringBuilder stringBuilder, string participantA, string participantB, string note)
         {
-            if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
-
             if (string.IsNullOrWhiteSpace(participantA)) throw new ArgumentException("A non-empty value should be provided", nameof(participantA));
             if (string.IsNullOrWhiteSpace(participantB)) throw new ArgumentException("A non-empty value should be provided", nameof(participantB));
 
@@ -81,8 +79,6 @@ namespace PlantUml.Builder.SequenceDiagrams
         /// <exception cref="ArgumentException">Thrown when <paramref name="participantB"/> is <c>null</c>, empty of only white space.</exception>
         public static void StartRef(this StringBuilder stringBuilder, string participantA, string participantB)
         {
-            if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
-
             if (string.IsNullOrWhiteSpace(participantA)) throw new ArgumentException("A non-empty value should be provided", nameof(participantA));
             if (string.IsNullOrWhiteSpace(participantB)) throw new ArgumentException("A non-empty value should be provided", nameof(participantB));
 

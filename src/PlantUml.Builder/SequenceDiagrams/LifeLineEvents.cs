@@ -2,7 +2,7 @@ namespace PlantUml.Builder.SequenceDiagrams
 {
     public class LifeLineEvents
     {
-        private readonly string value = string.Empty;
+        private readonly string value;
 
         private LifeLineEvents(params string[] values)
         {

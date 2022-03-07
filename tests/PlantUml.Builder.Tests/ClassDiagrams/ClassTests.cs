@@ -224,6 +224,19 @@ namespace PlantUml.Builder.ClassDiagrams.Tests
         }
 
         [TestMethod]
+        public void StringBuilderExtensions_Class_WithNoExtends_Should_ContainClassLineWithoutImplements()
+        {
+            // Assign
+            var stringBuilder = new StringBuilder();
+
+            // Act
+            stringBuilder.Class("classA", extends: new string[0]);
+
+            // Assert
+            stringBuilder.ToString().Should().Be("class classA\n");
+        }
+
+        [TestMethod]
         public void StringBuilderExtensions_Class_WithExtends_Should_ContainClassLineWithExtends()
         {
             // Assign

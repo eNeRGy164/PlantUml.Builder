@@ -26,7 +26,7 @@ namespace PlantUml.Builder
         }
 
         public Color(NamedColor color)
-            : this(color.ToString(format: "G"))
+            : this(color.ToString())
         {
         }
 

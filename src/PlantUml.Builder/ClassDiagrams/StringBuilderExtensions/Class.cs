@@ -58,8 +58,6 @@ namespace PlantUml.Builder.ClassDiagrams
         /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <c>null</c>, empty of only white space.</exception>
         public static void ClassStart(this StringBuilder stringBuilder, string name, string displayName = default, VisibilityModifier visibility = VisibilityModifier.None, bool isAbstract = false, string generics = default, string stereotype = default, CustomSpot customSpot = default, string tag = default, Uri url = default, Color backgroundColor = default, Color lineColor = default, LineStyle lineStyle = LineStyle.None, string[] extends = default, string[] implements = default)
         {
-            if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
-
             stringBuilder.VisibilityChar(visibility);
             stringBuilder.Class(name, displayName, isAbstract, generics, stereotype, customSpot, tag, url, backgroundColor, lineColor, lineStyle, extends, implements);
             stringBuilder.TrimEnd();

@@ -12,8 +12,6 @@ namespace PlantUml.Builder.SequenceDiagrams
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
         public static void ElseStart(this StringBuilder stringBuilder, string text = null)
         {
-            if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
-
             stringBuilder.GroupStart(Constant.Else, text);
         }
     }
