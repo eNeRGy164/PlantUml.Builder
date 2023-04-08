@@ -3,49 +3,48 @@ using System.Text;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace PlantUml.Builder.SequenceDiagrams.Tests
+namespace PlantUml.Builder.SequenceDiagrams.Tests;
+
+[TestClass]
+public class AltStartTests
 {
-    [TestClass]
-    public class AltStartTests
+    [TestMethod]
+    public void StringBuilderExtensions_AltStart_Null_Should_ThrowArgumentNullException()
     {
-        [TestMethod]
-        public void StringBuilderExtensions_AltStart_Null_Should_ThrowArgumentNullException()
-        {
-            // Assign
-            var stringBuilder = (StringBuilder)null;
+        // Assign
+        var stringBuilder = (StringBuilder)null;
 
-            // Act
-            Action action = () => stringBuilder.AltStart();
+        // Act
+        Action action = () => stringBuilder.AltStart();
 
-            // Assert
-            action.Should().Throw<ArgumentNullException>()
-                .And.ParamName.Should().Be("stringBuilder");
-        }
+        // Assert
+        action.Should().Throw<ArgumentNullException>()
+            .And.ParamName.Should().Be("stringBuilder");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_AltStart_Should_ContainAltStartLine()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_AltStart_Should_ContainAltStartLine()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            stringBuilder.AltStart();
+        // Act
+        stringBuilder.AltStart();
 
-            // Assert
-            stringBuilder.ToString().Should().Be("alt\n");
-        }
+        // Assert
+        stringBuilder.ToString().Should().Be("alt\n");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_AltStart_WithTitle_Should_ContainAltStartLineWithTitle()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_AltStart_WithTitle_Should_ContainAltStartLineWithTitle()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            stringBuilder.AltStart(text: "Title");
+        // Act
+        stringBuilder.AltStart(text: "Title");
 
-            // Assert
-            stringBuilder.ToString().Should().Be("alt Title\n");
-        }
+        // Assert
+        stringBuilder.ToString().Should().Be("alt Title\n");
     }
 }

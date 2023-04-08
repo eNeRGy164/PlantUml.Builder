@@ -1,14 +1,13 @@
 using System;
 
-namespace PlantUml.Builder
-{
-    public enum LineStyle
-        : byte
-    {
-        None,
+namespace PlantUml.Builder;
 
-        Dotted,
-        Dashed,
-        Bold
-    }
+public enum LineStyle
+    : byte
+{
+    None,
+
+    Dotted,
+    Dashed,
+    Bold
 }

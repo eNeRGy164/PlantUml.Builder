@@ -1,14 +1,13 @@
 using System;
 
-namespace PlantUml.Builder.SequenceDiagrams
+namespace PlantUml.Builder.SequenceDiagrams;
+
+[Flags]
+public enum ArrowDirection
+    : sbyte
 {
-    [Flags]
-    public enum ArrowDirection
-        : sbyte
-    {
-        None = 0,
-        Left = 1,
-        Right = 2,
-        Both = 3
-    }
+    None = 0,
+    Left = 1,
+    Right = 2,
+    Both = 3
 }

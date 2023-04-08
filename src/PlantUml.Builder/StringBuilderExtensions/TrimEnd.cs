@@ -1,28 +1,27 @@
 using System;
 using System.Text;
 
-namespace PlantUml.Builder
+namespace PlantUml.Builder;
+
+public static partial class StringBuilderExtensions
 {
-    public static partial class StringBuilderExtensions
+    /// <summary>
+    /// Removes all the trailing white-space characters from the current <see cref="StringBuilder"/>.
+    /// </summary>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    public static void TrimEnd(this StringBuilder stringBuilder)
     {
-        /// <summary>
-        /// Removes all the trailing white-space characters from the current <see cref="StringBuilder"/>.
-        /// </summary>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
-        public static void TrimEnd(this StringBuilder stringBuilder)
+        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+
+        if (stringBuilder.Length == 0)
         {
-            if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+            return;
+        }
+        
 
-            if (stringBuilder.Length == 0)
-            {
-                return;
-            }
-            
-
-            while (stringBuilder.Length > 0 && char.IsWhiteSpace(stringBuilder[stringBuilder.Length - 1]))
-            {
-                stringBuilder.Length--;
-            }
+        while (stringBuilder.Length > 0 && char.IsWhiteSpace(stringBuilder[stringBuilder.Length - 1]))
+        {
+            stringBuilder.Length--;
         }
     }
 }

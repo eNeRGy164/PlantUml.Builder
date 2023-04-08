@@ -6,44 +6,43 @@ using System.Text;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace PlantUml.Builder.ObjectDiagrams.Tests
+namespace PlantUml.Builder.ObjectDiagrams.Tests;
+
+[TestClass]
+public class StringBuilderExtensionMethodTests
 {
-    [TestClass]
-    public class StringBuilderExtensionMethodTests
+    [TestMethod]
+    [DynamicData(nameof(GetStringBuilderExtensionMethods), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetStringBuilderExtensionMethodsDisplayName))]
+    public void ExtensionMethodsShouldNotWorkOnANullStringBuilder(string methodName, object[] methodParameters)
     {
-        [TestMethod]
-        [DynamicData(nameof(GetStringBuilderExtensionMethods), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetStringBuilderExtensionMethodsDisplayName))]
-        public void ExtensionMethodsShouldNotWorkOnANullStringBuilder(string methodName, object[] methodParameters)
-        {
-            // Assign
-            StringBuilder stringBuilder = null;
+        // Assign
+        StringBuilder stringBuilder = null;
 
-            var method = typeof(StringBuilderExtensions).FindOverloadedMethod(methodName, methodParameters.Select(p => p.GetType()));
-            var remainingParameters = method.GetParameters().Skip(methodParameters.Length + 1).Select(p => Type.Missing);
-            var parameters = new object[] { stringBuilder }.Concat(methodParameters).Concat(remainingParameters).ToArray();
+        var method = typeof(StringBuilderExtensions).FindOverloadedMethod(methodName, methodParameters.Select(p => p.GetType()));
+        var remainingParameters = method.GetParameters().Skip(methodParameters.Length + 1).Select(p => Type.Missing);
+        var parameters = new object[] { stringBuilder }.Concat(methodParameters).Concat(remainingParameters).ToArray();
 
-            // Act
-            Action action = () => method.Invoke(null, parameters);
+        // Act
+        Action action = () => method.Invoke(null, parameters);
 
-            // Assert
-            action.Should().ThrowExactly<TargetInvocationException>()
-                .WithInnerExceptionExactly<ArgumentNullException>()
-                .And.ParamName.Should().Be("stringBuilder");
-        }
+        // Assert
+        action.Should().ThrowExactly<TargetInvocationException>()
+            .WithInnerExceptionExactly<ArgumentNullException>()
+            .And.ParamName.Should().Be("stringBuilder");
+    }
 
-        private static IEnumerable<object[]> GetStringBuilderExtensionMethods()
-        {
-            yield return new object[] { "Diamond", new object[] { "name" } };
-            yield return new object[] { "Object", new object[] { "name" } };
-            yield return new object[] { "MapStart", new object[] { "name" } };
-            yield return new object[] { "ObjectStart", new object[] { "name" } };
-            yield return new object[] { "MapEnd", new object[0] };
-            yield return new object[] { "ObjectEnd", new object[0] };
-        }
+    private static IEnumerable<object[]> GetStringBuilderExtensionMethods()
+    {
+        yield return new object[] { "Diamond", new object[] { "name" } };
+        yield return new object[] { "Object", new object[] { "name" } };
+        yield return new object[] { "MapStart", new object[] { "name" } };
+        yield return new object[] { "ObjectStart", new object[] { "name" } };
+        yield return new object[] { "MapEnd", new object[0] };
+        yield return new object[] { "ObjectEnd", new object[0] };
+    }
 
-        public static string GetStringBuilderExtensionMethodsDisplayName(MethodInfo _, object[] data)
-        {
-            return $"Method \"{data[0]}\" should throw an argument exception when StringBuilder is `null`";
-        }
+    public static string GetStringBuilderExtensionMethodsDisplayName(MethodInfo _, object[] data)
+    {
+        return $"Method \"{data[0]}\" should throw an argument exception when StringBuilder is `null`";
     }
 }

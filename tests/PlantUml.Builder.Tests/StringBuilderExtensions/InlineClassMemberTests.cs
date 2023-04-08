@@ -3,128 +3,127 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Text;
 
-namespace PlantUml.Builder.Tests
+namespace PlantUml.Builder.Tests;
+
+[TestClass]
+public class InlineClassMemberTests
 {
-    [TestClass]
-    public class InlineClassMemberTests
+    [TestMethod]
+    public void StringBuilderExtensions_ClassMember_Null_Should_ThrowArgumentNullException()
     {
-        [TestMethod]
-        public void StringBuilderExtensions_ClassMember_Null_Should_ThrowArgumentNullException()
-        {
-            // Assign
-            var stringBuilder = (StringBuilder)null;
+        // Assign
+        var stringBuilder = (StringBuilder)null;
 
-            // Act
-            Action action = () => stringBuilder.InlineClassMember(new ClassMember("member"));
+        // Act
+        Action action = () => stringBuilder.InlineClassMember(new ClassMember("member"));
 
-            // Assert
-            action.Should().Throw<ArgumentNullException>()
-                .And.ParamName.Should().Be("stringBuilder");
-        }
+        // Assert
+        action.Should().Throw<ArgumentNullException>()
+            .And.ParamName.Should().Be("stringBuilder");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_ClassMember_ClassMemberNull_Should_ThrowArgumentNullException()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_ClassMember_ClassMemberNull_Should_ThrowArgumentNullException()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            Action action = () => stringBuilder.InlineClassMember(null);
+        // Act
+        Action action = () => stringBuilder.InlineClassMember(null);
 
-            // Assert
-            action.Should().Throw<ArgumentNullException>()
-                .And.ParamName.Should().Be("classMember");
-        }
+        // Assert
+        action.Should().Throw<ArgumentNullException>()
+            .And.ParamName.Should().Be("classMember");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_ClassMember_Should_ContainClassMemberLine()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_ClassMember_Should_ContainClassMemberLine()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            stringBuilder.InlineClassMember(new ClassMember("member"));
+        // Act
+        stringBuilder.InlineClassMember(new ClassMember("member"));
 
-            // Assert
-            stringBuilder.ToString().Should().Be("member\n");
-        }
+        // Assert
+        stringBuilder.ToString().Should().Be("member\n");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_ClassMember_WithPublicVisibility_Should_ContainClassMemberLineWithPublicAnnotation()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_ClassMember_WithPublicVisibility_Should_ContainClassMemberLineWithPublicAnnotation()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            stringBuilder.InlineClassMember(new ClassMember("member", visibility: VisibilityModifier.Public));
+        // Act
+        stringBuilder.InlineClassMember(new ClassMember("member", visibility: VisibilityModifier.Public));
 
-            // Assert
-            stringBuilder.ToString().Should().Be("+member\n");
-        }
+        // Assert
+        stringBuilder.ToString().Should().Be("+member\n");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_ClassMember_WithPackagePrivateVisibility_Should_ContainClassMemberLineWithPackagePrivateAnnotation()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_ClassMember_WithPackagePrivateVisibility_Should_ContainClassMemberLineWithPackagePrivateAnnotation()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            stringBuilder.InlineClassMember(new ClassMember("member", visibility: VisibilityModifier.PackagePrivate));
+        // Act
+        stringBuilder.InlineClassMember(new ClassMember("member", visibility: VisibilityModifier.PackagePrivate));
 
-            // Assert
-            stringBuilder.ToString().Should().Be("~member\n");
-        }
+        // Assert
+        stringBuilder.ToString().Should().Be("~member\n");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_ClassMember_WithProtectedVisibility_Should_ContainClassMemberLineWithProtectedAnnotation()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_ClassMember_WithProtectedVisibility_Should_ContainClassMemberLineWithProtectedAnnotation()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            stringBuilder.InlineClassMember(new ClassMember("member", visibility: VisibilityModifier.Protected));
+        // Act
+        stringBuilder.InlineClassMember(new ClassMember("member", visibility: VisibilityModifier.Protected));
 
-            // Assert
-            stringBuilder.ToString().Should().Be("#member\n");
-        }
+        // Assert
+        stringBuilder.ToString().Should().Be("#member\n");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_ClassMember_WithPrivateVisibility_Should_ContainClassMemberLineWithPrivateAnnotation()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_ClassMember_WithPrivateVisibility_Should_ContainClassMemberLineWithPrivateAnnotation()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            stringBuilder.InlineClassMember(new ClassMember("member", visibility: VisibilityModifier.Private));
+        // Act
+        stringBuilder.InlineClassMember(new ClassMember("member", visibility: VisibilityModifier.Private));
 
-            // Assert
-            stringBuilder.ToString().Should().Be("-member\n");
-        }
+        // Assert
+        stringBuilder.ToString().Should().Be("-member\n");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_ClassMember_IsAbstract_Should_ContainClassMemberLineWithAbstractAnnotation()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_ClassMember_IsAbstract_Should_ContainClassMemberLineWithAbstractAnnotation()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            stringBuilder.InlineClassMember(new ClassMember("member", isAbstract: true));
+        // Act
+        stringBuilder.InlineClassMember(new ClassMember("member", isAbstract: true));
 
-            // Assert
-            stringBuilder.ToString().Should().Be("{abstract}member\n");
-        }
+        // Assert
+        stringBuilder.ToString().Should().Be("{abstract}member\n");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_ClassMember_IsStatic_Should_ContainClassMemberLineWithStaticAnnotation()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_ClassMember_IsStatic_Should_ContainClassMemberLineWithStaticAnnotation()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            stringBuilder.InlineClassMember(new ClassMember("member", isStatic: true));
+        // Act
+        stringBuilder.InlineClassMember(new ClassMember("member", isStatic: true));
 
-            // Assert
-            stringBuilder.ToString().Should().Be("{static}member\n");
-        }
+        // Assert
+        stringBuilder.ToString().Should().Be("{static}member\n");
     }
 }

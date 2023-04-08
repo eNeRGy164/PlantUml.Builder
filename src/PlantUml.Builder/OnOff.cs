@@ -1,11 +1,10 @@
 using System;
 
-namespace PlantUml.Builder
+namespace PlantUml.Builder;
+
+public enum OnOff
+    : byte
 {
-    public enum OnOff
-        : byte
-    {
-        On,
-        Off
-    }
+    On,
+    Off
 }

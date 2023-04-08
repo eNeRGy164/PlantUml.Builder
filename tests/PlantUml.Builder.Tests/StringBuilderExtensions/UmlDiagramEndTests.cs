@@ -3,36 +3,35 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Text;
 
-namespace PlantUml.Builder.Tests
+namespace PlantUml.Builder.Tests;
+
+[TestClass]
+public class UmlDiagramEndTests
 {
-    [TestClass]
-    public class UmlDiagramEndTests
+    [TestMethod]
+    public void StringBuilderExtensions_UmlDiagramEnd_Null_Should_ThrowArgumentNullException()
     {
-        [TestMethod]
-        public void StringBuilderExtensions_UmlDiagramEnd_Null_Should_ThrowArgumentNullException()
-        {
-            // Assign
-            var stringBuilder = (StringBuilder)null;
+        // Assign
+        var stringBuilder = (StringBuilder)null;
 
-            // Act
-            Action action = () => stringBuilder.UmlDiagramEnd();
+        // Act
+        Action action = () => stringBuilder.UmlDiagramEnd();
 
-            // Assert
-            action.Should().Throw<ArgumentNullException>()
-                .And.ParamName.Should().Be("stringBuilder");
-        }
+        // Assert
+        action.Should().Throw<ArgumentNullException>()
+            .And.ParamName.Should().Be("stringBuilder");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_UmlDiagramEnd_Should_ContainUmlDiagramEndLine()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_UmlDiagramEnd_Should_ContainUmlDiagramEndLine()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            stringBuilder.UmlDiagramEnd();
+        // Act
+        stringBuilder.UmlDiagramEnd();
 
-            // Assert
-            stringBuilder.ToString().Should().Be("@enduml\n");
-        }
+        // Assert
+        stringBuilder.ToString().Should().Be("@enduml\n");
     }
 }

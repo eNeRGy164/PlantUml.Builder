@@ -3,133 +3,132 @@ using System.Text;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace PlantUml.Builder.SequenceDiagrams.Tests
+namespace PlantUml.Builder.SequenceDiagrams.Tests;
+
+[TestClass]
+public class BoundaryTests
 {
-    [TestClass]
-    public class BoundaryTests
+    [TestMethod]
+    public void StringBuilderExtensions_Boundary_Null_Should_ThrowArgumentNullException()
     {
-        [TestMethod]
-        public void StringBuilderExtensions_Boundary_Null_Should_ThrowArgumentNullException()
-        {
-            // Assign
-            var stringBuilder = (StringBuilder)null;
+        // Assign
+        var stringBuilder = (StringBuilder)null;
 
-            // Act
-            Action action = () => stringBuilder.Boundary("boundaryA");
+        // Act
+        Action action = () => stringBuilder.Boundary("boundaryA");
 
-            // Assert
-            action.Should().Throw<ArgumentNullException>()
-                .And.ParamName.Should().Be("stringBuilder");
-        }
+        // Assert
+        action.Should().Throw<ArgumentNullException>()
+            .And.ParamName.Should().Be("stringBuilder");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_Boundary_NullName_Should_ThrowArgumentException()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_Boundary_NullName_Should_ThrowArgumentException()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            Action action = () => stringBuilder.Boundary(null);
+        // Act
+        Action action = () => stringBuilder.Boundary(null);
 
-            // Assert
-            action.Should().Throw<ArgumentException>()
-                .WithMessage("A non-empty value should be provided*")
-                .And.ParamName.Should().Be("name");
-        }
+        // Assert
+        action.Should().Throw<ArgumentException>()
+            .WithMessage("A non-empty value should be provided*")
+            .And.ParamName.Should().Be("name");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_Boundary_EmptyName_Should_ThrowArgumentException()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_Boundary_EmptyName_Should_ThrowArgumentException()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            Action action = () => stringBuilder.Boundary(string.Empty);
+        // Act
+        Action action = () => stringBuilder.Boundary(string.Empty);
 
-            // Assert
-            action.Should().Throw<ArgumentException>()
-                .WithMessage("A non-empty value should be provided*")
-                .And.ParamName.Should().Be("name");
-        }
+        // Assert
+        action.Should().Throw<ArgumentException>()
+            .WithMessage("A non-empty value should be provided*")
+            .And.ParamName.Should().Be("name");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_Boundary_WhitespaceName_Should_ThrowArgumentException()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_Boundary_WhitespaceName_Should_ThrowArgumentException()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            Action action = () => stringBuilder.Boundary(" ");
+        // Act
+        Action action = () => stringBuilder.Boundary(" ");
 
-            // Assert
-            action.Should().Throw<ArgumentException>()
-                .WithMessage("A non-empty value should be provided*")
-                .And.ParamName.Should().Be("name");
-        }
+        // Assert
+        action.Should().Throw<ArgumentException>()
+            .WithMessage("A non-empty value should be provided*")
+            .And.ParamName.Should().Be("name");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_Boundary_Should_ContainBoundaryLine()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_Boundary_Should_ContainBoundaryLine()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            stringBuilder.Boundary("boundaryA");
+        // Act
+        stringBuilder.Boundary("boundaryA");
 
-            // Assert
-            stringBuilder.ToString().Should().Be("boundary boundaryA\n");
-        }
+        // Assert
+        stringBuilder.ToString().Should().Be("boundary boundaryA\n");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_Boundary_WithDisplayName_Should_ContainBoundaryLineWithDisplayName()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_Boundary_WithDisplayName_Should_ContainBoundaryLineWithDisplayName()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            stringBuilder.Boundary("boundaryA", displayName: "Boundary A");
+        // Act
+        stringBuilder.Boundary("boundaryA", displayName: "Boundary A");
 
-            // Assert
-            stringBuilder.ToString().Should().Be("boundary \"Boundary A\" as boundaryA\n");
-        }
+        // Assert
+        stringBuilder.ToString().Should().Be("boundary \"Boundary A\" as boundaryA\n");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_Boundary_WithColor_Should_ContainBoundaryLineWithColor()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_Boundary_WithColor_Should_ContainBoundaryLineWithColor()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            stringBuilder.Boundary("boundaryA", color: "AliceBlue");
+        // Act
+        stringBuilder.Boundary("boundaryA", color: "AliceBlue");
 
-            // Assert
-            stringBuilder.ToString().Should().Be("boundary boundaryA #AliceBlue\n");
-        }
+        // Assert
+        stringBuilder.ToString().Should().Be("boundary boundaryA #AliceBlue\n");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_Boundary_WithColorWithHashtag_Should_ContainBoundaryLineWithColor()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_Boundary_WithColorWithHashtag_Should_ContainBoundaryLineWithColor()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            stringBuilder.Boundary("boundaryA", color: "#AliceBlue");
+        // Act
+        stringBuilder.Boundary("boundaryA", color: "#AliceBlue");
 
-            // Assert
-            stringBuilder.ToString().Should().Be("boundary boundaryA #AliceBlue\n");
-        }
+        // Assert
+        stringBuilder.ToString().Should().Be("boundary boundaryA #AliceBlue\n");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_Boundary_WithOrder_Should_ContainBoundaryLineWithOrder()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_Boundary_WithOrder_Should_ContainBoundaryLineWithOrder()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            stringBuilder.Boundary("boundaryA", order: 10);
+        // Act
+        stringBuilder.Boundary("boundaryA", order: 10);
 
-            // Assert
-            stringBuilder.ToString().Should().Be("boundary boundaryA order 10\n");
-        }
+        // Assert
+        stringBuilder.ToString().Should().Be("boundary boundaryA order 10\n");
     }
 }

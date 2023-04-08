@@ -1,14 +1,13 @@
-namespace PlantUml.Builder
-{
-    /// <seealso cref="https://github.com/plantuml/plantuml/blob/master/src/net/sourceforge/plantuml/skin/VisibilityModifier.java"/>
-    public enum VisibilityModifier
-        : byte
-    {
-        None = 0,
+namespace PlantUml.Builder;
 
-        Private,
-        Protected,
-        PackagePrivate,
-        Public
-    }
+/// <seealso cref="https://github.com/plantuml/plantuml/blob/master/src/net/sourceforge/plantuml/skin/VisibilityModifier.java"/>
+public enum VisibilityModifier
+    : byte
+{
+    None = 0,
+
+    Private,
+    Protected,
+    PackagePrivate,
+    Public
 }

@@ -3,49 +3,48 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Text;
 
-namespace PlantUml.Builder.Tests
+namespace PlantUml.Builder.Tests;
+
+[TestClass]
+public class UmlDiagramStartTests
 {
-    [TestClass]
-    public class UmlDiagramStartTests
+    [TestMethod]
+    public void StringBuilderExtensions_UmlDiagramStart_Null_Should_ThrowArgumentNullException()
     {
-        [TestMethod]
-        public void StringBuilderExtensions_UmlDiagramStart_Null_Should_ThrowArgumentNullException()
-        {
-            // Assign
-            var stringBuilder = (StringBuilder)null;
+        // Assign
+        var stringBuilder = (StringBuilder)null;
 
-            // Act
-            Action action = () => stringBuilder.UmlDiagramStart();
+        // Act
+        Action action = () => stringBuilder.UmlDiagramStart();
 
-            // Assert
-            action.Should().Throw<ArgumentNullException>()
-                .And.ParamName.Should().Be("stringBuilder");
-        }
+        // Assert
+        action.Should().Throw<ArgumentNullException>()
+            .And.ParamName.Should().Be("stringBuilder");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_UmlDiagramStart_Should_ContainStartLineWithoutFileName()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_UmlDiagramStart_Should_ContainStartLineWithoutFileName()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            stringBuilder.UmlDiagramStart();
+        // Act
+        stringBuilder.UmlDiagramStart();
 
-            // Assert
-            stringBuilder.ToString().Should().Be("@startuml\n");
-        }
+        // Assert
+        stringBuilder.ToString().Should().Be("@startuml\n");
+    }
 
-        [TestMethod]
-        public void StringBuilderExtensions_UmlDiagramStart_WithFileName_Should_ContainStartLineWithFileName()
-        {
-            // Assign
-            var stringBuilder = new StringBuilder();
+    [TestMethod]
+    public void StringBuilderExtensions_UmlDiagramStart_WithFileName_Should_ContainStartLineWithFileName()
+    {
+        // Assign
+        var stringBuilder = new StringBuilder();
 
-            // Act
-            stringBuilder.UmlDiagramStart("example.puml");
+        // Act
+        stringBuilder.UmlDiagramStart("example.puml");
 
-            // Assert
-            stringBuilder.ToString().Should().Be("@startuml example.puml\n");
-        }
+        // Assert
+        stringBuilder.ToString().Should().Be("@startuml example.puml\n");
     }
 }
