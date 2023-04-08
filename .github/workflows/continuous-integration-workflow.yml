@@ -13,23 +13,23 @@ jobs:
 
     steps:
     - name: Fetch all history for all tags and branches
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
 
     - name: Install GitVersion
-      uses: gittools/actions/gitversion/setup@v0.9.7
+      uses: gittools/actions/gitversion/setup@v0
       with:
           versionSpec: 5.x
 
     - name: Use GitVersion
       id: gitversion
-      uses: gittools/actions/gitversion/execute@v0.9.7
+      uses: gittools/actions/gitversion/execute@v0
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.x
+        dotnet-version: 6.x
 
     - name: Install dependencies
       run: dotnet restore
@@ -41,7 +41,7 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
 
     - name: coverlet
-      uses: b3b00/coverlet-action@1.1.1
+      uses: b3b00/coverlet-action@1.2.5
       with:
         testProject: tests/PlantUml.Builder.Tests/PlantUml.Builder.Tests.csproj
         output: lcov.info
@@ -49,16 +49,16 @@ jobs:
         excludes: '[PlantUml.Builder.Tests]*'
 
     - name: coveralls
-      uses: coverallsapp/github-action@v1.1.2
+      uses: coverallsapp/github-action@v2
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }} 
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         path-to-lcov: tests/PlantUml.Builder.Tests/lcov.info
 
     - name: Pack
       run: dotnet pack -v normal --configuration Release --no-restore --include-symbols --include-source -p:PackageVersion=${{ steps.gitversion.outputs.NuGetVersion }} src/PlantUml.Builder/PlantUml.Builder.csproj
 
     - name: Upload Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: nupkg
         path: ./src/PlantUml.Builder/bin/Release/*.nupkg
