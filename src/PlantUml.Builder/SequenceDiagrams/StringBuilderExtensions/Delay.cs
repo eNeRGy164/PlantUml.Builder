@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder.SequenceDiagrams;
 
 public static partial class StringBuilderExtensions
@@ -12,11 +9,11 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
     public static void Delay(this StringBuilder stringBuilder, string message = null)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
         stringBuilder.Append(Constant.Delay, 3);
 
-        if (!(message is null))
+        if (message is not null)
         {
             stringBuilder.Append(message);
             stringBuilder.Append(Constant.Delay, 3);

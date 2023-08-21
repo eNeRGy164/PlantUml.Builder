@@ -1,6 +1,4 @@
-using System;
 using System.Linq;
-using System.Text;
 
 namespace PlantUml.Builder;
 
@@ -16,7 +14,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <c>null</c>, empty, or only white space, or if <paramref name="portion"/> is not supplied.</exception>
     public static void HideEntityPortion(this StringBuilder stringBuilder, string name, EntityPortion portion, bool empty = false)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
         if (portion == 0) throw new ArgumentException("An entity portion should be supplied", nameof(portion));
@@ -45,7 +43,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentException">Thrown when <paramref name="portion"/> is not supplied.</exception>
     public static void HideEntityPortion(this StringBuilder stringBuilder, EntityPortion portion, params VisibilityModifier[] visibilities)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
         if (portion == 0) throw new ArgumentException("An entity portion should be supplied", nameof(portion));
 

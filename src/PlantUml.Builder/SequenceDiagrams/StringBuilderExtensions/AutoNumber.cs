@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder.SequenceDiagrams;
 
 public static partial class StringBuilderExtensions
@@ -18,7 +15,7 @@ public static partial class StringBuilderExtensions
     /// </remarks>
     public static void AutoNumber(this StringBuilder stringBuilder, string start, int? step = null, string format = null)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
         if (start is not null && string.IsNullOrWhiteSpace(start)) throw new ArgumentException("A non-empty value should be provided", nameof(start));
         if (format is not null && string.IsNullOrWhiteSpace(format)) throw new ArgumentException("A non-empty value should be provided", nameof(format));
@@ -67,7 +64,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
     public static void StopAutoNumber(this StringBuilder stringBuilder)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
         stringBuilder.Append(Constant.Auto);
         stringBuilder.Append(Constant.Number);
@@ -85,7 +82,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentException">Thrown when <paramref name="format"/> is empty of only white space.</exception>
     public static void ResumeAutoNumber(this StringBuilder stringBuilder, int? step = null, string format = null)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
         if (format is not null && string.IsNullOrWhiteSpace(format)) throw new ArgumentException("A non-empty value should be provided", nameof(format));
 
@@ -118,7 +115,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
     public static void IncreaseAutoNumber(this StringBuilder stringBuilder, char? position = default)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
         if (position.HasValue && (char.ToLower(position.Value) < 'a' || char.ToLower(position.Value) > 'z')) throw new ArgumentOutOfRangeException(nameof(position), "Only the characters A - Z are allowed");
 

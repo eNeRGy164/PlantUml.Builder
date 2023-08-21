@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder;
 
 public static partial class StringBuilderExtensions
@@ -14,7 +11,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentException"><paramref name="name"/> or <paramref name="value"/> is <c>null</c>, empty of only white space.</exception>
     public static void SkinParameter(this StringBuilder stringBuilder, string name, string value)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
         if (string.IsNullOrWhiteSpace(value)) throw new ArgumentException("A non-empty value should be provided", nameof(value));

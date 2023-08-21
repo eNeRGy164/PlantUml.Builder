@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder.ClassDiagrams;
 
 public static partial class StringBuilderExtensions
@@ -21,7 +18,7 @@ public static partial class StringBuilderExtensions
 
         stringBuilder.Append(Constant.Namespace);
 
-        if (!(displayName is null))
+        if (displayName is not null)
         {
             stringBuilder.Append(Constant.Space);
             stringBuilder.Append(Constant.Quote);
@@ -34,13 +31,13 @@ public static partial class StringBuilderExtensions
         stringBuilder.Append(Constant.Space);
         stringBuilder.Append(name);
 
-        if (!(stereotype is null))
+        if (stereotype is not null)
         {
             stringBuilder.Append(Constant.Space);
             stringBuilder.StereoType(stereotype);
         }
 
-        if (!(backgroundColor is null))
+        if (backgroundColor is not null)
         {
             stringBuilder.Append(Constant.Space);
             stringBuilder.Append(backgroundColor);

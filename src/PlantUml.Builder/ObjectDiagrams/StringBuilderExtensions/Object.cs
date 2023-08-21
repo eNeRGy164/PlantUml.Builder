@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder.ObjectDiagrams;
 
 public static partial class StringBuilderExtensions
@@ -15,7 +12,7 @@ public static partial class StringBuilderExtensions
     /// <param name="backgroundColor">Optional background color.</param>
     public static void Object(this StringBuilder stringBuilder, string name, string displayName = default, string stereotype = default, Uri url = default, Color backgroundColor = default)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
 
@@ -69,7 +66,7 @@ public static partial class StringBuilderExtensions
     {
         stringBuilder.Object(name, displayName, stereotype, url, backgroundColor);
 
-        if (char.IsWhiteSpace(stringBuilder[stringBuilder.Length - 1]))
+        if (char.IsWhiteSpace(stringBuilder[^1]))
         {
             stringBuilder.Length--;
         }
@@ -85,7 +82,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
     public static void ObjectEnd(this StringBuilder stringBuilder)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
         stringBuilder.Append(Constant.ObjectEnd);
         stringBuilder.AppendNewLine();

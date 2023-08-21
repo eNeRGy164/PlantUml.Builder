@@ -1,5 +1,3 @@
-using System;
-
 namespace PlantUml.Builder;
 
 public class Color : IFormattable

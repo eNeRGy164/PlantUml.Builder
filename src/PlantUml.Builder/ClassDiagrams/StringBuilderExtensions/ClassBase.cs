@@ -1,5 +1,4 @@
-using System;
-using System.Text;
+using static PlantUml.Builder.Constant;
 
 namespace PlantUml.Builder.ClassDiagrams;
 
@@ -27,97 +26,96 @@ public static partial class StringBuilderExtensions
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
 
         stringBuilder.Append(type.ToString().ToLowerInvariant());
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Space);
 
-        if (!(displayName is null))
+        if (displayName is not null)
         {
-            stringBuilder.Append(Constant.Quote);
+            stringBuilder.Append(Quote);
             stringBuilder.Append(displayName);
-            stringBuilder.Append(Constant.Quote);
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.As);
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Quote);
+            stringBuilder.Append(Space);
+            stringBuilder.Append(As);
+            stringBuilder.Append(Space);
         }
 
         stringBuilder.Append(name);
 
-        if (!(generics is null))
+        if (generics is not null)
         {
-            stringBuilder.Append(Constant.GenericsStart);
+            stringBuilder.Append(GenericsStart);
             stringBuilder.Append(generics);
-            stringBuilder.Append(Constant.GenericsEnd);
+            stringBuilder.Append(GenericsEnd);
         }
 
-        if (!(stereotype is null))
+        if (stereotype is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Space);
             stringBuilder.StereoType(stereotype, customSpot);
         }
 
-        if (!(tag is null))
+        if (tag is not null)
         {
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.TagPrefix);
+            stringBuilder.Append(Space);
+            stringBuilder.Append(TagPrefix);
             stringBuilder.Append(tag);
         }
 
-        if (!(url is null))
+        if (url is not null)
         {
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.UrlStart);
+            stringBuilder.Append(Space);
+            stringBuilder.Append(UrlStart);
             stringBuilder.Append(url);
-            stringBuilder.Append(Constant.UrlEnd);
+            stringBuilder.Append(UrlEnd);
         }
 
-        if (!(backgroundColor is null))
+        if (backgroundColor is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Space);
             stringBuilder.Append(backgroundColor);
         }
 
-        if (!(lineColor is null) || lineStyle != LineStyle.None)
+        if (lineColor is not null || lineStyle != LineStyle.None)
         {
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.ColorPrefix);
-            stringBuilder.Append(Constant.ColorPrefix);
+            stringBuilder.Append(Space);
+            stringBuilder.Append(ColorPrefix);
+            stringBuilder.Append(ColorPrefix);
 
             if (lineStyle > LineStyle.None)
             {
-                stringBuilder.Append(Constant.BorderStyleStart);
+                stringBuilder.Append(BorderStyleStart);
                 stringBuilder.Append(lineStyle.ToString().ToLowerInvariant());
-                stringBuilder.Append(Constant.BorderStyleEnd);
+                stringBuilder.Append(BorderStyleEnd);
             }
 
-            if (!(lineColor is null))
+            if (lineColor is not null)
             {
-                stringBuilder.Append(lineColor.ToString().TrimStart(Constant.ColorPrefix));
+                stringBuilder.Append(lineColor.ToString().TrimStart(ColorPrefix));
             }
         }
 
-        if (!(extends is null) && extends.Length > 0)
+        if (extends is not null && extends.Length > 0)
         {
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.Extends);
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Space);
+            stringBuilder.Append(Extends);
+            stringBuilder.Append(Space);
             stringBuilder.AppendJoin(',', extends);
         }
 
-        if (!(implements is null) && implements.Length > 0)
+        if (implements is not null && implements.Length > 0)
         {
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.Implements);
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Space);
+            stringBuilder.Append(Implements);
+            stringBuilder.Append(Space);
             stringBuilder.AppendJoin(',', implements);
         }
     }
-
 
     /// <summary>
     /// Base for rendering the end of a class.
     /// </summary>
     internal static void ClassBaseStart(this StringBuilder stringBuilder)
     {
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Space);
         stringBuilder.Append(Constant.ClassStart);
         stringBuilder.AppendNewLine();
     }

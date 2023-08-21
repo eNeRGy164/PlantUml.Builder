@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder.SequenceDiagrams;
 
 public static partial class StringBuilderExtensions
@@ -13,7 +10,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
     public static void BoxStart(this StringBuilder stringBuilder, string title = null, Color color = null)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
         stringBuilder.Append(Constant.Box);
 
@@ -25,7 +22,7 @@ public static partial class StringBuilderExtensions
             stringBuilder.Append(Constant.Quote);
         }
 
-        if (!(color is null))
+        if (color is not null)
         {
             stringBuilder.Append(Constant.Space);
             stringBuilder.Append(color);

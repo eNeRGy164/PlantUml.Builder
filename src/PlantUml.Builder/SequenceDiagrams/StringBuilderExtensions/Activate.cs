@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder.SequenceDiagrams;
 
 public static partial class StringBuilderExtensions
@@ -15,7 +12,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <c>null</c>, empty of only white space.</exception>
     public static void Activate(this StringBuilder stringBuilder, string name, Color color = null, Color borderColor = null)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
 
@@ -23,12 +20,12 @@ public static partial class StringBuilderExtensions
         stringBuilder.Append(Constant.Space);
         stringBuilder.Append(name);
 
-        if (!(color is null))
+        if (color is not null)
         {
             stringBuilder.Append(Constant.Space);
             stringBuilder.Append(color);
 
-            if (!(borderColor is null))
+            if (borderColor is not null)
             {
                 stringBuilder.Append(Constant.Space);
                 stringBuilder.Append(borderColor);

@@ -1,6 +1,3 @@
-﻿using System;
-using System.Text;
-
 namespace PlantUml.Builder;
 
 public static partial class StringBuilderExtensions
@@ -13,7 +10,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentException">Thrown when <paramref name="header"/> is <c>null</c>, empty of only white space.</exception>
     public static void Header(this StringBuilder stringBuilder, string header)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
         if (string.IsNullOrWhiteSpace(header)) throw new ArgumentException("A non-empty value should be provided", nameof(header));
 

@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder;
 
 public static partial class StringBuilderExtensions
@@ -13,11 +10,11 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
     public static void StereoType(this StringBuilder stringBuilder, string stereotype = default, CustomSpot customSpot = default)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
         stringBuilder.Append(Constant.SterotypeStart);
 
-        if (!(customSpot is null))
+        if (customSpot is not null)
         {
             stringBuilder.Append(Constant.CustomSpotStart);
             stringBuilder.Append(customSpot.Character);

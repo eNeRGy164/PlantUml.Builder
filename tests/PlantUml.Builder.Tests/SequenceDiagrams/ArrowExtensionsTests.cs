@@ -19,7 +19,7 @@ public class ArrowExtensionsTests
 
         var method = typeof(ArrowExtensions).GetMethod(methodName);
         var parameters = new List<object> { arrow };
-        parameters.AddRange(methodParameters ?? new object[0]);
+        parameters.AddRange(methodParameters ?? Array.Empty<object>());
 
         // Act
         Action action = () => method.Invoke(null, parameters.ToArray());

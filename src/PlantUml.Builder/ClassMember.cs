@@ -1,12 +1,12 @@
-using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using static System.Text.RegularExpressions.RegexOptions;
 
 namespace PlantUml.Builder;
 
 public class ClassMember
 {
-    private static readonly Regex modifiers = new("{(?<modifier>abstract|static)}", RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
+    private static readonly Regex modifiers = new("{(?<modifier>abstract|static)}", Singleline | Compiled | IgnoreCase);
 
     public string Name { get; }
 
@@ -36,6 +36,8 @@ public class ClassMember
 
     public static implicit operator ClassMember(string member)
     {
+        ArgumentNullException.ThrowIfNull(member);
+
         var isAbstract = false;
         var isStatic = false;
         var visibilityModifier = VisibilityModifier.None;
@@ -71,7 +73,7 @@ public class ClassMember
 
                 if (visibilityModifier != VisibilityModifier.None)
                 {
-                    value = value.Substring(1).TrimStart();
+                    value = value[1..].TrimStart();
                 }
             }
         }

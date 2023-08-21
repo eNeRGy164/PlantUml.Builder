@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder.SequenceDiagrams;
 
 public static partial class StringBuilderExtensions
@@ -21,9 +18,9 @@ public static partial class StringBuilderExtensions
     /// <exception cref="NotSupportedException"><paramref name="left"/> and <paramref name="right"/> are both <c>null</c>, or the arrow has an external symbol on the other side of the undefined participant.</exception>
     public static void Arrow(this StringBuilder stringBuilder, ParticipantName left, Arrow arrow, ParticipantName right, string message = default, LifeLineEvents lifeEvents = default, Color activationColor = default)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
+        ArgumentNullException.ThrowIfNull(arrow);
 
-        if (arrow is null) throw new ArgumentException("A non-empty value should be provided", nameof(arrow));
         if (left is null && right is null) throw new NotSupportedException("It is not possible for both partipants to be outside the diagram.");
         if (left is null && arrow.IsExternalRight()) throw new NotSupportedException("It is not possible for both partipants to be outside the diagram.");
         if (right is null && arrow.IsExternalLeft()) throw new NotSupportedException("It is not possible for both partipants to be outside the diagram.");

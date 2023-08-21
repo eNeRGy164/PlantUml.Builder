@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-
 namespace PlantUml.Builder.SequenceDiagrams;
 
 public static class ArrowExtensions
@@ -11,7 +8,7 @@ public static class ArrowExtensions
     /// <returns>The arrow with the new color applied.</returns>
     public static Arrow Color(this Arrow arrow, Color color)
     {
-        if (arrow is null) throw new ArgumentNullException(nameof(arrow));
+        ArgumentNullException.ThrowIfNull(arrow, nameof(arrow));
 
         return new Arrow(arrow, color);
     }
@@ -22,7 +19,7 @@ public static class ArrowExtensions
     /// <returns>The arrow with a solid line.</returns>
     public static Arrow Solid(this Arrow arrow)
     {
-        if (arrow is null) throw new ArgumentNullException(nameof(arrow));
+        ArgumentNullException.ThrowIfNull(arrow, nameof(arrow));
 
         return new Arrow(arrow, dottedLine: false);
     }
@@ -33,14 +30,14 @@ public static class ArrowExtensions
     /// <returns>The arrow with a dotted line.</returns>
     public static Arrow Dotted(this Arrow arrow)
     {
-        if (arrow is null) throw new ArgumentNullException(nameof(arrow));
+        ArgumentNullException.ThrowIfNull(arrow, nameof(arrow));
 
         return new Arrow(arrow, dottedLine: true);
     }
 
     public static Arrow Destroy(this Arrow arrow)
     {
-        if (arrow is null) throw new ArgumentNullException(nameof(arrow));
+        ArgumentNullException.ThrowIfNull(arrow, nameof(arrow));
 
         if (arrow.Direction == ArrowDirection.Left)
         {
@@ -67,7 +64,7 @@ public static class ArrowExtensions
 
     public static Arrow Lost(this Arrow arrow)
     {
-        if (arrow is null) throw new ArgumentNullException(nameof(arrow));
+        ArgumentNullException.ThrowIfNull(arrow, nameof(arrow));
 
         if (arrow.Direction == ArrowDirection.Left)
         {
@@ -89,7 +86,7 @@ public static class ArrowExtensions
     /// <exception cref="NotSupportedException">The right side is already destroyed.</exception>
     public static Arrow LostRight(this Arrow arrow)
     {
-        if (arrow is null) throw new ArgumentNullException(nameof(arrow));
+        ArgumentNullException.ThrowIfNull(arrow, nameof(arrow));
 
         string newRightHead;
 
@@ -126,7 +123,7 @@ public static class ArrowExtensions
     /// <exception cref="NotSupportedException">The left side is already destroyed.</exception>
     public static Arrow LostLeft(this Arrow arrow)
     {
-        if (arrow is null) throw new ArgumentNullException(nameof(arrow));
+        ArgumentNullException.ThrowIfNull(arrow, nameof(arrow));
 
         string newLeftHead;
 
@@ -189,7 +186,7 @@ public static class ArrowExtensions
     /// <exception cref="ArgumentNullException"><paramref name="arrow"/> is <c>null</c>.</exception>
     public static bool IsExternalLeft(this Arrow arrow)
     {
-        if (arrow is null) throw new ArgumentNullException(nameof(arrow));
+        ArgumentNullException.ThrowIfNull(arrow, nameof(arrow));
 
         if (arrow.LeftHead.Length > 0)
         {
@@ -207,11 +204,12 @@ public static class ArrowExtensions
     /// <exception cref="ArgumentNullException"><paramref name="arrow"/> is <c>null</c>.</exception>
     public static bool IsExternalRight(this Arrow arrow)
     {
-        if (arrow is null) throw new ArgumentNullException(nameof(arrow));
+        ArgumentNullException.ThrowIfNull(arrow, nameof(arrow));
 
         if (arrow.RightHead.Length > 0)
         {
-            var rightChar = arrow.RightHead[arrow.RightHead.Length - 1];
+            var rightChar = arrow.RightHead[^1];
+
             return rightChar == ArrowParts.RightExternal || rightChar == ArrowParts.ShortExternal;
         }
 

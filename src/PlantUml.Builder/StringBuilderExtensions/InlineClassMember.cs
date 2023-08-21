@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder;
 
 public static partial class StringBuilderExtensions
@@ -13,8 +10,8 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <c>null</c>, empty of only white space.</exception>
     public static void InlineClassMember(this StringBuilder stringBuilder, ClassMember classMember)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
-        if (classMember is null) throw new ArgumentNullException(nameof(classMember));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
+        ArgumentNullException.ThrowIfNull(classMember);
 
         if (classMember.IsAbstract)
         {

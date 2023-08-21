@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder.SequenceDiagrams;
 
 public static partial class StringBuilderExtensions
@@ -15,7 +12,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentException">Thrown when <paramref name="note"/> is <c>null</c>, empty of only white space.</exception>
     public static void Ref(this StringBuilder stringBuilder, string participant, string note)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
         if (string.IsNullOrWhiteSpace(participant)) throw new ArgumentException("A non-empty value should be provided", nameof(participant));
         if (string.IsNullOrWhiteSpace(note)) throw new ArgumentException("A non-empty value should be provided", nameof(note));
@@ -57,7 +54,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentException">Thrown when <paramref name="participant"/> is <c>null</c>, empty of only white space.</exception>
     public static void StartRef(this StringBuilder stringBuilder, string participant)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
         if (string.IsNullOrWhiteSpace(participant)) throw new ArgumentException("A non-empty value should be provided", nameof(participant));
 
@@ -91,7 +88,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
     public static void EndRef(this StringBuilder stringBuilder)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
         stringBuilder.Append(Constant.End);
         stringBuilder.Append(Constant.Space);
