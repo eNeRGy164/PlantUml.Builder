@@ -8,7 +8,7 @@ public static partial class StringBuilderExtensions
     /// <param name="type">The type of group.</param>
     /// <param name="text">Optional text.</param>
     /// <param name="label">Optional label.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void GroupStart(this StringBuilder stringBuilder, string type = Constant.Group, string text = null, string label = null)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);

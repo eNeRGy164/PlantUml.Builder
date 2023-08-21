@@ -7,8 +7,8 @@ public static partial class StringBuilderExtensions
     /// </summary>
     /// <param name="name">The name of the skin parameter.</param>
     /// <param name="value">The value of the skin parameter.</param>
-    /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException"><paramref name="name"/> or <paramref name="value"/> is <c>null</c>, empty of only white space.</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException"><paramref name="name"/> or <paramref name="value"/> is <see langword="null"/>, empty of only white space.</exception>
     public static void SkinParameter(this StringBuilder stringBuilder, string name, string value)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
@@ -30,7 +30,7 @@ public static partial class StringBuilderExtensions
     /// </summary>
     /// <param name="skinParameter">The skin parameter.</param>
     /// <param name="value">The value of the skin parameter.</param>
-    /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="skinParameter"/> is not a <see cref="SkinParameter"/> value.</exception>
     public static void SkinParameter(this StringBuilder stringBuilder, SkinParameter skinParameter, string value)
     {
@@ -44,8 +44,8 @@ public static partial class StringBuilderExtensions
     /// </summary>
     /// <param name="name">The skin parameter.</param>
     /// <param name="value">The value of the skin parameter.</param>
-    /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException"><paramref name="name"/> is <c>null</c>, empty of only white space.</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException"><paramref name="name"/> is <see langword="null"/>, empty of only white space.</exception>
     public static void SkinParameter(this StringBuilder stringBuilder, string name, int value)
     {
         stringBuilder.SkinParameter(name, value.ToString());
@@ -56,7 +56,7 @@ public static partial class StringBuilderExtensions
     /// </summary>
     /// <param name="skinParameter">The skin parameter.</param>
     /// <param name="value">The value of the skin parameter.</param>
-    /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="skinParameter"/> is not a <see cref="SkinParameter"/> value.</exception>
     public static void SkinParameter(this StringBuilder stringBuilder, SkinParameter skinParameter, int value)
     {
@@ -68,8 +68,8 @@ public static partial class StringBuilderExtensions
     /// </summary>
     /// <param name="name">The skin parameter.</param>
     /// <param name="value">The value of the skin parameter.</param>
-    /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException"><paramref name="name"/> is <c>null</c>, empty of only white space.</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException"><paramref name="name"/> is <see langword="null"/>, empty of only white space.</exception>
     public static void SkinParameter(this StringBuilder stringBuilder, string name, bool value)
     {
         stringBuilder.SkinParameter(name, value.ToString().ToLowerInvariant());
@@ -80,7 +80,7 @@ public static partial class StringBuilderExtensions
     /// </summary>
     /// <param name="skinParameter">The skin parameter.</param>
     /// <param name="value">The value of the skin parameter.</param>
-    /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="skinParameter"/> is not a <see cref="SkinParameter"/> value.</exception>
     public static void SkinParameter(this StringBuilder stringBuilder, SkinParameter skinParameter, bool value)
     {

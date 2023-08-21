@@ -6,7 +6,7 @@ public static partial class StringBuilderExtensions
     /// Renders a delay.
     /// </summary>
     /// <param name="message">Optional message for the delay.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void Delay(this StringBuilder stringBuilder, string message = null)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);

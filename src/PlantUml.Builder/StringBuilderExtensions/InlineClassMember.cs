@@ -6,8 +6,8 @@ public static partial class StringBuilderExtensions
     /// Renders a class member.
     /// </summary>
     /// <param name="classMember">The class member.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> or <paramref name="classMember"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <c>null</c>, empty of only white space.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> or <paramref name="classMember"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <see langword="null"/>, empty of only white space.</exception>
     public static void InlineClassMember(this StringBuilder stringBuilder, ClassMember classMember)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);

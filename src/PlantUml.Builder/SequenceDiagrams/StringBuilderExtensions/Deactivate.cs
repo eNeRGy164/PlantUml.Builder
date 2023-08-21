@@ -6,8 +6,8 @@ public static partial class StringBuilderExtensions
     /// Deactivates the life line for an actor.
     /// </summary>
     /// <param name="name">The name of the life line to deactivate.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <c>null</c>, empty of only white space.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <see langword="null"/>, empty of only white space.</exception>
     public static void Deactivate(this StringBuilder stringBuilder, string name)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
@@ -21,9 +21,9 @@ public static partial class StringBuilderExtensions
     }
 
     /// <summary>
-    /// Deactivates a life line.
+    /// Deactivates the last active lifeline.
     /// </summary>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void Deactivate(this StringBuilder stringBuilder)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);

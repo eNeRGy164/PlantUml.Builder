@@ -10,7 +10,7 @@ public static partial class StringBuilderExtensions
     /// <param name="stereotype">Optional stereo type.</param>
     /// <param name="url">Optional url.</param>
     /// <param name="backgroundColor">Optional background color.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void MapStart(this StringBuilder stringBuilder, string name, string displayName = default, string stereotype = default, Uri url = default, Color backgroundColor = default)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
@@ -60,7 +60,7 @@ public static partial class StringBuilderExtensions
     /// <summary>
     /// Renders the end of a map or associative array.
     /// </summary>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void MapEnd(this StringBuilder stringBuilder)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);

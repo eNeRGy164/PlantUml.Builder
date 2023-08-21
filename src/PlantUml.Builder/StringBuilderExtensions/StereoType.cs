@@ -7,7 +7,7 @@ public static partial class StringBuilderExtensions
     /// </summary>
     /// <param name="stereotype">Optional sterotype name.</param>
     /// <param name="customSpot">Optional custom spot.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void StereoType(this StringBuilder stringBuilder, string stereotype = default, CustomSpot customSpot = default)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);

@@ -7,10 +7,10 @@ public static partial class StringBuilderExtensions
     /// </summary>
     /// <param name="participantType">The type of participant.</param>
     /// <param name="name">The name of the participant.</param>
-    /// <param name="color">Optional color of the participant.</param>
+    /// <param name="color">Optional color for the participant.</param>
     /// <param name="order">Optional order of the participant.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <c>null</c>, empty of only white space.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <see langword="null"/>, empty of only white space.</exception>
     internal static void ParticipantBase(this StringBuilder stringBuilder, ParticipantType participantType, ParticipantName name, Color color, int? order)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
@@ -45,9 +45,10 @@ public static partial class StringBuilderExtensions
     /// </summary>
     /// <param name="name">The name of the participant.</param>
     /// <param name="participantType">The type of participant.</param>
-    /// <param name="color">Optional color of the participant.</param>/// <param name="order">Optional order of the participant.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <c>null</c>, empty of only white space.</exception>
+    /// <param name="color">Optional color for the participant.</param>
+    /// <param name="order">Optional order of the participant.</param>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <see langword="null"/>, empty of only white space.</exception>
     internal static void CreateParticipantBase(this StringBuilder stringBuilder, ParticipantName name, ParticipantType participantType = ParticipantType.None, Color color = null, int? order = null)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);

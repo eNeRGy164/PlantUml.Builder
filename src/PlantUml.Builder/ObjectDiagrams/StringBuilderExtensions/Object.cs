@@ -61,7 +61,7 @@ public static partial class StringBuilderExtensions
     /// <param name="displayName">Optional display name. The display name can contain spaces.</param>
     /// <param name="stereotype">Optional stereo type.</param>
     /// <param name="backgroundColor">Optional background color.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void ObjectStart(this StringBuilder stringBuilder, string name, string displayName = default, string stereotype = default, Uri url = default, Color backgroundColor = default)
     {
         stringBuilder.Object(name, displayName, stereotype, url, backgroundColor);
@@ -79,7 +79,7 @@ public static partial class StringBuilderExtensions
     /// <summary>
     /// Renders the end of an object.
     /// </summary>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void ObjectEnd(this StringBuilder stringBuilder)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);

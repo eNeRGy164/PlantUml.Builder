@@ -7,7 +7,7 @@ public static partial class StringBuilderExtensions
     /// </summary>
     /// <param name="title">Optional title of the box.</param>
     /// <param name="color">Optional background color of the box.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void BoxStart(this StringBuilder stringBuilder, string title = null, Color color = null)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);

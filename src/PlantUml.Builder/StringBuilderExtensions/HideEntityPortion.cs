@@ -10,8 +10,8 @@ public static partial class StringBuilderExtensions
     /// <param name="name">The name to scope the members to hide.</param>
     /// <param name="portion">The portion to hide.</param>
     /// <param name="empty">Only hide the portions if there are no members present.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <c>null</c>, empty, or only white space, or if <paramref name="portion"/> is not supplied.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <see langword="null"/>, empty, or only white space, or if <paramref name="portion"/> is not supplied.</exception>
     public static void HideEntityPortion(this StringBuilder stringBuilder, string name, EntityPortion portion, bool empty = false)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
@@ -39,7 +39,7 @@ public static partial class StringBuilderExtensions
     /// </summary>
     /// <param name="portion">The portion to hide.</param>
     /// <param name="visibilities">One or more visibilities to hide.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">Thrown when <paramref name="portion"/> is not supplied.</exception>
     public static void HideEntityPortion(this StringBuilder stringBuilder, EntityPortion portion, params VisibilityModifier[] visibilities)
     {

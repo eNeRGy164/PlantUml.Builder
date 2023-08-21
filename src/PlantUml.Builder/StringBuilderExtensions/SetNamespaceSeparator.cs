@@ -5,7 +5,7 @@ public static partial class StringBuilderExtensions
     /// <summary>
     /// Define another namespace separator.
     /// </summary>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void SetNamespaceSeparator(this StringBuilder stringBuilder, string separator = default)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);

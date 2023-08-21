@@ -16,10 +16,10 @@ public static partial class StringBuilderExtensions
     /// <param name="url">Optional URL.</param>
     /// <param name="backgroundColor">Optional background color.</param>
     /// <param name="lineColor">Optional line color.</param>
-    /// <param name="lineStyle">Optional line style.</param>
+    /// <param name="lineStyle">Optional line style. See <see cref="LineStyle"/> for possible values.</param>
     /// <param name="extends">Optional extends.</param>
     /// <param name="implements">Optional implementations.</param>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <c>null</c>, empty of only white space.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <see langword="null"/>, empty of only white space.</exception>
     internal static void ClassBase(this StringBuilder stringBuilder, ClassType type, string name, string displayName, string generics, string stereotype, CustomSpot customSpot, string tag, Uri url, Color backgroundColor, Color lineColor, LineStyle lineStyle, string[] extends, string[] implements)
     {
 
@@ -111,7 +111,7 @@ public static partial class StringBuilderExtensions
     }
 
     /// <summary>
-    /// Base for rendering the end of a class.
+    /// Base for rendering the start of a class.
     /// </summary>
     internal static void ClassBaseStart(this StringBuilder stringBuilder)
     {

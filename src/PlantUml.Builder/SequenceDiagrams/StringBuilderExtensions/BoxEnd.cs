@@ -5,7 +5,7 @@ public static partial class StringBuilderExtensions
     /// <summary>
     /// Renders the end of a box.
     /// </summary>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void BoxEnd(this StringBuilder stringBuilder)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);

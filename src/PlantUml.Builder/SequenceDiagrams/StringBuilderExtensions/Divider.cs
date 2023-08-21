@@ -6,7 +6,7 @@ public static partial class StringBuilderExtensions
     /// Renders a divider.
     /// </summary>
     /// <param name="message">Optional title for the divider.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void Divider(this StringBuilder stringBuilder, string title = null)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);

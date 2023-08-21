@@ -11,8 +11,8 @@ public static partial class StringBuilderExtensions
     /// <param name="label">Optional label for the relationship.</param>
     /// <param name="leftCardinality">Optional cardinality on the left side of the relationship.</param>
     /// <param name="rightCardinality">Optional cardinality on the right side of the relationship.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="left"/>, <paramref name="type"/> or <paramref name="right"/> is <c>null</c>, empty of only white space.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="left"/>, <paramref name="type"/> or <paramref name="right"/> is <see langword="null"/>, empty of only white space.</exception>
     public static void Relationship(this StringBuilder stringBuilder, string left, string type, string right, string label = default, string leftCardinality = default, string rightCardinality = default)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);

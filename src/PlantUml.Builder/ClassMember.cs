@@ -20,8 +20,8 @@ public class ClassMember
     /// 
     /// </summary>
     /// <param name="name">The name of the class member.</param>
-    /// <param name="isStatic">Whether the member is public; default <c>false</c>.</param>
-    /// <param name="isAbstract">Whether the member is abstract; default <c>false</c>.</param>
+    /// <param name="isStatic">Whether the member is public; default <see langword="false"/>.</param>
+    /// <param name="isAbstract">Whether the member is abstract; default <see langword="false"/>.</param>
     /// <param name="visibility">Whether the members has a specific visibility; default <c>None</c>.</param>
     public ClassMember(string name, bool isStatic = false, bool isAbstract = false, VisibilityModifier visibility = VisibilityModifier.None)
     {

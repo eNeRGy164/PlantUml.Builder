@@ -1,4 +1,4 @@
-namespace PlantUml.Builder;
+﻿namespace PlantUml.Builder;
 
 public static partial class StringBuilderExtensions
 {
@@ -6,8 +6,8 @@ public static partial class StringBuilderExtensions
     /// Renders a page footer.
     /// </summary>
     /// <param name="footer">The footer text.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="footer"/> is <c>null</c>, empty of only white space.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="footer"/> is <see langword="null"/>, empty of only white space.</exception>
     public static void Footer(this StringBuilder stringBuilder, string footer)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);

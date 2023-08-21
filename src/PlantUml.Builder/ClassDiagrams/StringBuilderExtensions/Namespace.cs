@@ -9,7 +9,7 @@ public static partial class StringBuilderExtensions
     /// <param name="displayName">Optional display name. The display name can contain spaces.</param>
     /// <param name="stereotype">Optional stereo type.</param>
     /// <param name="backgroundColor">Optional background color.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void NamespaceStart(this StringBuilder stringBuilder, string name, string displayName = null, string stereotype = null, Color backgroundColor = null)
     {
         if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
@@ -51,7 +51,7 @@ public static partial class StringBuilderExtensions
     /// <summary>
     /// Renders the end of a namespace.
     /// </summary>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void NamespaceEnd(this StringBuilder stringBuilder)
     {
         if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));

@@ -6,8 +6,8 @@ public static partial class StringBuilderExtensions
     /// Destroys the life line for a participant.
     /// </summary>
     /// <param name="name">The name of the life line to deactivate.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <c>null</c>, empty of only white space.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <see langword="null"/>, empty of only white space.</exception>
     public static void Destroy(this StringBuilder stringBuilder, string name)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);

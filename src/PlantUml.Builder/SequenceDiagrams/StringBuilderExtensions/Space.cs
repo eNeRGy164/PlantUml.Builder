@@ -6,7 +6,7 @@ public static partial class StringBuilderExtensions
     /// Renders some spacing.
     /// </summary>
     /// <param name="size">Optional size of the spacing.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void Space(this StringBuilder stringBuilder, int? size = null)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);

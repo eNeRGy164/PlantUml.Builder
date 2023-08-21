@@ -6,7 +6,7 @@ public static partial class StringBuilderExtensions
     /// Return to the previous participant.
     /// </summary>
     /// <param name="message">Optional message.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void Return(this StringBuilder stringBuilder)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
@@ -19,8 +19,8 @@ public static partial class StringBuilderExtensions
     /// Return to the previous participant.
     /// </summary>
     /// <param name="message">The return message.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="message"/> is <c>null</c>, empty of only white space.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="message"/> is <see langword="null"/>, empty of only white space.</exception>
     public static void Return(this StringBuilder stringBuilder, string message)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);

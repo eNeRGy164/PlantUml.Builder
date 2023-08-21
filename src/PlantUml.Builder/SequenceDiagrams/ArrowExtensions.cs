@@ -119,7 +119,7 @@ public static class ArrowExtensions
     /// <summary>
     /// Adds the <em>lost</em> indication to the left side of the <paramref name="arrow"/>.
     /// </summary>
-    /// <returns>The arrow with the lost indication on the left side.</returns>
+    /// <returns>The arrow with the <em>lost</em> indication on the left side.</returns>
     /// <exception cref="NotSupportedException">The left side is already destroyed.</exception>
     public static Arrow LostLeft(this Arrow arrow)
     {
@@ -182,8 +182,8 @@ public static class ArrowExtensions
     /// <summary>
     /// Determines if the left side is outside the diagram.
     /// </summary>
-    /// <returns><c>true</c> if the left side is outside the diagram.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="arrow"/> is <c>null</c>.</exception>
+    /// <returns><see langword="true"/> if the left side is outside the diagram.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="arrow"/> is <see langword="null"/>.</exception>
     public static bool IsExternalLeft(this Arrow arrow)
     {
         ArgumentNullException.ThrowIfNull(arrow, nameof(arrow));
@@ -200,8 +200,8 @@ public static class ArrowExtensions
     /// <summary>
     /// Determines if the right side is outside the diagram.
     /// </summary>
-    /// <returns><c>true</c> if the right side is outside the diagram.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="arrow"/> is <c>null</c>.</exception>
+    /// <returns><see langword="true"/> if the right side is outside the diagram.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="arrow"/> is <see langword="null"/>.</exception>
     public static bool IsExternalRight(this Arrow arrow)
     {
         ArgumentNullException.ThrowIfNull(arrow, nameof(arrow));

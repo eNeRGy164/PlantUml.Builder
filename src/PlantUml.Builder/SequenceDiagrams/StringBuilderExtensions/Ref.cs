@@ -7,9 +7,9 @@ public static partial class StringBuilderExtensions
     /// </summary>
     /// <param name="participant">Optional participant. The position is relative to this participant.</param>
     /// <param name="note">The text of the note.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="participant"/> is <c>null</c>, empty of only white space.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="note"/> is <c>null</c>, empty of only white space.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="participant"/> is <see langword="null"/>, empty of only white space.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="note"/> is <see langword="null"/>, empty of only white space.</exception>
     public static void Ref(this StringBuilder stringBuilder, string participant, string note)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
@@ -35,9 +35,9 @@ public static partial class StringBuilderExtensions
     /// <param name="participantA">The first participant.</param>
     /// <param name="participantB">The second participant.</param>
     /// <param name="note">The text of the note.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="participantA"/> is <c>null</c>, empty of only white space.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="participantB"/> is <c>null</c>, empty of only white space.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="participantA"/> is <see langword="null"/>, empty of only white space.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="participantB"/> is <see langword="null"/>, empty of only white space.</exception>
     public static void Ref(this StringBuilder stringBuilder, string participantA, string participantB, string note)
     {
         if (string.IsNullOrWhiteSpace(participantA)) throw new ArgumentException("A non-empty value should be provided", nameof(participantA));
@@ -50,8 +50,8 @@ public static partial class StringBuilderExtensions
     /// Renders the start of a multiline note.
     /// </summary>
     /// <param name="participant">Optional participant. The position is relative to this participant.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="participant"/> is <c>null</c>, empty of only white space.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="participant"/> is <see langword="null"/>, empty of only white space.</exception>
     public static void StartRef(this StringBuilder stringBuilder, string participant)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
@@ -71,9 +71,9 @@ public static partial class StringBuilderExtensions
     /// </summary>
     /// <param name="participantA">The first participant.</param>
     /// <param name="participantB">The second participant.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="participantA"/> is <c>null</c>, empty of only white space.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="participantB"/> is <c>null</c>, empty of only white space.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="participantA"/> is <see langword="null"/>, empty of only white space.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="participantB"/> is <see langword="null"/>, empty of only white space.</exception>
     public static void StartRef(this StringBuilder stringBuilder, string participantA, string participantB)
     {
         if (string.IsNullOrWhiteSpace(participantA)) throw new ArgumentException("A non-empty value should be provided", nameof(participantA));
@@ -85,7 +85,7 @@ public static partial class StringBuilderExtensions
     /// <summary>
     /// Renders the end of a multiline note.
     /// </summary>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void EndRef(this StringBuilder stringBuilder)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);

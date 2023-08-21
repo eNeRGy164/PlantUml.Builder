@@ -5,7 +5,7 @@ public static partial class StringBuilderExtensions
     /// <summary>
     /// Removes all the trailing white-space characters from the current <see cref="StringBuilder"/>.
     /// </summary>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void TrimEnd(this StringBuilder stringBuilder)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);

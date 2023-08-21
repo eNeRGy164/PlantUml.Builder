@@ -9,8 +9,8 @@ public static partial class StringBuilderExtensions
     /// <param name="participant">Optional participant. The position is relative to this participant.</param>
     /// <param name="style">Optional style of note. Default <see cref="NoteStyle.Normal"/>.</param>
     /// <param name="color">Optional backgrond color.</param>
-    /// <param name="alignWithPrevious">Optional alignment with the previous note. Default <c>false</c>.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <param name="alignWithPrevious">Optional alignment with the previous note. Default <see langword="false"/>.</param>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     internal static void NoteBase(this StringBuilder stringBuilder, NotePosition position, string participant = null, NoteStyle style = NoteStyle.Normal, Color color = null, bool alignWithPrevious = false)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
