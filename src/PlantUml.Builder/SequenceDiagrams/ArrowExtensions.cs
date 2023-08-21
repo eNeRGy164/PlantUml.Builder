@@ -39,44 +39,26 @@ public static class ArrowExtensions
     {
         ArgumentNullException.ThrowIfNull(arrow, nameof(arrow));
 
-        if (arrow.Direction == ArrowDirection.Left)
+        return arrow.Direction switch
         {
-            if (arrow.LeftHead[0] == char.ToLowerInvariant(ArrowParts.Destroy))
-            {
-                return arrow;
-            }
-
-            return new Arrow(ArrowParts.Destroy + arrow.LeftHead, arrow.Dotted, arrow.RightHead, arrow.Color);
-        }
-
-        if (arrow.Direction == ArrowDirection.Right)
-        {
-            if (arrow.RightHead[arrow.RightHead.Length - 1] == char.ToLowerInvariant(ArrowParts.Destroy))
-            {
-                return arrow;
-            }
-
-            return new Arrow(arrow.LeftHead, arrow.Dotted, arrow.RightHead + ArrowParts.Destroy, arrow.Color);
-        }
-
-        throw new NotSupportedException("This method only destroys an arrow if it is in a clear left or right direction.");
+            ArrowDirection.Left when char.ToLowerInvariant(arrow.LeftHead[0]) == ArrowParts.Destroy => arrow,
+            ArrowDirection.Left => new Arrow(ArrowParts.Destroy + arrow.LeftHead, arrow.Dotted, arrow.RightHead, arrow.Color),
+            ArrowDirection.Right when char.ToLowerInvariant(arrow.RightHead[^1]) == ArrowParts.Destroy => arrow,
+            ArrowDirection.Right => new Arrow(arrow.LeftHead, arrow.Dotted, arrow.RightHead + ArrowParts.Destroy, arrow.Color),
+            _ => throw new NotSupportedException("This method only destroys an arrow if it is in a clear left or right direction.")
+        };
     }
 
     public static Arrow Lost(this Arrow arrow)
     {
         ArgumentNullException.ThrowIfNull(arrow, nameof(arrow));
 
-        if (arrow.Direction == ArrowDirection.Left)
+        return arrow.Direction switch
         {
-            return arrow.LostLeft();
-        }
-
-        if (arrow.Direction == ArrowDirection.Right)
-        {
-            return arrow.LostRight();
-        }
-
-        throw new NotSupportedException("This method only loses an arrow if it is in a clear left or right direction.");
+            ArrowDirection.Left => arrow.LostLeft(),
+            ArrowDirection.Right => arrow.LostRight(),
+            _ => throw new NotSupportedException("This method only loses an arrow if it is in a clear left or right direction.")
+        };
     }
 
     /// <summary>
@@ -88,25 +70,28 @@ public static class ArrowExtensions
     {
         ArgumentNullException.ThrowIfNull(arrow, nameof(arrow));
 
+        if (arrow.RightHead.ToLowerInvariant().Contains(ArrowParts.Destroy))
+        {
+            throw new NotSupportedException("You cannot combine the \"lost\" and \"deleted\" message notation in the same arrow head.");
+        }
+
+        if (arrow.RightHead.ToLowerInvariant().Contains(ArrowParts.Lost))
+        {
+            return arrow;
+        }
+
         string newRightHead;
 
         if (arrow.RightHead.Length > 0)
         {
-            var lastChar = arrow.RightHead[arrow.RightHead.Length - 1];
-
-            if (arrow.RightHead.ToLowerInvariant().Count(c => c == ArrowParts.Lost) == 1)
+            if (arrow.IsExternalRight())
             {
-                return arrow;
+                newRightHead = arrow.RightHead[..^1] + ArrowParts.Lost + arrow.RightHead[^1];
             }
-
-            if (arrow.RightHead.ToLowerInvariant().IndexOf(ArrowParts.Destroy) > -1)
+            else
             {
-                throw new NotSupportedException("You can not combine the lost and deleted message notation in the same arrow head.");
+                newRightHead = arrow.RightHead + ArrowParts.Lost;
             }
-
-            newRightHead = (lastChar == ArrowParts.RightExternal || lastChar == ArrowParts.ShortExternal)
-                ? arrow.RightHead.Substring(0, Math.Max(0, arrow.RightHead.Length - 1)) + ArrowParts.Lost + lastChar
-                : arrow.RightHead + ArrowParts.Lost;
         }
         else
         {
@@ -125,28 +110,22 @@ public static class ArrowExtensions
     {
         ArgumentNullException.ThrowIfNull(arrow, nameof(arrow));
 
-        string newLeftHead;
-
-        if (arrow.LeftHead.Length > 0)
+        if (arrow.LeftHead.ToLowerInvariant().Contains(ArrowParts.Lost))
         {
-            if (arrow.LeftHead.ToLowerInvariant().Count(c => c == ArrowParts.Lost) == 1)
-            {
-                return arrow;
-            }
-
-            if (arrow.LeftHead.ToLowerInvariant().IndexOf(ArrowParts.Destroy) > -1)
-            {
-                throw new NotSupportedException("You can not combine the lost and deleted message notation in the same arrow head.");
-            }
-
-            newLeftHead = (arrow.LeftHead[0] == ArrowParts.LeftExternal || arrow.LeftHead[0] == ArrowParts.ShortExternal)
-                ? string.Empty + arrow.LeftHead[0] + ArrowParts.Lost + arrow.LeftHead.Substring(1)
-                : ArrowParts.Lost + arrow.LeftHead;
+            return arrow;
         }
-        else
+
+        if (arrow.LeftHead.ToLowerInvariant().Contains(ArrowParts.Destroy))
         {
-            newLeftHead = new string(ArrowParts.Lost, 1);
+            throw new NotSupportedException("You cannot combine the \"lost\" and \"deleted\" message notation in the same arrow head.");
         }
+
+        var newLeftHead = arrow.LeftHead switch
+        {
+            { Length: > 0 } when arrow.LeftHead[0] is ArrowParts.LeftExternal or ArrowParts.ShortExternal => $"{arrow.LeftHead[0]}{ArrowParts.Lost}{arrow.LeftHead[1..]}",
+            { Length: > 0 } => ArrowParts.Lost + arrow.LeftHead,
+            _ => new string(ArrowParts.Lost, 1)
+        };
 
         return new Arrow(newLeftHead, arrow.Dotted, arrow.RightHead, arrow.Color);
     }

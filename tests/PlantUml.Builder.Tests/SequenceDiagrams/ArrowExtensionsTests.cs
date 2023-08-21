@@ -108,7 +108,7 @@ public class ArrowExtensionsTests
 
         // Assert
         action.Should().ThrowExactly<NotSupportedException>()
-            .WithMessage("You can not combine the lost and deleted message notation in the same arrow head.");
+            .WithMessage("You cannot combine the \"lost\" and \"deleted\" message notation in the same arrow head.");
     }
 
     [TestMethod]
