@@ -6,68 +6,41 @@ namespace PlantUml.Builder.Tests;
 public class TitleTests
 {
     [TestMethod]
-    public void StringBuilderExtensions_Title_Null_Should_ThrowArgumentNullException()
+    public void TitleCannotBeNull()
     {
         // Arrange
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Title("Title");
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Title_NullName_Should_ThrowArgumentException()
-    {
-        // Assign
         var stringBuilder = new StringBuilder();
 
         // Act
         Action action = () => stringBuilder.Title(null);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("title");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName("title");
     }
 
+    [DataRow(EmptyString, DisplayName = "Title - Title argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "Title - Title argument cannot be any whitespace character")]
     [TestMethod]
-    public void StringBuilderExtensions_Title_EmptyName_Should_ThrowArgumentException()
+    public void TextMustContainAValue(string text)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Title(string.Empty);
+        Action action = () => stringBuilder.Title(text);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("title");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("title");
     }
 
     [TestMethod]
-    public void StringBuilderExtensions_Title_WhitespaceName_Should_ThrowArgumentException()
+    public void TitleIsRenderedCorrectly()
     {
         // Arrange
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        Action action = () => stringBuilder.Title(" ");
-
-        // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("title");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Title_Should_ContainTitleLine()
-    {
-        // Assign
         var stringBuilder = new StringBuilder();
 
         // Act

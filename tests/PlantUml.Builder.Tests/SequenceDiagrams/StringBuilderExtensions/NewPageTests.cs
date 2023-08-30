@@ -6,111 +6,56 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests;
 public class NewPageTests
 {
     [TestMethod]
-    public void StringBuilderExtensions_NewPage_Null_Should_ThrowArgumentNullException()
+    public void NewPageTitleCannotBeNull()
     {
         // Arrange
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.NewPage();
-
-        // Assert
-        action.Should().ThrowExactly<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_NewPage_NullWithTitle_Should_ThrowArgumentNullException()
-    {
-        // Arrange
-        var stringBuilder = (StringBuilder)null;
-        // Act
-        Action action = () => stringBuilder.NewPage("Page header");
-        // Assert
-        action.Should().ThrowExactly<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-    [TestMethod]
-    public void StringBuilderExtensions_NewPage_NullName_Should_ThrowArgumentException()
-    {
-        // Assign
         var stringBuilder = new StringBuilder();
 
         // Act
         Action action = () => stringBuilder.NewPage(null);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("title");
+        action.Should().ThrowExactly<ArgumentNullException>()
+            .WithParameterName("title");
     }
 
+    [DataRow(EmptyString, DisplayName = "NewPage - Title argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "NewPage - Title argument cannot be any whitespace character")]
     [TestMethod]
-    public void StringBuilderExtensions_NewPage_EmptyName_Should_ThrowArgumentException()
+    public void NewPageTitleMustContainAValue(string name)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.NewPage(string.Empty);
+        Action action = () => stringBuilder.NewPage(name);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("title");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("title");
     }
 
+    [DataRow(null, "newpage", DisplayName = "NewPage - Should Contain NewPage Line")]
+    [DataRow("Page header", "newpage Page header", DisplayName = "NewPage - With Title Should Contain NewPage Line")]
+    [DataRow("Page\nheader", "newpage Page\\nheader", DisplayName = "NewPage - With NewLine Should Escape NewLine")]
     [TestMethod]
-    public void StringBuilderExtensions_NewPage_WhitespaceName_Should_ThrowArgumentException()
+    public void NewPageIsRenderedCorrectly(string title, string expected)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.NewPage(" ");
+        if (title is not null)
+        {
+            stringBuilder.NewPage(title);
+        }
+        else
+        {
+            stringBuilder.NewPage();
+        }
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("title");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_NewPage_Should_ContainNewPageLine()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.NewPage();
-
-        // Assert
-        stringBuilder.ToString().Should().Be("newpage\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_NewPage_WithTitle_Should_ContainNewPageLine()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.NewPage("Page header");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("newpage Page header\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_NewPage_WithNewLine_Should_EscapeNewLine()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.NewPage("Page\nheader");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("newpage Page\\nheader\n");
+        stringBuilder.ToString().Should().Be($"{expected}\n");
     }
 }

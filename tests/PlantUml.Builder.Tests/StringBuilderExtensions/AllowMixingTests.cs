@@ -4,23 +4,9 @@ namespace PlantUml.Builder.Tests;
 public class AllowMixingTests
 {
     [TestMethod]
-    public void StringBuilderExtensions_AllowMixing_Null_Should_ThrowArgumentNullException()
+    public void AllowMixingIsRenderedCorrectly()
     {
         // Arrange
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.AllowMixing();
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_AllowMixing_Should_ContainAllowMixingLine()
-    {
-        // Assign
         var stringBuilder = new StringBuilder();
 
         // Act

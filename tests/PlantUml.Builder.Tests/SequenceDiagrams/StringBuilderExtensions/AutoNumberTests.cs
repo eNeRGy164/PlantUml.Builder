@@ -5,12 +5,12 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests;
 [TestClass]
 public class AutoNumberTests
 {
-    [DataRow("start", "", "<b>[000]", DisplayName = "Start can not be empty")]
-    [DataRow("start", " ", "<b>[000]", DisplayName = "Start can not be whitespace")]
-    [DataRow("format", "1", "", DisplayName = "Format can not be empty")]
-    [DataRow("format", "1", " ", DisplayName = "Format can not be whitespace")]
+    [DataRow("start", EmptyString, "<b>[000]", DisplayName = "AutoNumber - Start argument cannot be an empty string")]
+    [DataRow("start", AllWhitespace, "<b>[000]", DisplayName = "AutoNumber - Start argument cannot contain only whitespace")]
+    [DataRow("format", "1", EmptyString, DisplayName = "AutoNumber - Format argument cannot be an empty string")]
+    [DataRow("format", "1", AllWhitespace, DisplayName = "AutoNumber - Format argument cannot contain only whitespace")]
     [TestMethod]
-    public void AutoNumberParametersMustToContainAValidValue(string parameterName, string start, string format)
+    public void AutoNumberParametersMustContainAValidValue(string parameterName, string start, string format)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
@@ -19,20 +19,20 @@ public class AutoNumberTests
         Action action = () => stringBuilder.AutoNumber(start, default, format);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be(parameterName);
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName(parameterName);
     }
 
-    [DataRow(default, default, default, "autonumber", DisplayName = "Autonumber")]
-    [DataRow(10, default, default, "autonumber 10", DisplayName = "Autonumber with start")]
-    [DataRow("1.1.1", default, default, "autonumber 1.1.1", DisplayName = "Autonumber with start")]
-    [DataRow(default, 10, default, "autonumber", DisplayName = "Autonumber should ignore step if there is no start")]
-    [DataRow(10, 20, default, "autonumber 10 20", DisplayName = "Autonumber with start and step")]
-    [DataRow(default, default, "<b>[000]", "autonumber \"<b>[000]\"", DisplayName = "Autonumber with format")]
-    [DataRow(10, 20, "<b>[000]", "autonumber 10 20 \"<b>[000]\"", DisplayName = "Autonumber with all parameters")]
+    [DataRow(default, default, default, "autonumber", DisplayName = "AutoNumber - Basic usage with default parameters")]
+    [DataRow(10, default, default, "autonumber 10", DisplayName = "AutoNumber - With numeric start value")]
+    [DataRow("1.1.1", default, default, "autonumber 1.1.1", DisplayName = "AutoNumber - With string start value")]
+    [DataRow(default, 10, default, "autonumber", DisplayName = "AutoNumber - Ignores step size when start value is absent")]
+    [DataRow(10, 20, default, "autonumber 10 20", DisplayName = "AutoNumber - With both numeric start and step size")]
+    [DataRow(default, default, "<b>[000]", "autonumber \"<b>[000]\"", DisplayName = "AutoNumber - With custom format only")]
+    [DataRow(10, 20, "<b>[000]", "autonumber 10 20 \"<b>[000]\"", DisplayName = "AutoNumber - With all parameters including start, step, and format")]
     [TestMethod]
-    public void ACorrectAutoNumberIsRendered(object start, int? step, string format, string expected)
+    public void AutoNumberIsRenderedCorrectly(object start, int? step, string format, string expected)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
@@ -50,7 +50,7 @@ public class AutoNumberTests
     }
 
     [TestMethod]
-    public void ACorrectStopAutoNumberIsRendered()
+    public void AutoNumberStopIsRenderedCorrectly()
     {
         // Arrange
         var stringBuilder = new StringBuilder();
@@ -62,10 +62,10 @@ public class AutoNumberTests
         stringBuilder.ToString().Should().Be("autonumber stop\n");
     }
 
-    [DataRow("", DisplayName = "Value can not be empty")]
-    [DataRow(" ", DisplayName = "Value can not be whitespace")]
+    [DataRow(EmptyString, DisplayName = "ResumeAutoNumber - Format argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "ResumeAutoNumber - Format argument cannot be whitespace")]
     [TestMethod]
-    public void ResumeFormatParameterMustToContainAValidValue(string format)
+    public void AutoNumberResumeFormatMustContainAValue(string format)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
@@ -74,40 +74,37 @@ public class AutoNumberTests
         Action action = () => stringBuilder.ResumeAutoNumber(default, format);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("format");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("format");
     }
 
-    [DataRow(default, default, "autonumber resume", DisplayName = "Resume autonumber")]
-    [DataRow(20, default, "autonumber resume 20", DisplayName = "Resume autonumber with step size")]
-    [DataRow(default, "<b>[000]", "autonumber resume \"<b>[000]\"", DisplayName = "Resume autonumber with format")]
-    [DataRow(20, "<b>[000]", "autonumber resume 20 \"<b>[000]\"", DisplayName = "Resume autonumber with step size and format")]
+    [DataRow(default, default, "autonumber resume", DisplayName = "ResumeAutoNumber - Basic resume without step size or format")]
+    [DataRow(20, default, "autonumber resume 20", DisplayName = "ResumeAutoNumber - Resume with specified step size")]
+    [DataRow(default, "<b>[000]", "autonumber resume \"<b>[000]\"", DisplayName = "ResumeAutoNumber - Resume with custom format")]
+    [DataRow(20, "<b>[000]", "autonumber resume 20 \"<b>[000]\"", DisplayName = "ResumeAutoNumber - Resume with both step size and custom format")]
     [TestMethod]
-    public void ACorrectAutoNumberResumeIsRendered(int? step, string format, string expected)
+    public void AutoNumberResumeIsRenderedCorrectly(int? step, string format, string expected)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
 
-        var method = typeof(StringBuilderExtensions).GetMethod("ResumeAutoNumber");
-        var parameters = new object[] { stringBuilder, step, format };
-
         // Act
-        method.Invoke(null, parameters);
+        stringBuilder.ResumeAutoNumber(step, format);
 
         // Assert
         stringBuilder.ToString().Should().Be($"{expected}\n");
     }
 
-    [DataRow('0', DisplayName = "Position cannot be a number")]
-    [DataRow('Ç', DisplayName = "Position cannot be a outside A-Z")]
-    [DataRow('þ', DisplayName = "Position cannot be a outside A-Z")]
-    [DataRow('ë', DisplayName = "Position cannot contain diacritics")]
-    [DataRow('¿', DisplayName = "Position cannot contain unicode symbols")]
-    [DataRow('!', DisplayName = "Position cannot contain ascii symbols")]
-    [DataRow((char)0, DisplayName = "Position cannot contain nul char")]
+    [DataRow('1', DisplayName = "IncreaseAutoNumber - Position argument cannot be a numeric character")]
+    [DataRow('Ç', DisplayName = "IncreaseAutoNumber - Position argument cannot be a outside the range A-Z")]
+    [DataRow('þ', DisplayName = "IncreaseAutoNumber - Position argument cannot be a outside the range A-Z")]
+    [DataRow('ë', DisplayName = "IncreaseAutoNumber - Position argument cannot contain diacritic marks")]
+    [DataRow('¿', DisplayName = "IncreaseAutoNumber - Position argument cannot be a Unicode symbol")]
+    [DataRow('!', DisplayName = "IncreaseAutoNumber - Position argument cannot be an ASCII symbols")]
+    [DataRow((char)0, DisplayName = "IncreaseAutoNumber - Position argument cannot be a nul character")]
     [TestMethod]
-    public void PositionParameterMustBeInTheValidRange(char position)
+    public void AutoNumberIncreasePositionParameterMustBeValid(char position)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
@@ -116,17 +113,18 @@ public class AutoNumberTests
         Action action = () => stringBuilder.IncreaseAutoNumber(position);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentOutOfRangeException>()
+        action.Should()
+            .ThrowExactly<ArgumentOutOfRangeException>()
             .WithMessage("Only the characters A - Z are allowed*")
-            .And.ParamName.Should().Be("position");
+            .WithParameterName("position");
     }
 
-    [DataRow(default, "autonumber inc", DisplayName = "Position is optional")]
-    [DataRow('A', "autonumber inc A", DisplayName = "A is the lowest possible position")]
-    [DataRow('a', "autonumber inc a", DisplayName = "Position is case insensitive")]
-    [DataRow('Z', "autonumber inc Z", DisplayName = "A is the highest possible position")]
+    [DataRow(default, "autonumber inc", DisplayName = "IncreaseAutoNumber - Position is optional and defaults to empty")]
+    [DataRow('A', "autonumber inc A", DisplayName = "IncreaseAutoNumber - 'A' is the lowest valid position")]
+    [DataRow('a', "autonumber inc a", DisplayName = "IncreaseAutoNumber - Position is case-insensitive")]
+    [DataRow('Z', "autonumber inc Z", DisplayName = "IncreaseAutoNumber - 'Z' is the highest valid position")]
     [TestMethod]
-    public void ACorrectAutoNumberIncreaseIsRendered(char? position, string expected)
+    public void AutoNumberIncreaseIsRenderedCorrectly(char? position, string expected)
     {
         // Arrange
         var stringBuilder = new StringBuilder();

@@ -5,28 +5,10 @@ namespace PlantUml.Builder.Tests;
 [TestClass]
 public class SkinParameterTests
 {
+    [DataRow("name", null, "b", DisplayName = "SkinParameter - Name argument cannot be `null`")]
+    [DataRow("value", "a", null, DisplayName = "SkinParameter - Value argument cannot be `null`")]
     [TestMethod]
-    public void StringBuilderExtensions_SkinParameter_Null_Should_ThrowExactlyArgumentNullException()
-    {
-        // Arrange
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.SkinParameter("a", "b");
-
-        // Assert
-        action.Should().ThrowExactly<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [DataRow("name", null, "b", DisplayName = "Name can not be `null`")]
-    [DataRow("name", "", "b", DisplayName = "Name can not be empty")]
-    [DataRow("name", " ", "b", DisplayName = "Name can not be whitespace")]
-    [DataRow("value", "a", null, DisplayName = "Value can not be `null`")]
-    [DataRow("value", "a", "", DisplayName = "Value can not be empty")]
-    [DataRow("value", "a", " ", DisplayName = "Value can not be whitespace")]
-    [TestMethod]
-    public void ParametersHaveToContainAValue(string parameterName, string name, string value)
+    public void SkinParameterArgumentsCannotBeNull(string parameterName, string name, string value)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
@@ -35,56 +17,72 @@ public class SkinParameterTests
         Action action = () => stringBuilder.SkinParameter(name, value);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be(parameterName);
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName(parameterName);
     }
 
+    [DataRow("name", EmptyString, "b", DisplayName = "SkinParameter - Name argument cannot be empty")]
+    [DataRow("name", AllWhitespace, "b", DisplayName = "SkinParameter - Name argument cannot be any whitespace character")]
+    [DataRow("value", "a", EmptyString, DisplayName = "SkinParameter - Value argument cannot be empty")]
+    [DataRow("value", "a", AllWhitespace, DisplayName = "SkinParameter - Value argument cannot be any whitespace character")]
     [TestMethod]
-    public void EnumerationValueShouldExist()
+    public void SkinParameterArgumentsMustContainAValue(string parameterName, string name, string value)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.SkinParameter((SkinParameter)ushort.MaxValue, "b");
+        Action action = () => stringBuilder.SkinParameter(name, value);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentOutOfRangeException>()
-            .WithMessage("A defined enum value should be provided*")
-            .And.ParamName.Should().Be("skinParameter");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName(parameterName);
     }
 
-    [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetValidNotationsDisplayName))]
     [TestMethod]
-    public void AValidSkinParamNotationIsRendered(object name, object value, string expected)
+    public void SkinParameterEnumerationValueShouldExist()
     {
         // Arrange
         var stringBuilder = new StringBuilder();
 
-        var method = typeof(StringBuilderExtensions).GetMethod("SkinParameter", new[] { typeof(StringBuilder), name.GetType(), value.GetType() });
-        var parameters = new[] { stringBuilder, name, value };
-        
+        // Act
+        Action action = () => stringBuilder.SkinParameter((SkinParameter)ushort.MaxValue, AnyString);
+
+        // Assert
+        action.Should()
+            .ThrowExactly<ArgumentOutOfRangeException>()
+            .WithMessage("A defined enum value should be provided*")
+            .WithParameterName("skinParameter");
+    }
+
+    [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetMethodTestDisplayName))]
+    [TestMethod]
+    public void SkinParamIsRenderedCorrectly(MethodExpectationTestData testData)
+    {
+        // Arrange
+        var stringBuilder = new StringBuilder();
+
+        var (method, parameters) = typeof(StringBuilderExtensions).GetExtensionMethodAndParameters(stringBuilder, testData.Method, testData.Parameters);
+
         // Act
         method.Invoke(null, parameters);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"skinparam {expected}\n");
+        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
     }
     private static IEnumerable<object[]> GetValidNotations()
     {
-        yield return new object[] { "monochrome", "true", "monochrome true" };
-        yield return new object[] { " monochrome ", "true", "monochrome true" };
-        yield return new object[] { "monochrome", " true ", "monochrome true" };
-        yield return new object[] { SkinParameter.Monochrome, "true", "Monochrome true" };
-        yield return new object[] { "monochrome", true, "monochrome true" };
-        yield return new object[] { SkinParameter.Monochrome, false, "Monochrome false" };
-        yield return new object[] { "minclasswidth", 200, "minclasswidth 200" };
-        yield return new object[] { SkinParameter.MinClassWidth, 400, "MinClassWidth 400" };
+        yield return new object[] { new MethodExpectationTestData("SkinParameter", "skinparam monochrome true", "monochrome", "true") };
+        yield return new object[] { new MethodExpectationTestData("SkinParameter", "skinparam monochrome true", " monochrome ", "true") };
+        yield return new object[] { new MethodExpectationTestData("SkinParameter", "skinparam monochrome true", "monochrome", " true ") };
+        yield return new object[] { new MethodExpectationTestData("SkinParameter", "skinparam Monochrome true", SkinParameter.Monochrome, "true") };
+        yield return new object[] { new MethodExpectationTestData("SkinParameter", "skinparam monochrome true", "monochrome", true) };
+        yield return new object[] { new MethodExpectationTestData("SkinParameter", "skinparam Monochrome false", SkinParameter.Monochrome, false) };
+        yield return new object[] { new MethodExpectationTestData("SkinParameter", "skinparam minclasswidth 200", "minclasswidth", 200) };
+        yield return new object[] { new MethodExpectationTestData("SkinParameter", "skinparam MinClassWidth 400", SkinParameter.MinClassWidth, 400) };
     }
 
-    public static string GetValidNotationsDisplayName(MethodInfo _, object[] data)
-    {
-        return $"SkinParameter \"{data[0]}\" ({data[0].GetType().Name}) with value \"{data[1]}\" ({data[1].GetType().Name}) should render as \"skinparam {data[2]}\\n\"";
-    }
+    public static string GetMethodTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);
 }

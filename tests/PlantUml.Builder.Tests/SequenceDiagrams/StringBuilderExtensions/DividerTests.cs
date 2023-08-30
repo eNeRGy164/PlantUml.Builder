@@ -3,43 +3,18 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests;
 [TestClass]
 public class DividerTests
 {
+    [DataRow(null, "====", DisplayName = "Divider - Without label should only contain the divider line")]
+    [DataRow("Initialization", "==Initialization==", DisplayName = "Divider - With label should contain the divider line with the title")]
     [TestMethod]
-    public void StringBuilderExtensions_Divider_Null_Should_ThrowArgumentNullException()
+    public void DividerIsRenderedCorrectly(string title, string expected)
     {
         // Arrange
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Divider();
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Divider_Should_ContainDividerLine()
-    {
-        // Assign
         var stringBuilder = new StringBuilder();
 
         // Act
-        stringBuilder.Divider();
+        stringBuilder.Divider(title);
 
         // Assert
-        stringBuilder.ToString().Should().Be("====\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Divider_WithLabel_Should_ContainDividerLineWithTitle()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Divider("Initialization");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("==Initialization==\n");
+        stringBuilder.ToString().Should().Be($"{expected}\n");
     }
 }
