@@ -6,68 +6,41 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests;
 public class DestroyTests
 {
     [TestMethod]
-    public void StringBuilderExtensions_Destroy_Null_Should_ThrowArgumentNullException()
+    public void DestroyNameCannotBeNull()
     {
         // Arrange
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Destroy("actorA");
-
-        // Assert
-        action.Should().ThrowExactly<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Destroy_NullName_Should_ThrowArgumentException()
-    {
-        // Assign
         var stringBuilder = new StringBuilder();
 
         // Act
         Action action = () => stringBuilder.Destroy(null);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName("name");
     }
 
+    [DataRow(EmptyString, DisplayName = "Destroy - Name argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "Destroy - Name argument cannot be any whitespace character")]
     [TestMethod]
-    public void StringBuilderExtensions_Destroy_EmptyName_Should_ThrowArgumentException()
+    public void DestroyNameMustContainAValue(string name)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Destroy(string.Empty);
+        Action action = () => stringBuilder.Destroy(name);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("name");
     }
 
     [TestMethod]
-    public void StringBuilderExtensions_Destroy_WhitespaceName_Should_ThrowArgumentException()
+    public void DestroyIsRenderedCorrectly()
     {
         // Arrange
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        Action action = () => stringBuilder.Destroy(" ");
-
-        // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Destroy_Should_ContainActivateLine()
-    {
-        // Assign
         var stringBuilder = new StringBuilder();
 
         // Act
