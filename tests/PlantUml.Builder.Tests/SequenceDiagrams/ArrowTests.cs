@@ -6,154 +6,106 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests;
 public class ArrowClassTests
 {
     [TestMethod]
-    public void Arrow_NullStringConstructor_Should_ThrowArgumentException()
+    public void ArrowCannotBeNullString()
     {
-        // Assign
-        Arrow arrow = null;
-
-        // Act
-        Action action = () => arrow = new Arrow((string)null);
+        // Arrange & Act
+        Action action = () => _ = new Arrow((string)null);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("arrow");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName("arrow");
+    }
+
+        [TestMethod]
+    public void ArrowCannotBeNullCharacterArray()
+    {
+        // Arrange & Act
+        Action action = () => _ = new Arrow((char[])null);
+
+        // Assert
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("arrow");
+    }
+
+    [DataRow(EmptyString, DisplayName = "Arrow - Arrow argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "Arrow - Arrow argument cannot be whitespace")]
+    [TestMethod]
+    public void ArrowContainsAValue(string value)
+    {
+        // Arrange & Act
+        Action action = () => _ = new Arrow(value);
+
+        // Assert
+        action.Should()
+              .ThrowExactly<ArgumentException>()
+              .WithParameterName("arrow");
     }
 
     [TestMethod]
-    public void Arrow_NullCharArrayConstructor_Should_ThrowArgumentException()
+    public void ArrowCannotBeConstructedWithOnlyASingleCharacter()
     {
-        // Assign
-        Arrow arrow = null;
-
-        // Act
-        Action action = () => arrow = new Arrow((char[])null);
-
-        // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("arrow");
-    }
-
-    [TestMethod]
-    public void Arrow_EmptyConstructor_Should_ThrowArgumentException()
-    {
-        // Assign
-        Arrow arrow = null;
-
-        // Act
-        Action action = () => arrow = new Arrow(string.Empty);
-
-        // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("arrow");
-    }
-
-    [TestMethod]
-    public void Arrow_WhitespaceConstructor_Should_ThrowArgumentException()
-    {
-        // Assign
-        Arrow arrow = null;
-
-        // Act
-        Action action = () => arrow = new Arrow("  ");
-
-        // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("arrow");
-    }
-
-    [TestMethod]
-    public void Arrow_ShortStringConstructor_Should_ThrowArgumentException()
-    {
-        // Assign
-        Arrow arrow = null;
-
-        // Act
-        Action action = () => arrow = new Arrow("-");
+        // Arrange & Act
+        Action action = () => _ = new Arrow("-");
 
         // Assert
         action.Should().ThrowExactly<ArgumentException>()
             .WithMessage("The arrow type must be at least 2 characters long*")
-            .And.ParamName.Should().Be("arrow");
+            .WithParameterName("arrow");
     }
 
     [TestMethod]
-    public void Arrow_NoLineConstructor_Should_ThrowArgumentException()
+    public void ArrowCannotBeConstructedWithoutALineCharacter()
     {
-        // Assign
-        Arrow arrow = null;
-
-        // Act
-        Action action = () => arrow = new Arrow("<>");
+        // Arrange & Act
+        Action action = () => _ = new Arrow("<>");
 
         // Assert
         action.Should().ThrowExactly<ArgumentException>()
             .WithMessage("The arrow must contain at least 1 line character*")
-            .And.ParamName.Should().Be("arrow");
+            .WithParameterName("arrow");
     }
 
     [TestMethod]
-    public void Arrow_NoArrowHeadConstructor_Should_ThrowArgumentException()
+    public void ArrowCannotBeConstructedWithoutAHeadElement()
     {
-        // Assign
-        Arrow arrow = null;
-
-        // Act
-        Action action = () => arrow = new Arrow("--");
+        // Arrange & Act
+        Action action = () => _ = new Arrow("--");
 
         // Assert
         action.Should().ThrowExactly<ArgumentException>()
             .WithMessage("The arrow must contain at least 1 arrow head character ('>', '<', 'o', '/', '\\', 'x', ']', '[', '?').*")
-            .And.ParamName.Should().Be("arrow");
+            .WithParameterName("arrow");
     }
 
     [TestMethod]
-    public void Arrow_StringConstructor_ToString_Should_ReturnValue()
+    public void ArrowShouldConstructArrowFromCharacterArray()
     {
-        // Assign
-        var arrow = new Arrow("->");
-
-        // Assert
-        arrow.ToString().Should().Be("->");
-    }
-
-    [TestMethod]
-    public void Arrow_CharArrayConstructor_ToString_Should_ReturnValue()
-    {
-        // Assign
+        // Arrange & Act
         var arrow = new Arrow('-', '>');
 
         // Assert
         arrow.ToString().Should().Be("->");
     }
 
+    [DataRow("->")]
+    [DataRow("<->")]
+    [DataRow("<-[#red]>")]
     [TestMethod]
-    public void Arrow_StringConstructorBidirectional_ToString_Should_ReturnValue()
+    public void ArrowStringConstructorShouldNotAlterValidInput(string input)
     {
         // Arrange & Act
-        var arrow = new Arrow("<->");
+        var arrow = new Arrow(input);
 
         // Assert
-        arrow.ToString().Should().Be("<->");
+        arrow.ToString().Should().Be(input);
     }
 
     [TestMethod]
-    public void Arrow_StringConstructorWithColor_ToString_Should_ReturnValue()
+    public void ArrowConstructorChangesColor()
     {
-        // Assign
-        var arrow = new Arrow("<-[#red]>");
-
-        // Assert
-        arrow.ToString().Should().Be("<-[#red]>");
-    }
-
-    [TestMethod]
-    public void Arrow_ArrowConstructorWithColor_Should_ChangeColor()
-    {
-        // Assign
+        // Arrange
         var originalArrow = new Arrow("-[#red]>");
 
         // Act
@@ -164,7 +116,7 @@ public class ArrowClassTests
     }
 
     [TestMethod]
-    public void Arrow_ArrowConstructorWithDotted_Should_ChangeLineToDotted()
+    public void ArrowConstructorChangesLineToDotted()
     {
         // Arrange
         var originalArrow = new Arrow("-[#red]>");
@@ -177,9 +129,9 @@ public class ArrowClassTests
     }
 
     [TestMethod]
-    public void Arrow_ArrowConstructorWithNotDotted_Should_ChangeLineToSolid()
+    public void ArrowConstructorChangesLineToSolid()
     {
-        // Assign
+        // Arrange
         var originalArrow = new Arrow("--[#red]>");
 
         // Act
@@ -190,7 +142,7 @@ public class ArrowClassTests
     }
 
     [TestMethod]
-    public void Arrow_FullConstructor_Should_BuildCompleteArrow()
+    public void ArrowFullConstructorIsRenderedCorrectly()
     {
         // Act
         var arrow = new Arrow("<", dottedLine: false, ">", NamedColor.AliceBlue);
@@ -200,7 +152,7 @@ public class ArrowClassTests
     }
 
     [TestMethod]
-    public void Arrow_StartWithColor_ToString_Should_ReturnValue()
+    public void ArrowWithStartColorIsRenderedCorrectly()
     {
         // Act
         var arrow = new Arrow("[#red]->");
@@ -210,7 +162,7 @@ public class ArrowClassTests
     }
 
     [TestMethod]
-    public void Arrow_StartWithColor_Should_HaveEmptyLeft()
+    public void ArrowWithStartColorHasEmptyLeftHead()
     {
         // Act
         var arrow = new Arrow("[#red]->");
@@ -220,7 +172,7 @@ public class ArrowClassTests
     }
 
     [TestMethod]
-    public void Arrow_LeftWithColor_Should_HaveColor()
+    public void ArrowWithLeftColorHasColor()
     {
         // Act
         var arrow = new Arrow("<[#red]-");
@@ -230,7 +182,7 @@ public class ArrowClassTests
     }
 
     [TestMethod]
-    public void Arrow_ColorStartCharacterAsLastChar_Should_NotBeAColor()
+    public void ArrowWithIncompleteColorHasNoColor()
     {
         // Act
         var arrow = new Arrow("<-[");
@@ -240,7 +192,7 @@ public class ArrowClassTests
     }
 
     [TestMethod]
-    public void Arrow_ExternalStart_Should_HaveNoColor()
+    public void ArrowWithExternalStartHasNoColor()
     {
         // Act
         var arrow = new Arrow("[->");
@@ -250,7 +202,7 @@ public class ArrowClassTests
     }
 
     [TestMethod]
-    public void Arrow_ExternalEnd_Should_HaveCorrectRightHead()
+    public void ArrowWithExternalEndHasCorrectRightHead()
     {
         // Act
         var arrow = new Arrow("->]");
@@ -260,9 +212,9 @@ public class ArrowClassTests
     }
 
     [TestMethod]
-    public void Arrow_RightArrow_LeftHead_Should_BeEmpty()
+    public void ArrowRightHasEmptyLeftHead()
     {
-        // Assign
+        // Arrange
         var arrow = new Arrow("->");
 
         // Assert
@@ -270,9 +222,9 @@ public class ArrowClassTests
     }
 
     [TestMethod]
-    public void Arrow_LeftArrowRightHead_Should_BeEmpty()
+    public void ArrowLeftHasEmptyRightHead()
     {
-        // Assign
+        // Arrange
         var arrow = new Arrow("<-");
 
         // Assert
@@ -280,19 +232,9 @@ public class ArrowClassTests
     }
 
     [TestMethod]
-    public void Arrow_StartWithColor_LeftHead_Should_BeEmpty()
+    public void ArrowWithRightColorHasColor()
     {
-        // Assign
-        var arrow = new Arrow("[#red]->");
-
-        // Assert
-        arrow.LeftHead.Should().BeEmpty();
-    }
-
-    [TestMethod]
-    public void Arrow_StartWithColor_LeftHead_Should_HaveColor()
-    {
-        // Assign
+        // Arrange
         var arrow = new Arrow("[#red]->");
 
         // Assert
@@ -300,9 +242,9 @@ public class ArrowClassTests
     }
 
     [TestMethod]
-    public void Arrow_ArrowRight_ToString_Should_ReturnCorrectArrow()
+    public void ArrowRightIsRenderedCorrectly()
     {
-        // Assign
+        // Arrange
         var arrow = Arrow.Right;
 
         // Assert
@@ -310,9 +252,9 @@ public class ArrowClassTests
     }
 
     [TestMethod]
-    public void Arrow_ArrowRightWithColor_ToString_Should_ReturnCorrectArrow()
+    public void ArrowRightWithColorIsRenderedCorrectly()
     {
-        // Assign
+        // Arrange
         var arrow = Arrow.Right.Color(NamedColor.AliceBlue);
 
         // Assert
@@ -320,9 +262,9 @@ public class ArrowClassTests
     }
 
     [TestMethod]
-    public void Arrow_StringCast_Should_GiveCorrectArrow()
+    public void ArrowStringCastIsRenderedCorrectly()
     {
-        // Assign
+        // Arrange
         var value = "->";
 
         // Act
@@ -333,9 +275,9 @@ public class ArrowClassTests
     }
 
     [TestMethod]
-    public void Arrow_CastString_Should_GiveCorrectString()
+    public void ArrowStringCastReturnsCorrectString()
     {
-        // Assign
+        // Arrange
         var arrow = new Arrow("->");
 
         // Act
