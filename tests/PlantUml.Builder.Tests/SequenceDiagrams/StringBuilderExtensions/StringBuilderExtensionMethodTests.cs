@@ -6,15 +6,11 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests;
 public class StringBuilderExtensionMethodTests
 {
     [TestMethod]
-    [DynamicData(nameof(GetStringBuilderExtensionMethods), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetStringBuilderExtensionMethodsDisplayName))]
-    public void ExtensionMethodsShouldNotWorkOnANullStringBuilder(string methodName, object[] methodParameters)
+    [DynamicData(nameof(GetStringBuilderExtensionMethods), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetStringBuilderExtensionMethodTestDisplayName))]
+    public void ExtensionMethodsShouldNotWorkOnANullStringBuilder(MethodWithArgumentData testData)
     {
         // Arrange
-        StringBuilder stringBuilder = null;
-
-        var method = typeof(StringBuilderExtensions).FindOverloadedMethod(methodName, methodParameters.Select(p => p.GetType()));
-        var remainingParameters = method.GetParameters().Skip(methodParameters.Length + 1).Select(p => Type.Missing);
-        var parameters = new object[] { stringBuilder }.Concat(methodParameters).Concat(remainingParameters).ToArray();
+        var (method, parameters) = typeof(StringBuilderExtensions).GetExtensionMethodAndParameters(null, testData.Method, testData.Parameters);
 
         // Act
         Action action = () => method.Invoke(null, parameters);
@@ -22,19 +18,59 @@ public class StringBuilderExtensionMethodTests
         // Assert
         action.Should().ThrowExactly<TargetInvocationException>()
             .WithInnerExceptionExactly<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
+            .WithParameterName("stringBuilder");
     }
 
     private static IEnumerable<object[]> GetStringBuilderExtensionMethods()
     {
-        yield return new object[] { "AutoNumber", new object[0] };
-        yield return new object[] { "IncreaseAutoNumber", new object[0] };
-        yield return new object[] { "ResumeAutoNumber", new object[0] };
-        yield return new object[] { "StopAutoNumber", new object[0] };
+        yield return new object[] { new MethodWithArgumentData("Activate", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("Actor", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("AltStart") };
+        yield return new object[] { new MethodWithArgumentData("Arrow", (ParticipantName)AnyString, Arrow.Right, (ParticipantName)AnyString) };
+        yield return new object[] { new MethodWithArgumentData("AutoNumber") };
+        yield return new object[] { new MethodWithArgumentData("AutoActivate") };
+        yield return new object[] { new MethodWithArgumentData("Boundary", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("BoxEnd") };
+        yield return new object[] { new MethodWithArgumentData("BoxStart") };
+        yield return new object[] { new MethodWithArgumentData("Collections", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("Control", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("Create", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("CreateActor", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("CreateBoundary", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("CreateCollections", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("CreateControl", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("CreateDatabase", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("CreateEntity", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("CreateQueue", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("Database", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("Deactivate") };
+        yield return new object[] { new MethodWithArgumentData("Deactivate", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("Delay") };
+        yield return new object[] { new MethodWithArgumentData("Destroy", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("Divider") };
+        yield return new object[] { new MethodWithArgumentData("ElseStart") };
+        yield return new object[] { new MethodWithArgumentData("EndLoop") };
+        yield return new object[] { new MethodWithArgumentData("EndRef") };
+        yield return new object[] { new MethodWithArgumentData("Entity", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("GroupEnd") };
+        yield return new object[] { new MethodWithArgumentData("GroupStart") };
+        yield return new object[] { new MethodWithArgumentData("IncreaseAutoNumber") };
+        yield return new object[] { new MethodWithArgumentData("NewPage") };
+        yield return new object[] { new MethodWithArgumentData("NewPage", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("Participant", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("Queue", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("Ref", AnyString, AnyString) };
+        yield return new object[] { new MethodWithArgumentData("Ref", AnyString, AnyString, AnyString) };
+        yield return new object[] { new MethodWithArgumentData("ResumeAutoNumber") };
+        yield return new object[] { new MethodWithArgumentData("Return") };
+        yield return new object[] { new MethodWithArgumentData("Return", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("Space") };
+        yield return new object[] { new MethodWithArgumentData("StartLoop") };
+        yield return new object[] { new MethodWithArgumentData("StartRef", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("StartRef", AnyString, AnyString) };
+        yield return new object[] { new MethodWithArgumentData("StopAutoNumber") };
+
     }
 
-    public static string GetStringBuilderExtensionMethodsDisplayName(MethodInfo _, object[] data)
-    {
-        return $"Method \"{data[0]}\" should throw an argument exception when StringBuilder is `null`";
-    }
+    public static string GetStringBuilderExtensionMethodTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetStringBuilderExtensionMethodTestDisplayName(data);
 }

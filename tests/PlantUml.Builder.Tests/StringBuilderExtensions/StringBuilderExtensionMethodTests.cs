@@ -6,15 +6,11 @@ namespace PlantUml.Builder.Tests;
 public class StringBuilderExtensionMethodTests
 {
     [TestMethod]
-    [DynamicData(nameof(GetStringBuilderExtensionMethods), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetStringBuilderExtensionMethodsDisplayName))]
-    public void ExtensionMethodsShouldNotWorkOnANullStringBuilder(string methodName, object[] methodParameters)
+    [DynamicData(nameof(GetStringBuilderExtensionMethods), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetStringBuilderExtensionMethodTestDisplayName))]
+    public void ExtensionMethodsShouldNotWorkOnANullStringBuilder(MethodWithArgumentData testData)
     {
         // Arrange
-        StringBuilder stringBuilder = null;
-
-        var method = typeof(StringBuilderExtensions).FindOverloadedMethod(methodName, methodParameters.Select(p => p.GetType()));
-        var remainingParameters = method.GetParameters().Skip(methodParameters.Length + 1).Select(p => Type.Missing);
-        var parameters = new object[] { stringBuilder }.Concat(methodParameters).Concat(remainingParameters).ToArray();
+        var (method, parameters) = typeof(StringBuilderExtensions).GetExtensionMethodAndParameters(null, testData.Method, testData.Parameters);
 
         // Act
         Action action = () => method.Invoke(null, parameters);
@@ -22,24 +18,42 @@ public class StringBuilderExtensionMethodTests
         // Assert
         action.Should().ThrowExactly<TargetInvocationException>()
             .WithInnerExceptionExactly<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
+            .WithParameterName("stringBuilder");
     }
 
     private static IEnumerable<object[]> GetStringBuilderExtensionMethods()
     {
-        yield return new object[] { "Note", new object[] { default(NotePosition), string.Empty } };
-        yield return new object[] { "HNote", new object[] { default(NotePosition), string.Empty } };
-        yield return new object[] { "RNote", new object[] { default(NotePosition), string.Empty } };
-        yield return new object[] { "StartNote", new object[] { default(NotePosition) } };
-        yield return new object[] { "StartHNote", new object[] { default(NotePosition) } };
-        yield return new object[] { "StartRNote", new object[] { default(NotePosition) } };
-        yield return new object[] { "EndNote", new object[0] };
-        yield return new object[] { "EndHNote", new object[0] };
-        yield return new object[] { "EndRNote", new object[0] };
+        // PlantUML methods
+        yield return new object[] { new MethodWithArgumentData("Note", default(NotePosition), AnyString) };
+        yield return new object[] { new MethodWithArgumentData("HNote", default(NotePosition), AnyString) };
+        yield return new object[] { new MethodWithArgumentData("RNote", default(NotePosition), AnyString) };
+        yield return new object[] { new MethodWithArgumentData("StartNote", default(NotePosition)) };
+        yield return new object[] { new MethodWithArgumentData("StartHNote", default(NotePosition)) };
+        yield return new object[] { new MethodWithArgumentData("StartRNote", default(NotePosition)) };
+        yield return new object[] { new MethodWithArgumentData("EndNote") };
+        yield return new object[] { new MethodWithArgumentData("EndHNote") };
+        yield return new object[] { new MethodWithArgumentData("EndRNote") };
+        yield return new object[] { new MethodWithArgumentData("AllowMixing") };
+        yield return new object[] { new MethodWithArgumentData("Comment") };
+        yield return new object[] { new MethodWithArgumentData("CommentBlock") };
+        yield return new object[] { new MethodWithArgumentData("Footer", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("Header", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("HideEntityPortion", AnyString, EntityPortion.Members) };
+        yield return new object[] { new MethodWithArgumentData("InlineClassMember", (ClassMember)AnyString) };
+        yield return new object[] { new MethodWithArgumentData("MemberDeclaration", AnyString, (ClassMember)AnyString) };
+        yield return new object[] { new MethodWithArgumentData("Relationship", AnyString, AnyString, AnyString) };
+        yield return new object[] { new MethodWithArgumentData("SetNamespaceSeparator") };
+        yield return new object[] { new MethodWithArgumentData("SkinParameter", AnyString, AnyString) };
+        yield return new object[] { new MethodWithArgumentData("StereoType") };
+        yield return new object[] { new MethodWithArgumentData("Text", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("Title", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("UmlDiagramEnd") };
+        yield return new object[] { new MethodWithArgumentData("UmlDiagramStart") };
+
+        // Non PlantUML methods
+        yield return new object[] { new MethodWithArgumentData("AppendNewLine") };
+        yield return new object[] { new MethodWithArgumentData("TrimEnd") };
     }
 
-    public static string GetStringBuilderExtensionMethodsDisplayName(MethodInfo _, object[] data)
-    {
-        return $"Method \"{data[0]}\" should throw an argument exception when StringBuilder is `null`";
-    }
+    public static string GetStringBuilderExtensionMethodTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetStringBuilderExtensionMethodTestDisplayName(data);
 }
