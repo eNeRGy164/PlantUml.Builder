@@ -3,8 +3,8 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests;
 [TestClass]
 public class ArrowDefaultsTests
 {
-    [TestMethod]
     [DynamicData(nameof(GetDefaultArrows), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetDefaultArrowsDisplayName))]
+    [TestMethod]
     public void ReturnCorrectDefaultArrowNotation(string name, string expected)
     {
         // Arrange & Act
@@ -54,8 +54,5 @@ public class ArrowDefaultsTests
         yield return new[] { "DottedThinLeftRight", "<<-->>" };
     }
 
-    public static string GetDefaultArrowsDisplayName(MethodInfo _, object[] data)
-    {
-        return $"The default \"{data[0]}\" should have the \"{data[1]}\" notation";
-    }
+    public static string GetDefaultArrowsDisplayName(MethodInfo _, object[] data) => $"The default \"{data[0]}\" should have the \"{data[1]}\" notation";
 }
