@@ -16,8 +16,7 @@ public static partial class StringBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
         ArgumentException.ThrowIfNullOrWhitespace(name);
-        if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
-        if (portion == 0) throw new ArgumentException("An entity portion should be supplied", nameof(portion));
+        if (portion == EntityPortion.None || !Enum.IsDefined(portion)) throw new ArgumentOutOfRangeException(nameof(portion), "An entity portion should be supplied");
 
         stringBuilder.Append(Constant.Hide);
         stringBuilder.Append(Constant.Space);
@@ -45,7 +44,7 @@ public static partial class StringBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        if (portion == 0) throw new ArgumentException("An entity portion should be supplied", nameof(portion));
+        if (portion == EntityPortion.None || !Enum.IsDefined(portion)) throw new ArgumentOutOfRangeException(nameof(portion), "An entity portion should be supplied");
 
         stringBuilder.Append(Constant.Hide);
         stringBuilder.Append(Constant.Space);

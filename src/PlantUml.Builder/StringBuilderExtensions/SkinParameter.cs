@@ -33,7 +33,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="skinParameter"/> is not a <see cref="SkinParameter"/> value.</exception>
     public static void SkinParameter(this StringBuilder stringBuilder, SkinParameter skinParameter, string value)
     {
-        if (!Enum.IsDefined(typeof(SkinParameter), skinParameter)) throw new ArgumentOutOfRangeException(nameof(skinParameter), "A defined enum value should be provided");
+        if (!Enum.IsDefined(skinParameter)) throw new ArgumentOutOfRangeException(nameof(skinParameter), "A defined enum value should be provided");
 
         stringBuilder.SkinParameter(skinParameter.ToString(), value);
     }

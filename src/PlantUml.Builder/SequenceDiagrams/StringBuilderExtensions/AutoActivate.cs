@@ -10,6 +10,7 @@ public static partial class StringBuilderExtensions
     public static void AutoActivate(this StringBuilder stringBuilder, OnOff mode = OnOff.On)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
+        if (!Enum.IsDefined(mode)) throw new ArgumentOutOfRangeException(nameof(mode), "A defined enum value should be provided");
 
         stringBuilder.Append(Constant.Auto);
         stringBuilder.Append(Constant.Activate);
