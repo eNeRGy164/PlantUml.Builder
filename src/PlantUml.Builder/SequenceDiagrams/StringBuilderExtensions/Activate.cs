@@ -15,18 +15,18 @@ public static partial class StringBuilderExtensions
         ArgumentNullException.ThrowIfNull(stringBuilder);
         ArgumentException.ThrowIfNullOrWhitespace(name);
 
-        stringBuilder.Append(Constant.Activate);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Words.Activate);
+        stringBuilder.Append(Constant.Symbols.Space);
         stringBuilder.Append(name);
 
         if (color is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(color);
 
             if (borderColor is not null)
             {
-                stringBuilder.Append(Constant.Space);
+                stringBuilder.Append(Constant.Symbols.Space);
                 stringBuilder.Append(borderColor);
             }
         }

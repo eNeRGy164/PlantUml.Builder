@@ -10,9 +10,9 @@ public static partial class StringBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.Append(Constant.At);
-        stringBuilder.Append(Constant.End);
-        stringBuilder.Append(Constant.Uml);
+        stringBuilder.Append(Constant.Symbols.At);
+        stringBuilder.Append(Constant.Words.End);
+        stringBuilder.Append(Constant.Words.Uml);
         stringBuilder.AppendNewLine();
     }
 }

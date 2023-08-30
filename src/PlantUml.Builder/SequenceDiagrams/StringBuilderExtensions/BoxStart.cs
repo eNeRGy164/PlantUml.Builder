@@ -12,19 +12,19 @@ public static partial class StringBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.Append(Constant.Box);
+        stringBuilder.Append(Constant.Words.Box);
 
         if (!string.IsNullOrEmpty(title))
         {
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.Quote);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Symbols.Quote);
             stringBuilder.Append(title.Trim());
-            stringBuilder.Append(Constant.Quote);
+            stringBuilder.Append(Constant.Symbols.Quote);
         }
 
         if (color is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(color);
         }
 

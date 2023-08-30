@@ -9,7 +9,7 @@ public static partial class StringBuilderExtensions
     /// <param name="text">Optional text.</param>
     /// <param name="label">Optional label.</param>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
-    public static void GroupStart(this StringBuilder stringBuilder, string type = Constant.Group, string text = null, string label = null)
+    public static void GroupStart(this StringBuilder stringBuilder, string type = Constant.Words.Group, string text = null, string label = null)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
@@ -17,19 +17,19 @@ public static partial class StringBuilderExtensions
 
         if (!string.IsNullOrWhiteSpace(label))
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(label);
         }
 
         if (!string.IsNullOrWhiteSpace(text))
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             
-            if (type == Constant.Group) stringBuilder.Append(Constant.GroupLabelStart);
+            if (type == Constant.Words.Group) stringBuilder.Append(Constant.GroupLabelStart);
 
             stringBuilder.Append(text);
 
-            if (type == Constant.Group) stringBuilder.Append(Constant.GroupLabelEnd);
+            if (type == Constant.Words.Group) stringBuilder.Append(Constant.GroupLabelEnd);
         }
 
         stringBuilder.AppendNewLine();

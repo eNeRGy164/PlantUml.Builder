@@ -16,14 +16,14 @@ public static partial class StringBuilderExtensions
         ArgumentException.ThrowIfNullOrWhitespace(participant);
         ArgumentException.ThrowIfNullOrWhitespace(note);
 
-        stringBuilder.Append(Constant.Ref);
-        stringBuilder.Append(Constant.Space);
-        stringBuilder.Append(Constant.Over);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Words.Ref);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Words.Over);
+        stringBuilder.Append(Constant.Symbols.Space);
         stringBuilder.Append(participant);
-        stringBuilder.Append(Constant.Space);
-        stringBuilder.Append(Constant.Colon);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Symbols.Colon);
+        stringBuilder.Append(Constant.Symbols.Space);
         stringBuilder.Append(note.Replace("\n", "\\n"));
         stringBuilder.AppendNewLine();
     }
@@ -42,7 +42,7 @@ public static partial class StringBuilderExtensions
         ArgumentException.ThrowIfNullOrWhitespace(participantA);
         ArgumentException.ThrowIfNullOrWhitespace(participantB);
 
-        stringBuilder.Ref(participantA + Constant.Comma + participantB, note);
+        stringBuilder.Ref(participantA + Constant.Symbols.Comma + participantB, note);
     }
 
     /// <summary>
@@ -56,10 +56,10 @@ public static partial class StringBuilderExtensions
         ArgumentNullException.ThrowIfNull(stringBuilder);
         ArgumentException.ThrowIfNullOrWhitespace(participant);
 
-        stringBuilder.Append(Constant.Ref);
-        stringBuilder.Append(Constant.Space);
-        stringBuilder.Append(Constant.Over);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Words.Ref);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Words.Over);
+        stringBuilder.Append(Constant.Symbols.Space);
         stringBuilder.Append(participant);
         stringBuilder.AppendNewLine();
     }
@@ -77,7 +77,7 @@ public static partial class StringBuilderExtensions
         ArgumentException.ThrowIfNullOrWhitespace(participantA);
         ArgumentException.ThrowIfNullOrWhitespace(participantB);
 
-        stringBuilder.StartRef(participantA + Constant.Comma + participantB);
+        stringBuilder.StartRef(participantA + Constant.Symbols.Comma + participantB);
     }
 
     /// <summary>
@@ -88,9 +88,9 @@ public static partial class StringBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.Append(Constant.End);
-        stringBuilder.Append(Constant.Space);
-        stringBuilder.Append(Constant.Ref);
+        stringBuilder.Append(Constant.Words.End);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Words.Ref);
         stringBuilder.AppendNewLine();
     }
 }

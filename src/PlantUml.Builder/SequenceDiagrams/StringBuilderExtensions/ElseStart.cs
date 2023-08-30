@@ -9,6 +9,6 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void ElseStart(this StringBuilder stringBuilder, string text = null)
     {
-        stringBuilder.GroupStart(Constant.Else, text);
+        stringBuilder.GroupStart(Constant.Words.Else, text);
     }
 }

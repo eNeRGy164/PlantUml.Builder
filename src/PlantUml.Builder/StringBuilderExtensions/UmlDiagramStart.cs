@@ -12,13 +12,13 @@ public static partial class StringBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.Append(Constant.At);
-        stringBuilder.Append(Constant.Start);
-        stringBuilder.Append(Constant.Uml);
+        stringBuilder.Append(Constant.Symbols.At);
+        stringBuilder.Append(Constant.Words.Start);
+        stringBuilder.Append(Constant.Words.Uml);
 
         if (!string.IsNullOrEmpty(fileName))
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(fileName);
         }
 

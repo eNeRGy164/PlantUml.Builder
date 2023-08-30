@@ -21,34 +21,34 @@ public static partial class StringBuilderExtensions
         ArgumentException.ThrowIfNullOrWhitespace(right);
 
         stringBuilder.Append(left);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Symbols.Space);
 
         if (!string.IsNullOrEmpty(leftCardinality))
         {
-            stringBuilder.Append(Constant.Quote);
+            stringBuilder.Append(Constant.Symbols.Quote);
             stringBuilder.Append(leftCardinality);
-            stringBuilder.Append(Constant.Quote);
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Quote);
+            stringBuilder.Append(Constant.Symbols.Space);
         }
 
         stringBuilder.Append(type);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Symbols.Space);
 
         if (!string.IsNullOrEmpty(rightCardinality))
         {
-            stringBuilder.Append(Constant.Quote);
+            stringBuilder.Append(Constant.Symbols.Quote);
             stringBuilder.Append(rightCardinality);
-            stringBuilder.Append(Constant.Quote);
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Quote);
+            stringBuilder.Append(Constant.Symbols.Space);
         }
 
         stringBuilder.Append(right);
 
         if (!string.IsNullOrEmpty(label))
         {
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.Colon);
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Symbols.Colon);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(label);
         }
 

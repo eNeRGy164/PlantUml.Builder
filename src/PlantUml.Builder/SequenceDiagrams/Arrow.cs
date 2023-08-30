@@ -129,7 +129,7 @@ public partial class Arrow
                 {
                     mode = ArrowPart.Body;
                 }
-                else if (value[i] == Constant.ColorStart && (i < value.Length - 1) && value[i + 1] == Constant.ColorPrefix)
+                else if (value[i] == Constant.Color.Start && (i < value.Length - 1) && value[i + 1] == Constant.Color.Prefix)
                 {
                     // Left arrow head can start with a '[', but should not be a color.
                     mode = ArrowPart.Color;
@@ -142,7 +142,7 @@ public partial class Arrow
 
             if (mode == ArrowPart.Body)
             {
-                if (value[i] == Constant.ColorStart && (i < value.Length - 1) && value[i + 1] == Constant.ColorPrefix)
+                if (value[i] == Constant.Color.Start && (i < value.Length - 1) && value[i + 1] == Constant.Color.Prefix)
                 {
                     mode = ArrowPart.Color;
                 }
@@ -158,11 +158,11 @@ public partial class Arrow
 
             if (mode == ArrowPart.Color)
             {
-                if (value[i] == Constant.ColorStart)
+                if (value[i] == Constant.Color.Start)
                 {
                     continue;
                 }
-                else if (value[i] == Constant.ColorEnd)
+                else if (value[i] == Constant.Color.End)
                 {
                     mode = ArrowPart.Body;
                     continue;

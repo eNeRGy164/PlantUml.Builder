@@ -10,6 +10,6 @@ public static partial class StringBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.Append(Constant.NewLine);
+        stringBuilder.Append(Constant.Symbols.NewLine);
     }
 }

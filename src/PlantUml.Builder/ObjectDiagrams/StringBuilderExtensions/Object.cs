@@ -15,30 +15,30 @@ public static partial class StringBuilderExtensions
         ArgumentNullException.ThrowIfNull(stringBuilder);
         ArgumentException.ThrowIfNullOrWhitespace(name);
 
-        stringBuilder.Append(Constant.Object);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Words.Object);
+        stringBuilder.Append(Constant.Symbols.Space);
 
         if (displayName is not null)
         {
-            stringBuilder.Append(Constant.Quote);
+            stringBuilder.Append(Constant.Symbols.Quote);
             stringBuilder.Append(displayName);
-            stringBuilder.Append(Constant.Quote);
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.As);
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Quote);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Words.As);
+            stringBuilder.Append(Constant.Symbols.Space);
         }
 
         stringBuilder.Append(name);
 
         if (stereotype is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.StereoType(stereotype);
         }
 
         if (url is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(Constant.UrlStart);
             stringBuilder.Append(url);
             stringBuilder.Append(Constant.UrlEnd);
@@ -46,7 +46,7 @@ public static partial class StringBuilderExtensions
 
         if (backgroundColor is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(backgroundColor);
         }
 
@@ -70,8 +70,8 @@ public static partial class StringBuilderExtensions
             stringBuilder.Length--;
         }
 
-        stringBuilder.Append(Constant.Space);
-        stringBuilder.Append(Constant.ObjectStart);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Object.Start);
         stringBuilder.AppendNewLine();
     }
 
@@ -83,7 +83,7 @@ public static partial class StringBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.Append(Constant.ObjectEnd);
+        stringBuilder.Append(Constant.Object.End);
         stringBuilder.AppendNewLine();
     }
 }

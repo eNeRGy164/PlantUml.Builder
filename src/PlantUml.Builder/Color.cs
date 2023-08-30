@@ -19,13 +19,13 @@ public class Color : IFormattable
         }
         else
         {
-            if (color[0] == Constant.ColorPrefix)
+            if (color[0] == Constant.Color.Prefix)
             {
                 this.value = color.Trim();
             }
             else
             {
-                this.value = Constant.ColorPrefix + color.Trim();
+                this.value = Constant.Color.Prefix + color.Trim();
             }
         }
     }
@@ -58,7 +58,7 @@ public class Color : IFormattable
     {
         if (format != null && format.Equals("B", StringComparison.OrdinalIgnoreCase))
         {
-            return Constant.ColorStart + this.value + Constant.ColorEnd;
+            return Constant.Color.Start + this.value + Constant.Color.End;
         }
 
         return this.value;

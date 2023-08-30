@@ -15,7 +15,7 @@ public static partial class StringBuilderExtensions
 
         if (!string.IsNullOrEmpty(comment))
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(comment.Replace("\n", "\\n"));
         }
         

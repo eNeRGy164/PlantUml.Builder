@@ -1,5 +1,3 @@
-using static PlantUml.Builder.Constant;
-
 namespace PlantUml.Builder.ClassDiagrams;
 
 public static partial class StringBuilderExtensions
@@ -25,86 +23,86 @@ public static partial class StringBuilderExtensions
         ArgumentException.ThrowIfNullOrWhitespace(name);
 
         stringBuilder.Append(type.ToString().ToLowerInvariant());
-        stringBuilder.Append(Space);
+        stringBuilder.Append(Constant.Symbols.Space);
 
         if (displayName is not null)
         {
-            stringBuilder.Append(Quote);
+            stringBuilder.Append(Constant.Symbols.Quote);
             stringBuilder.Append(displayName);
-            stringBuilder.Append(Quote);
-            stringBuilder.Append(Space);
-            stringBuilder.Append(As);
-            stringBuilder.Append(Space);
+            stringBuilder.Append(Constant.Symbols.Quote);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Words.As);
+            stringBuilder.Append(Constant.Symbols.Space);
         }
 
         stringBuilder.Append(name);
 
         if (generics is not null)
         {
-            stringBuilder.Append(GenericsStart);
+            stringBuilder.Append(Constant.GenericsStart);
             stringBuilder.Append(generics);
-            stringBuilder.Append(GenericsEnd);
+            stringBuilder.Append(Constant.GenericsEnd);
         }
 
         if (stereotype is not null)
         {
-            stringBuilder.Append(Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.StereoType(stereotype, customSpot);
         }
 
         if (tag is not null)
         {
-            stringBuilder.Append(Space);
-            stringBuilder.Append(TagPrefix);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.TagPrefix);
             stringBuilder.Append(tag);
         }
 
         if (url is not null)
         {
-            stringBuilder.Append(Space);
-            stringBuilder.Append(UrlStart);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.UrlStart);
             stringBuilder.Append(url);
-            stringBuilder.Append(UrlEnd);
+            stringBuilder.Append(Constant.UrlEnd);
         }
 
         if (backgroundColor is not null)
         {
-            stringBuilder.Append(Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(backgroundColor);
         }
 
         if (lineColor is not null || lineStyle != LineStyle.None)
         {
-            stringBuilder.Append(Space);
-            stringBuilder.Append(ColorPrefix);
-            stringBuilder.Append(ColorPrefix);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Color.Prefix);
+            stringBuilder.Append(Constant.Color.Prefix);
 
             if (lineStyle > LineStyle.None)
             {
-                stringBuilder.Append(BorderStyleStart);
+                stringBuilder.Append(Constant.Styling.Border.Start);
                 stringBuilder.Append(lineStyle.ToString().ToLowerInvariant());
-                stringBuilder.Append(BorderStyleEnd);
+                stringBuilder.Append(Constant.Styling.Border.End);
             }
 
             if (lineColor is not null)
             {
-                stringBuilder.Append(lineColor.ToString().TrimStart(ColorPrefix));
+                stringBuilder.Append(lineColor.ToString().TrimStart(Constant.Color.Prefix));
             }
         }
 
         if (extends is not null && extends.Length > 0)
         {
-            stringBuilder.Append(Space);
-            stringBuilder.Append(Extends);
-            stringBuilder.Append(Space);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Words.Extends);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.AppendJoin(',', extends);
         }
 
         if (implements is not null && implements.Length > 0)
         {
-            stringBuilder.Append(Space);
-            stringBuilder.Append(Implements);
-            stringBuilder.Append(Space);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Words.Implements);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.AppendJoin(',', implements);
         }
     }
@@ -114,8 +112,8 @@ public static partial class StringBuilderExtensions
     /// </summary>
     internal static void ClassBaseStart(this StringBuilder stringBuilder)
     {
-        stringBuilder.Append(Space);
-        stringBuilder.Append(Constant.ClassStart);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Class.Start);
         stringBuilder.AppendNewLine();
     }
 
@@ -124,7 +122,7 @@ public static partial class StringBuilderExtensions
     /// </summary>
     internal static void ClassBaseEnd(this StringBuilder stringBuilder)
     {
-        stringBuilder.Append(Constant.ClassEnd);
+        stringBuilder.Append(Constant.Class.End);
         stringBuilder.AppendNewLine();
     }
 }

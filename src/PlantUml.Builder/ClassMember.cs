@@ -69,8 +69,8 @@ public class ClassMember
         {
             var matches = modifiers.Matches(value).Cast<Match>();
 
-            isAbstract = matches.Any(m => string.Equals(m.Groups["modifier"].Value, Constant.Abstract, StringComparison.OrdinalIgnoreCase));
-            isStatic = matches.Any(m => string.Equals(m.Groups["modifier"].Value, Constant.Static, StringComparison.OrdinalIgnoreCase));
+            isAbstract = matches.Any(m => string.Equals(m.Groups["modifier"].Value, Constant.Words.Abstract, StringComparison.OrdinalIgnoreCase));
+            isStatic = matches.Any(m => string.Equals(m.Groups["modifier"].Value, Constant.Words.Static, StringComparison.OrdinalIgnoreCase));
 
             value = modifiers.Replace(value, string.Empty).Trim();
 
@@ -78,16 +78,16 @@ public class ClassMember
             {
                 switch (value[0])
                 {
-                    case Constant.Private:
+                    case Constant.Visibility.Private:
                         visibilityModifier = VisibilityModifier.Private;
                         break;
-                    case Constant.Protected:
+                    case Constant.Visibility.Protected:
                         visibilityModifier = VisibilityModifier.Protected;
                         break;
-                    case Constant.PackagePrivate:
+                    case Constant.Visibility.PackagePrivate:
                         visibilityModifier = VisibilityModifier.PackagePrivate;
                         break;
-                    case Constant.Public:
+                    case Constant.Visibility.Public:
                         visibilityModifier = VisibilityModifier.Public;
                         break;
                 }

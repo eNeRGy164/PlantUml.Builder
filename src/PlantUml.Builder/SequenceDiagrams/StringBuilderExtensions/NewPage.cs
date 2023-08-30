@@ -10,8 +10,8 @@ public static partial class StringBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
         
-        stringBuilder.Append(Constant.New);
-        stringBuilder.Append(Constant.Page);
+        stringBuilder.Append(Constant.Words.New);
+        stringBuilder.Append(Constant.Words.Page);
         stringBuilder.AppendNewLine();
     }
 
@@ -26,9 +26,9 @@ public static partial class StringBuilderExtensions
         ArgumentNullException.ThrowIfNull(stringBuilder);
         ArgumentException.ThrowIfNullOrWhitespace(title);
 
-        stringBuilder.Append(Constant.New);
-        stringBuilder.Append(Constant.Page);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Words.New);
+        stringBuilder.Append(Constant.Words.Page);
+        stringBuilder.Append(Constant.Symbols.Space);
         stringBuilder.Append(title.Replace("\n", "\\n"));
         stringBuilder.AppendNewLine();
     }

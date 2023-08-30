@@ -12,9 +12,9 @@ public static partial class StringBuilderExtensions
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
         stringBuilder.Append(Constant.CommentStart);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Symbols.Space);
         stringBuilder.Append(comment);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Symbols.Space);
         stringBuilder.Append(Constant.CommentEnd);
         stringBuilder.AppendNewLine();
     }

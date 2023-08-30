@@ -20,27 +20,27 @@ public static partial class StringBuilderExtensions
         if (start is not null) ArgumentException.ThrowIfNullOrWhitespace(start);
         if (format is not null) ArgumentException.ThrowIfNullOrWhitespace(format);
 
-        stringBuilder.Append(Constant.Auto);
-        stringBuilder.Append(Constant.Number);
+        stringBuilder.Append(Constant.Words.Auto);
+        stringBuilder.Append(Constant.Words.Number);
 
         if (!string.IsNullOrWhiteSpace(start))
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(start);
 
             if (step.HasValue)
             {
-                stringBuilder.Append(Constant.Space);
+                stringBuilder.Append(Constant.Symbols.Space);
                 stringBuilder.Append(step.Value);
             }
         }
 
         if (!string.IsNullOrEmpty(format))
         {
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.Quote);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Symbols.Quote);
             stringBuilder.Append(format);
-            stringBuilder.Append(Constant.Quote);
+            stringBuilder.Append(Constant.Symbols.Quote);
         }
 
         stringBuilder.AppendNewLine();
@@ -66,10 +66,10 @@ public static partial class StringBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.Append(Constant.Auto);
-        stringBuilder.Append(Constant.Number);
-        stringBuilder.Append(Constant.Space);
-        stringBuilder.Append(Constant.Stop);
+        stringBuilder.Append(Constant.Words.Auto);
+        stringBuilder.Append(Constant.Words.Number);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Words.Stop);
         stringBuilder.AppendNewLine();
     }
 
@@ -86,23 +86,23 @@ public static partial class StringBuilderExtensions
 
         if (format is not null) ArgumentException.ThrowIfNullOrWhitespace(format);
 
-        stringBuilder.Append(Constant.Auto);
-        stringBuilder.Append(Constant.Number);
-        stringBuilder.Append(Constant.Space);
-        stringBuilder.Append(Constant.Resume);
+        stringBuilder.Append(Constant.Words.Auto);
+        stringBuilder.Append(Constant.Words.Number);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Words.Resume);
 
         if (step.HasValue)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(step.Value);
         }
 
         if (format is not null)
         {
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.Quote);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Symbols.Quote);
             stringBuilder.Append(format);
-            stringBuilder.Append(Constant.Quote);
+            stringBuilder.Append(Constant.Symbols.Quote);
         }
 
         stringBuilder.AppendNewLine();
@@ -120,14 +120,14 @@ public static partial class StringBuilderExtensions
 
         if (position.HasValue && (char.ToLower(position.Value) < 'a' || char.ToLower(position.Value) > 'z')) throw new ArgumentOutOfRangeException(nameof(position), "Only the characters A - Z are allowed");
 
-        stringBuilder.Append(Constant.Auto);
-        stringBuilder.Append(Constant.Number);
-        stringBuilder.Append(Constant.Space);
-        stringBuilder.Append(Constant.Increase);
+        stringBuilder.Append(Constant.Words.Auto);
+        stringBuilder.Append(Constant.Words.Number);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Words.Increase);
 
         if (position.HasValue)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(position);
         }
 

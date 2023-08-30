@@ -34,12 +34,12 @@ public static partial class StringBuilderExtensions
             stringBuilder.Append(left);
         }
 
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Symbols.Space);
 
         if (left is not null && right is not null)
         {
             stringBuilder.Append(arrow);
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
         }
 
         if (right is null)
@@ -53,21 +53,21 @@ public static partial class StringBuilderExtensions
 
         if (lifeEvents is not null && lifeEvents != LifeLineEvents.None)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(lifeEvents);
         }
 
         if (activationColor is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(activationColor);
         }
 
         if (!string.IsNullOrEmpty(message))
         {
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.Colon);
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Symbols.Colon);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(message.Replace("\n", "\\n"));
         }
 

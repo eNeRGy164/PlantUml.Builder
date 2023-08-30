@@ -13,9 +13,9 @@ public static partial class StringBuilderExtensions
     {
         stringBuilder.NoteBase(position, participant: null, style, color, alignWithPrevious);
 
-        stringBuilder.Append(Constant.Space);
-        stringBuilder.Append(Constant.Colon);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Symbols.Colon);
+        stringBuilder.Append(Constant.Symbols.Space);
         stringBuilder.Append(note.Replace("\n", "\\n"));
         stringBuilder.AppendNewLine();
     }
@@ -33,9 +33,9 @@ public static partial class StringBuilderExtensions
     public static void Note(this StringBuilder stringBuilder, NotePosition position, string participant, string note, NoteStyle style = NoteStyle.Normal, Color color = null, bool alignWithPrevious = false)
     {
         stringBuilder.NoteBase(position, participant, style, color, alignWithPrevious);
-        stringBuilder.Append(Constant.Space);
-        stringBuilder.Append(Constant.Colon);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Symbols.Colon);
+        stringBuilder.Append(Constant.Symbols.Space);
         stringBuilder.Append(note.Replace("\n", "\\n"));
         stringBuilder.AppendNewLine();
     }
@@ -66,7 +66,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void Note(this StringBuilder stringBuilder, string participantA, string participantB, string note, NoteStyle style = NoteStyle.Normal, Color color = null, bool alignWithPrevious = false)
     {
-        stringBuilder.Note(NotePosition.Over, participantA + Constant.Comma + participantB, note, style, color, alignWithPrevious);
+        stringBuilder.Note(NotePosition.Over, participantA + Constant.Symbols.Comma + participantB, note, style, color, alignWithPrevious);
     }
 
     /// <summary>
@@ -216,7 +216,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void StartNote(this StringBuilder stringBuilder, string participantA, string participantB, NoteStyle style = NoteStyle.Normal, Color color = null, bool alignWithPrevious = false)
     {
-        stringBuilder.StartNote(NotePosition.Over, participantA + Constant.Comma + participantB, style, color, alignWithPrevious);
+        stringBuilder.StartNote(NotePosition.Over, participantA + Constant.Symbols.Comma + participantB, style, color, alignWithPrevious);
     }
 
     /// <summary>
@@ -255,7 +255,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void StartHNote(this StringBuilder stringBuilder, string participantA, string participantB, Color color = null, bool alignWithPrevious = false)
     {
-        stringBuilder.StartNote(NotePosition.Over, participantA + Constant.Comma + participantB, NoteStyle.Hexagonal, color, alignWithPrevious);
+        stringBuilder.StartNote(NotePosition.Over, participantA + Constant.Symbols.Comma + participantB, NoteStyle.Hexagonal, color, alignWithPrevious);
     }
 
     /// <summary>
@@ -294,7 +294,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void StartRNote(this StringBuilder stringBuilder, string participantA, string participantB, Color color = null, bool alignWithPrevious = false)
     {
-        stringBuilder.StartNote(NotePosition.Over, participantA + Constant.Comma + participantB, NoteStyle.Box, color, alignWithPrevious);
+        stringBuilder.StartNote(NotePosition.Over, participantA + Constant.Symbols.Comma + participantB, NoteStyle.Box, color, alignWithPrevious);
     }
 
     /// <summary>

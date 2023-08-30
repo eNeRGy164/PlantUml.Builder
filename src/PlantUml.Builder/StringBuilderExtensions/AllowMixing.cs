@@ -10,9 +10,9 @@ public static partial class StringBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.Append(Constant.Allow);
-        stringBuilder.Append(Constant.Underscore);
-        stringBuilder.Append(Constant.Mixing);
+        stringBuilder.Append(Constant.Words.Allow);
+        stringBuilder.Append(Constant.Symbols.Underscore);
+        stringBuilder.Append(Constant.Words.Mixing);
 
         stringBuilder.AppendNewLine();
     }

@@ -15,11 +15,10 @@ public static partial class StringBuilderExtensions
         ArgumentException.ThrowIfNullOrWhitespace(name);
         ArgumentException.ThrowIfNullOrWhitespace(value);
 
-        stringBuilder.Append(Constant.Skin);
-        stringBuilder.Append(Constant.Param);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Words.SkinParam);
+        stringBuilder.Append(Constant.Symbols.Space);
         stringBuilder.Append(name.Trim());
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Symbols.Space);
         stringBuilder.Append(value.Trim());
         stringBuilder.AppendNewLine();
     }

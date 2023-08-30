@@ -70,7 +70,7 @@ public class ParticipantName
         var mustBeQuoted = MustBeQuoted(name);
         if (mustBeQuoted)
         {
-            return Constant.Quote + name + Constant.Quote;
+            return Constant.Symbols.Quote + name + Constant.Symbols.Quote;
         }
         else
         {

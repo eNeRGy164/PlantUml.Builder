@@ -10,19 +10,19 @@ public static partial class StringBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.Append(Constant.Set);
-        stringBuilder.Append(Constant.Space);
-        stringBuilder.Append(Constant.Namespace);
-        stringBuilder.Append(char.ToUpper(Constant.Separator[0]));
-        stringBuilder.Append(Constant.Separator[1..]);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Words.Set);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Words.Namespace);
+        stringBuilder.Append(char.ToUpper(Constant.Words.Separator[0]));
+        stringBuilder.Append(Constant.Words.Separator[1..]);
+        stringBuilder.Append(Constant.Symbols.Space);
 
         if (!string.IsNullOrWhiteSpace(separator))
         {
             stringBuilder.Append(separator);
         } else
         {
-            stringBuilder.Append(Constant.None);
+            stringBuilder.Append(Constant.Words.None);
         }
 
         stringBuilder.AppendNewLine();

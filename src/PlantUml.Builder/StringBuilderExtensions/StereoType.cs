@@ -16,11 +16,11 @@ public static partial class StringBuilderExtensions
 
         if (customSpot is not null)
         {
-            stringBuilder.Append(Constant.CustomSpotStart);
+            stringBuilder.Append(Constant.Styling.CustomSpot.Start);
             stringBuilder.Append(customSpot.Character);
-            stringBuilder.Append(Constant.Comma);
+            stringBuilder.Append(Constant.Symbols.Comma);
             stringBuilder.Append(customSpot.Color);
-            stringBuilder.Append(Constant.CustomSpotEnd);
+            stringBuilder.Append(Constant.Styling.CustomSpot.End);
         }
 
         stringBuilder.Append(stereotype);

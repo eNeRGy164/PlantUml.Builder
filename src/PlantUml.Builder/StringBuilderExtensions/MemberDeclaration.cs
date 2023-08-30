@@ -16,9 +16,9 @@ public static partial class StringBuilderExtensions
         ArgumentNullException.ThrowIfNull(member);
 
         stringBuilder.Append(name);
-        stringBuilder.Append(Constant.Space);
-        stringBuilder.Append(Constant.Colon);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Symbols.Colon);
+        stringBuilder.Append(Constant.Symbols.Space);
         stringBuilder.InlineClassMember(member);
     }
 }

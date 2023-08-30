@@ -18,15 +18,15 @@ public static partial class StringBuilderExtensions
         ArgumentException.ThrowIfNullOrWhitespace(name);
         if (portion == EntityPortion.None || !Enum.IsDefined(portion)) throw new ArgumentOutOfRangeException(nameof(portion), "An entity portion should be supplied");
 
-        stringBuilder.Append(Constant.Hide);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Words.Hide);
+        stringBuilder.Append(Constant.Symbols.Space);
         stringBuilder.Append(name);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Symbols.Space);
 
         if (empty)
         {
-            stringBuilder.Append(Constant.Empty);
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Words.Empty);
+            stringBuilder.Append(Constant.Symbols.Space);
         }
 
         stringBuilder.Append(portion.ToString().ToLowerInvariant());
@@ -46,13 +46,13 @@ public static partial class StringBuilderExtensions
 
         if (portion == EntityPortion.None || !Enum.IsDefined(portion)) throw new ArgumentOutOfRangeException(nameof(portion), "An entity portion should be supplied");
 
-        stringBuilder.Append(Constant.Hide);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Words.Hide);
+        stringBuilder.Append(Constant.Symbols.Space);
 
         if (visibilities.Length > 0)
         {
             stringBuilder.AppendJoin(',', visibilities.Select(v => v.ToString().ToLowerInvariant()));
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
         }
 
         stringBuilder.Append(portion.ToString().ToLowerInvariant());

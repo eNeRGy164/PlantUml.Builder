@@ -15,16 +15,16 @@ public static partial class StringBuilderExtensions
 
         if (classMember.IsAbstract)
         {
-            stringBuilder.Append(Constant.ModifierStart);
-            stringBuilder.Append(Constant.Abstract);
-            stringBuilder.Append(Constant.ModifierEnd);
+            stringBuilder.Append(Constant.Modifiers.Start);
+            stringBuilder.Append(Constant.Words.Abstract);
+            stringBuilder.Append(Constant.Modifiers.End);
         }
 
         if (classMember.IsStatic)
         {
-            stringBuilder.Append(Constant.ModifierStart);
-            stringBuilder.Append(Constant.Static);
-            stringBuilder.Append(Constant.ModifierEnd);
+            stringBuilder.Append(Constant.Modifiers.Start);
+            stringBuilder.Append(Constant.Words.Static);
+            stringBuilder.Append(Constant.Modifiers.End);
         }
 
         stringBuilder.VisibilityChar(classMember.Visibility);
@@ -37,16 +37,16 @@ public static partial class StringBuilderExtensions
         switch (visibility)
         {
             case VisibilityModifier.Private:
-                stringBuilder.Append(Constant.Private);
+                stringBuilder.Append(Constant.Visibility.Private);
                 break;
             case VisibilityModifier.Protected:
-                stringBuilder.Append(Constant.Protected);
+                stringBuilder.Append(Constant.Visibility.Protected);
                 break;
             case VisibilityModifier.PackagePrivate:
-                stringBuilder.Append(Constant.PackagePrivate);
+                stringBuilder.Append(Constant.Visibility.PackagePrivate);
                 break;
             case VisibilityModifier.Public:
-                stringBuilder.Append(Constant.Public);
+                stringBuilder.Append(Constant.Visibility.Public);
                 break;
         }
     }

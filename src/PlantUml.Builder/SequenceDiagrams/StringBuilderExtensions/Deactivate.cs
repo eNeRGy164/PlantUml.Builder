@@ -13,8 +13,8 @@ public static partial class StringBuilderExtensions
         ArgumentNullException.ThrowIfNull(stringBuilder);
         ArgumentException.ThrowIfNullOrWhitespace(name);
 
-        stringBuilder.Append(Constant.Deactivate);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Words.Deactivate);
+        stringBuilder.Append(Constant.Symbols.Space);
         stringBuilder.Append(name);
         stringBuilder.AppendNewLine();
     }
@@ -27,7 +27,7 @@ public static partial class StringBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.Append(Constant.Deactivate);
+        stringBuilder.Append(Constant.Words.Deactivate);
         stringBuilder.AppendNewLine();
     }
 }

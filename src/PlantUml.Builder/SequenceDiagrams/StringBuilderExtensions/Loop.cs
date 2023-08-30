@@ -9,7 +9,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void StartLoop(this StringBuilder stringBuilder, string text = null)
     {
-        stringBuilder.GroupStart(Constant.Loop, text);
+        stringBuilder.GroupStart(Constant.Words.Loop, text);
     }
 
     /// <summary>

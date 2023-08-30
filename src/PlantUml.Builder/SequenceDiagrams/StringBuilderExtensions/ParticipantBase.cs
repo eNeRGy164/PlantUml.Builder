@@ -18,22 +18,22 @@ public static partial class StringBuilderExtensions
         if (participantType >= ParticipantType.Participant)
         {
             stringBuilder.Append(participantType.ToString().ToLowerInvariant());
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
         }
 
         stringBuilder.Append(name);
 
         if (order.HasValue)
         {
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.Order);
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Words.Order);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(order.Value);
         }
 
         if (color is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(color);
         }
 
@@ -53,8 +53,8 @@ public static partial class StringBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.Append(Constant.Create);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Words.Create);
+        stringBuilder.Append(Constant.Symbols.Space);
         stringBuilder.ParticipantBase(participantType, name, color, order);
     }
 }

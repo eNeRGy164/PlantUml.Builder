@@ -11,7 +11,7 @@ public static partial class StringBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.Append(Constant.Return);
+        stringBuilder.Append(Constant.Words.Return);
         stringBuilder.AppendNewLine();
     }
 
@@ -26,8 +26,8 @@ public static partial class StringBuilderExtensions
         ArgumentNullException.ThrowIfNull(stringBuilder);
         ArgumentException.ThrowIfNullOrWhitespace(message);
 
-        stringBuilder.Append(Constant.Return);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Words.Return);
+        stringBuilder.Append(Constant.Symbols.Space);
         stringBuilder.Append(message);
         stringBuilder.AppendNewLine();
     }

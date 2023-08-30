@@ -26,8 +26,8 @@ public static partial class StringBuilderExtensions
 
         if (isAbstract)
         {
-            stringBuilder.Append(Constant.Abstract);
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Words.Abstract);
+            stringBuilder.Append(Constant.Symbols.Space);
         }
 
         stringBuilder.ClassBase(ClassType.Class, name, displayName, generics, stereotype, customSpot, tag, url, backgroundColor, lineColor, lineStyle, extends, implements);

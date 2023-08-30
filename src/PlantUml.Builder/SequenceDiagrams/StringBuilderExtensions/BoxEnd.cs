@@ -10,9 +10,9 @@ public static partial class StringBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.Append(Constant.End);
-        stringBuilder.Append(Constant.Space);
-        stringBuilder.Append(Constant.Box); 
+        stringBuilder.Append(Constant.Words.End);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Words.Box); 
         stringBuilder.AppendNewLine();
     }
 }

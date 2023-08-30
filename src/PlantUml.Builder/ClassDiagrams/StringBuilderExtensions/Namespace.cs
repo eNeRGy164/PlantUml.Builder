@@ -15,35 +15,35 @@ public static partial class StringBuilderExtensions
         ArgumentNullException.ThrowIfNull(stringBuilder);
         ArgumentException.ThrowIfNullOrWhitespace(name);
 
-        stringBuilder.Append(Constant.Namespace);
+        stringBuilder.Append(Constant.Words.Namespace);
 
         if (displayName is not null)
         {
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.Quote);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Symbols.Quote);
             stringBuilder.Append(displayName);
-            stringBuilder.Append(Constant.Quote);
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.As);
+            stringBuilder.Append(Constant.Symbols.Quote);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Words.As);
         }
 
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Symbols.Space);
         stringBuilder.Append(name);
 
         if (stereotype is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.StereoType(stereotype);
         }
 
         if (backgroundColor is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(backgroundColor);
         }
 
-        stringBuilder.Append(Constant.Space);
-        stringBuilder.Append(Constant.NamespaceStart);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Namespace.Start);
         stringBuilder.AppendNewLine();
     }
 
@@ -55,7 +55,7 @@ public static partial class StringBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.Append(Constant.NamespaceEnd);
+        stringBuilder.Append(Constant.Namespace.End);
         stringBuilder.AppendNewLine();
     }
 }

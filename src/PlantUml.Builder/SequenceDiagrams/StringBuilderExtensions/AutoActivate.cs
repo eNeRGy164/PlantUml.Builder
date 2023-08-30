@@ -12,9 +12,9 @@ public static partial class StringBuilderExtensions
         ArgumentNullException.ThrowIfNull(stringBuilder);
         if (!Enum.IsDefined(mode)) throw new ArgumentOutOfRangeException(nameof(mode), "A defined enum value should be provided");
 
-        stringBuilder.Append(Constant.Auto);
-        stringBuilder.Append(Constant.Activate);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Words.Auto);
+        stringBuilder.Append(Constant.Words.Activate);
+        stringBuilder.Append(Constant.Symbols.Space);
         stringBuilder.Append(mode.ToString().ToLowerInvariant());
         stringBuilder.AppendNewLine();
     }

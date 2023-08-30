@@ -10,7 +10,7 @@ public static partial class StringBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.Append(Constant.End);
+        stringBuilder.Append(Constant.Words.End);
         stringBuilder.AppendNewLine();
     }
 }
