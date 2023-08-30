@@ -5,270 +5,80 @@ namespace PlantUml.Builder.ClassDiagrams.Tests;
 [TestClass]
 public class EntityTests
 {
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_Null_Should_ThrowArgumentNullException()
+    [TestMethod("Entity - Name argument cannot be `null`")]
+    public void EntityNameCannotBeNull()
     {
         // Arrange
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Entity("EntityA");
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_NullName_Should_ThrowArgumentException()
-    {
-        // Assign
         var stringBuilder = new StringBuilder();
 
         // Act
         Action action = () => stringBuilder.Entity(null);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName("name");
     }
 
+    [DataRow(EmptyString, DisplayName = "Entity - Name argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "Entity - Name argument cannot be any whitespace character")]
     [TestMethod]
-    public void StringBuilderExtensions_Entity_EmptyName_Should_ThrowArgumentException()
+    public void EntityNameMustContainAValue(string name)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Entity(string.Empty);
+        Action action = () => stringBuilder.Entity(name);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("name");
     }
 
+    [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetMethodTestDisplayName))]
     [TestMethod]
-    public void StringBuilderExtensions_Entity_WhitespaceName_Should_ThrowArgumentException()
+    public void EntityIsRenderedCorrectly(MethodExpectationTestData testData)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
 
+        var (method, parameters) = typeof(StringBuilderExtensions).GetExtensionMethodAndParameters(stringBuilder, testData.Method, testData.Parameters);
+
         // Act
-        Action action = () => stringBuilder.Entity(" ");
+        method.Invoke(null, parameters);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_Should_ContainEntityLine()
+    private static IEnumerable<object[]> GetValidNotations()
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
+        // Define the valid notations and expected results for different overloads
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA", "entityA") };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity \"Entity A\" as entityA", "entityA", "Entity A") };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA<Object>", "entityA", null, "Object") };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA <<stereotype>>", "entityA", null, null, "stereotype") };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA <<(R,#Blue)stereotype>>", "entityA", null, null, "stereotype", new CustomSpot('R', NamedColor.Blue)) };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA $tag", "entityA", null, null, null, null, "tag") };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA [[https://blog.hompus.nl/]]", "entityA", null, null, null, null, null, new Uri("https://blog.hompus.nl")) };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA #AliceBlue", "entityA", null, null, null, null, null, null, (Color)NamedColor.AliceBlue) };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA ##AliceBlue", "entityA", null, null, null, null, null, null, null, (Color)NamedColor.AliceBlue) };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA ##[dashed]", "entityA", null, null, null, null, null, null, null, null, LineStyle.Dashed) };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA", "entityA", null, null, null, null, null, null, null, null, null, Array.Empty<string>()) };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA extends BaseClass", "entityA", null, null, null, null, null, null, null, null, null, new[] { "BaseClass" }) };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA extends BaseClass,BaseClass2", "entityA", null, null, null, null, null, null, null, null, null, new[] { "BaseClass", "BaseClass2" }) };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA", "entityA", null, null, null, null, null, null, null, null, null, null, Array.Empty<string>()) };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA implements IInterface", "entityA", null, null, null, null, null, null, null, null, null, null, new[] { "IInterface" }) };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA implements IInterface,IInterface2", "entityA", null, null, null, null, null, null, null, null, null, null, new[] { "IInterface", "IInterface2" }) };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity \"Entity A\" as entityA<T> <<(A,#Blue)stereotype>> $tag [[https://blog.hompus.nl/]] #Blue ##[dashed]Blue extends BaseClass,BaseClass2 implements IInterface,IInterface2", "entityA", "Entity A", "T", "stereotype", new CustomSpot('A', NamedColor.Blue), "tag", new Uri("https://blog.hompus.nl"), (Color)NamedColor.Blue, (Color)NamedColor.Blue, LineStyle.Dashed, new[] { "BaseClass", "BaseClass2" }, new[] { "IInterface", "IInterface2" }) };
 
-        // Act
-        stringBuilder.Entity("EntityA");
+        yield return new object[] { new MethodExpectationTestData("EntityStart", "entity entityA {", "entityA") };
+        yield return new object[] { new MethodExpectationTestData("EntityStart", "+entity entityA {", "entityA", null, VisibilityModifier.Public) };
 
-        // Assert
-        stringBuilder.ToString().Should().Be("entity EntityA\n");
+        yield return new object[] { new MethodExpectationTestData("EntityEnd", "}") };
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_WithDisplayName_Should_ContainEntityLineWithDisplayName()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Entity("EntityA", displayName: "Entity A");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("entity \"Entity A\" as EntityA\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_WithStereotype_Should_ContainEntityLineWithStereotype()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Entity("EntityA", stereotype: "entity");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("entity EntityA <<entity>>\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_WithStereotypeAndCustomSpot_Should_ContainEntityLineWithStereotypeAndCustomSpot()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Entity("EntityA", stereotype: "entity", customSpot: new CustomSpot('R', "Blue"));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("entity EntityA <<(R,#Blue)entity>>\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_WithGenerics_Should_ContainEntityLineWithGenerics()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Entity("EntityA", generics: "Object");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("entity EntityA<Object>\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_WithBackgroundColor_Should_ContainEntityLineWithBackgroundColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Entity("EntityA", backgroundColor: "#AliceBlue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("entity EntityA #AliceBlue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_WithBackgroundColorWithHashtag_Should_ContainEntityLineWithBackgroundColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Entity("EntityA", backgroundColor: "AliceBlue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("entity EntityA #AliceBlue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_WithTag_Should_ContainEntityLineWithTag()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Entity("EntityA", tag: "tag");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("entity EntityA $tag\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_WithUrl_Should_ContainEntityLineWithUrl()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Entity("EntityA", url: new Uri("https://blog.hompus.nl"));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("entity EntityA [[https://blog.hompus.nl/]]\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_WithLineStyle_Should_ContainEntityLineWithLineStyle()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Entity("EntityA", lineStyle: LineStyle.Bold);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("entity EntityA ##[bold]\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_WithLineColor_Should_ContainEntityLineWithLineColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Entity("EntityA", lineColor: "Blue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("entity EntityA ##Blue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_WithExtends_Should_ContainEntityLineWithExtends()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Entity("EntityA", extends: new[] { "BaseClass" });
-
-        // Assert
-        stringBuilder.ToString().Should().Be("entity EntityA extends BaseClass\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_WithMultipleExtends_Should_ContainEntityLineWithSeperatedExtends()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Entity("EntityA", extends: new[] { "BaseClass", "BaseClass2" });
-
-        // Assert
-        stringBuilder.ToString().Should().Be("entity EntityA extends BaseClass,BaseClass2\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_WithNoImplements_Should_ContainEntityLineWithoutImplements()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Entity("EntityA", implements: new string[0]);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("entity EntityA\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_WithImplements_Should_ContainEntityLineWithImplements()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Entity("EntityA", implements: new[] { "IInterface" });
-
-        // Assert
-        stringBuilder.ToString().Should().Be("entity EntityA implements IInterface\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_WithMultipleImplements_Should_ContainEntityLineWithSeperatedImplements()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Entity("EntityA", implements: new[] { "IInterface", "IInterface2" });
-
-        // Assert
-        stringBuilder.ToString().Should().Be("entity EntityA implements IInterface,IInterface2\n");
-    }
+    public static string GetMethodTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);
 }
