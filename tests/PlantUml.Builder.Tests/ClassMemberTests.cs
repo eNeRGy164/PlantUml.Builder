@@ -5,40 +5,30 @@ namespace PlantUml.Builder.Tests;
 [TestClass]
 public class ClassMemberTests
 {
-    [TestMethod]
-    public void ClassMember_NullName_Should_ThrowArgumentException()
+    [TestMethod("ClassMember - Name argument cannot be `null`")]
+    public void ClassMemberNameCannotBeNull()
     {
         // Arrange & Act
         Action action = () => _ = new ClassMember(null);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName("name");
     }
 
+    [DataRow(EmptyString, DisplayName = "ClassMember - Name argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "ClassMember - Name argument cannot be whitespace")]
     [TestMethod]
-    public void ClassMember_EmptyName_Should_ThrowArgumentException()
+    public void ClassMemberNameMustContainAValue(string name)
     {
         // Arrange & Act
         Action action = () => _ = new ClassMember(name);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
-    }
-
-    [TestMethod]
-    public void ClassMember_WhitespaceName_Should_ThrowArgumentException()
-    {
-        // Act
-        Action action = () => new ClassMember(" ");
-
-        // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+              .ThrowExactly<ArgumentException>()
+              .WithParameterName("name");
     }
 
     [DataRow("member", "member", DisplayName = "Value without special values should stay the same")]
