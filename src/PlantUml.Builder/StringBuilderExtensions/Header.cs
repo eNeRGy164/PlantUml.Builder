@@ -11,8 +11,7 @@ public static partial class StringBuilderExtensions
     public static void Header(this StringBuilder stringBuilder, string header)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
-
-        if (string.IsNullOrWhiteSpace(header)) throw new ArgumentException("A non-empty value should be provided", nameof(header));
+        ArgumentException.ThrowIfNullOrWhitespace(header);
 
         stringBuilder.Append(Constant.Header);
         stringBuilder.Append(Constant.Space);

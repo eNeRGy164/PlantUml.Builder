@@ -13,8 +13,7 @@ public static partial class StringBuilderExtensions
     public static void Activate(this StringBuilder stringBuilder, string name, Color color = null, Color borderColor = null)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
-
-        if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
+        ArgumentException.ThrowIfNullOrWhitespace(name);
 
         stringBuilder.Append(Constant.Activate);
         stringBuilder.Append(Constant.Space);

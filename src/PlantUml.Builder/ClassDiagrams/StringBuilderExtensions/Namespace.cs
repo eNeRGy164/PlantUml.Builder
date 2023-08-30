@@ -12,9 +12,8 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void NamespaceStart(this StringBuilder stringBuilder, string name, string displayName = null, string stereotype = null, Color backgroundColor = null)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
-
-        if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
+        ArgumentException.ThrowIfNullOrWhitespace(name);
 
         stringBuilder.Append(Constant.Namespace);
 
@@ -54,7 +53,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void NamespaceEnd(this StringBuilder stringBuilder)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
         stringBuilder.Append(Constant.NamespaceEnd);
         stringBuilder.AppendNewLine();

@@ -22,8 +22,7 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <see langword="null"/>, empty of only white space.</exception>
     internal static void ClassBase(this StringBuilder stringBuilder, ClassType type, string name, string displayName, string generics, string stereotype, CustomSpot customSpot, string tag, Uri url, Color backgroundColor, Color lineColor, LineStyle lineStyle, string[] extends, string[] implements)
     {
-
-        if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
+        ArgumentException.ThrowIfNullOrWhitespace(name);
 
         stringBuilder.Append(type.ToString().ToLowerInvariant());
         stringBuilder.Append(Space);

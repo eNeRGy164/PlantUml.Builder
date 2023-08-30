@@ -25,8 +25,8 @@ public class ClassMember
     /// <param name="visibility">Whether the members has a specific visibility; default <c>None</c>.</param>
     public ClassMember(string name, bool isStatic = false, bool isAbstract = false, VisibilityModifier visibility = VisibilityModifier.None)
     {
-        if (name is null) throw new ArgumentException("A non-empty value should be provided", nameof(name));
-        if ((name.Length > 0 && string.IsNullOrWhiteSpace(name)) || (name.Length == 0 && !isStatic && !isAbstract)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
+        ArgumentNullException.ThrowIfNull(name);
+        if ((name.Length > 0 && string.IsNullOrWhiteSpace(name)) || (name.Length == 0 && !isStatic && !isAbstract)) throw new System.ArgumentException("A non-empty value should be provided", nameof(name));
 
         this.Name = name;
         this.IsStatic = isStatic;

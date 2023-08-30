@@ -13,9 +13,8 @@ public static partial class StringBuilderExtensions
     public static void Ref(this StringBuilder stringBuilder, string participant, string note)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
-
-        if (string.IsNullOrWhiteSpace(participant)) throw new ArgumentException("A non-empty value should be provided", nameof(participant));
-        if (string.IsNullOrWhiteSpace(note)) throw new ArgumentException("A non-empty value should be provided", nameof(note));
+        ArgumentException.ThrowIfNullOrWhitespace(participant);
+        ArgumentException.ThrowIfNullOrWhitespace(note);
 
         stringBuilder.Append(Constant.Ref);
         stringBuilder.Append(Constant.Space);
@@ -40,8 +39,8 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentException">Thrown when <paramref name="participantB"/> is <see langword="null"/>, empty of only white space.</exception>
     public static void Ref(this StringBuilder stringBuilder, string participantA, string participantB, string note)
     {
-        if (string.IsNullOrWhiteSpace(participantA)) throw new ArgumentException("A non-empty value should be provided", nameof(participantA));
-        if (string.IsNullOrWhiteSpace(participantB)) throw new ArgumentException("A non-empty value should be provided", nameof(participantB));
+        ArgumentException.ThrowIfNullOrWhitespace(participantA);
+        ArgumentException.ThrowIfNullOrWhitespace(participantB);
 
         stringBuilder.Ref(participantA + Constant.Comma + participantB, note);
     }
@@ -55,8 +54,7 @@ public static partial class StringBuilderExtensions
     public static void StartRef(this StringBuilder stringBuilder, string participant)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
-
-        if (string.IsNullOrWhiteSpace(participant)) throw new ArgumentException("A non-empty value should be provided", nameof(participant));
+        ArgumentException.ThrowIfNullOrWhitespace(participant);
 
         stringBuilder.Append(Constant.Ref);
         stringBuilder.Append(Constant.Space);
@@ -76,8 +74,8 @@ public static partial class StringBuilderExtensions
     /// <exception cref="ArgumentException">Thrown when <paramref name="participantB"/> is <see langword="null"/>, empty of only white space.</exception>
     public static void StartRef(this StringBuilder stringBuilder, string participantA, string participantB)
     {
-        if (string.IsNullOrWhiteSpace(participantA)) throw new ArgumentException("A non-empty value should be provided", nameof(participantA));
-        if (string.IsNullOrWhiteSpace(participantB)) throw new ArgumentException("A non-empty value should be provided", nameof(participantB));
+        ArgumentException.ThrowIfNullOrWhitespace(participantA);
+        ArgumentException.ThrowIfNullOrWhitespace(participantB);
 
         stringBuilder.StartRef(participantA + Constant.Comma + participantB);
     }

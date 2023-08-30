@@ -16,10 +16,9 @@ public static partial class StringBuilderExtensions
     public static void Relationship(this StringBuilder stringBuilder, string left, string type, string right, string label = default, string leftCardinality = default, string rightCardinality = default)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
-
-        if (string.IsNullOrWhiteSpace(left)) throw new ArgumentException("A non-empty value should be provided", nameof(left));
-        if (string.IsNullOrWhiteSpace(type)) throw new ArgumentException("A non-empty value should be provided", nameof(type));
-        if (string.IsNullOrWhiteSpace(right)) throw new ArgumentException("A non-empty value should be provided", nameof(right));
+        ArgumentException.ThrowIfNullOrWhitespace(left);
+        ArgumentException.ThrowIfNullOrWhitespace(type);
+        ArgumentException.ThrowIfNullOrWhitespace(right);
 
         stringBuilder.Append(left);
         stringBuilder.Append(Constant.Space);

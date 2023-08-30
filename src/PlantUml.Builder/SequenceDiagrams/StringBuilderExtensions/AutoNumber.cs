@@ -17,8 +17,8 @@ public static partial class StringBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        if (start is not null && string.IsNullOrWhiteSpace(start)) throw new ArgumentException("A non-empty value should be provided", nameof(start));
-        if (format is not null && string.IsNullOrWhiteSpace(format)) throw new ArgumentException("A non-empty value should be provided", nameof(format));
+        if (start is not null) ArgumentException.ThrowIfNullOrWhitespace(start);
+        if (format is not null) ArgumentException.ThrowIfNullOrWhitespace(format);
 
         stringBuilder.Append(Constant.Auto);
         stringBuilder.Append(Constant.Number);
@@ -84,7 +84,7 @@ public static partial class StringBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        if (format is not null && string.IsNullOrWhiteSpace(format)) throw new ArgumentException("A non-empty value should be provided", nameof(format));
+        if (format is not null) ArgumentException.ThrowIfNullOrWhitespace(format);
 
         stringBuilder.Append(Constant.Auto);
         stringBuilder.Append(Constant.Number);

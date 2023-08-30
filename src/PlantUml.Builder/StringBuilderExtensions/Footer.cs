@@ -11,8 +11,7 @@ public static partial class StringBuilderExtensions
     public static void Footer(this StringBuilder stringBuilder, string footer)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
-
-        if (string.IsNullOrWhiteSpace(footer)) throw new ArgumentException("A non-empty value should be provided", nameof(footer));
+        ArgumentException.ThrowIfNullOrWhitespace(footer);
 
         stringBuilder.Append(Constant.Footer);
         stringBuilder.Append(Constant.Space);

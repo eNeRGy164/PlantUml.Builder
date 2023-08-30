@@ -20,7 +20,7 @@ public class ParticipantName
 
     public ParticipantName(string name, string displayName)
     {
-        if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
+        ArgumentException.ThrowIfNullOrWhitespace(name);
 
         if (string.IsNullOrWhiteSpace(displayName))
         {

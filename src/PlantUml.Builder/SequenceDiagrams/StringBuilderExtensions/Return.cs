@@ -24,8 +24,7 @@ public static partial class StringBuilderExtensions
     public static void Return(this StringBuilder stringBuilder, string message)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
-
-        if (string.IsNullOrWhiteSpace(message)) throw new ArgumentException("A non-empty value should be provided", nameof(message));
+        ArgumentException.ThrowIfNullOrWhitespace(message);
 
         stringBuilder.Append(Constant.Return);
         stringBuilder.Append(Constant.Space);

@@ -29,14 +29,14 @@ public partial class Arrow
 
     public Arrow(string arrow)
     {
-        if (string.IsNullOrWhiteSpace(arrow)) throw new ArgumentException("A non-empty value should be provided", nameof(arrow));
+        ArgumentException.ThrowIfNullOrWhitespace(arrow);
 
         var value = arrow.Trim();
 
-        if (value.Length < 2) throw new ArgumentException("The arrow type must be at least 2 characters long", nameof(arrow));
+        if (value.Length < 2) throw new System.ArgumentException("The arrow type must be at least 2 characters long", nameof(arrow));
 
-        if (!value.Contains(ArrowParts.Line)) throw new ArgumentException("The arrow must contain at least 1 line character ('-')", nameof(arrow));
-        if (value.IndexOfAny(this.arrowHeads) == -1) throw new ArgumentException($"The arrow must contain at least 1 arrow head character ('{string.Join("', '", this.arrowHeads)}').", nameof(arrow));
+        if (!value.Contains(ArrowParts.Line)) throw new System.ArgumentException("The arrow must contain at least 1 line character ('-')", nameof(arrow));
+        if (value.IndexOfAny(this.arrowHeads) == -1) throw new System.ArgumentException($"The arrow must contain at least 1 arrow head character ('{string.Join("', '", this.arrowHeads)}').", nameof(arrow));
 
         this.Parse(value, out List<char> left, out List<char> line, out List<char> color, out List<char> right);
 

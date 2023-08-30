@@ -11,8 +11,7 @@ public static partial class StringBuilderExtensions
     public static void Text(this StringBuilder stringBuilder, string text)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
-
-        if (string.IsNullOrWhiteSpace(text)) throw new ArgumentException("A non-empty value should be provided", nameof(text));
+        ArgumentException.ThrowIfNullOrWhitespace(text);
 
         stringBuilder.Append(text.Replace("\n", "\\n"));
         stringBuilder.AppendNewLine();

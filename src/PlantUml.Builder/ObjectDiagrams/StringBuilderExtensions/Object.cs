@@ -13,8 +13,7 @@ public static partial class StringBuilderExtensions
     public static void Object(this StringBuilder stringBuilder, string name, string displayName = default, string stereotype = default, Uri url = default, Color backgroundColor = default)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
-
-        if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
+        ArgumentException.ThrowIfNullOrWhitespace(name);
 
         stringBuilder.Append(Constant.Object);
         stringBuilder.Append(Constant.Space);

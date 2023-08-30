@@ -24,8 +24,7 @@ public static partial class StringBuilderExtensions
     public static void NewPage(this StringBuilder stringBuilder, string title)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
-
-        if (string.IsNullOrWhiteSpace(title)) throw new ArgumentException("A non-empty value should be provided", nameof(title));
+        ArgumentException.ThrowIfNullOrWhitespace(title);
 
         stringBuilder.Append(Constant.New);
         stringBuilder.Append(Constant.Page);

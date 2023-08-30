@@ -11,8 +11,7 @@ public static partial class StringBuilderExtensions
     public static void Deactivate(this StringBuilder stringBuilder, string name)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
-
-        if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
+        ArgumentException.ThrowIfNullOrWhitespace(name);
 
         stringBuilder.Append(Constant.Deactivate);
         stringBuilder.Append(Constant.Space);

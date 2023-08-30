@@ -12,9 +12,8 @@ public static partial class StringBuilderExtensions
     public static void SkinParameter(this StringBuilder stringBuilder, string name, string value)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
-
-        if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
-        if (string.IsNullOrWhiteSpace(value)) throw new ArgumentException("A non-empty value should be provided", nameof(value));
+        ArgumentException.ThrowIfNullOrWhitespace(name);
+        ArgumentException.ThrowIfNullOrWhitespace(value);
 
         stringBuilder.Append(Constant.Skin);
         stringBuilder.Append(Constant.Param);

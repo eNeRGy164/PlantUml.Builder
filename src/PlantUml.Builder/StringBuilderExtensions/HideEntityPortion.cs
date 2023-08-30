@@ -15,7 +15,7 @@ public static partial class StringBuilderExtensions
     public static void HideEntityPortion(this StringBuilder stringBuilder, string name, EntityPortion portion, bool empty = false)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
-
+        ArgumentException.ThrowIfNullOrWhitespace(name);
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
         if (portion == 0) throw new ArgumentException("An entity portion should be supplied", nameof(portion));
 
