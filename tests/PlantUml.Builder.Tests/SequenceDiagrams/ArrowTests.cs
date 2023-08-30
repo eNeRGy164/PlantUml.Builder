@@ -1,8 +1,8 @@
 
-namespace PlantUml.Builder.Tests.SequenceDiagrams;
+namespace PlantUml.Builder.SequenceDiagrams.Tests;
 
 [TestClass]
-public class ArrowTests
+public class ArrowClassTests
 {
     [TestMethod]
     public void Arrow_NullStringConstructor_Should_ThrowArgumentException()

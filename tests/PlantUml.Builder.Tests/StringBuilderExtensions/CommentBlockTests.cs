@@ -1,7 +1,7 @@
 namespace PlantUml.Builder.Tests;
 
 [TestClass]
-public class CommentBlockBlockTests
+public class CommentBlockTests
 {
     [TestMethod]
     public void StringBuilderExtensions_CommentBlock_Null_Should_ThrowArgumentNullException()

@@ -1,6 +1,4 @@
-using PlantUml.Builder.SequenceDiagrams;
-
-namespace PlantUml.Builder.Tests.SequenceDiagrams;
+namespace PlantUml.Builder.SequenceDiagrams.Tests;
 
 [TestClass]
 public class ArrowExtensionsTests

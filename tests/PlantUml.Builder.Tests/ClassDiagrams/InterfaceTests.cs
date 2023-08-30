@@ -1,6 +1,5 @@
-using PlantUml.Builder.ClassDiagrams;
 
-namespace PlantUml.Builder.Tests.ClassDiagrams;
+namespace PlantUml.Builder.ClassDiagrams.Tests;
 
 [TestClass]
 public class InterfaceTests
