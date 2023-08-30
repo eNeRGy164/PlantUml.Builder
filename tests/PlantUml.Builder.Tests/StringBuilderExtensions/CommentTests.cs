@@ -3,56 +3,19 @@ namespace PlantUml.Builder.Tests;
 [TestClass]
 public class CommentTests
 {
+    [DataRow(null, "'", DisplayName = "Comment - Handles an empty comment")]
+    [DataRow("This is a comment", "' This is a comment", DisplayName = "Comment - Renders a comment with content")]
+    [DataRow("\nThis is a comment\non multiple lines\n", "' \\nThis is a comment\\non multiple lines\\n", DisplayName = "Comment - Escapes new lines inside a comment")]
     [TestMethod]
-    public void StringBuilderExtensions_Comment_Null_Should_ThrowArgumentNullException()
+    public void CommentIsRenderedCorrectly(string comment, string expected)
     {
         // Arrange
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Comment();
-
-        // Assert
-        action.Should().ThrowExactly<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Comment_Should_ContainEmptyCommentLine()
-    {
-        // Assign
         var stringBuilder = new StringBuilder();
 
         // Act
-        stringBuilder.Comment();
+        stringBuilder.Comment(comment);
 
         // Assert
-        stringBuilder.ToString().Should().Be("'\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Comment_WithComment_Should_ContainCommentWithComment()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Comment("This is a comment");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("' This is a comment\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Comment_WithNewLineComment_Should_CommentWithEscapedNewLineComment()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Comment("This is a comment\non a single line");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("' This is a comment\\non a single line\n");
+        stringBuilder.ToString().Should().Be($"{expected}\n");
     }
 }

@@ -3,56 +3,19 @@ namespace PlantUml.Builder.Tests;
 [TestClass]
 public class CommentBlockTests
 {
+    [DataRow(null, "/'  '/", DisplayName = "CommentBlock - Handles an empty comment block")]
+    [DataRow("This is a comment", "/' This is a comment '/", DisplayName = "CommentBlock - Renders a comment block with content")]
+    [DataRow("\nThis is a comment\non multiple lines\n", "/' \nThis is a comment\non multiple lines\n '/", DisplayName = "CommentBlock - Supports new lines inside a comment block")]
     [TestMethod]
-    public void StringBuilderExtensions_CommentBlock_Null_Should_ThrowArgumentNullException()
+    public void CommentBlockIsRenderedCorrectly(string comment, string expected)
     {
         // Arrange
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.CommentBlock();
-
-        // Assert
-        action.Should().ThrowExactly<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_CommentBlock_Should_ContainEmptyCommentBlockLine()
-    {
-        // Assign
         var stringBuilder = new StringBuilder();
 
         // Act
-        stringBuilder.CommentBlock();
+        stringBuilder.CommentBlock(comment);
 
         // Assert
-        stringBuilder.ToString().Should().Be("/'  '/\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_CommentBlock_WithCommentBlock_Should_ContainCommentBlockWithCommentBlock()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.CommentBlock("This is a comment");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("/' This is a comment '/\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_CommentBlock_WithNewLineCommentBlock_Should_CommentBlockWithEscapedNewLineCommentBlock()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.CommentBlock("This is a comment\non a single line");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("/' This is a comment\non a single line '/\n");
+        stringBuilder.ToString().Should().Be($"{expected}\n");
     }
 }
