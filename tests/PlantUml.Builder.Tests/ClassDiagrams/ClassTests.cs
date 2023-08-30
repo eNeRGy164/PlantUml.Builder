@@ -5,296 +5,81 @@ namespace PlantUml.Builder.ClassDiagrams.Tests;
 [TestClass]
 public class ClassTests
 {
-    [TestMethod]
-    public void StringBuilderExtensions_Class_Null_Should_ThrowArgumentNullException()
+    [TestMethod("Class - Name argument cannot be `null`")]
+    public void ClassNameCannotBeNull()
     {
         // Arrange
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Class("classA");
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Class_NullName_Should_ThrowArgumentException()
-    {
-        // Assign
         var stringBuilder = new StringBuilder();
 
         // Act
         Action action = () => stringBuilder.Class(null);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName("name");
     }
 
+    [DataRow(EmptyString, DisplayName = "Class - Name argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "Class - Name argument cannot be any whitespace character")]
     [TestMethod]
-    public void StringBuilderExtensions_Class_EmptyName_Should_ThrowArgumentException()
+    public void ClassNameMustContainAValue(string name)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Class(string.Empty);
+        Action action = () => stringBuilder.Class(name);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("name");
     }
 
+    [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetValidNotationTestDisplayName))]
     [TestMethod]
-    public void StringBuilderExtensions_Class_WhitespaceName_Should_ThrowArgumentException()
+    public void ClassIsRenderedCorreclty(MethodExpectationTestData testData)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
 
+        var (method, parameters) = typeof(StringBuilderExtensions).GetExtensionMethodAndParameters(stringBuilder, testData.Method, testData.Parameters);
+
         // Act
-        Action action = () => stringBuilder.Class(" ");
+        method.Invoke(null, parameters);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Class_Should_ContainClassLine()
+    private static IEnumerable<object[]> GetValidNotations()
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
+        // Define the valid notations and expected results for different overloads
+        yield return new object[] { new MethodExpectationTestData("Class", "class classA", "classA") };
+        yield return new object[] { new MethodExpectationTestData("Class", "class \"Class A\" as classA", "classA", "Class A") };
+        yield return new object[] { new MethodExpectationTestData("Class", "abstract class classA", "classA", null, true) };
+        yield return new object[] { new MethodExpectationTestData("Class", "class classA<Object>", "classA", null, null, "Object") };
+        yield return new object[] { new MethodExpectationTestData("Class", "class classA <<stereotype>>", "classA", null, null, null, "stereotype") };
+        yield return new object[] { new MethodExpectationTestData("Class", "class classA <<(R,#Blue)stereotype>>", "classA", null, null, null, "stereotype", new CustomSpot('R', NamedColor.Blue)) };
+        yield return new object[] { new MethodExpectationTestData("Class", "class classA $tag", "classA", null, null, null, null, null, "tag") };
+        yield return new object[] { new MethodExpectationTestData("Class", "class classA [[https://blog.hompus.nl/]]", "classA", null, null, null, null, null, null, new Uri("https://blog.hompus.nl")) };
+        yield return new object[] { new MethodExpectationTestData("Class", "class classA #AliceBlue", "classA", null, null, null, null, null, null, null, (Color)NamedColor.AliceBlue) };
+        yield return new object[] { new MethodExpectationTestData("Class", "class classA ##AliceBlue", "classA", null, null, null, null, null, null, null, null, (Color)NamedColor.AliceBlue) };
+        yield return new object[] { new MethodExpectationTestData("Class", "class classA ##[dashed]", "classA", null, null, null, null, null, null, null, null, null, LineStyle.Dashed) };
+        yield return new object[] { new MethodExpectationTestData("Class", "class classA", "classA", null, null, null, null, null, null, null, null, null, null, Array.Empty<string>()) };
+        yield return new object[] { new MethodExpectationTestData("Class", "class classA extends BaseClass", "classA", null, null, null, null, null, null, null, null, null, null, new[] { "BaseClass" }) };
+        yield return new object[] { new MethodExpectationTestData("Class", "class classA extends BaseClass,BaseClass2", "classA", null, null, null, null, null, null, null, null, null, null, new[] { "BaseClass", "BaseClass2" }) };
+        yield return new object[] { new MethodExpectationTestData("Class", "class classA", "classA", null, null, null, null, null, null, null, null, null, null, null, Array.Empty<string>()) };
+        yield return new object[] { new MethodExpectationTestData("Class", "class classA implements IInterface", "classA", null, null, null, null, null, null, null, null, null, null, null, new[] { "IInterface" }) };
+        yield return new object[] { new MethodExpectationTestData("Class", "class classA implements IInterface,IInterface2", "classA", null, null, null, null, null, null, null, null, null, null, null, new[] { "IInterface", "IInterface2" }) };
+        yield return new object[] { new MethodExpectationTestData("Class", "abstract class \"Class A\" as classA<T> <<(A,#Blue)stereotype>> $tag [[https://blog.hompus.nl/]] #Blue ##[dashed]Blue extends extend1,extend2 implements IInterface,IInterface2", "classA", "Class A", true, "T", "stereotype", new CustomSpot('A', NamedColor.Blue), "tag", new Uri("https://blog.hompus.nl"), (Color)NamedColor.Blue, (Color)NamedColor.Blue, LineStyle.Dashed, new[] { "extend1", "extend2" }, new[] { "IInterface", "IInterface2" }) };
 
-        // Act
-        stringBuilder.Class("classA");
+        yield return new object[] { new MethodExpectationTestData("ClassStart", "class classA {", "classA") };
+        yield return new object[] { new MethodExpectationTestData("ClassStart", "+class classA {", "classA", null, VisibilityModifier.Public) };
 
-        // Assert
-        stringBuilder.ToString().Should().Be("class classA\n");
+        yield return new object[] { new MethodExpectationTestData("ClassEnd", "}") };
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Class_WithDisplayName_Should_ContainClassLineWithDisplayName()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Class("classA", displayName: "Class A");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class \"Class A\" as classA\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Class_IsAbstract_Should_ContainClassLineWithAbstract()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Class("classA", isAbstract: true);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("abstract class classA\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Class_WithStereotype_Should_ContainClassLineWithStereotype()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Class("classA", stereotype: "entity");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class classA <<entity>>\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Class_WithStereotypeAndCustomSpot_Should_ContainClassLineWithStereotypeAndCustomSpot()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Class("classA", stereotype: "entity", customSpot: new CustomSpot('R', "Blue"));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class classA <<(R,#Blue)entity>>\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Class_WithGenerics_Should_ContainClassLineWithGenerics()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Class("classA", generics: "Object");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class classA<Object>\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Class_WithBackgroundColor_Should_ContainClassLineWithBackgroundColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Class("classA", backgroundColor: "#AliceBlue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class classA #AliceBlue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Class_WithBackgroundColorWithHashtag_Should_ContainClassLineWithBackgroundColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Class("classA", backgroundColor: "AliceBlue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class classA #AliceBlue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Class_WithTag_Should_ContainClassLineWithTag()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Class("classA", tag: "tag");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class classA $tag\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Class_WithUrl_Should_ContainClassLineWithUrl()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Class("classA", url: new Uri("https://blog.hompus.nl"));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class classA [[https://blog.hompus.nl/]]\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Class_WithLineStyle_Should_ContainClassLineWithLineStyle()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Class("classA", lineStyle: LineStyle.Bold);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class classA ##[bold]\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Class_WithLineColor_Should_ContainClassLineWithLineColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Class("classA", lineColor: "Blue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class classA ##Blue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Class_WithNoExtends_Should_ContainClassLineWithoutImplements()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Class("classA", extends: new string[0]);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class classA\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Class_WithExtends_Should_ContainClassLineWithExtends()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Class("classA", extends: new[] { "BaseClass" });
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class classA extends BaseClass\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Class_WithMultipleExtends_Should_ContainClassLineWithSeperatedExtends()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Class("classA", extends: new[] { "BaseClass", "BaseClass2" });
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class classA extends BaseClass,BaseClass2\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Class_WithNoImplements_Should_ContainClassLineWithoutImplements()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Class("classA", implements: new string[0]);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class classA\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Class_WithImplements_Should_ContainClassLineWithImplements()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Class("classA", implements: new[] { "IInterface" });
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class classA implements IInterface\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Class_WithMultipleImplements_Should_ContainClassLineWithSeperatedImplements()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Class("classA", implements: new[] { "IInterface", "IInterface2" });
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class classA implements IInterface,IInterface2\n");
-    }
+    public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);
 }
