@@ -1,0 +1,7 @@
+###############################
+# .NET Coding Conventions     #
+###############################
+
+[*.{cs,vb}]
+dotnet_diagnostic.CA1507.severity = none
+dotnet_diagnostic.IDE0022.severity = silent
