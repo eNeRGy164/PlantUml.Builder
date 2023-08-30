@@ -1,6 +1,3 @@
-using System.Text;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PlantUml.Builder.ObjectDiagrams;
 
 namespace PlantUml.Builder.Examples;

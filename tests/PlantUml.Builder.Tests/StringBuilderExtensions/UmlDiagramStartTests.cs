@@ -1,8 +1,3 @@
-﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Text;
-
 namespace PlantUml.Builder.Tests;
 
 [TestClass]

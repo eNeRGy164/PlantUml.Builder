@@ -1,6 +1,3 @@
-using System;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace PlantUml.Builder.Tests;
 
@@ -11,7 +8,7 @@ public class ClassMemberTests
     public void ClassMember_NullName_Should_ThrowArgumentException()
     {
         // Act
-        Action action = () => new ClassMember(null);
+        Action action = () => _ = new ClassMember(null);
 
         // Assert
         action.Should().Throw<ArgumentException>()
@@ -23,7 +20,7 @@ public class ClassMemberTests
     public void ClassMember_EmptyName_Should_ThrowArgumentException()
     {
         // Act
-        Action action = () => new ClassMember(string.Empty);
+        Action action = () => _ = new ClassMember(name);
 
         // Assert
         action.Should().Throw<ArgumentException>()

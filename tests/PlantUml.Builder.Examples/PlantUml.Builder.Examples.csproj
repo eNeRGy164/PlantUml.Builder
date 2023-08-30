@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -16,6 +17,17 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\PlantUml.Builder\PlantUml.Builder.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="System.Reflection" />
+    <Using Include="System.Text" />
+    <Using Include="FluentAssertions" />
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+    <Using Remove="System.IO" />
+    <Using Remove="System.Net.Http" />
+    <Using Remove="System.Threading" />
+    <Using Remove="System.Threading.Tasks" />
   </ItemGroup>
 
 </Project>

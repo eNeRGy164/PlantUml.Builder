@@ -1,5 +1,3 @@
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PlantUml.Builder.SequenceDiagrams;
 
 namespace PlantUml.Builder.Tests.SequenceDiagrams;
