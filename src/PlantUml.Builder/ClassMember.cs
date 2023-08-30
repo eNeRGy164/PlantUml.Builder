@@ -4,20 +4,35 @@ using static System.Text.RegularExpressions.RegexOptions;
 
 namespace PlantUml.Builder;
 
+/// <summary>
+/// Represents a class member.
+/// </summary>
 public class ClassMember
 {
     private static readonly Regex modifiers = new("{(?<modifier>abstract|static)}", Singleline | Compiled | IgnoreCase);
 
+    /// <summary>
+    /// Gets the name of the class member.
+    /// </summary>
     public string Name { get; }
 
+    /// <summary>
+    /// Gets a value indicating whether the class member is static.
+    /// </summary>
     public bool IsStatic { get; }
 
+    /// <summary>
+    /// Gets a value indicating whether the class member is abstract.
+    /// </summary>
     public bool IsAbstract { get; }
 
+    /// <summary>
+    /// Gets the visibility modifier of the class member.
+    /// </summary>
     public VisibilityModifier Visibility { get; }
 
     /// <summary>
-    /// 
+    /// Initializes a new instance of the <see cref="ClassMember"/> class.
     /// </summary>
     /// <param name="name">The name of the class member.</param>
     /// <param name="isStatic">Whether the member is public; default <see langword="false"/>.</param>
@@ -33,6 +48,12 @@ public class ClassMember
         this.IsAbstract = isAbstract;
         this.Visibility = visibility;
     }
+
+    /// <summary>
+    /// Converts a string representation of a class member to its <see cref="ClassMember"/> equivalent.
+    /// </summary>
+    /// <param name="member">The string representation of the class member.</param>
+    /// <returns>The equivalent <see cref="ClassMember"/> object.</returns>
 
     public static implicit operator ClassMember(string member)
     {

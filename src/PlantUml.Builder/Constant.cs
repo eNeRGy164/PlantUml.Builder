@@ -1,5 +1,8 @@
 namespace PlantUml.Builder;
 
+/// <summary>
+/// Contains constant values used across the PlantUML builder.
+/// </summary>
 public class Constant
 {
     public const string Abstract = "abstract";
