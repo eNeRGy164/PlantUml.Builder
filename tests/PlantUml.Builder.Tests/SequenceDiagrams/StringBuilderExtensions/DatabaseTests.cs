@@ -6,126 +6,66 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests;
 public class DatabaseTests
 {
     [TestMethod]
-    public void StringBuilderExtensions_Database_Null_Should_ThrowArgumentNullException()
+    public void DatabaseNameCannotBeNull()
     {
         // Arrange
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Database("databaseA");
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Database_NullName_Should_ThrowArgumentException()
-    {
-        // Assign
         var stringBuilder = new StringBuilder();
 
         // Act
         Action action = () => stringBuilder.Database(null);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName("name");
     }
 
+    [DataRow(EmptyString, DisplayName = "Database - Name argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "Database - Name argument cannot be any whitespace character")]
     [TestMethod]
-    public void StringBuilderExtensions_Database_EmptyName_Should_ThrowArgumentException()
+    public void DatabaseNameMustContainAValue(string name)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Database(string.Empty);
+        Action action = () => stringBuilder.Database(name);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("name");
     }
 
+    [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetValidNotationTestDisplayName))]
     [TestMethod]
-    public void StringBuilderExtensions_Database_WhitespaceName_Should_ThrowArgumentException()
+    public void DatabaseIsRenderedCorreclty(MethodExpectationTestData testData)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
 
+        var (method, parameters) = typeof(StringBuilderExtensions).GetExtensionMethodAndParameters(stringBuilder, testData.Method, testData.Parameters);
+
         // Act
-        Action action = () => stringBuilder.Database(" ");
+        method.Invoke(null, parameters);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Database_Should_ContainDatabaseLine()
+    private static IEnumerable<object[]> GetValidNotations()
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
+        // Define the valid notations and expected results for different overloads
+        yield return new object[] { new MethodExpectationTestData("Database", "database databaseA", "databaseA") };
+        yield return new object[] { new MethodExpectationTestData("Database", "database \"Database A\" as databaseA", "databaseA", "Database A") };
+        yield return new object[] { new MethodExpectationTestData("Database", "database databaseA #AliceBlue", "databaseA", null, (Color)"AliceBlue") };
+        yield return new object[] { new MethodExpectationTestData("Database", "database databaseA order 10", "databaseA", null, null, 10) };
 
-        // Act
-        stringBuilder.Database("databaseA");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("database databaseA\n");
+        yield return new object[] { new MethodExpectationTestData("CreateDatabase", "create database databaseA", "databaseA") };
+        yield return new object[] { new MethodExpectationTestData("CreateDatabase", "create database \"Database A\" as databaseA", "databaseA", "Database A") };
+        yield return new object[] { new MethodExpectationTestData("CreateDatabase", "create database databaseA #AliceBlue", "databaseA", null, (Color)"AliceBlue") };
+        yield return new object[] { new MethodExpectationTestData("CreateDatabase", "create database databaseA order 10", "databaseA", null, null, 10) };
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Database_WithDisplayName_Should_ContainDatabaseLineWithDisplayName()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Database("databaseA", displayName: "Database A");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("database \"Database A\" as databaseA\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Database_WithColor_Should_ContainDatabaseLineWithColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Database("databaseA", color: "AliceBlue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("database databaseA #AliceBlue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Database_WithColorWithHashtag_Should_ContainDatabaseLineWithColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Database("databaseA", color: "#AliceBlue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("database databaseA #AliceBlue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Database_WithOrder_Should_ContainDatabaseLineWithOrder()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Database("databaseA", order: 10);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("database databaseA order 10\n");
-    }
+    public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);
 }

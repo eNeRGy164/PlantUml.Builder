@@ -6,126 +6,66 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests;
 public class ControlTests
 {
     [TestMethod]
-    public void StringBuilderExtensions_Control_Null_Should_ThrowArgumentNullException()
+    public void ControlNameCannotBeNull()
     {
         // Arrange
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Control("controlA");
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Control_NullName_Should_ThrowArgumentException()
-    {
-        // Assign
         var stringBuilder = new StringBuilder();
 
         // Act
         Action action = () => stringBuilder.Control(null);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName("name");
     }
 
+    [DataRow(EmptyString, DisplayName = "Control - Name argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "Control - Name argument cannot be any whitespace character")]
     [TestMethod]
-    public void StringBuilderExtensions_Control_EmptyName_Should_ThrowArgumentException()
+    public void ControlNameMustContainAValue(string name)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Control(string.Empty);
+        Action action = () => stringBuilder.Control(name);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("name");
     }
 
+    [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetValidNotationTestDisplayName))]
     [TestMethod]
-    public void StringBuilderExtensions_Control_WhitespaceName_Should_ThrowArgumentException()
+    public void ControlIsRenderedCorreclty(MethodExpectationTestData testData)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
 
+        var (method, parameters) = typeof(StringBuilderExtensions).GetExtensionMethodAndParameters(stringBuilder, testData.Method, testData.Parameters);
+
         // Act
-        Action action = () => stringBuilder.Control(" ");
+        method.Invoke(null, parameters);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Control_Should_ContainControlLine()
+    private static IEnumerable<object[]> GetValidNotations()
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
+        // Define the valid notations and expected results for different overloads
+        yield return new object[] { new MethodExpectationTestData("Control", "control controlA", "controlA") };
+        yield return new object[] { new MethodExpectationTestData("Control", "control \"Control A\" as controlA", "controlA", "Control A") };
+        yield return new object[] { new MethodExpectationTestData("Control", "control controlA #AliceBlue", "controlA", null, (Color)"AliceBlue") };
+        yield return new object[] { new MethodExpectationTestData("Control", "control controlA order 10", "controlA", null, null, 10) };
 
-        // Act
-        stringBuilder.Control("controlA");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("control controlA\n");
+        yield return new object[] { new MethodExpectationTestData("CreateControl", "create control controlA", "controlA") };
+        yield return new object[] { new MethodExpectationTestData("CreateControl", "create control \"Control A\" as controlA", "controlA", "Control A") };
+        yield return new object[] { new MethodExpectationTestData("CreateControl", "create control controlA #AliceBlue", "controlA", null, (Color)"AliceBlue") };
+        yield return new object[] { new MethodExpectationTestData("CreateControl", "create control controlA order 10", "controlA", null, null, 10) };
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Control_WithDisplayName_Should_ContainControlLineWithDisplayName()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Control("controlA", displayName: "Control A");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("control \"Control A\" as controlA\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Control_WithColor_Should_ContainControlLineWithColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Control("controlA", color: "AliceBlue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("control controlA #AliceBlue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Control_WithColorWithHashtag_Should_ContainControlLineWithColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Control("controlA", color: "#AliceBlue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("control controlA #AliceBlue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Control_WithOrder_Should_ContainControlLineWithOrder()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Control("controlA", order: 10);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("control controlA order 10\n");
-    }
+    public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);
 }

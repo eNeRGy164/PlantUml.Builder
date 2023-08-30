@@ -6,126 +6,66 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests;
 public class QueueTests
 {
     [TestMethod]
-    public void StringBuilderExtensions_Queue_Null_Should_ThrowArgumentNullException()
+    public void QueueNameCannotBeNull()
     {
         // Arrange
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Queue("queueA");
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Queue_NullName_Should_ThrowArgumentException()
-    {
-        // Assign
         var stringBuilder = new StringBuilder();
 
         // Act
         Action action = () => stringBuilder.Queue(null);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName("name");
     }
 
+    [DataRow(EmptyString, DisplayName = "Queue - Name argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "Queue - Name argument cannot be any whitespace character")]
     [TestMethod]
-    public void StringBuilderExtensions_Queue_EmptyName_Should_ThrowArgumentException()
+    public void QueueNameMustContainAValue(string name)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Queue(string.Empty);
+        Action action = () => stringBuilder.Queue(name);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("name");
     }
 
+    [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetValidNotationTestDisplayName))]
     [TestMethod]
-    public void StringBuilderExtensions_Queue_WhitespaceName_Should_ThrowArgumentException()
+    public void QueueIsRenderedCorreclty(MethodExpectationTestData testData)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
 
+        var (method, parameters) = typeof(StringBuilderExtensions).GetExtensionMethodAndParameters(stringBuilder, testData.Method, testData.Parameters);
+
         // Act
-        Action action = () => stringBuilder.Queue(" ");
+        method.Invoke(null, parameters);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Queue_Should_ContainQueueLine()
+    private static IEnumerable<object[]> GetValidNotations()
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
+        // Define the valid notations and expected results for different overloads
+        yield return new object[] { new MethodExpectationTestData("Queue", "queue queueA", "queueA").WithDisplayName("Queue - Basic notation") };
+        yield return new object[] { new MethodExpectationTestData("Queue", "queue \"Queue A\" as queueA", "queueA", "Queue A").WithDisplayName("Queue - With display name") };
+        yield return new object[] { new MethodExpectationTestData("Queue", "queue queueA #AliceBlue", "queueA", null, (Color)"AliceBlue").WithDisplayName("Queue - With color") };
+        yield return new object[] { new MethodExpectationTestData("Queue", "queue queueA order 10", "queueA", null, null, 10).WithDisplayName("Queue - With order 10") };
 
-        // Act
-        stringBuilder.Queue("queueA");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("queue queueA\n");
+        yield return new object[] { new MethodExpectationTestData("CreateQueue", "create queue queueA", "queueA").WithDisplayName("CreateQueue - Basic notation") };
+        yield return new object[] { new MethodExpectationTestData("CreateQueue", "create queue \"Queue A\" as queueA", "queueA", "Queue A").WithDisplayName("CreateQueue - With display name") };
+        yield return new object[] { new MethodExpectationTestData("CreateQueue", "create queue queueA #AliceBlue", "queueA", null, (Color)"AliceBlue").WithDisplayName("CreateQueue - With color") };
+        yield return new object[] { new MethodExpectationTestData("CreateQueue", "create queue queueA order 10", "queueA", null, null, 10).WithDisplayName("CreateQueue - With order 10") };
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Queue_WithDisplayName_Should_ContainQueueLineWithDisplayName()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Queue("queueA", displayName: "Queue A");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("queue \"Queue A\" as queueA\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Queue_WithColor_Should_ContainQueueLineWithColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Queue("queueA", color: "AliceBlue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("queue queueA #AliceBlue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Queue_WithColorWithHashtag_Should_ContainQueueLineWithColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Queue("queueA", color: "#AliceBlue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("queue queueA #AliceBlue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Queue_WithOrder_Should_ContainQueueLineWithOrder()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Queue("queueA", order: 10);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("queue queueA order 10\n");
-    }
+    public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);
 }
