@@ -5,8 +5,8 @@ namespace PlantUml.Builder.ObjectDiagrams.Tests;
 [TestClass]
 public class MapTests
 {
-    [TestMethod]
-    public void NameCannotBeNull()
+    [TestMethod("MapStart - Name argument cannot be `null`")]
+    public void MapNameCannotBeNull()
     {
         // Arrange
         var stringBuilder = new StringBuilder();
@@ -15,14 +15,15 @@ public class MapTests
         Action action = () => stringBuilder.MapStart(null);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentNullException>()
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
             .WithParameterName("name");
     }
 
-    [DataRow(EmptyString, DisplayName = "Name can not be empty")]
-    [DataRow(AllWhitespace, DisplayName = "Name can not be any whitespace character")]
+    [DataRow(EmptyString, DisplayName = "MapStart - Name argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "MapStart - Name argument cannot be any whitespace character")]
     [TestMethod]
-    public void NameMustContainAValue(string name)
+    public void MapNameMustContainAValue(string name)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
@@ -31,13 +32,14 @@ public class MapTests
         Action action = () => stringBuilder.MapStart(name);
         
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
+        action.Should()
+            .ThrowExactly<ArgumentException>()
             .WithParameterName("name");
     }
 
     [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetValidNotationTestDisplayName))]
     [TestMethod]
-    public void AValidMapNotationIsRendered(MethodExpectationTestData testData)
+    public void MapIsRenderedCorrectly(MethodExpectationTestData testData)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
@@ -60,6 +62,7 @@ public class MapTests
         yield return new object[] { new MethodExpectationTestData("MapStart", "map name [[https://blog.hompus.nl/]] {", "name", null, null, new Uri("https://blog.hompus.nl")) };
         yield return new object[] { new MethodExpectationTestData("MapStart", "map name #Blue {", "name", null, null, null, (Color)NamedColor.Blue) };
         yield return new object[] { new MethodExpectationTestData("MapStart", "map \"Display Name\" as name <<stereotype>> [[https://blog.hompus.nl/]] #Blue {", "name", "Display Name", "stereotype", new Uri("https://blog.hompus.nl"), (Color)NamedColor.Blue) };
+
         yield return new object[] { new MethodExpectationTestData("MapEnd", "}") };
     }
 
