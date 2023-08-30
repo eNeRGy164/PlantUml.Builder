@@ -7,7 +7,7 @@ public class RefTests
     [TestMethod]
     public void StringBuilderExtensions_Ref_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act
@@ -21,7 +21,7 @@ public class RefTests
     [TestMethod]
     public void StringBuilderExtensions_Ref_NullWithMultipleParticipants_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
         // Act
         Action action = () => stringBuilder.Ref("actorA", "actorB", "note");
@@ -33,7 +33,7 @@ public class RefTests
     [TestMethod]
     public void StringBuilderExtensions_Ref_NullParticipant_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -48,7 +48,7 @@ public class RefTests
     [TestMethod]
     public void StringBuilderExtensions_Ref_EmptyParticipant_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -63,7 +63,7 @@ public class RefTests
     [TestMethod]
     public void StringBuilderExtensions_Ref_WhitespaceParticipant_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -78,7 +78,7 @@ public class RefTests
     [TestMethod]
     public void StringBuilderExtensions_Ref_NullNote_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
         // Act
         Action action = () => stringBuilder.Ref("actorA", null);
@@ -91,7 +91,7 @@ public class RefTests
     [TestMethod]
     public void StringBuilderExtensions_Ref_EmptyNote_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
         // Act
         Action action = () => stringBuilder.Ref("actorA", string.Empty);
@@ -104,7 +104,7 @@ public class RefTests
     [TestMethod]
     public void StringBuilderExtensions_Ref_WhitespaceNote_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
         // Act
         Action action = () => stringBuilder.Ref("actorA", " ");
@@ -117,7 +117,7 @@ public class RefTests
     [TestMethod]
     public void StringBuilderExtensions_Ref_NullParticipantB_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
         // Act
         Action action = () => stringBuilder.Ref("actorA", null, "note");
@@ -156,7 +156,7 @@ public class RefTests
     [TestMethod]
     public void StringBuilderExtensions_Ref_NullParticipantA_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
         // Act
         Action action = () => stringBuilder.Ref(null, "actorB", "note");
@@ -195,7 +195,7 @@ public class RefTests
     [TestMethod]
     public void StringBuilderExtensions_Ref_Should_ContainRefLine()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -208,7 +208,7 @@ public class RefTests
     [TestMethod]
     public void StringBuilderExtensions_Ref_WithMultiLineNote_Should_ContainRefLineWithMultilineNote()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -221,7 +221,7 @@ public class RefTests
     [TestMethod]
     public void StringBuilderExtensions_Ref_WithDisplayName_Should_ContainRefLineWithDisplayName()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act

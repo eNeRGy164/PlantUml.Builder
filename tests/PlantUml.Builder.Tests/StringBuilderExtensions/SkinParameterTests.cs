@@ -7,7 +7,7 @@ public class SkinParameterTests
     [TestMethod]
     public void StringBuilderExtensions_SkinParameter_Null_Should_ThrowExactlyArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act
@@ -27,7 +27,7 @@ public class SkinParameterTests
     [TestMethod]
     public void ParametersHaveToContainAValue(string parameterName, string name, string value)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -42,7 +42,7 @@ public class SkinParameterTests
     [TestMethod]
     public void EnumerationValueShouldExist()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -58,7 +58,7 @@ public class SkinParameterTests
     [TestMethod]
     public void AValidSkinParamNotationIsRendered(object name, object value, string expected)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         var method = typeof(StringBuilderExtensions).GetMethod("SkinParameter", new[] { typeof(StringBuilder), name.GetType(), value.GetType() });

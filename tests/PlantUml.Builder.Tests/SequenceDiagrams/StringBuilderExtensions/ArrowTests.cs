@@ -70,7 +70,7 @@ public class ArrowTests
     [TestMethod]
     public void NotPossibleToHaveBothParticipantsOutsideTheDiagram(string left, string arrow, string right)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -84,7 +84,7 @@ public class ArrowTests
     [TestMethod]
     public void StringBuilderExtensions_Arrow_ArrowShouldBeAtLeastTwoLong_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -99,7 +99,7 @@ public class ArrowTests
     [TestMethod]
     public void StringBuilderExtensions_Arrow_Should_ContainArrowLine()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act

@@ -6,7 +6,7 @@ public class ColorTests
     [TestMethod]
     public void Color_NullConstructor_ToString_Should_ReturnEmptyString()
     {
-        // Assign
+        // Arrange & act
         var color = new Color(null);
 
         // Assert
@@ -16,7 +16,7 @@ public class ColorTests
     [TestMethod]
     public void Color_StringConstructorWithHashTag_ToString_Should_ReturnValueWithHashTag()
     {
-        // Assign
+        // Arrange
         var color = new Color("#AliceBlue");
 
         // Assert
@@ -46,7 +46,7 @@ public class ColorTests
     [TestMethod]
     public void Color_StringCast_ToString_Should_ReturnValueWithHashTag()
     {
-        // Assign
+        // Arrange
         var value = "AliceBlue";
 
         // Act
@@ -59,7 +59,7 @@ public class ColorTests
     [TestMethod]
     public void Color_NamedColorEnumCast_ToString_Should_ReturnValueWithHashTag()
     {
-        // Assign
+        // Arrange
         var value = NamedColor.AliceBlue;
 
         // Act
@@ -72,7 +72,7 @@ public class ColorTests
     [TestMethod]
     public void Color_ToStringWithFormatEmpty_Should_ReturnColorWithBrackets()
     {
-        // Assign
+        // Arrange
         var color = new Color(NamedColor.AliceBlue);
 
         // Act

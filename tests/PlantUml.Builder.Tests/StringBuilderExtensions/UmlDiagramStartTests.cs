@@ -6,7 +6,7 @@ public class UmlDiagramStartTests
     [TestMethod]
     public void StringBuilderExtensions_UmlDiagramStart_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act

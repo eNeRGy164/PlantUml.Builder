@@ -6,7 +6,7 @@ public class StereoTypeTests
     [TestMethod]
     public void StringBuilderExtensions_StereoType_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act

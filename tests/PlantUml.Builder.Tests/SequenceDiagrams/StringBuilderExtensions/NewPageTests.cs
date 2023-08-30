@@ -7,7 +7,7 @@ public class NewPageTests
     [TestMethod]
     public void StringBuilderExtensions_NewPage_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act
@@ -21,7 +21,7 @@ public class NewPageTests
     [TestMethod]
     public void StringBuilderExtensions_NewPage_NullWithTitle_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
         // Act
         Action action = () => stringBuilder.NewPage("Page header");
@@ -47,7 +47,7 @@ public class NewPageTests
     [TestMethod]
     public void StringBuilderExtensions_NewPage_EmptyName_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act

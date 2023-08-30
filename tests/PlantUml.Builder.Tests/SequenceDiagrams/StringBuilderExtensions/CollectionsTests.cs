@@ -7,7 +7,7 @@ public class CollectionsTests
     [TestMethod]
     public void StringBuilderExtensions_Collections_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act
@@ -36,7 +36,7 @@ public class CollectionsTests
     [TestMethod]
     public void StringBuilderExtensions_Collections_EmptyName_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act

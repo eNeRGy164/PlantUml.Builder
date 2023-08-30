@@ -6,7 +6,7 @@ public class AppendNewLineTests
     [TestMethod]
     public void StringBuilderExtensions_AppendNewLine_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act

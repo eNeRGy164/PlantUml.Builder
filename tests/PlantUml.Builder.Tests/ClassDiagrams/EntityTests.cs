@@ -8,7 +8,7 @@ public class EntityTests
     [TestMethod]
     public void StringBuilderExtensions_Entity_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act
@@ -37,7 +37,7 @@ public class EntityTests
     [TestMethod]
     public void StringBuilderExtensions_Entity_EmptyName_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -52,7 +52,7 @@ public class EntityTests
     [TestMethod]
     public void StringBuilderExtensions_Entity_WhitespaceName_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act

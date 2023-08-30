@@ -7,7 +7,7 @@ public class RelationshipTests
     [TestMethod]
     public void StringBuilderExtensions_Relationship_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act
@@ -36,7 +36,7 @@ public class RelationshipTests
     [TestMethod]
     public void StringBuilderExtensions_Relationship_EmptyLeft_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -51,7 +51,7 @@ public class RelationshipTests
     [TestMethod]
     public void StringBuilderExtensions_Relationship_WhitespaceLeft_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act

@@ -9,8 +9,10 @@ public class LifeLineEventsTests
     [DynamicData(nameof(GetLifeLineEvents), DynamicDataSourceType.Method)]
     public void ReturnCorrectLifeLineEvent(string name, string expected)
     {
+        // Arrange & Act
         var lifeLineEvents = typeof(LifeLineEvents).GetProperty(name).GetValue(null);
 
+        // Assert
         lifeLineEvents.ToString().Should().Be(expected);
     }
 

@@ -7,7 +7,7 @@ public class TextTests
     [TestMethod]
     public void StringBuilderExtensions_Text_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act
@@ -36,7 +36,7 @@ public class TextTests
     [TestMethod]
     public void StringBuilderExtensions_Text_EmptyText_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -79,7 +79,7 @@ public class TextTests
     [TestMethod]
     public void StringBuilderExtensions_Text_WithNewLine_Should_EscapeNewLine()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act

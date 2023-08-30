@@ -7,7 +7,7 @@ public class FooterTests
     [TestMethod]
     public void StringBuilderExtensions_Footer_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act
@@ -36,7 +36,7 @@ public class FooterTests
     [TestMethod]
     public void StringBuilderExtensions_Footer_EmptyName_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -66,7 +66,7 @@ public class FooterTests
     [TestMethod]
     public void StringBuilderExtensions_Footer_Should_ContainFooterLine()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act

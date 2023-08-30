@@ -7,7 +7,7 @@ public class ControlTests
     [TestMethod]
     public void StringBuilderExtensions_Control_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act
@@ -36,7 +36,7 @@ public class ControlTests
     [TestMethod]
     public void StringBuilderExtensions_Control_EmptyName_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -51,7 +51,7 @@ public class ControlTests
     [TestMethod]
     public void StringBuilderExtensions_Control_WhitespaceName_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act

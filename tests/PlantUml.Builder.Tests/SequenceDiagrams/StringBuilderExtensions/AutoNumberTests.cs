@@ -11,7 +11,7 @@ public class AutoNumberTests
     [TestMethod]
     public void AutoNumberParametersMustToContainAValidValue(string parameterName, string start, string format)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -33,7 +33,7 @@ public class AutoNumberTests
     [TestMethod]
     public void ACorrectAutoNumberIsRendered(object start, int? step, string format, string expected)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         var startType = start?.GetType() ?? typeof(string);
@@ -51,7 +51,7 @@ public class AutoNumberTests
     [TestMethod]
     public void ACorrectStopAutoNumberIsRendered()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -66,7 +66,7 @@ public class AutoNumberTests
     [TestMethod]
     public void ResumeFormatParameterMustToContainAValidValue(string format)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -85,7 +85,7 @@ public class AutoNumberTests
     [TestMethod]
     public void ACorrectAutoNumberResumeIsRendered(int? step, string format, string expected)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         var method = typeof(StringBuilderExtensions).GetMethod("ResumeAutoNumber");
@@ -108,7 +108,7 @@ public class AutoNumberTests
     [TestMethod]
     public void PositionParameterMustBeInTheValidRange(char position)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -127,7 +127,7 @@ public class AutoNumberTests
     [TestMethod]
     public void ACorrectAutoNumberIncreaseIsRendered(char? position, string expected)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act

@@ -7,7 +7,7 @@ public class ReturnTests
     [TestMethod]
     public void StringBuilderExtensions_Return_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act
@@ -48,7 +48,7 @@ public class ReturnTests
     [TestMethod]
     public void StringBuilderExtensions_Return_EmptyMessage_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -78,7 +78,7 @@ public class ReturnTests
     [TestMethod]
     public void StringBuilderExtensions_Return_Should_ContainReturnLine()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -91,7 +91,7 @@ public class ReturnTests
     [TestMethod]
     public void StringBuilderExtensions_Return_WithMessage_Should_ContainReturnLineWithMessage()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act

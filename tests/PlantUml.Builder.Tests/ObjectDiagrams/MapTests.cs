@@ -10,7 +10,7 @@ public class MapTests
     [TestMethod]
     public void NameMustContainAValue(string name, string value)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -26,7 +26,7 @@ public class MapTests
     [TestMethod]
     public void AValidMapNotationIsRendered(string methodName, object[] methodParameters, string expected)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         var method = typeof(StringBuilderExtensions).FindOverloadedMethod(methodName, methodParameters.Select(p => p?.GetType()));

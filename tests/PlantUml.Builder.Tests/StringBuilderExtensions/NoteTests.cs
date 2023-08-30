@@ -7,7 +7,7 @@ public class NoteTests
     [TestMethod]
     public void AValidNoteIsRendered(string methodName, object[] methodParameters, string expected)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         var method = typeof(StringBuilderExtensions).FindOverloadedMethod(methodName, methodParameters.Select(p => p.GetType()));

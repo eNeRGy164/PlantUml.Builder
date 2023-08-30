@@ -7,7 +7,7 @@ public class ClassMemberTests
     [TestMethod]
     public void ClassMember_NullName_Should_ThrowArgumentException()
     {
-        // Act
+        // Arrange & Act
         Action action = () => _ = new ClassMember(null);
 
         // Assert
@@ -19,7 +19,7 @@ public class ClassMemberTests
     [TestMethod]
     public void ClassMember_EmptyName_Should_ThrowArgumentException()
     {
-        // Act
+        // Arrange & Act
         Action action = () => _ = new ClassMember(name);
 
         // Assert

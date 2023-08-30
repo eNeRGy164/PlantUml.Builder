@@ -8,7 +8,7 @@ public class InterfaceTests
     [TestMethod]
     public void StringBuilderExtensions_Interface_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act
@@ -37,7 +37,7 @@ public class InterfaceTests
     [TestMethod]
     public void StringBuilderExtensions_Interface_EmptyName_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -52,7 +52,7 @@ public class InterfaceTests
     [TestMethod]
     public void StringBuilderExtensions_Interface_WhitespaceName_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act

@@ -6,7 +6,7 @@ public class DividerTests
     [TestMethod]
     public void StringBuilderExtensions_Divider_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act

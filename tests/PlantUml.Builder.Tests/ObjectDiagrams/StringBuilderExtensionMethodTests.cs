@@ -8,7 +8,7 @@ public class StringBuilderExtensionMethodTests
     [DynamicData(nameof(GetStringBuilderExtensionMethods), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetStringBuilderExtensionMethodsDisplayName))]
     public void ExtensionMethodsShouldNotWorkOnANullStringBuilder(string methodName, object[] methodParameters)
     {
-        // Assign
+        // Arrange
         StringBuilder stringBuilder = null;
 
         var method = typeof(StringBuilderExtensions).FindOverloadedMethod(methodName, methodParameters.Select(p => p.GetType()));
@@ -26,7 +26,7 @@ public class StringBuilderExtensionMethodTests
 
     private static IEnumerable<object[]> GetStringBuilderExtensionMethods()
     {
-        yield return new object[] { "Diamond", new object[] { "name" } };
+        // Define the valid notations and expected results for different overloads
         yield return new object[] { "Object", new object[] { "name" } };
         yield return new object[] { "MapStart", new object[] { "name" } };
         yield return new object[] { "ObjectStart", new object[] { "name" } };

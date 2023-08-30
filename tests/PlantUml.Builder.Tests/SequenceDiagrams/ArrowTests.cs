@@ -132,7 +132,7 @@ public class ArrowTests
     [TestMethod]
     public void Arrow_StringConstructorBidirectional_ToString_Should_ReturnValue()
     {
-        // Assign
+        // Arrange & Act
         var arrow = new Arrow("<->");
 
         // Assert
@@ -165,7 +165,7 @@ public class ArrowTests
     [TestMethod]
     public void Arrow_ArrowConstructorWithDotted_Should_ChangeLineToDotted()
     {
-        // Assign
+        // Arrange
         var originalArrow = new Arrow("-[#red]>");
 
         // Act

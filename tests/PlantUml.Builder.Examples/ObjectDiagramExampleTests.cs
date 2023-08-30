@@ -11,7 +11,7 @@ public class ObjectDiagramExampleTests
     [TestMethod]
     public void DefinitionOfObjects()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 object firstObject
 object ""My Second Object"" as o2
@@ -33,7 +33,7 @@ object ""My Second Object"" as o2
     [TestMethod]
     public void RelationsBetweenObjects()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 object Object01
 object Object02
@@ -77,7 +77,7 @@ Object07 .. Object08 : some labels
     [TestMethod]
     public void AssociationsObjects()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 object o1
 object o2
@@ -111,7 +111,7 @@ dia --> o3
     [TestMethod]
     public void AddingFields01()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 
 object user
@@ -141,7 +141,7 @@ user : id = 123
     [TestMethod]
     public void AddingFields02()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 
 object user {
@@ -171,7 +171,7 @@ id = 123
     [TestMethod]
     public void MapTableOrAssociativeArray01()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 map CapitalCity {
 UK => London
@@ -199,7 +199,7 @@ Germany => Berlin
     [TestMethod]
     public void MapTableOrAssociativeArray02()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 map ""Map **Contry => CapitalCity**"" as CC {
 UK => London
@@ -227,7 +227,7 @@ Germany => Berlin
     [TestMethod]
     public void MapTableOrAssociativeArray03()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 map ""map: Map<Integer, String>"" as users {
 1 => Alice
@@ -255,7 +255,7 @@ map ""map: Map<Integer, String>"" as users {
     [TestMethod]
     public void MapTableOrAssociativeArray04()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 object London
 
@@ -287,7 +287,7 @@ Germany => Berlin
     [TestMethod]
     public void MapTableOrAssociativeArray05()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 object London
 object Washington

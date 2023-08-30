@@ -7,7 +7,7 @@ public class HideEntityPortionTests
     [TestMethod]
     public void StringBuilderExtensions_HideEntityPortion_NullWithNameAndPortion_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act
@@ -80,7 +80,7 @@ public class HideEntityPortionTests
     [TestMethod]
     public void StringBuilderExtensions_HideEntityPortion_WithPortionNone_Should_ThrowArgumentException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -123,7 +123,7 @@ public class HideEntityPortionTests
     [TestMethod]
     public void StringBuilderExtensions_HideEntityPortion_WithNameAndPortionEmpty_Should_ContainHideEntityPortionLineWithEmpty()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act

@@ -6,7 +6,7 @@ public class AllowMixingTests
     [TestMethod]
     public void StringBuilderExtensions_AllowMixing_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act

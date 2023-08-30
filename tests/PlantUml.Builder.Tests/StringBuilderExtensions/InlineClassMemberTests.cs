@@ -6,7 +6,7 @@ public class InlineClassMemberTests
     [TestMethod]
     public void StringBuilderExtensions_ClassMember_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act
@@ -34,7 +34,7 @@ public class InlineClassMemberTests
     [TestMethod]
     public void StringBuilderExtensions_ClassMember_Should_ContainClassMemberLine()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act

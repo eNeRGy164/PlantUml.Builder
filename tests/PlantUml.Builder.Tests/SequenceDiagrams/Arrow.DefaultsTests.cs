@@ -9,8 +9,10 @@ public class ArrowDefaultsTests
     [DynamicData(nameof(GetDefaultArrows), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetDefaultArrowsDisplayName))]
     public void ReturnCorrectDefaultArrowNotation(string name, string expected)
     {
+        // Arrange & Act
         var arrow = typeof(Arrow).GetProperty(name).GetValue(null);
 
+        // Assert
         arrow.ToString().Should().Be(expected);
     }
 

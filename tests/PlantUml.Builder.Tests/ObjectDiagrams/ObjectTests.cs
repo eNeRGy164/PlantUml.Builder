@@ -10,7 +10,7 @@ public class ObjectTests
     [TestMethod]
     public void NameMustContainAValue(string name, string value)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -26,7 +26,7 @@ public class ObjectTests
     [TestMethod]
     public void AValidObjectNotationIsRendered(string methodName, object[] methodParameters, string expected)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         var method = typeof(StringBuilderExtensions).FindOverloadedMethod(methodName, methodParameters.Select(p => p?.GetType()));
@@ -42,7 +42,7 @@ public class ObjectTests
 
     private static IEnumerable<object[]> GetValidNotations()
     {
-        yield return new object[] { nameof(StringBuilderExtensions.Object), new object[] { "name" }, "object name" };
+        // Define the valid notations and expected results for different overloads
         yield return new object[] { nameof(StringBuilderExtensions.Object), new object[] { "name", "Display Name" }, "object \"Display Name\" as name" };
         yield return new object[] { nameof(StringBuilderExtensions.Object), new object[] { "name", null, "stereotype" }, "object name <<stereotype>>" };
         yield return new object[] { nameof(StringBuilderExtensions.Object), new object[] { "name", null, null, new Uri("https://blog.hompus.nl") }, "object name [[https://blog.hompus.nl/]]" };

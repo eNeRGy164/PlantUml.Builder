@@ -7,7 +7,7 @@ public class SetNamespaceSeparatorTests
     [TestMethod]
     public void StringBuilderExtensions_SetNamespaceSeparator_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act
@@ -34,7 +34,7 @@ public class SetNamespaceSeparatorTests
     [TestMethod]
     public void StringBuilderExtensions_SetNamespaceSeparator_WithoutSeparator_Should_ContainSetNamespaceSeparatorNoneLine()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act

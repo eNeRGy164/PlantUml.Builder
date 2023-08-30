@@ -6,7 +6,7 @@ public class CommentTests
     [TestMethod]
     public void StringBuilderExtensions_Comment_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act

@@ -9,7 +9,7 @@ public class ArrowExtensionsTests
     [DynamicData(nameof(GetArrowExtensionMethods), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetArrowExtensionMethodsDisplayName))]
     public void ExtensionMethodsShouldNotWorkOnANullArrow(string methodName, object[] methodParameters = null)
     {
-        // Assign
+        // Arrange
         Arrow arrow = null;
 
         var method = typeof(ArrowExtensions).GetMethod(methodName);
@@ -52,7 +52,7 @@ public class ArrowExtensionsTests
     [DataRow("[->", NamedColor.Yellow, "[-[#Yellow]>", DisplayName = "The incoming arrow should change color")]
     public void ChangeTheColorOfTheArrow(string original, NamedColor? color, string expected)
     {
-        // Assign
+        // Arrange
         Arrow originalArrow = original;
 
         // Act
@@ -69,7 +69,7 @@ public class ArrowExtensionsTests
     [DataRow("[->", "[-->", DisplayName = "An incoming solid arrow line should become a dotted line")]
     public void EnsureTheLineIsDotted(string original, string expected)
     {
-        // Assign
+        // Arrange
         Arrow originalArrow = original;
 
         // Act
@@ -92,7 +92,7 @@ public class ArrowExtensionsTests
     [DataRow("x-x", "LostRight", DisplayName = "If the right side is already deleted, it can't become lost")]
     public void TheDeletedSideCannotBecomeLost(string original, string methodName)
     {
-        // Assign
+        // Arrange
         Arrow originalArrow = original;
 
         var method = typeof(ArrowExtensions).GetMethod(methodName);
@@ -126,7 +126,7 @@ public class ArrowExtensionsTests
 
     public void AddTheLostNotationOnTheLeftOfTheArrowOnce(string original, string methodName, string expected)
     {
-        // Assign
+        // Arrange
         Arrow originalArrow = original;
 
         var method = typeof(ArrowExtensions).GetMethod(methodName);
@@ -146,7 +146,7 @@ public class ArrowExtensionsTests
     [DataRow("[-->", "[->", DisplayName = "An incomming dotted arrow line should become a solid line")]
     public void EnsureTheLineIsSolid(string original, string expected)
     {
-        // Assign
+        // Arrange
         Arrow originalArrow = original;
 
         // Act
@@ -169,7 +169,7 @@ public class ArrowExtensionsTests
 
     public void DestroyTheMessageInTheDirectionOfTheArrow(string original, string expected)
     {
-        // Assign
+        // Arrange
         Arrow originalArrow = original;
 
         // Act
@@ -189,7 +189,7 @@ public class ArrowExtensionsTests
 
     public void MethodsOnlyWorkIfTheArrowIsToTheLeftOrRight(string original, string methodName)
     {
-        // Assign
+        // Arrange
         Arrow originalArrow = original;
 
         var method = typeof(ArrowExtensions).GetMethod(methodName);
@@ -216,7 +216,7 @@ public class ArrowExtensionsTests
 
     public void MakeArrowIncommingOrOutgoing(string original, string methodName, string expected)
     {
-        // Assign
+        // Arrange
         Arrow originalArrow = original;
 
         var method = typeof(ArrowExtensions).GetMethod(methodName);

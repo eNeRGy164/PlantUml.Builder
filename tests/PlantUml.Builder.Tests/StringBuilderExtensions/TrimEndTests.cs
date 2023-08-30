@@ -7,7 +7,7 @@ public class TrimEndTests
     [TestMethod]
     public void StringBuilderExtensions_TrimEnd_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act
@@ -34,7 +34,7 @@ public class TrimEndTests
     [TestMethod]
     public void StringBuilderExtensions_TrimEnd_TextWithWhitespace_Should_BeTextOnly()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder("Text   ");
 
         // Act

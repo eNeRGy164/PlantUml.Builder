@@ -6,7 +6,7 @@ public class AutoActivateTests
     [TestMethod]
     public void StringBuilderExtensions_AutoActivate_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act
@@ -20,7 +20,7 @@ public class AutoActivateTests
     [TestMethod]
     public void StringBuilderExtensions_AutoActivate_Should_ContainAutoActivateLineWithOn()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act

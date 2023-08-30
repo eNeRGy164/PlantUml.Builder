@@ -1,6 +1,4 @@
-using PlantUml.Builder.SequenceDiagrams;
-
-namespace PlantUml.Builder.Tests.SequenceDiagrams;
+namespace PlantUml.Builder.SequenceDiagrams.Tests;
 
 [TestClass]
 public class ParticipantNameTests
@@ -19,8 +17,10 @@ public class ParticipantNameTests
     [TestMethod]
     public void CanCastStringToParticipantName(string original, string expected)
     {
+        // Arrange & Act
         ParticipantName participantName = original;
 
+        // Assert
         participantName.ToString().Should().Be(expected);
     }
 }

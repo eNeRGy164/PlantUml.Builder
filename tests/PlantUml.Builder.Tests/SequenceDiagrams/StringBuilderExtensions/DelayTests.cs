@@ -6,7 +6,7 @@ public class DelayTests
     [TestMethod]
     public void StringBuilderExtensions_Delay_Null_Should_ThrowArgumentNullException()
     {
-        // Assign
+        // Arrange
         var stringBuilder = (StringBuilder)null;
 
         // Act
