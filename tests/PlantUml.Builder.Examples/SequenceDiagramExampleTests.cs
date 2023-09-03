@@ -12,14 +12,17 @@ public class SequenceDiagramExampleTests
     public void BasicExamples()
     {
         // Arrange
-        var example = @"@startuml
-Alice -> Bob : Authentication Request
-Bob --> Alice : Authentication Response
+        var example =
+            """
+            @startuml
+            Alice -> Bob : Authentication Request
+            Bob --> Alice : Authentication Response
 
-Alice -> Bob : Another authentication Request
-Alice <-- Bob : Another authentication Response
-@enduml
-";
+            Alice -> Bob : Another authentication Request
+            Alice <-- Bob : Another authentication Response
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -40,24 +43,27 @@ Alice <-- Bob : Another authentication Response
     public void DeclaringParticipant01()
     {
         // Arrange
-        var example = @"@startuml
-participant participant as Foo
-actor actor as Foo1
-boundary boundary as Foo2
-control control as Foo3
-entity entity as Foo4
-database database as Foo5
-collections collections as Foo6
-queue queue as Foo7
-Foo -> Foo1 : To actor
-Foo -> Foo2 : To boundary
-Foo -> Foo3 : To control
-Foo -> Foo4 : To entity
-Foo -> Foo5 : To database
-Foo -> Foo6 : To collections
-Foo -> Foo7 : To queue
-@enduml
-";
+        var example =
+            """
+            @startuml
+            participant participant as Foo
+            actor actor as Foo1
+            boundary boundary as Foo2
+            control control as Foo3
+            entity entity as Foo4
+            database database as Foo5
+            collections collections as Foo6
+            queue queue as Foo7
+            Foo -> Foo1 : To actor
+            Foo -> Foo2 : To boundary
+            Foo -> Foo3 : To control
+            Foo -> Foo4 : To entity
+            Foo -> Foo5 : To database
+            Foo -> Foo6 : To collections
+            Foo -> Foo7 : To queue
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -88,21 +94,24 @@ Foo -> Foo7 : To queue
     public void DeclaringParticipant02()
     {
         // Arrange
-        var example = @"@startuml
-actor Bob #red
-' The only difference between actor
-' and participant is the drawing
-participant Alice
-participant ""I have a really\nlong name"" as L #99FF99
-/' You can also declare:
-   participant L as ""I have a really\nlong name""  #99FF99
-  '/
+        var example =
+            """
+            @startuml
+            actor Bob #red
+            ' The only difference between actor
+            ' and participant is the drawing
+            participant Alice
+            participant "I have a really\nlong name" as L #99FF99
+            /' You can also declare:
+               participant L as "I have a really\nlong name"  #99FF99
+              '/
 
-Alice -> Bob : Authentication Request
-Bob -> Alice : Authentication Response
-Bob -> L : Log transaction
-@enduml
-";
+            Alice -> Bob : Authentication Request
+            Bob -> Alice : Authentication Response
+            Bob -> L : Log transaction
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -128,12 +137,15 @@ Bob -> L : Log transaction
     public void DeclaringParticipant03()
     {
         // Arrange
-        var example = @"@startuml
-participant Last order 30
-participant Middle order 20
-participant First order 10
-@enduml
-";
+        var example =
+            """
+            @startuml
+            participant Last order 30
+            participant Middle order 20
+            participant First order 10
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -152,14 +164,17 @@ participant First order 10
     public void UseNonLettersInParticipants()
     {
         // Arrange
-        var example = @"@startuml
-Alice -> ""Bob()"" : Hello
-""Bob()"" -> ""This is very\nlong"" as Long
-' You can also declare:
-' ""Bob()"" -> Long as ""This is very\nlong""
-Long --> ""Bob()"" : ok
-@enduml
-";
+        var example =
+            """
+            @startuml
+            Alice -> "Bob()" : Hello
+            "Bob()" -> "This is very\nlong" as Long
+            ' You can also declare:
+            ' "Bob()" -> Long as "This is very\nlong"
+            Long --> "Bob()" : ok
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -180,10 +195,13 @@ Long --> ""Bob()"" : ok
     public void MessageToSelf01()
     {
         // Arrange
-        var example = @"@startuml
-Alice -> Alice : This is a signal to self.\nIt also demonstrates\nmultiline \ntext
-@enduml
-";
+        var example =
+            """
+            @startuml
+            Alice -> Alice : This is a signal to self.\nIt also demonstrates\nmultiline \ntext
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -200,10 +218,13 @@ Alice -> Alice : This is a signal to self.\nIt also demonstrates\nmultiline \nte
     public void MessageToSelf02()
     {
         // Arrange
-        var example = @"@startuml
-Alice <- Alice : This is a signal to self.\nIt also demonstrates\nmultiline \ntext
-@enduml
-";
+        var example =
+            """
+            @startuml
+            Alice <- Alice : This is a signal to self.\nIt also demonstrates\nmultiline \ntext
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -220,12 +241,15 @@ Alice <- Alice : This is a signal to self.\nIt also demonstrates\nmultiline \nte
     public void TextAlignment01()
     {
         // Arrange
-        var example = @"@startuml
-skinparam sequenceMessageAlignment right
-Bob -> Alice : Request
-Alice -> Bob : Response
-@enduml
-";
+        var example =
+            """
+            @startuml
+            skinparam sequenceMessageAlignment right
+            Bob -> Alice : Request
+            Alice -> Bob : Response
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -244,12 +268,15 @@ Alice -> Bob : Response
     public void TextAlignment02()
     {
         // Arrange
-        var example = @"@startuml
-skinparam responseMessageBelowArrow true
-Bob -> Alice : hello
-Alice -> Bob : ok
-@enduml
-";
+        var example =
+            """
+            @startuml
+            skinparam responseMessageBelowArrow true
+            Bob -> Alice : hello
+            Alice -> Bob : ok
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -268,21 +295,24 @@ Alice -> Bob : ok
     public void ChangeArrowStyle01()
     {
         // Arrange
-        var example = @"@startuml
-Bob ->x Alice
-Bob -> Alice
-Bob ->> Alice
-Bob -\ Alice
-Bob \\- Alice
-Bob //-- Alice
+        var example =
+            """
+            @startuml
+            Bob ->x Alice
+            Bob -> Alice
+            Bob ->> Alice
+            Bob -\ Alice
+            Bob \\- Alice
+            Bob //-- Alice
 
-Bob ->o Alice
-Bob o\\-- Alice
+            Bob ->o Alice
+            Bob o\\-- Alice
 
-Bob <-> Alice
-Bob <->o Alice
-@enduml
-";
+            Bob <-> Alice
+            Bob <->o Alice
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -310,21 +340,24 @@ Bob <->o Alice
     public void ChangeArrowStyle02()
     {
         // Arrange
-        var example = @"@startuml
-Bob ->x Alice
-Bob -> Alice
-Bob ->> Alice
-Bob -\ Alice
-Bob \\- Alice
-Bob //-- Alice
+        var example =
+            """
+            @startuml
+            Bob ->x Alice
+            Bob -> Alice
+            Bob ->> Alice
+            Bob -\ Alice
+            Bob \\- Alice
+            Bob //-- Alice
 
-Bob ->o Alice
-Bob o\\-- Alice
+            Bob ->o Alice
+            Bob o\\-- Alice
 
-Bob <-> Alice
-Bob <->o Alice
-@enduml
-";
+            Bob <-> Alice
+            Bob <->o Alice
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
         var bob = new Bob();
@@ -354,11 +387,14 @@ Bob <->o Alice
     public void ChangeArrowColor()
     {
         // Arrange
-        var example = @"@startuml
-Bob -[#red]> Alice : hello
-Alice --[#0000FF]> Bob : ok
-@enduml
-";
+        var example =
+            """
+            @startuml
+            Bob -[#red]> Alice : hello
+            Alice --[#0000FF]> Bob : ok
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -376,12 +412,15 @@ Alice --[#0000FF]> Bob : ok
     public void MessageSequenceNumbering01()
     {
         // Arrange
-        var example = @"@startuml
-autonumber
-Bob -> Alice : Authentication Request
-Bob <- Alice : Authentication Response
-@enduml
-";
+        var example =
+            """
+            @startuml
+            autonumber
+            Bob -> Alice : Authentication Request
+            Bob <- Alice : Authentication Response
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -400,21 +439,24 @@ Bob <- Alice : Authentication Response
     public void MessageSequenceNumbering02()
     {
         // Arrange
-        var example = @"@startuml
-autonumber
-Bob -> Alice : Authentication Request
-Bob <- Alice : Authentication Response
+        var example =
+            """
+            @startuml
+            autonumber
+            Bob -> Alice : Authentication Request
+            Bob <- Alice : Authentication Response
 
-autonumber 15
-Bob -> Alice : Another authentication Request
-Bob <- Alice : Another authentication Response
+            autonumber 15
+            Bob -> Alice : Another authentication Request
+            Bob <- Alice : Another authentication Response
 
-autonumber 40 10
-Bob -> Alice : Yet another authentication Request
-Bob <- Alice : Yet another authentication Response
+            autonumber 40 10
+            Bob -> Alice : Yet another authentication Request
+            Bob <- Alice : Yet another authentication Response
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -442,21 +484,24 @@ Bob <- Alice : Yet another authentication Response
     public void MessageSequenceNumbering03()
     {
         // Arrange
-        var example = @"@startuml
-autonumber ""<b>[000]""
-Bob -> Alice : Authentication Request
-Bob <- Alice : Authentication Response
+        var example =
+            """
+            @startuml
+            autonumber "<b>[000]"
+            Bob -> Alice : Authentication Request
+            Bob <- Alice : Authentication Response
 
-autonumber 15 ""<b>(<u>##</u>)""
-Bob -> Alice : Another authentication Request
-Bob <- Alice : Another authentication Response
+            autonumber 15 "<b>(<u>##</u>)"
+            Bob -> Alice : Another authentication Request
+            Bob <- Alice : Another authentication Response
 
-autonumber 40 10 ""<font color=red><b>Message 0  ""
-Bob -> Alice : Yet another authentication Request
-Bob <- Alice : Yet another authentication Response
+            autonumber 40 10 "<font color=red><b>Message 0  "
+            Bob -> Alice : Yet another authentication Request
+            Bob <- Alice : Yet another authentication Response
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -484,26 +529,29 @@ Bob <- Alice : Yet another authentication Response
     public void MessageSequenceNumbering04()
     {
         // Arrange
-        var example = @"@startuml
-autonumber 10 10 ""<b>[000]""
-Bob -> Alice : Authentication Request
-Bob <- Alice : Authentication Response
+        var example =
+            """
+            @startuml
+            autonumber 10 10 "<b>[000]"
+            Bob -> Alice : Authentication Request
+            Bob <- Alice : Authentication Response
 
-autonumber stop
-Bob -> Alice : dummy
+            autonumber stop
+            Bob -> Alice : dummy
 
-autonumber resume ""<font color=red><b>Message 0  ""
-Bob -> Alice : Yet another authentication Request
-Bob <- Alice : Yet another authentication Response
+            autonumber resume "<font color=red><b>Message 0  "
+            Bob -> Alice : Yet another authentication Request
+            Bob <- Alice : Yet another authentication Response
 
-autonumber stop
-Bob -> Alice : dummy
+            autonumber stop
+            Bob -> Alice : dummy
 
-autonumber resume 1 ""<font color=blue><b>Message 0  ""
-Bob -> Alice : Yet another authentication Request
-Bob <- Alice : Yet another authentication Response
-@enduml
-";
+            autonumber resume 1 "<font color=blue><b>Message 0  "
+            Bob -> Alice : Yet another authentication Request
+            Bob <- Alice : Yet another authentication Response
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -536,29 +584,32 @@ Bob <- Alice : Yet another authentication Response
     public void MessageSequenceNumbering05()
     {
         // Arrange
-        var example = @"@startuml
-autonumber 1.1.1
-Alice -> Bob : Authentication request
-Bob --> Alice : Response
+        var example =
+            """
+            @startuml
+            autonumber 1.1.1
+            Alice -> Bob : Authentication request
+            Bob --> Alice : Response
 
-autonumber inc A
-' Now we have 2.1.1
-Alice -> Bob : Another authentication request
-Bob --> Alice : Response
+            autonumber inc A
+            ' Now we have 2.1.1
+            Alice -> Bob : Another authentication request
+            Bob --> Alice : Response
 
-autonumber inc B
-' Now we have 2.2.1
-Alice -> Bob : Another authentication request
-Bob --> Alice : Response
+            autonumber inc B
+            ' Now we have 2.2.1
+            Alice -> Bob : Another authentication request
+            Bob --> Alice : Response
 
-autonumber inc A
-' Now we have 3.1.1
-Alice -> Bob : Another authentication request
-autonumber inc B
-' Now we have 3.2.1
-Bob --> Alice : Response
-@enduml
-";
+            autonumber inc A
+            ' Now we have 3.1.1
+            Alice -> Bob : Another authentication request
+            autonumber inc B
+            ' Now we have 3.2.1
+            Bob --> Alice : Response
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -594,18 +645,21 @@ Bob --> Alice : Response
     public void PageTitleHeaderAndFooter()
     {
         // Arrange
-        var example = @"@startuml
+        var example =
+            """
+            @startuml
 
-header Page Header
-footer Page %page% of %lastpage%
+            header Page Header
+            footer Page %page% of %lastpage%
 
-title Example Title
+            title Example Title
 
-Alice -> Bob : message 1
-Alice -> Bob : message 2
+            Alice -> Bob : message 1
+            Alice -> Bob : message 2
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -630,21 +684,24 @@ Alice -> Bob : message 2
     public void SplittingDiagrams()
     {
         // Arrange
-        var example = @"@startuml
-Alice -> Bob : message 1
-Alice -> Bob : message 2
+        var example =
+            """
+            @startuml
+            Alice -> Bob : message 1
+            Alice -> Bob : message 2
 
-newpage
+            newpage
 
-Alice -> Bob : message 3
-Alice -> Bob : message 4
+            Alice -> Bob : message 3
+            Alice -> Bob : message 4
 
-newpage A title for the\nlast page
+            newpage A title for the\nlast page
 
-Alice -> Bob : message 5
-Alice -> Bob : message 6
-@enduml
-";
+            Alice -> Bob : message 5
+            Alice -> Bob : message 6
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -672,31 +729,34 @@ Alice -> Bob : message 6
     public void GroupingMessages()
     {
         // Arrange
-        var example = @"@startuml
-Alice -> Bob : Authentication Request
+        var example =
+            """
+            @startuml
+            Alice -> Bob : Authentication Request
 
-alt successful case
+            alt successful case
 
-Bob -> Alice : Authentication Accepted
+            Bob -> Alice : Authentication Accepted
 
-else some kind of failure
+            else some kind of failure
 
-Bob -> Alice : Authentication Failure
-group My own label
-Alice -> Log : Log attack start
-loop 1000 times
-Alice -> Bob : DNS Attack
-end
-Alice -> Log : Log attack end
-end
+            Bob -> Alice : Authentication Failure
+            group My own label
+            Alice -> Log : Log attack start
+            loop 1000 times
+            Alice -> Bob : DNS Attack
+            end
+            Alice -> Log : Log attack end
+            end
 
-else Another type of failure
+            else Another type of failure
 
-Bob -> Alice : Please repeat
+            Bob -> Alice : Please repeat
 
-end
-@enduml
-";
+            end
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -734,18 +794,21 @@ end
     public void SecondaryGroupLabel()
     {
         // Arrange
-        var example = @"@startuml
-Alice -> Bob : Authentication Request
-Bob -> Alice : Authentication Failure
-group My own label [My own label 2]
-Alice -> Log : Log attack start
-loop 1000 times
-Alice -> Bob : DNS Attack
-end
-Alice -> Log : Log attack end
-end
-@enduml
-";
+        var example =
+            """
+            @startuml
+            Alice -> Bob : Authentication Request
+            Bob -> Alice : Authentication Failure
+            group My own label [My own label 2]
+            Alice -> Log : Log attack start
+            loop 1000 times
+            Alice -> Bob : DNS Attack
+            end
+            Alice -> Log : Log attack end
+            end
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -770,21 +833,24 @@ end
     public void NotesOnMessages()
     {
         // Arrange
-        var example = @"@startuml
-Alice -> Bob : hello
-note left : this is a first note
+        var example =
+            """
+            @startuml
+            Alice -> Bob : hello
+            note left : this is a first note
 
-Bob -> Alice : ok
-note right : this is another note
+            Bob -> Alice : ok
+            note right : this is another note
 
-Bob -> Bob : I am thinking
-note left
-a note
-can also be defined
-on several lines
-end note
-@enduml
-";
+            Bob -> Bob : I am thinking
+            note left
+            a note
+            can also be defined
+            on several lines
+            end note
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -812,27 +878,30 @@ end note
     public void SomeOtherNotes()
     {
         // Arrange
-        var example = @"@startuml
-participant Alice
-participant Bob
-note left of Alice #aqua
-This is displayed
-left of Alice.
-end note
+        var example =
+            """
+            @startuml
+            participant Alice
+            participant Bob
+            note left of Alice #aqua
+            This is displayed
+            left of Alice.
+            end note
 
-note right of Alice : This is displayed right of Alice.
+            note right of Alice : This is displayed right of Alice.
 
-note over Alice : This is displayed over Alice.
+            note over Alice : This is displayed over Alice.
 
-note over Alice,Bob #FFAAAA : This is displayed\n over Bob and Alice.
+            note over Alice,Bob #FFAAAA : This is displayed\n over Bob and Alice.
 
-note over Bob,Alice
-This is yet another
-example of
-a long note.
-end note
-@enduml
-";
+            note over Bob,Alice
+            This is yet another
+            example of
+            a long note.
+            end note
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -866,26 +935,29 @@ end note
     public void ChangingNotesShape()
     {
         // Arrange
-        var example = @"@startuml
-caller -> server : conReq
-hnote over caller : idle
-caller <- server : conConf
-rnote over server
- ""r"" as rectangle
- ""h"" as hexagon
-end rnote
-rnote over server
- this is
- on several
- lines
-end rnote
-hnote over caller
- this is
- on several
- lines
-end hnote
-@enduml
-";
+        var example =
+            """
+            @startuml
+            caller -> server : conReq
+            hnote over caller : idle
+            caller <- server : conConf
+            rnote over server
+             "r" as rectangle
+             "h" as hexagon
+            end rnote
+            rnote over server
+             this is
+             on several
+             lines
+            end rnote
+            hnote over caller
+             this is
+             on several
+             lines
+            end hnote
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -918,15 +990,18 @@ end hnote
     public void NoteOverAllParticipants()
     {
         // Arrange
-        var example = @"@startuml
-Alice -> Bob : m1
-Bob -> Charlie : m2
-note over Alice,Charlie : Old method for note over all part. with:\n """"note over //FirstPart, LastPart//"""".
-note across : New method with:\n""""note across""""
-Bob -> Alice
-hnote across : Note across all part.
-@enduml
-";
+        var example =
+            """
+            @startuml
+            Alice -> Bob : m1
+            Bob -> Charlie : m2
+            note over Alice,Charlie : Old method for note over all part. with:\n ""note over //FirstPart, LastPart//"".
+            note across : New method with:\n""note across""
+            Bob -> Alice
+            hnote across : Note across all part.
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -948,12 +1023,15 @@ hnote across : Note across all part.
     public void SeveralNotesAlignedAtTheSameLevel01()
     {
         // Arrange
-        var example = @"@startuml
-note over Alice : initial state of Alice
-note over Bob : initial state of Bob
-Bob -> Alice : hello
-@enduml
-";
+        var example =
+            """
+            @startuml
+            note over Alice : initial state of Alice
+            note over Bob : initial state of Bob
+            Bob -> Alice : hello
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -972,12 +1050,15 @@ Bob -> Alice : hello
     public void SeveralNotesAlignedAtTheSameLevel02()
     {
         // Arrange
-        var example = @"@startuml
-note over Alice : initial state of Alice
-/ note over Bob : initial state of Bob
-Bob -> Alice : hello
-@enduml
-";
+        var example =
+            """
+            @startuml
+            note over Alice : initial state of Alice
+            / note over Bob : initial state of Bob
+            Bob -> Alice : hello
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -996,36 +1077,39 @@ Bob -> Alice : hello
     public void CreoleAndHtml()
     {
         // Arrange
-        var example = @"@startuml
-participant Alice
-participant ""The **Famous** Bob"" as Bob
+        var example =
+            """
+            @startuml
+            participant Alice
+            participant "The **Famous** Bob" as Bob
 
-Alice -> Bob : hello --there--
-... Some ~~long delay~~ ...
-Bob -> Alice : ok
-note left
-  This is **bold**
-  This is //italics//
-  This is """"monospaced""""
-  This is --stroked--
-  This is __underlined__
-  This is ~~waved~~
-end note
+            Alice -> Bob : hello --there--
+            ... Some ~~long delay~~ ...
+            Bob -> Alice : ok
+            note left
+              This is **bold**
+              This is //italics//
+              This is ""monospaced""
+              This is --stroked--
+              This is __underlined__
+              This is ~~waved~~
+            end note
 
-Alice -> Bob : A //well formatted// message
-note right of Alice
- This is <back:cadetblue><size:18>displayed</size></back>
- __left of__ Alice.
-end note
-note left of Bob
- <u:red>This</u> is <color #118888>displayed</color>
- **<color purple>left of</color> <s:red>Alice</strike> Bob**.
-end note
-note over Alice,Bob
- <w:#FF33FF>This is hosted</w> by <img sourceforge.jpg>
-end note
-@enduml
-";
+            Alice -> Bob : A //well formatted// message
+            note right of Alice
+             This is <back:cadetblue><size:18>displayed</size></back>
+             __left of__ Alice.
+            end note
+            note left of Bob
+             <u:red>This</u> is <color #118888>displayed</color>
+             **<color purple>left of</color> <s:red>Alice</strike> Bob**.
+            end note
+            note over Alice,Bob
+             <w:#FF33FF>This is hosted</w> by <img sourceforge.jpg>
+            end note
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1068,20 +1152,23 @@ end note
     public void DividerOrSeparator()
     {
         // Arrange
-        var example = @"@startuml
+        var example =
+            """
+            @startuml
 
-== Initialization ==
+            == Initialization ==
 
-Alice -> Bob : Authentication Request
-Bob --> Alice : Authentication Response
+            Alice -> Bob : Authentication Request
+            Bob --> Alice : Authentication Response
 
-== Repetition ==
+            == Repetition ==
 
-Alice -> Bob : Another authentication Request
-Alice <-- Bob : another authentication Response
+            Alice -> Bob : Another authentication Request
+            Alice <-- Bob : another authentication Response
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1108,20 +1195,23 @@ Alice <-- Bob : another authentication Response
     public void Reference()
     {
         // Arrange
-        var example = @"@startuml
-participant Alice
-actor Bob
+        var example =
+            """
+            @startuml
+            participant Alice
+            actor Bob
 
-ref over Alice,Bob : init
+            ref over Alice,Bob : init
 
-Alice -> Bob : hello
+            Alice -> Bob : hello
 
-ref over Bob
-  This can be on
-  several lines
-end ref
-@enduml
-";
+            ref over Bob
+              This can be on
+              several lines
+            end ref
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1148,16 +1238,19 @@ end ref
     public void Delay()
     {
         // Arrange
-        var example = @"@startuml
+        var example =
+            """
+            @startuml
 
-Alice -> Bob : Authentication Request
-...
-Bob --> Alice : Authentication Response
-...5 minutes later...
-Bob --> Alice : Good Bye !
+            Alice -> Bob : Authentication Request
+            ...
+            Bob --> Alice : Authentication Response
+            ...5 minutes later...
+            Bob --> Alice : Good Bye !
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1180,14 +1273,17 @@ Bob --> Alice : Good Bye !
     public void TextWrapping()
     {
         // Arrange
-        var example = @"@startuml
-skinparam MaxMessageSize 50
-participant a
-participant b
-a -> b : this\nis\nmanually\ndone
-a -> b : this is a very long message on several words
-@enduml
-";
+        var example =
+            """
+            @startuml
+            skinparam MaxMessageSize 50
+            participant a
+            participant b
+            a -> b : this\nis\nmanually\ndone
+            a -> b : this is a very long message on several words
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1208,19 +1304,22 @@ a -> b : this is a very long message on several words
     public void Space()
     {
         // Arrange
-        var example = @"@startuml
+        var example =
+            """
+            @startuml
 
-Alice -> Bob : message 1
-Bob --> Alice : ok
-|||
-Alice -> Bob : message 2
-Bob --> Alice : ok
-||45||
-Alice -> Bob : message 3
-Bob --> Alice : ok
+            Alice -> Bob : message 1
+            Bob --> Alice : ok
+            |||
+            Alice -> Bob : message 2
+            Bob --> Alice : ok
+            ||45||
+            Alice -> Bob : message 3
+            Bob --> Alice : ok
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1246,28 +1345,31 @@ Bob --> Alice : ok
     public void LifelineActivationAndDestruction01()
     {
         // Arrange
-        var example = @"@startuml
-participant User
+        var example =
+            """
+            @startuml
+            participant User
 
-User -> A : DoWork
-activate A
+            User -> A : DoWork
+            activate A
 
-A -> B : << createRequest >>
-activate B
+            A -> B : << createRequest >>
+            activate B
 
-B -> C : DoWork
-activate C
-C --> B : WorkDone
-destroy C
+            B -> C : DoWork
+            activate C
+            C --> B : WorkDone
+            destroy C
 
-B --> A : RequestCreated
-deactivate B
+            B --> A : RequestCreated
+            deactivate B
 
-A -> User : Done
-deactivate A
+            A -> User : Done
+            deactivate A
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1302,26 +1404,29 @@ deactivate A
     public void LifelineActivationAndDestruction02()
     {
         // Arrange
-        var example = @"@startuml
-participant User
+        var example =
+            """
+            @startuml
+            participant User
 
-User -> A : DoWork
-activate A #FFBBBB
+            User -> A : DoWork
+            activate A #FFBBBB
 
-A -> A : Internal call
-activate A #DarkSalmon
+            A -> A : Internal call
+            activate A #DarkSalmon
 
-A -> B : << createRequest >>
-activate B
+            A -> B : << createRequest >>
+            activate B
 
-B --> A : RequestCreated
-deactivate B
-deactivate A
-A -> User : Done
-deactivate A
+            B --> A : RequestCreated
+            deactivate B
+            deactivate A
+            A -> User : Done
+            deactivate A
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1354,19 +1459,22 @@ deactivate A
     public void LifelineActivationAndDestruction03()
     {
         // Arrange
-        var example = @"@startuml
-autoactivate on
-alice -> bob : hello
-bob -> bob : self call
-bill -> bob #005500 : hello from thread 2
-bob -> george ** : create
-return done in thread 2
-return rc
-bob -> george !! : delete
-return success
+        var example =
+            """
+            @startuml
+            autoactivate on
+            alice -> bob : hello
+            bob -> bob : self call
+            bill -> bob #005500 : hello from thread 2
+            bob -> george ** : create
+            return done in thread 2
+            return rc
+            bob -> george !! : delete
+            return success
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1392,13 +1500,16 @@ return success
     public void Return()
     {
         // Arrange
-        var example = @"@startuml
-Bob -> Alice : hello
-activate Alice
-Alice -> Alice : some action
-return bye
-@enduml
-";
+        var example =
+            """
+            @startuml
+            Bob -> Alice : hello
+            activate Alice
+            Alice -> Alice : some action
+            return bye
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1418,20 +1529,23 @@ return bye
     public void ParticipantCreation()
     {
         // Arrange
-        var example = @"@startuml
-Bob -> Alice : hello
+        var example =
+            """
+            @startuml
+            Bob -> Alice : hello
 
-create Other
-Alice -> Other : new
+            create Other
+            Alice -> Other : new
 
-create control String
-Alice -> String
-note right : You can also put notes!
+            create control String
+            Alice -> String
+            note right : You can also put notes!
 
-Alice --> Bob : ok
+            Alice --> Bob : ok
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1458,17 +1572,20 @@ Alice --> Bob : ok
     public void ShortcutSyntaxForActivationDeactivationCreation()
     {
         // Arrange
-        var example = @"@startuml
-alice -> bob ++ : hello
-bob -> bob ++ : self call
-bob -> bib ++ #005500 : hello
-bob -> george ** : create
-return done
-return rc
-bob -> george !! : delete
-return success
-@enduml
-";
+        var example =
+            """
+            @startuml
+            alice -> bob ++ : hello
+            bob -> bob ++ : self call
+            bob -> bib ++ #005500 : hello
+            bob -> george ** : create
+            return done
+            return rc
+            bob -> george !! : delete
+            return success
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1492,12 +1609,15 @@ return success
     public void MixActivationAndDeactivationOnSameLine01()
     {
         // Arrange
-        var example = @"@startuml
-alice -> bob ++ : hello1
-bob -> charlie --++ : hello2
-charlie --> alice -- : ok
-@enduml
-";
+        var example =
+            """
+            @startuml
+            alice -> bob ++ : hello1
+            bob -> charlie --++ : hello2
+            charlie --> alice -- : ok
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1516,13 +1636,16 @@ charlie --> alice -- : ok
     public void MixActivationAndDeactivationOnSameLine02()
     {
         // Arrange
-        var example = @"@startuml
-alice -> bob --++ #Gold : hello
-bob -> alice --++ #Gold : you too
-alice -> bob -- : step1
-alice -> bob : step2
-@enduml
-";
+        var example =
+            """
+            @startuml
+            alice -> bob --++ #Gold : hello
+            bob -> alice --++ #Gold : you too
+            alice -> bob -- : step1
+            alice -> bob : step2
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1542,22 +1665,25 @@ alice -> bob : step2
     public void IncomingAndOutgoingMessages01()
     {
         // Arrange
-        var example = @"@startuml
-[-> A : DoWork
+        var example =
+            """
+            @startuml
+            [-> A : DoWork
 
-activate A
+            activate A
 
-A -> A : Internal call
-activate A
+            A -> A : Internal call
+            activate A
 
-A ->] : << createRequest >>
+            A ->] : << createRequest >>
 
-A <--] : RequestCreated
-deactivate A
-[<- A : Done
-deactivate A
-@enduml
-";
+            A <--] : RequestCreated
+            deactivate A
+            [<- A : Done
+            deactivate A
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1586,30 +1712,33 @@ deactivate A
     public void IncomingAndOutgoingMessages02()
     {
         // Arrange
-        var example = @"@startuml
-participant Alice
-participant Bob #lightblue
-Alice -> Bob
-Bob -> Carol
-...
-[-> Bob
-[o-> Bob
-[o->o Bob
-[x-> Bob
-...
-[<- Bob
-[x<- Bob
-...
-Bob ->]
-Bob ->o]
-Bob o->o]
-Bob ->x]
-...
-Bob <-]
-Bob x<-]
+        var example =
+            """
+            @startuml
+            participant Alice
+            participant Bob #lightblue
+            Alice -> Bob
+            Bob -> Carol
+            ...
+            [-> Bob
+            [o-> Bob
+            [o->o Bob
+            [x-> Bob
+            ...
+            [<- Bob
+            [x<- Bob
+            ...
+            Bob ->]
+            Bob ->o]
+            Bob o->o]
+            Bob ->x]
+            ...
+            Bob <-]
+            Bob x<-]
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1646,16 +1775,19 @@ Bob x<-]
     public void ShortArrowsForIncomingAndOutgoingMessages()
     {
         // Arrange
-        var example = @"@startuml
-?-> Alice : """"?->""""\n**short** to actor1
-[-> Alice : """"[->""""\n**from start** to actor1
-[-> Bob : """"[->""""\n**from start** to actor2
-?-> Bob : """"?->""""\n**short** to actor2
-Alice ->] : """"->]""""\nfrom actor1 **to end**
-Alice ->? : """"->?""""\n**short** from actor1
-Alice -> Bob : """"->"""" \nfrom actor1 to actor2
-@enduml
-";
+        var example =
+            """
+            @startuml
+            ?-> Alice : ""?->""\n**short** to actor1
+            [-> Alice : ""[->""\n**from start** to actor1
+            [-> Bob : ""[->""\n**from start** to actor2
+            ?-> Bob : ""?->""\n**short** to actor2
+            Alice ->] : ""->]""\nfrom actor1 **to end**
+            Alice ->? : ""->?""\n**short** from actor1
+            Alice -> Bob : ""->"" \nfrom actor1 to actor2
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1678,9 +1810,12 @@ Alice -> Bob : """"->"""" \nfrom actor1 to actor2
     public void Template()
     {
         // Arrange
-        var example = @"@startuml
-@enduml
-";
+        var example =
+            """
+            @startuml
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 

@@ -12,11 +12,14 @@ public class ObjectDiagramExampleTests
     public void DefinitionOfObjects()
     {
         // Arrange
-        var example = @"@startuml
-object firstObject
-object ""My Second Object"" as o2
-@enduml
-";
+        var example =
+            """
+            @startuml
+            object firstObject
+            object "My Second Object" as o2
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -34,22 +37,25 @@ object ""My Second Object"" as o2
     public void RelationsBetweenObjects()
     {
         // Arrange
-        var example = @"@startuml
-object Object01
-object Object02
-object Object03
-object Object04
-object Object05
-object Object06
-object Object07
-object Object08
+        var example =
+            """
+            @startuml
+            object Object01
+            object Object02
+            object Object03
+            object Object04
+            object Object05
+            object Object06
+            object Object07
+            object Object08
 
-Object01 <|-- Object02
-Object03 *-- Object04
-Object05 o-- ""4"" Object06
-Object07 .. Object08 : some labels
-@enduml
-";
+            Object01 <|-- Object02
+            Object03 *-- Object04
+            Object05 o-- "4" Object06
+            Object07 .. Object08 : some labels
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -78,17 +84,20 @@ Object07 .. Object08 : some labels
     public void AssociationsObjects()
     {
         // Arrange
-        var example = @"@startuml
-object o1
-object o2
-diamond dia
-object o3
+        var example =
+            """
+            @startuml
+            object o1
+            object o2
+            diamond dia
+            object o3
 
-o1 --> dia
-o2 --> dia
-dia --> o3
-@enduml
-";
+            o1 --> dia
+            o2 --> dia
+            dia --> o3
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -112,15 +121,18 @@ dia --> o3
     public void AddingFields01()
     {
         // Arrange
-        var example = @"@startuml
+        var example =
+            """
+            @startuml
 
-object user
+            object user
 
-user : name = ""Dummy""
-user : id = 123
+            user : name = "Dummy"
+            user : id = 123
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -142,15 +154,18 @@ user : id = 123
     public void AddingFields02()
     {
         // Arrange
-        var example = @"@startuml
+        var example =
+            """
+            @startuml
 
-object user {
-name = ""Dummy""
-id = 123
-}
+            object user {
+            name = "Dummy"
+            id = 123
+            }
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -172,14 +187,17 @@ id = 123
     public void MapTableOrAssociativeArray01()
     {
         // Arrange
-        var example = @"@startuml
-map CapitalCity {
-UK => London
-USA => Washington
-Germany => Berlin
-}
-@enduml
-";
+        var example =
+            """
+            @startuml
+            map CapitalCity {
+            UK => London
+            USA => Washington
+            Germany => Berlin
+            }
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -200,14 +218,17 @@ Germany => Berlin
     public void MapTableOrAssociativeArray02()
     {
         // Arrange
-        var example = @"@startuml
-map ""Map **Contry => CapitalCity**"" as CC {
-UK => London
-USA => Washington
-Germany => Berlin
-}
-@enduml
-";
+        var example =
+            """
+            @startuml
+            map "Map **Contry => CapitalCity**" as CC {
+            UK => London
+            USA => Washington
+            Germany => Berlin
+            }
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -228,14 +249,17 @@ Germany => Berlin
     public void MapTableOrAssociativeArray03()
     {
         // Arrange
-        var example = @"@startuml
-map ""map: Map<Integer, String>"" as users {
-1 => Alice
-2 => Bob
-3 => Charlie
-}
-@enduml
-";
+        var example =
+            """
+            @startuml
+            map "map: Map<Integer, String>" as users {
+            1 => Alice
+            2 => Bob
+            3 => Charlie
+            }
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -256,16 +280,19 @@ map ""map: Map<Integer, String>"" as users {
     public void MapTableOrAssociativeArray04()
     {
         // Arrange
-        var example = @"@startuml
-object London
+        var example =
+            """
+            @startuml
+            object London
 
-map CapitalCity {
-UK *-> London
-USA => Washington
-Germany => Berlin
-}
-@enduml
-";
+            map CapitalCity {
+            UK *-> London
+            USA => Washington
+            Germany => Berlin
+            }
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -288,21 +315,24 @@ Germany => Berlin
     public void MapTableOrAssociativeArray05()
     {
         // Arrange
-        var example = @"@startuml
-object London
-object Washington
-object Berlin
-object NewYork
+        var example =
+            """
+            @startuml
+            object London
+            object Washington
+            object Berlin
+            object NewYork
 
-map CapitalCity {
-UK *-> London
-USA *--> Washington
-Germany *---> Berlin
-}
+            map CapitalCity {
+            UK *-> London
+            USA *--> Washington
+            Germany *---> Berlin
+            }
 
-NewYork --> CapitalCity::USA
-@enduml
-";
+            NewYork --> CapitalCity::USA
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
