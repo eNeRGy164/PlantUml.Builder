@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder.SequenceDiagrams;
 
 public static partial class StringBuilderExtensions
@@ -9,9 +6,9 @@ public static partial class StringBuilderExtensions
     /// Renders the beginning of an alt.
     /// </summary>
     /// <param name="text">Optional text.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void AltStart(this StringBuilder stringBuilder, string text = null)
     {
-        stringBuilder.GroupStart(Constant.Alt, text);
+        stringBuilder.GroupStart(Constant.Words.Alt, text);
     }
 }

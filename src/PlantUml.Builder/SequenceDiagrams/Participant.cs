@@ -1,8 +1,6 @@
-using System;
-
 namespace PlantUml.Builder.SequenceDiagrams;
 
 public class Participant
 {
-    public static ParticipantName Outside = default;
+    public static readonly ParticipantName Outside = default;
 }

@@ -1,278 +1,84 @@
-using System;
-using System.Text;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PlantUml.Builder.ClassDiagrams;
+using static PlantUml.Builder.TestData;
 
-namespace PlantUml.Builder.Tests.ClassDiagrams;
+namespace PlantUml.Builder.ClassDiagrams.Tests;
 
 [TestClass]
 public class InterfaceTests
 {
-    [TestMethod]
-    public void StringBuilderExtensions_Interface_Null_Should_ThrowArgumentNullException()
+    [TestMethod("Interface - Name argument cannot be `null`")]
+    public void InterfaceNameCannotBeNull()
     {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Interface("interfaceA");
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Interface_NullName_Should_ThrowArgumentException()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
         Action action = () => stringBuilder.Interface(null);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName("name");
     }
 
+    [DataRow(EmptyString, DisplayName = "Interface - Name argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "Interface - Name argument cannot be any whitespace character")]
     [TestMethod]
-    public void StringBuilderExtensions_Interface_EmptyName_Should_ThrowArgumentException()
+    public void InterfaceNameMustContainAValue(string name)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Interface(string.Empty);
+        Action action = () => stringBuilder.Interface(name);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("name");
     }
 
+    [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetMethodTestDisplayName))]
     [TestMethod]
-    public void StringBuilderExtensions_Interface_WhitespaceName_Should_ThrowArgumentException()
+    public void InterfaceIsRenderedCorrectly(MethodExpectationTestData testData)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
+        var (method, parameters) = typeof(StringBuilderExtensions).GetExtensionMethodAndParameters(stringBuilder, testData.Method, testData.Parameters);
+
         // Act
-        Action action = () => stringBuilder.Interface(" ");
+        method.Invoke(null, parameters);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Interface_Should_ContainInterfaceLine()
+    private static IEnumerable<object[]> GetValidNotations()
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
+        // Define the valid notations and expected results for different overloads
+        yield return new object[] { new MethodExpectationTestData("Interface", "interface interfaceA", "interfaceA") };
+        yield return new object[] { new MethodExpectationTestData("Interface", "interface \"Interface A\" as interfaceA", "interfaceA", "Interface A") };
+        yield return new object[] { new MethodExpectationTestData("Interface", "interface interfaceA<Object>", "interfaceA", null, "Object") };
+        yield return new object[] { new MethodExpectationTestData("Interface", "interface interfaceA <<stereotype>>", "interfaceA", null, null, "stereotype") };
+        yield return new object[] { new MethodExpectationTestData("Interface", "interface interfaceA <<(R,#Blue)stereotype>>", "interfaceA", null, null, "stereotype", new CustomSpot('R', NamedColor.Blue)) };
+        yield return new object[] { new MethodExpectationTestData("Interface", "interface interfaceA $tag", "interfaceA", null, null, null, null, "tag") };
+        yield return new object[] { new MethodExpectationTestData("Interface", "interface interfaceA [[https://blog.hompus.nl/]]", "interfaceA", null, null, null, null, null, new Uri("https://blog.hompus.nl")) };
+        yield return new object[] { new MethodExpectationTestData("Interface", "interface interfaceA #AliceBlue", "interfaceA", null, null, null, null, null, null, (Color)NamedColor.AliceBlue) };
+        yield return new object[] { new MethodExpectationTestData("Interface", "interface interfaceA ##AliceBlue", "interfaceA", null, null, null, null, null, null, null, (Color)NamedColor.AliceBlue) };
+        yield return new object[] { new MethodExpectationTestData("Interface", "interface interfaceA ##[dashed]", "interfaceA", null, null, null, null, null, null, null, null, LineStyle.Dashed) };
+        yield return new object[] { new MethodExpectationTestData("Interface", "interface interfaceA", "interfaceA", null, null, null, null, null, null, null, null, null, Array.Empty<string>()) };
+        yield return new object[] { new MethodExpectationTestData("Interface", "interface interfaceA extends BaseClass", "interfaceA", null, null, null, null, null, null, null, null, null, new[] { "BaseClass" }) };
+        yield return new object[] { new MethodExpectationTestData("Interface", "interface interfaceA extends BaseClass,BaseClass2", "interfaceA", null, null, null, null, null, null, null, null, null, new[] { "BaseClass", "BaseClass2" }) };
+        yield return new object[] { new MethodExpectationTestData("Interface", "interface interfaceA", "interfaceA", null, null, null, null, null, null, null, null, null, null, Array.Empty<string>()) };
+        yield return new object[] { new MethodExpectationTestData("Interface", "interface interfaceA implements IInterface", "interfaceA", null, null, null, null, null, null, null, null, null, null, new[] { "IInterface" }) };
+        yield return new object[] { new MethodExpectationTestData("Interface", "interface interfaceA implements IInterface,IInterface2", "interfaceA", null, null, null, null, null, null, null, null, null, null, new[] { "IInterface", "IInterface2" }) };
+        yield return new object[] { new MethodExpectationTestData("Interface", "interface \"Interface A\" as interfaceA<T> <<(A,#Blue)stereotype>> $tag [[https://blog.hompus.nl/]] #Blue ##[dashed]Blue extends BaseClass,BaseClass2 implements IInterface,IInterface2", "interfaceA", "Interface A", "T", "stereotype", new CustomSpot('A', NamedColor.Blue), "tag", new Uri("https://blog.hompus.nl"), (Color)NamedColor.Blue, (Color)NamedColor.Blue, LineStyle.Dashed, new[] { "BaseClass", "BaseClass2" }, new[] { "IInterface", "IInterface2" }) };
 
-        // Act
-        stringBuilder.Interface("interfaceA");
+        yield return new object[] { new MethodExpectationTestData("InterfaceStart", "interface interfaceA {", "interfaceA") };
+        yield return new object[] { new MethodExpectationTestData("InterfaceStart", "+interface interfaceA {", "interfaceA", null, VisibilityModifier.Public) };
 
-        // Assert
-        stringBuilder.ToString().Should().Be("interface interfaceA\n");
+        yield return new object[] { new MethodExpectationTestData("InterfaceEnd", "}") };
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Interface_WithDisplayName_Should_ContainInterfaceLineWithDisplayName()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Interface("interfaceA", displayName: "Interface A");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("interface \"Interface A\" as interfaceA\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Interface_WithStereotype_Should_ContainInterfaceLineWithStereotype()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Interface("interfaceA", stereotype: "entity");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("interface interfaceA <<entity>>\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Interface_WithStereotypeAndCustomSpot_Should_ContainInterfaceLineWithStereotypeAndCustomSpot()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Interface("interfaceA", stereotype: "entity", customSpot: new CustomSpot('R', "Blue"));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("interface interfaceA <<(R,#Blue)entity>>\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Interface_WithGenerics_Should_ContainInterfaceLineWithGenerics()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Interface("interfaceA", generics: "Object");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("interface interfaceA<Object>\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Interface_WithBackgroundColor_Should_ContainInterfaceLineWithBackgroundColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Interface("interfaceA", backgroundColor: "#AliceBlue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("interface interfaceA #AliceBlue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Interface_WithBackgroundColorWithHashtag_Should_ContainInterfaceLineWithBackgroundColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Interface("interfaceA", backgroundColor: "AliceBlue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("interface interfaceA #AliceBlue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Interface_WithTag_Should_ContainInterfaceLineWithTag()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Interface("interfaceA", tag: "tag");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("interface interfaceA $tag\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Interface_WithUrl_Should_ContainInterfaceLineWithUrl()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Interface("interfaceA", url: new Uri("https://blog.hompus.nl"));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("interface interfaceA [[https://blog.hompus.nl/]]\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Interface_WithLineStyle_Should_ContainInterfaceLineWithLineStyle()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Interface("interfaceA", lineStyle: LineStyle.Bold);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("interface interfaceA ##[bold]\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Interface_WithLineColor_Should_ContainInterfaceLineWithLineColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Interface("interfaceA", lineColor: "Blue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("interface interfaceA ##Blue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Interface_WithExtends_Should_ContainInterfaceLineWithExtends()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Interface("interfaceA", extends: new[] { "BaseClass" });
-
-        // Assert
-        stringBuilder.ToString().Should().Be("interface interfaceA extends BaseClass\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Interface_WithMultipleExtends_Should_ContainInterfaceLineWithSeperatedExtends()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Interface("interfaceA", extends: new[] { "BaseClass", "BaseClass2" });
-
-        // Assert
-        stringBuilder.ToString().Should().Be("interface interfaceA extends BaseClass,BaseClass2\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Interface_WithNoImplements_Should_ContainInterfaceLineWithoutImplements()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Interface("interfaceA", implements: new string[0]);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("interface interfaceA\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Interface_WithImplements_Should_ContainInterfaceLineWithImplements()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Interface("interfaceA", implements: new[] { "IInterface" });
-
-        // Assert
-        stringBuilder.ToString().Should().Be("interface interfaceA implements IInterface\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Interface_WithMultipleImplements_Should_ContainInterfaceLineWithSeperatedImplements()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Interface("interfaceA", implements: new[] { "IInterface", "IInterface2" });
-
-        // Assert
-        stringBuilder.ToString().Should().Be("interface interfaceA implements IInterface,IInterface2\n");
-    }
+    public static string GetMethodTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);
 }

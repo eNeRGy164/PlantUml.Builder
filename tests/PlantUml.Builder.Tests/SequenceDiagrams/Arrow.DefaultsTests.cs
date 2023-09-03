@@ -1,21 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PlantUml.Builder.SequenceDiagrams;
-
-namespace PlantUml.Builder.Tests.SequenceDiagrams;
+namespace PlantUml.Builder.SequenceDiagrams.Tests;
 
 [TestClass]
 public class ArrowDefaultsTests
 {
-    [TestMethod]
     [DynamicData(nameof(GetDefaultArrows), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetDefaultArrowsDisplayName))]
+    [TestMethod]
     public void ReturnCorrectDefaultArrowNotation(string name, string expected)
     {
+        // Arrange & Act
         var arrow = typeof(Arrow).GetProperty(name).GetValue(null);
 
+        // Assert
         arrow.ToString().Should().Be(expected);
     }
 
@@ -59,8 +54,5 @@ public class ArrowDefaultsTests
         yield return new[] { "DottedThinLeftRight", "<<-->>" };
     }
 
-    public static string GetDefaultArrowsDisplayName(MethodInfo _, object[] data)
-    {
-        return $"The default \"{data[0]}\" should have the \"{data[1]}\" notation";
-    }
+    public static string GetDefaultArrowsDisplayName(MethodInfo _, object[] data) => $"The default \"{data[0]}\" should have the \"{data[1]}\" notation";
 }

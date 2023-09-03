@@ -1,95 +1,62 @@
-using System;
-using System.Text;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static PlantUml.Builder.TestData;
 
 namespace PlantUml.Builder.SequenceDiagrams.Tests;
 
 [TestClass]
 public class CreateTests
 {
-    [TestMethod]
-    public void StringBuilderExtensions_Create_Null_Should_ThrowArgumentNullException()
+    [TestMethod("Create - Name argument cannot be `null`")]
+    public void CreateNameCannotBeNull()
     {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Create("actorA");
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Create_NullName_Should_ThrowArgumentException()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
         Action action = () => stringBuilder.Create(null);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName("name");
     }
 
+    [DataRow(EmptyString, DisplayName = "Create - Name argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "Create - Name argument cannot be any whitespace character")]
     [TestMethod]
-    public void StringBuilderExtensions_Create_EmptyName_Should_ThrowArgumentException()
+    public void CreateNameMustContainAValue(string name)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Create(string.Empty);
+        Action action = () => stringBuilder.Create(name);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("name");
     }
 
+    [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetValidNotationTestDisplayName))]
     [TestMethod]
-    public void StringBuilderExtensions_Create_WhitespaceName_Should_ThrowArgumentException()
+    public void CreateIsRenderedCorrectly(MethodExpectationTestData testData)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
+        var (method, parameters) = typeof(StringBuilderExtensions).GetExtensionMethodAndParameters(stringBuilder, testData.Method, testData.Parameters);
 
         // Act
-        Action action = () => stringBuilder.Create(" ");
+        method.Invoke(null, parameters);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Create_Should_ContainCreateLine()
+    private static IEnumerable<object[]> GetValidNotations()
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Create("actorA");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("create actorA\n");
+        yield return new object[] { new MethodExpectationTestData("Create", "create actorA", "actorA").WithDisplayName("Create - Default create line") };
+        yield return new object[] { new MethodExpectationTestData("Create", "create actorA order 10", "actorA", null, null, 10).WithDisplayName("Create - Create line with order") };
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Create_WithOrder_Should_ContainCreateLineWithOrder()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Create("actorA", order: 10);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("create actorA order 10\n");
-    }
+    public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);
 }

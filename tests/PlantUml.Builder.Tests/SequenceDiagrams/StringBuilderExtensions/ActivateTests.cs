@@ -1,7 +1,4 @@
-using System;
-using System.Text;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static PlantUml.Builder.TestData;
 
 namespace PlantUml.Builder.SequenceDiagrams.Tests;
 
@@ -9,126 +6,62 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests;
 public class ActivateTests
 {
     [TestMethod]
-    public void StringBuilderExtensions_Activate_Null_Should_ThrowArgumentNullException()
+    public void ActivateNameCannotBeNull()
     {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Activate("actor");
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Activate_NullName_Should_ThrowArgumentException()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
         Action action = () => stringBuilder.Activate(null);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName("name");
     }
 
+    [DataRow(EmptyString, DisplayName = "Activate - Name argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "Activate - Name argument cannot be any whitespace character")]
     [TestMethod]
-    public void StringBuilderExtensions_Activate_EmptyName_Should_ThrowArgumentException()
+    public void ActivateNameMustContainAValue(string name)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Activate(string.Empty);
+        Action action = () => stringBuilder.Activate(name);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("name");
     }
 
+    [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetValidNotationTestDisplayName))]
     [TestMethod]
-    public void StringBuilderExtensions_Activate_WhitespaceName_Should_ThrowArgumentException()
+    public void ActivateIsRenderedCorreclty(MethodExpectationTestData testData)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
+        var (method, parameters) = typeof(StringBuilderExtensions).GetExtensionMethodAndParameters(stringBuilder, testData.Method, testData.Parameters);
+
         // Act
-        Action action = () => stringBuilder.Activate(" ");
+        method.Invoke(null, parameters);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Activate_Should_ContainActivateLine()
+    private static IEnumerable<object[]> GetValidNotations()
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Activate("actor");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("activate actor\n");
+        // Define the valid notations and expected results for different overloads
+        yield return new object[] { new MethodExpectationTestData("Activate", "activate actor", "actor") };
+        yield return new object[] { new MethodExpectationTestData("Activate", "activate actor #Blue", "actor", (Color)"Blue") };
+        yield return new object[] { new MethodExpectationTestData("Activate", "activate actor #Blue", "actor", (Color)"#Blue") };
+        yield return new object[] { new MethodExpectationTestData("Activate", "activate actor", "actor", null, (Color)"Blue") };
+        yield return new object[] { new MethodExpectationTestData("Activate", "activate actor #Blue #APPLICATION", "actor", (Color)"Blue", (Color)"APPLICATION") };
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Activate_WithColor_Should_ContainActivationLineWithColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Activate("actor", "Blue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("activate actor #Blue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Activate_WithColorWithHashTag_Should_ContainActivationLineWithColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Activate("actor", "#Blue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("activate actor #Blue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Activate_WithOnlyBorderColor_Should_ContainActivationLineWithNoColors()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Activate("actor", borderColor: "Blue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("activate actor\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Activate_WithColorAndBorderColor_Should_ContainActivationLineWithColors()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Activate("actor", "Blue", NamedColor.APPLICATION);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("activate actor #Blue #APPLICATION\n");
-    }
+    public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);
 }

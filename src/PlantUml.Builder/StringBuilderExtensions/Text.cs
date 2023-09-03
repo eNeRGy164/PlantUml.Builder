@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder;
 
 public static partial class StringBuilderExtensions
@@ -9,13 +6,12 @@ public static partial class StringBuilderExtensions
     /// Renders a line of text.
     /// </summary>
     /// <param name="text">Line of text.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="text"/> is <c>null</c>, empty of only white space.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="text"/> is <see langword="null"/>, empty of only white space.</exception>
     public static void Text(this StringBuilder stringBuilder, string text)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
-
-        if (string.IsNullOrWhiteSpace(text)) throw new ArgumentException("A non-empty value should be provided", nameof(text));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
+        ArgumentException.ThrowIfNullOrWhitespace(text);
 
         stringBuilder.Append(text.Replace("\n", "\\n"));
         stringBuilder.AppendNewLine();

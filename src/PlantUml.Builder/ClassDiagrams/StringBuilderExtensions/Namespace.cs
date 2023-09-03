@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder.ClassDiagrams;
 
 public static partial class StringBuilderExtensions
@@ -12,54 +9,53 @@ public static partial class StringBuilderExtensions
     /// <param name="displayName">Optional display name. The display name can contain spaces.</param>
     /// <param name="stereotype">Optional stereo type.</param>
     /// <param name="backgroundColor">Optional background color.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void NamespaceStart(this StringBuilder stringBuilder, string name, string displayName = null, string stereotype = null, Color backgroundColor = null)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
+        ArgumentException.ThrowIfNullOrWhitespace(name);
 
-        if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
+        stringBuilder.Append(Constant.Words.Namespace);
 
-        stringBuilder.Append(Constant.Namespace);
-
-        if (!(displayName is null))
+        if (displayName is not null)
         {
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.Quote);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Symbols.Quote);
             stringBuilder.Append(displayName);
-            stringBuilder.Append(Constant.Quote);
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.As);
+            stringBuilder.Append(Constant.Symbols.Quote);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Words.As);
         }
 
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Symbols.Space);
         stringBuilder.Append(name);
 
-        if (!(stereotype is null))
+        if (stereotype is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.StereoType(stereotype);
         }
 
-        if (!(backgroundColor is null))
+        if (backgroundColor is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(backgroundColor);
         }
 
-        stringBuilder.Append(Constant.Space);
-        stringBuilder.Append(Constant.NamespaceStart);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Namespace.Start);
         stringBuilder.AppendNewLine();
     }
 
     /// <summary>
     /// Renders the end of a namespace.
     /// </summary>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void NamespaceEnd(this StringBuilder stringBuilder)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.Append(Constant.NamespaceEnd);
+        stringBuilder.Append(Constant.Namespace.End);
         stringBuilder.AppendNewLine();
     }
 }

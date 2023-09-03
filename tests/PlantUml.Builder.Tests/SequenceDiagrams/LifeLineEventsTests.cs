@@ -1,21 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PlantUml.Builder.SequenceDiagrams;
-
-namespace PlantUml.Builder.Tests.SequenceDiagrams;
+namespace PlantUml.Builder.SequenceDiagrams.Tests;
 
 [TestClass]
 public class LifeLineEventsTests
 {
-    [TestMethod]
     [DynamicData(nameof(GetLifeLineEvents), DynamicDataSourceType.Method)]
+    [TestMethod]
     public void ReturnCorrectLifeLineEvent(string name, string expected)
     {
+        // Arrange & Act
         var lifeLineEvents = typeof(LifeLineEvents).GetProperty(name).GetValue(null);
 
+        // Assert
         lifeLineEvents.ToString().Should().Be(expected);
     }
 
@@ -36,8 +31,5 @@ public class LifeLineEventsTests
         yield return new[] { "DestroyTargetInstance", "!!" };
     }
 
-    public static string GetLifeLineEventsDisplayName(MethodInfo _, object[] data)
-    {
-        return $"The life line events \"{data[0]}\" should have the \"{data[1]}\" notation";
-    }
+    public static string GetLifeLineEventsDisplayName(MethodInfo _, object[] data) => $"The life line events \"{data[0]}\" should have the \"{data[1]}\" notation";
 }

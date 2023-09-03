@@ -1,76 +1,31 @@
-using System;
-using System.Text;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 namespace PlantUml.Builder.Tests;
 
 [TestClass]
 public class StereoTypeTests
 {
+    [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetValidNotationTestDisplayName))]
     [TestMethod]
-    public void StringBuilderExtensions_StereoType_Null_Should_ThrowArgumentNullException()
+    public void StereoTypeIsRenderedCorrectly(MethodExpectationTestData testData)
     {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.StereoType();
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_StereoType_NoParameters_Should_EmptyStereoType()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
+        var (method, parameters) = typeof(StringBuilderExtensions).GetExtensionMethodAndParameters(stringBuilder, testData.Method, testData.Parameters);
+
         // Act
-        stringBuilder.StereoType();
+        method.Invoke(null, parameters);
 
         // Assert
-        stringBuilder.ToString().Should().Be("<<>>");
+        stringBuilder.ToString().Should().Be($"{testData.Expected}");
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_StereoType_WithName_Should_StereoTypeWithName()
+    public static IEnumerable<object[]> GetValidNotations()
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.StereoType("name");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("<<name>>");
+        yield return new object[] { new MethodExpectationTestData("StereoType", "<<>>") };
+        yield return new object[] { new MethodExpectationTestData("StereoType", "<<name>>", "name") };
+        yield return new object[] { new MethodExpectationTestData("StereoType", "<<(T,#Aqua)>>", null, new CustomSpot('T', NamedColor.Aqua)) };
+        yield return new object[] { new MethodExpectationTestData("StereoType", "<<(T,#Aqua)name>>", "name", new CustomSpot('T', NamedColor.Aqua))};
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_StereoType_WithSpot_Should_StereoTypeWithSpot()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.StereoType(customSpot: new CustomSpot('T', NamedColor.Aqua));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("<<(T,#Aqua)>>");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_StereoType_WithNameAndSpot_Should_StereoTypeWithNameAndSpot()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.StereoType("name", new CustomSpot('T', NamedColor.Aqua));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("<<(T,#Aqua)name>>");
-    }
+    public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);
 }

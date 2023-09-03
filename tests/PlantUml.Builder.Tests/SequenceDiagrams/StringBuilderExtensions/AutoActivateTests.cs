@@ -1,63 +1,43 @@
-using System;
-using System.Text;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 namespace PlantUml.Builder.SequenceDiagrams.Tests;
 
 [TestClass]
 public class AutoActivateTests
 {
     [TestMethod]
-    public void StringBuilderExtensions_AutoActivate_Null_Should_ThrowArgumentNullException()
+    public void AutoActivateEnumerationValueShouldExist()
     {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.AutoActivate();
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_AutoActivate_Should_ContainAutoActivateLineWithOn()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        stringBuilder.AutoActivate();
+        Action action = () => stringBuilder.AutoActivate((OnOff)byte.MaxValue);
 
         // Assert
-        stringBuilder.ToString().Should().Be("autoactivate on\n");
+        action.Should().ThrowExactly<ArgumentOutOfRangeException>()
+            .WithMessage("A defined enum value should be provided*")
+            .WithParameterName("mode");
     }
 
+    [DataRow(null, "autoactivate on", DisplayName = "AutoActivate - Default is On")]
+    [DataRow(OnOff.On, "autoactivate on", DisplayName = "AutoActivate - With On parameter")]
+    [DataRow(OnOff.Off, "autoactivate off", DisplayName = "AutoActivate - With Off parameter")]
     [TestMethod]
-    public void StringBuilderExtensions_AutoActivate_WithOn_Should_ContainAutoActivationLineWithOn()
+    public void AutoActivateIsRenderedCorrectly(OnOff? onOff, string expected)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        stringBuilder.AutoActivate(OnOff.On);
+        if (onOff.HasValue)
+        {
+            stringBuilder.AutoActivate(onOff.Value);
+        }
+        else
+        {
+            stringBuilder.AutoActivate();
+        }
 
         // Assert
-        stringBuilder.ToString().Should().Be("autoactivate on\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_AutoActivate_WithOff_Should_ContainAutoActivationLineWithOff()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.AutoActivate(OnOff.Off);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("autoactivate off\n");
+        stringBuilder.ToString().Should().Be($"{expected}\n");
     }
 }

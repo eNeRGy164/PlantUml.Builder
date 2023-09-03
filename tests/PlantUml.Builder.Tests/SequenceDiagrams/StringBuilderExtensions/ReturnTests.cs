@@ -1,88 +1,46 @@
-using System;
-using System.Text;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static PlantUml.Builder.TestData;
 
 namespace PlantUml.Builder.SequenceDiagrams.Tests;
 
 [TestClass]
 public class ReturnTests
 {
-    [TestMethod]
-    public void StringBuilderExtensions_Return_Null_Should_ThrowArgumentNullException()
+    [TestMethod("Return - Message argument cannot be `null`")]
+    public void ReturnMessageCannotBeNull()
     {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Return();
-
-        // Assert
-        action.Should().ThrowExactly<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Return_NullWithMessage_Should_ThrowArgumentNullException()
-    {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-        // Act
-        Action action = () => stringBuilder.Return("Result");
-        // Assert
-        action.Should().ThrowExactly<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Return_NullMessage_Should_ThrowArgumentException()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
         Action action = () => stringBuilder.Return(null);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("message");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName("message");
     }
 
+    [DataRow(EmptyString, DisplayName = "Return - Message argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "Return - Message argument cannot be any whitespace character")]
     [TestMethod]
-    public void StringBuilderExtensions_Return_EmptyMessage_Should_ThrowArgumentException()
+    public void ReturnMessageMustContainAValue(string participant)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Return(string.Empty);
+        Action action = () => stringBuilder.Return(participant);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("message");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("message");
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Return_WhitespaceMessage_Should_ThrowArgumentException()
+    [TestMethod("Return - Without message is rendered correctly")]
+    public void ReturnIsRenderedCorrectly()
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        Action action = () => stringBuilder.Return(" ");
-
-        // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("message");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Return_Should_ContainReturnLine()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -92,10 +50,10 @@ public class ReturnTests
         stringBuilder.ToString().Should().Be("return\n");
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Return_WithMessage_Should_ContainReturnLineWithMessage()
+    [TestMethod("Return - With message is rendered correctly")]
+    public void ReturnWithMessageIsRenderedCorrectly()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act

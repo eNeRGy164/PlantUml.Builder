@@ -1,4 +1,3 @@
-using System;
 using System.Text.RegularExpressions;
 
 namespace PlantUml.Builder.SequenceDiagrams;
@@ -21,7 +20,7 @@ public class ParticipantName
 
     public ParticipantName(string name, string displayName)
     {
-        if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
+        ArgumentException.ThrowIfNullOrWhitespace(name);
 
         if (string.IsNullOrWhiteSpace(displayName))
         {
@@ -71,7 +70,7 @@ public class ParticipantName
         var mustBeQuoted = MustBeQuoted(name);
         if (mustBeQuoted)
         {
-            return Constant.Quote + name + Constant.Quote;
+            return Constant.Symbols.Quote + name + Constant.Symbols.Quote;
         }
         else
         {

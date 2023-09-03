@@ -1,81 +1,17 @@
-using System;
-using System.Text;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 namespace PlantUml.Builder.SequenceDiagrams.Tests;
 
 [TestClass]
 public class ArrowTests
 {
-    [TestMethod]
-    public void StringBuilderExtensions_Arrow_Null_Should_ThrowArgumentNullException()
-    {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Arrow("l", "->", "r");
-
-        // Assert
-        action.Should().ThrowExactly<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Arrow_NullType_Should_ThrowArgumentException()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        Action action = () => stringBuilder.Arrow("l", null, "r");
-
-        // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("arrow");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Arrow_EmptyType_Should_ThrowArgumentException()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        Action action = () => stringBuilder.Arrow("l", string.Empty, "r");
-
-        // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("arrow");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Arrow_WhitespaceType_Should_ThrowArgumentException()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        Action action = () => stringBuilder.Arrow("l", " ", "r");
-
-        // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("arrow");
-    }
-
     [DataRow(default, "->", default, DisplayName = "Both side are not defined")]
     [DataRow(default, "->]", "B", DisplayName = "Left side is not defined and arrow indicates an outgoing meesage to the right")]
     [DataRow("B", "[->", default, DisplayName = "Right side is not defined and arrow indicates an incomming message from the left")]
     [DataRow(default, "->?", "B", DisplayName = "Left side is not defined and arrow indicates a short outgoing meesage to the right")]
     [DataRow("B", "?->", default, DisplayName = "Right side is not defined and arrow indicates a short incomming message from the left")]
     [TestMethod]
-    public void NotPossibleToHaveBothParticipantsOutsideTheDiagram(string left, string arrow, string right)
+    public void ArrowCannotHaveBothParticipantsOutsideTheDiagram(string left, string arrow, string right)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -86,213 +22,53 @@ public class ArrowTests
             .WithMessage("It is not possible for both partipants to be outside the diagram.");
     }
 
+    [DataRow(default, "r", "[-> r", DisplayName = "Arrow_NullLeft_Should_MakeArrowComeFromTheOutside")]
+    [DataRow("l", default, "l ->]", DisplayName = "Arrow_NullRight_Should_MakeArrowGoToTheOutside")]
     [TestMethod]
-    public void StringBuilderExtensions_Arrow_ArrowShouldBeAtLeastTwoLong_Should_ThrowArgumentException()
+    public void ArrowSupportsOutsideSourcesIfParticipantIsNotSupplied(string left, string right, string expected)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Arrow("l", "-", "r");
+        stringBuilder.Arrow(left, "->", right);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("The arrow type must be at least 2 characters long*")
-            .And.ParamName.Should().Be("arrow");
+        stringBuilder.ToString().Should().Be($"{expected}\n");
     }
 
+    [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetValidNotationTestDisplayName))]
     [TestMethod]
-    public void StringBuilderExtensions_Arrow_Should_ContainArrowLine()
+    public void ArrowIsRenderedCorrectly(MethodExpectationTestData testData)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
+        var (method, parameters) = typeof(StringBuilderExtensions).GetExtensionMethodAndParameters(stringBuilder, testData.Method, testData.Parameters);
+
         // Act
-        stringBuilder.Arrow("l", "->", "r");
+        method.Invoke(null, parameters);
 
         // Assert
-        stringBuilder.ToString().Should().Be("l -> r\n");
+        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Arrow_WithLabel_Should_ContainArrowLineWithLabel()
+    private static IEnumerable<object[]> GetValidNotations()
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
+        var left = new ParticipantName("l");
+        var arrow = new Arrow("->");
+        var right = new ParticipantName("r");
 
-        // Act
-        stringBuilder.Arrow("l", "->", "r", message: "label1");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("l -> r : label1\n");
+        yield return new object[] { new MethodExpectationTestData("Arrow", "l -> r", left, arrow, right) };
+        yield return new object[] { new MethodExpectationTestData("Arrow", "l -> r : label1", left, arrow, right, "label1") };
+        yield return new object[] { new MethodExpectationTestData("Arrow", "l -> r : label1\\nlabel2", left, arrow, right, "label1\nlabel2") };
+        yield return new object[] { new MethodExpectationTestData("Arrow", "l -> r #Blue", left, arrow, right, default, default, (Color)NamedColor.Blue) };
+        yield return new object[] { new MethodExpectationTestData("Arrow", "l -> r ++", left, arrow, right, default, LifeLineEvents.Activate) };
+        yield return new object[] { new MethodExpectationTestData("Arrow", "l -> r ++ #Blue", left, arrow, right, default, LifeLineEvents.Activate, (Color)"Blue") };
+        yield return new object[] { new MethodExpectationTestData("Arrow", "l -> r --", left, arrow, right, default, LifeLineEvents.Deactivate) };
+        yield return new object[] { new MethodExpectationTestData("Arrow", "l -> r **", left, arrow, right, default, LifeLineEvents.Create) };
+        yield return new object[] { new MethodExpectationTestData("Arrow", "l -> r !!", left, arrow, right, default, LifeLineEvents.Destroy) };
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Arrow_WithMultiLineLabel_Should_ContainArrowLineWithLabelWithEscapedNewLines()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Arrow("l", "->", "r", message: "label1\nlabel2");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("l -> r : label1\\nlabel2\n");
-    }
-
-    //[TestMethod]
-    //public void StringBuilderExtensions_Arrow_WithColor_Should_ContainArrowLineWithColor()
-    //{
-    //    // Assign
-    //    var stringBuilder = new StringBuilder();
-
-    //    // Act
-    //    stringBuilder.Arrow("l", Arrow.Right(NamedColor.Blue), "r");
-
-    //    // Assert
-    //    stringBuilder.ToString().Should().Be("l -[#Blue]> r\n");
-    //}
-
-    //[TestMethod]
-    //public void StringBuilderExtensions_Arrow_WithColorWithHashtag_Should_ContainArrowLineWithColor()
-    //{
-    //    // Assign
-    //    var stringBuilder = new StringBuilder();
-
-    //    // Act
-    //    stringBuilder.Arrow("l", Arrow.Right("#Blue"), "r");
-
-    //    // Assert
-    //    stringBuilder.ToString().Should().Be("l -[#Blue]> r\n");
-    //}
-
-    [TestMethod]
-    public void StringBuilderExtensions_Arrow_WithActivateTarget_Should_ContainArrowLineWithTargetActivation()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Arrow("l", "->", "r", lifeEvents: LifeLineEvents.Activate);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("l -> r ++\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Arrow_WithActivateTargetAndActivationColor_Should_ContainArrowLineWithTargetActivationWithColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Arrow("l", "->", "r", lifeEvents: LifeLineEvents.Activate, activationColor: "Blue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("l -> r ++ #Blue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Arrow_WithActivateTargetAndActivationColorWithHashTag_Should_ContainArrowLineWithTargetActivationWithColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Arrow("l", "->", "r", lifeEvents: LifeLineEvents.Activate, activationColor: "#Blue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("l -> r ++ #Blue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Arrow_WithActivationColorB_Should_ContainArrowLineWithActivationColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Arrow("l", "->", "r", activationColor: "#Blue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("l -> r #Blue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Arrow_WithDeactivateSource_Should_ContainArrowLineWithSourceDeactivation()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Arrow("l", "->", "r", lifeEvents: LifeLineEvents.Deactivate);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("l -> r --\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Arrow_WithCreateTargetInstance_Should_ContainArrowLineWithTargetInstanceCreation()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Arrow("l", "->", "r", lifeEvents: LifeLineEvents.Create);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("l -> r **\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Arrow_WithDestroyTargetInstance_Should_ContainArrowLineWithTargetInstanceDestruction()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Arrow("l", "->", "r", lifeEvents: LifeLineEvents.Destroy);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("l -> r !!\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Arrow_WithNewLineInParticipantName_Should_EscapeNewLine()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Arrow("l\nl", "->", "r\nr");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("\"l\\nl\" -> \"r\\nr\"\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Arrow_NullLeft_Should_MakeArrowComeFromTheOutside()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Arrow(default, "->", "r");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("[-> r\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Arrow_NullRight_Should_MakeArrowGoToTheOutside()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Arrow("l", "->", default);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("l ->]\n");
-    }
+    public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);
 }

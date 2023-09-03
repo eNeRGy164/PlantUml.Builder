@@ -1,50 +1,20 @@
-using System;
-using System.Text;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 namespace PlantUml.Builder.SequenceDiagrams.Tests;
 
 [TestClass]
 public class DelayTests
 {
+    [DataRow(default, "...", DisplayName = "Delay - Default delay line")]
+    [DataRow("5 minutes later", "...5 minutes later...", DisplayName = "Delay - With message")]
     [TestMethod]
-    public void StringBuilderExtensions_Delay_Null_Should_ThrowArgumentNullException()
+    public void DelayIsRenderedCorrectly(string message, string expected)
     {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Delay();
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Delay_Should_ContainDelayLine()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        stringBuilder.Delay();
+        stringBuilder.Delay(message);
 
         // Assert
-        stringBuilder.ToString().Should().Be("...\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Delay_WithLabel_Should_ContainDelayLineWithMessage()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Delay("5 minutes later");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("...5 minutes later...\n");
+        stringBuilder.ToString().Should().Be($"{expected}\n");
     }
 }

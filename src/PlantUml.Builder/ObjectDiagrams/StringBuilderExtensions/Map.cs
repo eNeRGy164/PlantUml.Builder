@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder.ObjectDiagrams;
 
 public static partial class StringBuilderExtensions
@@ -13,37 +10,36 @@ public static partial class StringBuilderExtensions
     /// <param name="stereotype">Optional stereo type.</param>
     /// <param name="url">Optional url.</param>
     /// <param name="backgroundColor">Optional background color.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void MapStart(this StringBuilder stringBuilder, string name, string displayName = default, string stereotype = default, Uri url = default, Color backgroundColor = default)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
+        ArgumentException.ThrowIfNullOrWhitespace(name);
 
-        if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
-
-        stringBuilder.Append(Constant.Map);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Words.Map);
+        stringBuilder.Append(Constant.Symbols.Space);
 
         if (displayName is not null)
         {
-            stringBuilder.Append(Constant.Quote);
+            stringBuilder.Append(Constant.Symbols.Quote);
             stringBuilder.Append(displayName);
-            stringBuilder.Append(Constant.Quote);
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.As);
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Quote);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Words.As);
+            stringBuilder.Append(Constant.Symbols.Space);
         }
 
         stringBuilder.Append(name);
 
         if (stereotype is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.StereoType(stereotype);
         }
 
         if (url is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(Constant.UrlStart);
             stringBuilder.Append(url);
             stringBuilder.Append(Constant.UrlEnd);
@@ -51,24 +47,24 @@ public static partial class StringBuilderExtensions
 
         if (backgroundColor is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(backgroundColor);
         }
 
-        stringBuilder.Append(Constant.Space);
-        stringBuilder.Append(Constant.MapStart);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Map.Start);
         stringBuilder.AppendNewLine();
     }
 
     /// <summary>
     /// Renders the end of a map or associative array.
     /// </summary>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void MapEnd(this StringBuilder stringBuilder)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.Append(Constant.MapEnd);
+        stringBuilder.Append(Constant.Map.End);
         stringBuilder.AppendNewLine();
     }
 }

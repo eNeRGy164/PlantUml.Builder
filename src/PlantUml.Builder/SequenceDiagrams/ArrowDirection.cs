@@ -1,5 +1,3 @@
-using System;
-
 namespace PlantUml.Builder.SequenceDiagrams;
 
 [Flags]
@@ -9,5 +7,5 @@ public enum ArrowDirection
     None = 0,
     Left = 1,
     Right = 2,
-    Both = 3
+    Both = Left | Right
 }

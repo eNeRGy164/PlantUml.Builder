@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder.SequenceDiagrams;
 
 public static partial class StringBuilderExtensions
@@ -14,16 +11,16 @@ public static partial class StringBuilderExtensions
     /// <param name="message">Optional message for the arrow.</param>
     /// <param name="lifeEvents">Optional changes to the life of the <em>source</em> or <em>target</em>.</param>
     /// <param name="activationColor">Optional color for the target activation.</param>
-    /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException"><paramref name="arrow"/> is <c>null</c>, empty of only white space.</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException"><paramref name="arrow"/> is <see langword="null"/>, empty of only white space.</exception>
     /// <exception cref="ArgumentException"><paramref name="left"/> or <paramref name="right"/> is empty of only white space.</exception>
     /// <exception cref="ArgumentException"><paramref name="arrow"/> consists of less then 2 characters.</exception>
-    /// <exception cref="NotSupportedException"><paramref name="left"/> and <paramref name="right"/> are both <c>null</c>, or the arrow has an external symbol on the other side of the undefined participant.</exception>
+    /// <exception cref="NotSupportedException"><paramref name="left"/> and <paramref name="right"/> are both <see langword="null"/>, or the arrow has an external symbol on the other side of the undefined participant.</exception>
     public static void Arrow(this StringBuilder stringBuilder, ParticipantName left, Arrow arrow, ParticipantName right, string message = default, LifeLineEvents lifeEvents = default, Color activationColor = default)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
+        ArgumentNullException.ThrowIfNull(arrow);
 
-        if (arrow is null) throw new ArgumentException("A non-empty value should be provided", nameof(arrow));
         if (left is null && right is null) throw new NotSupportedException("It is not possible for both partipants to be outside the diagram.");
         if (left is null && arrow.IsExternalRight()) throw new NotSupportedException("It is not possible for both partipants to be outside the diagram.");
         if (right is null && arrow.IsExternalLeft()) throw new NotSupportedException("It is not possible for both partipants to be outside the diagram.");
@@ -37,12 +34,12 @@ public static partial class StringBuilderExtensions
             stringBuilder.Append(left);
         }
 
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Symbols.Space);
 
         if (left is not null && right is not null)
         {
             stringBuilder.Append(arrow);
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
         }
 
         if (right is null)
@@ -56,21 +53,21 @@ public static partial class StringBuilderExtensions
 
         if (lifeEvents is not null && lifeEvents != LifeLineEvents.None)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(lifeEvents);
         }
 
         if (activationColor is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(activationColor);
         }
 
         if (!string.IsNullOrEmpty(message))
         {
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.Colon);
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Symbols.Colon);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(message.Replace("\n", "\\n"));
         }
 

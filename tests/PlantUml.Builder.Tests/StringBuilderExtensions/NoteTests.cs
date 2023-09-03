@@ -1,87 +1,85 @@
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-
 namespace PlantUml.Builder.Tests;
 
 [TestClass]
 public class NoteTests
 {
-    [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetValidNotationsDisplayName))]
+    [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetValidNotationTestDisplayName))]
     [TestMethod]
-    public void AValidNoteIsRendered(string methodName, object[] methodParameters, string expected)
+    public void NoteIsRenderedCorrectly(MethodExpectationTestData testData)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
-        var method = typeof(StringBuilderExtensions).FindOverloadedMethod(methodName, methodParameters.Select(p => p.GetType()));
-        var remainingParameters = method.GetParameters().Skip(methodParameters.Length + 1).Select(p => Type.Missing);
-        var parameters = new object[] { stringBuilder }.Concat(methodParameters).Concat(remainingParameters).ToArray();
+        var (method, parameters) = typeof(StringBuilderExtensions).GetExtensionMethodAndParameters(stringBuilder, testData.Method, testData.Parameters);
 
         // Act
         method.Invoke(null, parameters);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{expected}\n");
+        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
     }
 
     private static IEnumerable<object[]> GetValidNotations()
     {
-        yield return new object[] { "Note", new object[] { NotePosition.Left, "Simple note." }, "note left : Simple note." };
-        yield return new object[] { "Note", new object[] { NotePosition.Left, "Line1\nLine2" }, "note left : Line1\\nLine2" };
-        yield return new object[] { "Note", new object[] { NotePosition.Left, "Simple note.", NoteStyle.Hexagonal }, "hnote left : Simple note." };
-        yield return new object[] { "Note", new object[] { NotePosition.Left, "Simple note.", NoteStyle.Box }, "rnote left : Simple note." };
-        yield return new object[] { "Note", new object[] { NotePosition.Left, "actorA", "Simple note." }, "note left of actorA : Simple note." };
-        yield return new object[] { "Note", new object[] { NotePosition.Left, "actorA", "Line1\nLine2" }, "note left of actorA : Line1\\nLine2" };
-        yield return new object[] { "Note", new object[] { NotePosition.Left, "actorA", "Simple note.", default(NoteStyle), (Color)NamedColor.AliceBlue }, "note left of actorA #AliceBlue : Simple note." };
-        yield return new object[] { "Note", new object[] { "actorA", "Simple note." }, "note over actorA : Simple note." };
-        yield return new object[] { "Note", new object[] { "actorA", "actorB", "Simple note." }, "note over actorA,actorB : Simple note." };
-        yield return new object[] { "Note", new object[] { "actorA", "Simple note.", default(NoteStyle), (Color)string.Empty, true }, "/ note over actorA : Simple note." };
-        yield return new object[] { "HNote", new object[] { NotePosition.Left, "Simple note." }, "hnote left : Simple note." };
-        yield return new object[] { "HNote", new object[] { NotePosition.Left, "Line1\nLine2" }, "hnote left : Line1\\nLine2" };
-        yield return new object[] { "HNote", new object[] { NotePosition.Left, "actorA", "Simple note." }, "hnote left of actorA : Simple note." };
-        yield return new object[] { "HNote", new object[] { NotePosition.Left, "actorA", "Line1\nLine2" }, "hnote left of actorA : Line1\\nLine2" };
-        yield return new object[] { "HNote", new object[] { NotePosition.Left, "actorA", "Simple note.", (Color)NamedColor.AliceBlue }, "hnote left of actorA #AliceBlue : Simple note." };
-        yield return new object[] { "HNote", new object[] { "actorA", "Simple note." }, "hnote over actorA : Simple note." };
-        yield return new object[] { "HNote", new object[] { "actorA", "actorB", "Simple note." }, "hnote over actorA,actorB : Simple note." };
-        yield return new object[] { "HNote", new object[] { "actorA", "Simple note.", (Color)string.Empty, true }, "/ hnote over actorA : Simple note." };
-        yield return new object[] { "RNote", new object[] { NotePosition.Left, "Simple note." }, "rnote left : Simple note." };
-        yield return new object[] { "RNote", new object[] { NotePosition.Left, "Line1\nLine2" }, "rnote left : Line1\\nLine2" };
-        yield return new object[] { "RNote", new object[] { NotePosition.Left, "actorA", "Simple note." }, "rnote left of actorA : Simple note." };
-        yield return new object[] { "RNote", new object[] { NotePosition.Left, "actorA", "Line1\nLine2" }, "rnote left of actorA : Line1\\nLine2" };
-        yield return new object[] { "RNote", new object[] { NotePosition.Left, "actorA", "Simple note.", (Color)NamedColor.AliceBlue }, "rnote left of actorA #AliceBlue : Simple note." };
-        yield return new object[] { "RNote", new object[] { "actorA", "Simple note." }, "rnote over actorA : Simple note." };
-        yield return new object[] { "RNote", new object[] { "actorA", "actorB", "Simple note." }, "rnote over actorA,actorB : Simple note." };
-        yield return new object[] { "RNote", new object[] { "actorA", "Simple note.", (Color)string.Empty, true }, "/ rnote over actorA : Simple note." };
-        yield return new object[] { "StartNote", new object[] { NotePosition.Left }, "note left" };
-        yield return new object[] { "StartNote", new object[] { NotePosition.Left, string.Empty, NoteStyle.Hexagonal }, "hnote left" };
-        yield return new object[] { "StartNote", new object[] { NotePosition.Left, string.Empty, NoteStyle.Box }, "rnote left" };
-        yield return new object[] { "StartNote", new object[] { NotePosition.Left, "actorA" }, "note left of actorA" };
-        yield return new object[] { "StartNote", new object[] { "actorA" }, "note over actorA" };
-        yield return new object[] { "StartNote", new object[] { "actorA", "actorB" }, "note over actorA,actorB" };
-        yield return new object[] { "StartHNote", new object[] { NotePosition.Left }, "hnote left" };
-        yield return new object[] { "StartHNote", new object[] { NotePosition.Left, "actorA" }, "hnote left of actorA" };
-        yield return new object[] { "StartHNote", new object[] { "actorA" }, "hnote over actorA" };
-        yield return new object[] { "StartHNote", new object[] { "actorA", "actorB" }, "hnote over actorA,actorB" };
-        yield return new object[] { "StartRNote", new object[] { NotePosition.Left }, "rnote left" };
-        yield return new object[] { "StartRNote", new object[] { NotePosition.Left, "actorA" }, "rnote left of actorA" };
-        yield return new object[] { "StartRNote", new object[] { "actorA" }, "rnote over actorA" };
-        yield return new object[] { "StartRNote", new object[] { "actorA", "actorB" }, "rnote over actorA,actorB" };
-        yield return new object[] { "EndNote", new object[0], "end note" };
-        yield return new object[] { "EndHNote", new object[0], "end hnote" };
-        yield return new object[] { "EndRNote", new object[0], "end rnote" };
+        // Define the valid notations and expected results for different overloads
+
+        // Note
+        yield return new object[] { new MethodExpectationTestData("Note", "note left : Simple note.", NotePosition.Left, "Simple note.") };
+        yield return new object[] { new MethodExpectationTestData("Note", "note left : Line1\\nLine2", NotePosition.Left, "Line1\nLine2") };
+        yield return new object[] { new MethodExpectationTestData("Note", "hnote left : Simple note.", NotePosition.Left, "Simple note.", NoteStyle.Hexagonal) };
+        yield return new object[] { new MethodExpectationTestData("Note", "rnote left : Simple note.", NotePosition.Left, "Simple note.", NoteStyle.Box) };
+        yield return new object[] { new MethodExpectationTestData("Note", "note left of actorA : Simple note.", NotePosition.Left, "actorA", "Simple note.") };
+        yield return new object[] { new MethodExpectationTestData("Note", "note left of actorA : Line1\\nLine2", NotePosition.Left, "actorA", "Line1\nLine2") };
+        yield return new object[] { new MethodExpectationTestData("Note", "note left of actorA #AliceBlue : Simple note.", NotePosition.Left, "actorA", "Simple note.", default(NoteStyle), (Color)NamedColor.AliceBlue) };
+        yield return new object[] { new MethodExpectationTestData("Note", "note over actorA : Simple note.", "actorA", "Simple note.") };
+        yield return new object[] { new MethodExpectationTestData("Note", "note over actorA,actorB : Simple note.", "actorA", "actorB", "Simple note.") };
+        yield return new object[] { new MethodExpectationTestData("Note", "/ note over actorA : Simple note.", "actorA", "Simple note.", default(NoteStyle), (Color)string.Empty, true) };
+
+        // HNote
+        yield return new object[] { new MethodExpectationTestData("HNote", "hnote left : Simple note.", NotePosition.Left, "Simple note.") };
+        yield return new object[] { new MethodExpectationTestData("HNote", "hnote left : Line1\\nLine2", NotePosition.Left, "Line1\nLine2") };
+        yield return new object[] { new MethodExpectationTestData("HNote", "hnote left of actorA : Simple note.", NotePosition.Left, "actorA", "Simple note.") };
+        yield return new object[] { new MethodExpectationTestData("HNote", "hnote left of actorA : Line1\\nLine2", NotePosition.Left, "actorA", "Line1\nLine2") };
+        yield return new object[] { new MethodExpectationTestData("HNote", "hnote left of actorA #AliceBlue : Simple note.", NotePosition.Left, "actorA", "Simple note.", (Color)NamedColor.AliceBlue) };
+        yield return new object[] { new MethodExpectationTestData("HNote", "hnote over actorA : Simple note.", "actorA", "Simple note.") };
+        yield return new object[] { new MethodExpectationTestData("HNote", "hnote over actorA,actorB : Simple note.", "actorA", "actorB", "Simple note.") };
+        yield return new object[] { new MethodExpectationTestData("HNote", "/ hnote over actorA : Simple note.", "actorA", "Simple note.", (Color)string.Empty, true) };
+
+        // RNote
+        yield return new object[] { new MethodExpectationTestData("RNote", "rnote left : Simple note.", NotePosition.Left, "Simple note.") };
+        yield return new object[] { new MethodExpectationTestData("RNote", "rnote left : Line1\\nLine2", NotePosition.Left, "Line1\nLine2") };
+        yield return new object[] { new MethodExpectationTestData("RNote", "rnote left of actorA : Simple note.", NotePosition.Left, "actorA", "Simple note.") };
+        yield return new object[] { new MethodExpectationTestData("RNote", "rnote left of actorA : Line1\\nLine2", NotePosition.Left, "actorA", "Line1\nLine2") };
+        yield return new object[] { new MethodExpectationTestData("RNote", "rnote left of actorA #AliceBlue : Simple note.", NotePosition.Left, "actorA", "Simple note.", (Color)NamedColor.AliceBlue) };
+        yield return new object[] { new MethodExpectationTestData("RNote", "rnote over actorA : Simple note.", "actorA", "Simple note.") };
+        yield return new object[] { new MethodExpectationTestData("RNote", "rnote over actorA,actorB : Simple note.", "actorA", "actorB", "Simple note.") };
+        yield return new object[] { new MethodExpectationTestData("RNote", "/ rnote over actorA : Simple note.", "actorA", "Simple note.", (Color)string.Empty, true) };
+
+        // StartNote
+        yield return new object[] { new MethodExpectationTestData("StartNote", "note left", NotePosition.Left) };
+        yield return new object[] { new MethodExpectationTestData("StartNote", "hnote left", NotePosition.Left, string.Empty, NoteStyle.Hexagonal) };
+        yield return new object[] { new MethodExpectationTestData("StartNote", "rnote left", NotePosition.Left, string.Empty, NoteStyle.Box) };
+        yield return new object[] { new MethodExpectationTestData("StartNote", "note left of actorA", NotePosition.Left, "actorA") };
+        yield return new object[] { new MethodExpectationTestData("StartNote", "note over actorA", "actorA") };
+        yield return new object[] { new MethodExpectationTestData("StartNote", "note over actorA,actorB", "actorA", "actorB") };
+
+        // StartHNote
+        yield return new object[] { new MethodExpectationTestData("StartHNote", "hnote left", NotePosition.Left) };
+        yield return new object[] { new MethodExpectationTestData("StartHNote", "hnote left of actorA", NotePosition.Left, "actorA") };
+        yield return new object[] { new MethodExpectationTestData("StartHNote", "hnote over actorA", "actorA") };
+        yield return new object[] { new MethodExpectationTestData("StartHNote", "hnote over actorA,actorB", "actorA", "actorB") };
+
+        // StartRNote
+        yield return new object[] { new MethodExpectationTestData("StartRNote", "rnote left", NotePosition.Left) };
+        yield return new object[] { new MethodExpectationTestData("StartRNote", "rnote left of actorA", NotePosition.Left, "actorA") };
+        yield return new object[] { new MethodExpectationTestData("StartRNote", "rnote over actorA", "actorA") };
+        yield return new object[] { new MethodExpectationTestData("StartRNote", "rnote over actorA,actorB", "actorA", "actorB") };
+
+        // EndNotes
+        yield return new object[] { new MethodExpectationTestData("EndNote", "end note") };
+        yield return new object[] { new MethodExpectationTestData("EndHNote", "end hnote") };
+        yield return new object[] { new MethodExpectationTestData("EndRNote", "end rnote") };
     }
 
-    public static string GetValidNotationsDisplayName(MethodInfo _, object[] data)
-    {
-        var parameters = ((object[])data[1]).Select(p => (Type: p.GetType().Name, Value: $"\"{p}\""));
-        var types = string.Join(", ", parameters.Select(p => p.Type));
-        var values = string.Join(", ", parameters.Select(p => p.Value));
-
-        return $"Method \"{data[0]}({types})\" with parameters {values} should render as \"{data[2]}\\n\"";
-    }
+    public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);
 }

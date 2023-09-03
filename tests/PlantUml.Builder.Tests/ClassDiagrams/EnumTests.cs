@@ -1,278 +1,84 @@
-using System;
-using System.Text;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PlantUml.Builder.ClassDiagrams;
+using static PlantUml.Builder.TestData;
 
-namespace PlantUml.Builder.Tests.ClassDiagrams;
+namespace PlantUml.Builder.ClassDiagrams.Tests;
 
 [TestClass]
 public class EnumTests
 {
-    [TestMethod]
-    public void StringBuilderExtensions_Enum_Null_Should_ThrowArgumentNullException()
+    [TestMethod("Enum - Name argument cannot be `null`")]
+    public void EnumNameCannotBeNull()
     {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Enum("EnumA");
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Enum_NullName_Should_ThrowArgumentException()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
         Action action = () => stringBuilder.Enum(null);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should().
+            ThrowExactly<ArgumentNullException>()
+            .WithParameterName("name");
     }
 
+    [DataRow(EmptyString, DisplayName = "Enum - Name argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "Enum - Name argument cannot be any whitespace character")]
     [TestMethod]
-    public void StringBuilderExtensions_Enum_EmptyName_Should_ThrowArgumentException()
+    public void EnumNameMustContainAValue(string name)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Enum(string.Empty);
+        Action action = () => stringBuilder.Enum(name);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("name");
     }
 
+    [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetMethodTestDisplayName))]
     [TestMethod]
-    public void StringBuilderExtensions_Enum_WhitespaceName_Should_ThrowArgumentException()
+    public void EnumIsRenderedCorrectly(MethodExpectationTestData testData)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
+        var (method, parameters) = typeof(StringBuilderExtensions).GetExtensionMethodAndParameters(stringBuilder, testData.Method, testData.Parameters);
+
         // Act
-        Action action = () => stringBuilder.Enum(" ");
+        method.Invoke(null, parameters);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Enum_Should_ContainEnumLine()
+    private static IEnumerable<object[]> GetValidNotations()
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
+        // Define the valid notations and expected results for different overloads
+        yield return new object[] { new MethodExpectationTestData("Enum", "enum enumA", "enumA") };
+        yield return new object[] { new MethodExpectationTestData("Enum", "enum \"Enum A\" as enumA", "enumA", "Enum A") };
+        yield return new object[] { new MethodExpectationTestData("Enum", "enum enumA<Object>", "enumA", null, "Object") };
+        yield return new object[] { new MethodExpectationTestData("Enum", "enum enumA <<stereotype>>", "enumA", null, null, "stereotype") };
+        yield return new object[] { new MethodExpectationTestData("Enum", "enum enumA <<(R,#Blue)stereotype>>", "enumA", null, null, "stereotype", new CustomSpot('R', NamedColor.Blue)) };
+        yield return new object[] { new MethodExpectationTestData("Enum", "enum enumA $tag", "enumA", null, null, null, null, "tag") };
+        yield return new object[] { new MethodExpectationTestData("Enum", "enum enumA [[https://blog.hompus.nl/]]", "enumA", null, null, null, null, null, new Uri("https://blog.hompus.nl")) };
+        yield return new object[] { new MethodExpectationTestData("Enum", "enum enumA #AliceBlue", "enumA", null, null, null, null, null, null, (Color)NamedColor.AliceBlue) };
+        yield return new object[] { new MethodExpectationTestData("Enum", "enum enumA ##AliceBlue", "enumA", null, null, null, null, null, null, null, (Color)NamedColor.AliceBlue) };
+        yield return new object[] { new MethodExpectationTestData("Enum", "enum enumA ##[dashed]", "enumA", null, null, null, null, null, null, null, null, LineStyle.Dashed) };
+        yield return new object[] { new MethodExpectationTestData("Enum", "enum enumA", "enumA", null, null, null, null, null, null, null, null, null, Array.Empty<string>()) };
+        yield return new object[] { new MethodExpectationTestData("Enum", "enum enumA extends BaseClass", "enumA", null, null, null, null, null, null, null, null, null, new[] { "BaseClass" }) };
+        yield return new object[] { new MethodExpectationTestData("Enum", "enum enumA extends BaseClass,BaseClass2", "enumA", null, null, null, null, null, null, null, null, null, new[] { "BaseClass", "BaseClass2" }) };
+        yield return new object[] { new MethodExpectationTestData("Enum", "enum enumA", "enumA", null, null, null, null, null, null, null, null, null, null, Array.Empty<string>()) };
+        yield return new object[] { new MethodExpectationTestData("Enum", "enum enumA implements IInterface", "enumA", null, null, null, null, null, null, null, null, null, null, new[] { "IInterface" }) };
+        yield return new object[] { new MethodExpectationTestData("Enum", "enum enumA implements IInterface,IInterface2", "enumA", null, null, null, null, null, null, null, null, null, null, new[] { "IInterface", "IInterface2" }) };
+        yield return new object[] { new MethodExpectationTestData("Enum", "enum \"Enum A\" as enumA<T> <<(A,#Blue)stereotype>> $tag [[https://blog.hompus.nl/]] #Blue ##[dashed]Blue extends BaseClass,BaseClass2 implements IInterface,IInterface2", "enumA", "Enum A", "T", "stereotype", new CustomSpot('A', NamedColor.Blue), "tag", new Uri("https://blog.hompus.nl"), (Color)NamedColor.Blue, (Color)NamedColor.Blue, LineStyle.Dashed, new[] { "BaseClass", "BaseClass2" }, new[] { "IInterface", "IInterface2" }) };
 
-        // Act
-        stringBuilder.Enum("EnumA");
+        yield return new object[] { new MethodExpectationTestData("EnumStart", "enum enumA {", "enumA") };
+        yield return new object[] { new MethodExpectationTestData("EnumStart", "+enum enumA {", "enumA", null, VisibilityModifier.Public) };
 
-        // Assert
-        stringBuilder.ToString().Should().Be("enum EnumA\n");
+        yield return new object[] { new MethodExpectationTestData("EnumEnd", "}") };
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Enum_WithDisplayName_Should_ContainEnumLineWithDisplayName()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Enum("EnumA", displayName: "Enum A");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("enum \"Enum A\" as EnumA\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Enum_WithStereotype_Should_ContainEnumLineWithStereotype()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Enum("EnumA", stereotype: "entity");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("enum EnumA <<entity>>\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Enum_WithStereotypeAndCustomSpot_Should_ContainEnumLineWithStereotypeAndCustomSpot()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Enum("EnumA", stereotype: "entity", customSpot: new CustomSpot('R', "Blue"));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("enum EnumA <<(R,#Blue)entity>>\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Enum_WithGenerics_Should_ContainEnumLineWithGenerics()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Enum("EnumA", generics: "Object");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("enum EnumA<Object>\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Enum_WithBackgroundColor_Should_ContainEnumLineWithBackgroundColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Enum("EnumA", backgroundColor: "#AliceBlue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("enum EnumA #AliceBlue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Enum_WithBackgroundColorWithHashtag_Should_ContainEnumLineWithBackgroundColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Enum("EnumA", backgroundColor: "AliceBlue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("enum EnumA #AliceBlue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Enum_WithTag_Should_ContainEnumLineWithTag()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Enum("EnumA", tag: "tag");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("enum EnumA $tag\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Enum_WithUrl_Should_ContainEnumLineWithUrl()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Enum("EnumA", url: new Uri("https://blog.hompus.nl"));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("enum EnumA [[https://blog.hompus.nl/]]\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Enum_WithLineStyle_Should_ContainEnumLineWithLineStyle()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Enum("EnumA", lineStyle: LineStyle.Bold);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("enum EnumA ##[bold]\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Enum_WithLineColor_Should_ContainEnumLineWithLineColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Enum("EnumA", lineColor: "Blue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("enum EnumA ##Blue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Enum_WithExtends_Should_ContainEnumLineWithExtends()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Enum("EnumA", extends: new[] { "BaseClass" });
-
-        // Assert
-        stringBuilder.ToString().Should().Be("enum EnumA extends BaseClass\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Enum_WithMultipleExtends_Should_ContainEnumLineWithSeperatedExtends()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Enum("EnumA", extends: new[] { "BaseClass", "BaseClass2" });
-
-        // Assert
-        stringBuilder.ToString().Should().Be("enum EnumA extends BaseClass,BaseClass2\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Enum_WithNoImplements_Should_ContainEnumLineWithoutImplements()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Enum("EnumA", implements: new string[0]);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("enum EnumA\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Enum_WithImplements_Should_ContainEnumLineWithImplements()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Enum("EnumA", implements: new[] { "IInterface" });
-
-        // Assert
-        stringBuilder.ToString().Should().Be("enum EnumA implements IInterface\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Enum_WithMultipleImplements_Should_ContainEnumLineWithSeperatedImplements()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Enum("EnumA", implements: new[] { "IInterface", "IInterface2" });
-
-        // Assert
-        stringBuilder.ToString().Should().Be("enum EnumA implements IInterface,IInterface2\n");
-    }
+    public static string GetMethodTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);
 }

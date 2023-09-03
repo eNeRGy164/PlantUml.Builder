@@ -1,6 +1,3 @@
-using System.Text;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PlantUml.Builder.SequenceDiagrams;
 
 namespace PlantUml.Builder.Examples;
@@ -14,7 +11,7 @@ public class SequenceDiagramExampleTests
     [TestMethod]
     public void BasicExamples()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 Alice -> Bob : Authentication Request
 Bob --> Alice : Authentication Response
@@ -42,7 +39,7 @@ Alice <-- Bob : Another authentication Response
     [TestMethod]
     public void DeclaringParticipant01()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 participant participant as Foo
 actor actor as Foo1
@@ -90,7 +87,7 @@ Foo -> Foo7 : To queue
     [TestMethod]
     public void DeclaringParticipant02()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 actor Bob #red
 ' The only difference between actor
@@ -130,7 +127,7 @@ Bob -> L : Log transaction
     [TestMethod]
     public void DeclaringParticipant03()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 participant Last order 30
 participant Middle order 20
@@ -154,7 +151,7 @@ participant First order 10
     [TestMethod]
     public void UseNonLettersInParticipants()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 Alice -> ""Bob()"" : Hello
 ""Bob()"" -> ""This is very\nlong"" as Long
@@ -182,7 +179,7 @@ Long --> ""Bob()"" : ok
     [TestMethod]
     public void MessageToSelf01()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 Alice -> Alice : This is a signal to self.\nIt also demonstrates\nmultiline \ntext
 @enduml
@@ -202,7 +199,7 @@ Alice -> Alice : This is a signal to self.\nIt also demonstrates\nmultiline \nte
     [TestMethod]
     public void MessageToSelf02()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 Alice <- Alice : This is a signal to self.\nIt also demonstrates\nmultiline \ntext
 @enduml
@@ -222,7 +219,7 @@ Alice <- Alice : This is a signal to self.\nIt also demonstrates\nmultiline \nte
     [TestMethod]
     public void TextAlignment01()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 skinparam sequenceMessageAlignment right
 Bob -> Alice : Request
@@ -246,7 +243,7 @@ Alice -> Bob : Response
     [TestMethod]
     public void TextAlignment02()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 skinparam responseMessageBelowArrow true
 Bob -> Alice : hello
@@ -270,7 +267,7 @@ Alice -> Bob : ok
     [TestMethod]
     public void ChangeArrowStyle01()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 Bob ->x Alice
 Bob -> Alice
@@ -312,7 +309,7 @@ Bob <->o Alice
     [TestMethod]
     public void ChangeArrowStyle02()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 Bob ->x Alice
 Bob -> Alice
@@ -356,7 +353,7 @@ Bob <->o Alice
     [TestMethod]
     public void ChangeArrowColor()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 Bob -[#red]> Alice : hello
 Alice --[#0000FF]> Bob : ok
@@ -378,7 +375,7 @@ Alice --[#0000FF]> Bob : ok
     [TestMethod]
     public void MessageSequenceNumbering01()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 autonumber
 Bob -> Alice : Authentication Request
@@ -402,7 +399,7 @@ Bob <- Alice : Authentication Response
     [TestMethod]
     public void MessageSequenceNumbering02()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 autonumber
 Bob -> Alice : Authentication Request
@@ -444,7 +441,7 @@ Bob <- Alice : Yet another authentication Response
     [TestMethod]
     public void MessageSequenceNumbering03()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 autonumber ""<b>[000]""
 Bob -> Alice : Authentication Request
@@ -486,7 +483,7 @@ Bob <- Alice : Yet another authentication Response
     [TestMethod]
     public void MessageSequenceNumbering04()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 autonumber 10 10 ""<b>[000]""
 Bob -> Alice : Authentication Request
@@ -538,7 +535,7 @@ Bob <- Alice : Yet another authentication Response
     [TestMethod]
     public void MessageSequenceNumbering05()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 autonumber 1.1.1
 Alice -> Bob : Authentication request
@@ -596,7 +593,7 @@ Bob --> Alice : Response
     [TestMethod]
     public void PageTitleHeaderAndFooter()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 
 header Page Header
@@ -632,7 +629,7 @@ Alice -> Bob : message 2
     [TestMethod]
     public void SplittingDiagrams()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 Alice -> Bob : message 1
 Alice -> Bob : message 2
@@ -674,7 +671,7 @@ Alice -> Bob : message 6
     [TestMethod]
     public void GroupingMessages()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 Alice -> Bob : Authentication Request
 
@@ -736,7 +733,7 @@ end
     [TestMethod]
     public void SecondaryGroupLabel()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 Alice -> Bob : Authentication Request
 Bob -> Alice : Authentication Failure
@@ -772,7 +769,7 @@ end
     [TestMethod]
     public void NotesOnMessages()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 Alice -> Bob : hello
 note left : this is a first note
@@ -814,7 +811,7 @@ end note
     [TestMethod]
     public void SomeOtherNotes()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 participant Alice
 participant Bob
@@ -868,7 +865,7 @@ end note
     [TestMethod]
     public void ChangingNotesShape()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 caller -> server : conReq
 hnote over caller : idle
@@ -920,7 +917,7 @@ end hnote
     [TestMethod]
     public void NoteOverAllParticipants()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 Alice -> Bob : m1
 Bob -> Charlie : m2
@@ -950,7 +947,7 @@ hnote across : Note across all part.
     [TestMethod]
     public void SeveralNotesAlignedAtTheSameLevel01()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 note over Alice : initial state of Alice
 note over Bob : initial state of Bob
@@ -974,7 +971,7 @@ Bob -> Alice : hello
     [TestMethod]
     public void SeveralNotesAlignedAtTheSameLevel02()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 note over Alice : initial state of Alice
 / note over Bob : initial state of Bob
@@ -998,7 +995,7 @@ Bob -> Alice : hello
     [TestMethod]
     public void CreoleAndHtml()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 participant Alice
 participant ""The **Famous** Bob"" as Bob
@@ -1070,7 +1067,7 @@ end note
     [TestMethod]
     public void DividerOrSeparator()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 
 == Initialization ==
@@ -1110,7 +1107,7 @@ Alice <-- Bob : another authentication Response
     [TestMethod]
     public void Reference()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 participant Alice
 actor Bob
@@ -1150,7 +1147,7 @@ end ref
     [TestMethod]
     public void Delay()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 
 Alice -> Bob : Authentication Request
@@ -1182,7 +1179,7 @@ Bob --> Alice : Good Bye !
     [TestMethod]
     public void TextWrapping()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 skinparam MaxMessageSize 50
 participant a
@@ -1210,7 +1207,7 @@ a -> b : this is a very long message on several words
     [TestMethod]
     public void Space()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 
 Alice -> Bob : message 1
@@ -1248,7 +1245,7 @@ Bob --> Alice : ok
     [TestMethod]
     public void LifelineActivationAndDestruction01()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 participant User
 
@@ -1304,7 +1301,7 @@ deactivate A
     [TestMethod]
     public void LifelineActivationAndDestruction02()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 participant User
 
@@ -1356,7 +1353,7 @@ deactivate A
     [TestMethod]
     public void LifelineActivationAndDestruction03()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 autoactivate on
 alice -> bob : hello
@@ -1394,7 +1391,7 @@ return success
     [TestMethod]
     public void Return()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 Bob -> Alice : hello
 activate Alice
@@ -1420,7 +1417,7 @@ return bye
     [TestMethod]
     public void ParticipantCreation()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 Bob -> Alice : hello
 
@@ -1460,7 +1457,7 @@ Alice --> Bob : ok
     [TestMethod]
     public void ShortcutSyntaxForActivationDeactivationCreation()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 alice -> bob ++ : hello
 bob -> bob ++ : self call
@@ -1494,7 +1491,7 @@ return success
     [TestMethod]
     public void MixActivationAndDeactivationOnSameLine01()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 alice -> bob ++ : hello1
 bob -> charlie --++ : hello2
@@ -1518,7 +1515,7 @@ charlie --> alice -- : ok
     [TestMethod]
     public void MixActivationAndDeactivationOnSameLine02()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 alice -> bob --++ #Gold : hello
 bob -> alice --++ #Gold : you too
@@ -1544,7 +1541,7 @@ alice -> bob : step2
     [TestMethod]
     public void IncomingAndOutgoingMessages01()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 [-> A : DoWork
 
@@ -1588,7 +1585,7 @@ deactivate A
     [TestMethod]
     public void IncomingAndOutgoingMessages02()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 participant Alice
 participant Bob #lightblue
@@ -1648,7 +1645,7 @@ Bob x<-]
     [TestMethod]
     public void ShortArrowsForIncomingAndOutgoingMessages()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 ?-> Alice : """"?->""""\n**short** to actor1
 [-> Alice : """"[->""""\n**from start** to actor1
@@ -1680,7 +1677,7 @@ Alice -> Bob : """"->"""" \nfrom actor1 to actor2
     [TestMethod]
     public void Template()
     {
-        // Assign
+        // Arrange
         var example = @"@startuml
 @enduml
 ";

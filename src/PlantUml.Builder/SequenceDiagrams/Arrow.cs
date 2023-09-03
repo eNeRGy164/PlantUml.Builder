@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace PlantUml.Builder.SequenceDiagrams;
@@ -31,14 +29,14 @@ public partial class Arrow
 
     public Arrow(string arrow)
     {
-        if (string.IsNullOrWhiteSpace(arrow)) throw new ArgumentException("A non-empty value should be provided", nameof(arrow));
+        ArgumentException.ThrowIfNullOrWhitespace(arrow);
 
         var value = arrow.Trim();
 
-        if (value.Length < 2) throw new ArgumentException("The arrow type must be at least 2 characters long", nameof(arrow));
+        if (value.Length < 2) throw new System.ArgumentException("The arrow type must be at least 2 characters long", nameof(arrow));
 
-        if (value.IndexOf(ArrowParts.Line) == -1) throw new ArgumentException("The arrow must contain at least 1 line character ('-')", nameof(arrow));
-        if (value.IndexOfAny(this.arrowHeads) == -1) throw new ArgumentException($"The arrow must contain at least 1 arrow head character ('{string.Join("', '", this.arrowHeads)}').", nameof(arrow));
+        if (!value.Contains(ArrowParts.Line)) throw new System.ArgumentException("The arrow must contain at least 1 line character ('-')", nameof(arrow));
+        if (value.IndexOfAny(this.arrowHeads) == -1) throw new System.ArgumentException($"The arrow must contain at least 1 arrow head character ('{string.Join("', '", this.arrowHeads)}').", nameof(arrow));
 
         this.Parse(value, out List<char> left, out List<char> line, out List<char> color, out List<char> right);
 
@@ -131,7 +129,7 @@ public partial class Arrow
                 {
                     mode = ArrowPart.Body;
                 }
-                else if (value[i] == Constant.ColorStart && (i < value.Length - 1) && value[i + 1] == Constant.ColorPrefix)
+                else if (value[i] == Constant.Color.Start && (i < value.Length - 1) && value[i + 1] == Constant.Color.Prefix)
                 {
                     // Left arrow head can start with a '[', but should not be a color.
                     mode = ArrowPart.Color;
@@ -144,7 +142,7 @@ public partial class Arrow
 
             if (mode == ArrowPart.Body)
             {
-                if (value[i] == Constant.ColorStart && (i < value.Length - 1) && value[i + 1] == Constant.ColorPrefix)
+                if (value[i] == Constant.Color.Start && (i < value.Length - 1) && value[i + 1] == Constant.Color.Prefix)
                 {
                     mode = ArrowPart.Color;
                 }
@@ -160,11 +158,11 @@ public partial class Arrow
 
             if (mode == ArrowPart.Color)
             {
-                if (value[i] == Constant.ColorStart)
+                if (value[i] == Constant.Color.Start)
                 {
                     continue;
                 }
-                else if (value[i] == Constant.ColorEnd)
+                else if (value[i] == Constant.Color.End)
                 {
                     mode = ArrowPart.Body;
                     continue;

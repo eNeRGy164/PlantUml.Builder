@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder.SequenceDiagrams;
 
 public static partial class StringBuilderExtensions
@@ -8,13 +5,13 @@ public static partial class StringBuilderExtensions
     /// <summary>
     /// Creates a new page.
     /// </summary>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void NewPage(this StringBuilder stringBuilder)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
         
-        stringBuilder.Append(Constant.New);
-        stringBuilder.Append(Constant.Page);
+        stringBuilder.Append(Constant.Words.New);
+        stringBuilder.Append(Constant.Words.Page);
         stringBuilder.AppendNewLine();
     }
 
@@ -22,17 +19,16 @@ public static partial class StringBuilderExtensions
     /// Creates a new page.
     /// </summary>
     /// <param name="title">Title of the new page.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="title"/> is <c>null</c>, empty of only white space.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="title"/> is <see langword="null"/>, empty of only white space.</exception>
     public static void NewPage(this StringBuilder stringBuilder, string title)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
+        ArgumentException.ThrowIfNullOrWhitespace(title);
 
-        if (string.IsNullOrWhiteSpace(title)) throw new ArgumentException("A non-empty value should be provided", nameof(title));
-
-        stringBuilder.Append(Constant.New);
-        stringBuilder.Append(Constant.Page);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Words.New);
+        stringBuilder.Append(Constant.Words.Page);
+        stringBuilder.Append(Constant.Symbols.Space);
         stringBuilder.Append(title.Replace("\n", "\\n"));
         stringBuilder.AppendNewLine();
     }

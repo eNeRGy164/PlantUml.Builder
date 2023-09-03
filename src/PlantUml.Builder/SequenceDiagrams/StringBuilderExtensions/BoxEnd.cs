@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder.SequenceDiagrams;
 
 public static partial class StringBuilderExtensions
@@ -8,14 +5,14 @@ public static partial class StringBuilderExtensions
     /// <summary>
     /// Renders the end of a box.
     /// </summary>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void BoxEnd(this StringBuilder stringBuilder)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.Append(Constant.End);
-        stringBuilder.Append(Constant.Space);
-        stringBuilder.Append(Constant.Box); 
+        stringBuilder.Append(Constant.Words.End);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Words.Box); 
         stringBuilder.AppendNewLine();
     }
 }

@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>warnings</Nullable>
 
     <Version>0.1.0</Version>
     <Authors>Michaël Hompus</Authors>
@@ -25,4 +27,13 @@
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Using Include="System.Text"/>
+    <Using Remove="System.Linq"/>
+    <Using Remove="System.IO"/>
+    <Using Remove="System.Net.Http"/>
+    <Using Remove="System.Threading"/>
+    <Using Remove="System.Threading.Tasks"/>
+  </ItemGroup>
+  
 </Project>

@@ -1,5 +1,3 @@
-using System;
-using System.Text;
 using PlantUml.Builder.ClassDiagrams;
 
 namespace PlantUml.Builder.ObjectDiagrams;
@@ -21,11 +19,11 @@ public static partial class StringBuilderExtensions
     /// <param name="lineStyle">Optional line style.</param>
     /// <param name="extends">Optional extends.</param>
     /// <param name="implements">Optional implementations.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <c>null</c>, empty of only white space.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <see langword="null"/>, empty of only white space.</exception>
     public static void Diamond(this StringBuilder stringBuilder, string name, string displayName = default, string generics = default, string stereotype = default, CustomSpot customSpot = default, string tag = default, Uri url = default, Color backgroundColor = default, Color lineColor = default, LineStyle lineStyle = LineStyle.None, string[] extends = default, string[] implements = default)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
         stringBuilder.ClassBase(ClassType.Diamond, name, displayName, generics, stereotype, customSpot, tag, url, backgroundColor, lineColor, lineStyle, extends, implements);
         stringBuilder.AppendNewLine();

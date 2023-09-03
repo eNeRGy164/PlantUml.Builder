@@ -1,7 +1,4 @@
-﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Text;
+using static PlantUml.Builder.TestData;
 
 namespace PlantUml.Builder.Tests;
 
@@ -9,68 +6,39 @@ namespace PlantUml.Builder.Tests;
 public class FooterTests
 {
     [TestMethod]
-    public void StringBuilderExtensions_Footer_Null_Should_ThrowArgumentNullException()
+    public void FooterCannotBeNull()
     {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Footer("Footer");
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Footer_NullName_Should_ThrowArgumentException()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
         Action action = () => stringBuilder.Footer(null);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("footer");
+        action.Should().ThrowExactly<ArgumentNullException>()
+            .WithParameterName("footer");
     }
 
+    [DataRow(EmptyString, DisplayName = "Footer - Footer argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "Footer - Footer argument cannot be any whitespace character")]
     [TestMethod]
-    public void StringBuilderExtensions_Footer_EmptyName_Should_ThrowArgumentException()
+    public void FooterMustContainAValue(string footer)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Footer(string.Empty);
+        Action action = () => stringBuilder.Footer(footer);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("footer");
+        action.Should().ThrowExactly<ArgumentException>()
+            .WithParameterName("footer");
     }
 
     [TestMethod]
-    public void StringBuilderExtensions_Footer_WhitespaceName_Should_ThrowArgumentException()
+    public void FooterIsRenderedCorrectlyv()
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        Action action = () => stringBuilder.Footer(" ");
-
-        // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("footer");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Footer_Should_ContainFooterLine()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act

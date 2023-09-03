@@ -1,7 +1,4 @@
-using System;
-using System.Text;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static PlantUml.Builder.TestData;
 
 namespace PlantUml.Builder.Tests;
 
@@ -9,23 +6,9 @@ namespace PlantUml.Builder.Tests;
 public class SetNamespaceSeparatorTests
 {
     [TestMethod]
-    public void StringBuilderExtensions_SetNamespaceSeparator_Null_Should_ThrowArgumentNullException()
+    public void SetNamespaceSeparatorValueIsUsed()
     {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.SetNamespaceSeparator();
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_SetNamespaceSeparator_WithSeparator_Should_ContainSetNamespaceSeparatorLine()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -35,53 +18,17 @@ public class SetNamespaceSeparatorTests
         stringBuilder.ToString().Should().Be("set namespaceSeparator ::\n");
     }
 
+    [DataRow(null, DisplayName = "SetNamespaceSeparator - Separator is ignored if it is `null`")]
+    [DataRow(EmptyString, DisplayName = "SetNamespaceSeparator - Separator is ignored if it is an empty string")]
+    [DataRow(AllWhitespace, DisplayName = "SetNamespaceSeparator - Separator is ignored if it is contains only whitespaces")]
     [TestMethod]
-    public void StringBuilderExtensions_SetNamespaceSeparator_WithoutSeparator_Should_ContainSetNamespaceSeparatorNoneLine()
+    public void SetNamespaceSeparatorWithoutAValueSetsSeparatorToNone(string separator)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        stringBuilder.SetNamespaceSeparator();
-
-        // Assert
-        stringBuilder.ToString().Should().Be("set namespaceSeparator none\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_SetNamespaceSeparator_WithSeparatorNull_Should_ContainSetNamespaceSeparatorNoneLine()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.SetNamespaceSeparator(null);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("set namespaceSeparator none\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_SetNamespaceSeparator_WithSeparatorEmpty_Should_ContainSetNamespaceSeparatorNoneLine()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.SetNamespaceSeparator(string.Empty);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("set namespaceSeparator none\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_SetNamespaceSeparator_WithSeparatorWhitespace_Should_ContainSetNamespaceSeparatorNoneLine()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.SetNamespaceSeparator(" ");
+        stringBuilder.SetNamespaceSeparator(separator);
 
         // Assert
         stringBuilder.ToString().Should().Be("set namespaceSeparator none\n");

@@ -1,31 +1,12 @@
-﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Text;
-
-namespace PlantUml.Builder.Tests;
+﻿namespace PlantUml.Builder.Tests;
 
 [TestClass]
 public class UmlDiagramEndTests
 {
     [TestMethod]
-    public void StringBuilderExtensions_UmlDiagramEnd_Null_Should_ThrowArgumentNullException()
+    public void UmlDiagramEndIsRenderedCorrectly()
     {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.UmlDiagramEnd();
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_UmlDiagramEnd_Should_ContainUmlDiagramEndLine()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act

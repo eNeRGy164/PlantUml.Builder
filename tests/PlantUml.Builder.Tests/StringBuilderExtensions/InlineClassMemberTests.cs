@@ -1,129 +1,61 @@
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Text;
-
 namespace PlantUml.Builder.Tests;
 
 [TestClass]
 public class InlineClassMemberTests
 {
-    [TestMethod]
-    public void StringBuilderExtensions_ClassMember_Null_Should_ThrowArgumentNullException()
+    [TestMethod("InlineClassMember - Class member argument cannot be `null`")]
+    public void InlineClassMemberCannotBeNull()
     {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.InlineClassMember(new ClassMember("member"));
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_ClassMember_ClassMemberNull_Should_ThrowArgumentNullException()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
         Action action = () => stringBuilder.InlineClassMember(null);
 
         // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("classMember");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName("classMember");
     }
 
+    [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetValidNotationTestDisplayName))]
     [TestMethod]
-    public void StringBuilderExtensions_ClassMember_Should_ContainClassMemberLine()
+    public void InlineClassMemberIsRenderedCorrectly(ClassMemberData testData)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
+        var classMember = new ClassMember(testData.Name, testData.IsStatic, testData.IsAbstract, testData.Visibility);
 
         // Act
-        stringBuilder.InlineClassMember(new ClassMember("member"));
+        stringBuilder.InlineClassMember(classMember);
 
         // Assert
-        stringBuilder.ToString().Should().Be("member\n");
+        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_ClassMember_WithPublicVisibility_Should_ContainClassMemberLineWithPublicAnnotation()
+    private static IEnumerable<object[]> GetValidNotations()
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.InlineClassMember(new ClassMember("member", visibility: VisibilityModifier.Public));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("+member\n");
+        yield return new object[] { new ClassMemberData("member", "member") };
+        yield return new object[] { new ClassMemberData("{abstract}member", "member", IsAbstract: true) };
+        yield return new object[] { new ClassMemberData("{static}member", "member", IsStatic: true) };
+        yield return new object[] { new ClassMemberData("+member", "member", Visibility: VisibilityModifier.Public) };
+        yield return new object[] { new ClassMemberData("~member", "member", Visibility: VisibilityModifier.PackagePrivate) };
+        yield return new object[] { new ClassMemberData("#member", "member", Visibility: VisibilityModifier.Protected) };
+        yield return new object[] { new ClassMemberData("-member", "member", Visibility: VisibilityModifier.Private) };
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_ClassMember_WithPackagePrivateVisibility_Should_ContainClassMemberLineWithPackagePrivateAnnotation()
+    public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data)
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
+        if (data[0] is not ClassMemberData testData)
+        {
+            throw new ArgumentException($"Data array must contain a {nameof(ClassMemberData)} instance.", nameof(data));
+        }
 
-        // Act
-        stringBuilder.InlineClassMember(new ClassMember("member", visibility: VisibilityModifier.PackagePrivate));
+        var types = new StringBuilder();
+        var values = new StringBuilder();
 
-        // Assert
-        stringBuilder.ToString().Should().Be("~member\n");
+        return $"ClassMember with Name={testData.Name}, IsStatic={testData.IsStatic}, IsAbstract={testData.IsAbstract}, Visibility={testData.Visibility} should render as \"{testData.Expected}\\n\"";
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_ClassMember_WithProtectedVisibility_Should_ContainClassMemberLineWithProtectedAnnotation()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.InlineClassMember(new ClassMember("member", visibility: VisibilityModifier.Protected));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("#member\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_ClassMember_WithPrivateVisibility_Should_ContainClassMemberLineWithPrivateAnnotation()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.InlineClassMember(new ClassMember("member", visibility: VisibilityModifier.Private));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("-member\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_ClassMember_IsAbstract_Should_ContainClassMemberLineWithAbstractAnnotation()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.InlineClassMember(new ClassMember("member", isAbstract: true));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("{abstract}member\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_ClassMember_IsStatic_Should_ContainClassMemberLineWithStaticAnnotation()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.InlineClassMember(new ClassMember("member", isStatic: true));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("{static}member\n");
-    }
+    public record ClassMemberData(string Expected, string Name, bool IsStatic = false, bool IsAbstract = false, VisibilityModifier Visibility = VisibilityModifier.None);
 }

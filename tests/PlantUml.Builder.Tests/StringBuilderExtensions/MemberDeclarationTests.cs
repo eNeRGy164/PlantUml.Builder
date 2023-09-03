@@ -1,188 +1,80 @@
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Text;
+using static PlantUml.Builder.TestData;
 
 namespace PlantUml.Builder.Tests;
 
 [TestClass]
 public class MemberDeclarationTests
 {
+    [DataRow("name", null, AnyString, DisplayName = "MemberDeclaration - Class argument cannot be `null`")]
+    [DataRow("member", AnyString, null, DisplayName = "MemberDeclaration - Member argument cannot be `null`")]
     [TestMethod]
-    public void StringBuilderExtensions_MemberDeclaration_Null_Should_ThrowArgumentNullException()
+    public void MemberDeclarationArgumentsCannotBeNull(string parameterName, string name, string member)
     {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.MemberDeclaration("class", new ClassMember("member"));
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_MemberDeclaration_NullName_Should_ThrowArgumentNullException()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.MemberDeclaration(null, new ClassMember("member"));
+        Action action = () => stringBuilder.MemberDeclaration(name, (ClassMember)member);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName(parameterName);
     }
 
+    [DataRow(EmptyString, DisplayName = "MemberDeclaration - Name argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "MemberDeclaration - Name argument cannot be any whitespace character")]
     [TestMethod]
-    public void StringBuilderExtensions_MemberDeclaration_EmptyName_Should_ThrowArgumentException()
+    public void MemberDeclarationNameMustContainAValue(string name)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.MemberDeclaration(string.Empty, new ClassMember("member"));
+        Action action = () => stringBuilder.MemberDeclaration(name, (ClassMember)AnyString);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("name");
     }
 
+    [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetValidNotationTestDisplayName))]
     [TestMethod]
-    public void StringBuilderExtensions_MemberDeclaration_WhitespaceName_Should_ThrowArgumentException()
+    public void MemberDeclarationIsRenderedCorrectly(MemberDeclarationData testData)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
+        var classMember = new ClassMember(testData.MemberName, testData.IsStatic, testData.IsAbstract, testData.Visibility);
 
         // Act
-        Action action = () => stringBuilder.MemberDeclaration(" ", new ClassMember("member"));
+        stringBuilder.MemberDeclaration(testData.ClassName, classMember);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_MemberDeclaration_NullData_Should_ThrowArgumentException()
+    private static IEnumerable<object[]> GetValidNotations()
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        Action action = () => stringBuilder.MemberDeclaration("class", null);
-
-        // Assert
-        action.Should().ThrowExactly<ArgumentNullException>()
-            .And.ParamName.Should().Be("data");
+        yield return new object[] { new MemberDeclarationData("class : data", "class", "data") };
+        yield return new object[] { new MemberDeclarationData("class : member", "class", "member") };
+        yield return new object[] { new MemberDeclarationData("class : {abstract}member", "class", "member", IsAbstract: true) };
+        yield return new object[] { new MemberDeclarationData("class : {static}member", "class", "member", IsStatic: true) };
+        yield return new object[] { new MemberDeclarationData("class : +member", "class", "member", Visibility: VisibilityModifier.Public) };
+        yield return new object[] { new MemberDeclarationData("class : ~member", "class", "member", Visibility: VisibilityModifier.PackagePrivate) };
+        yield return new object[] { new MemberDeclarationData("class : #member", "class", "member", Visibility: VisibilityModifier.Protected) };
+        yield return new object[] { new MemberDeclarationData("class : -member", "class", "member", Visibility: VisibilityModifier.Private) };
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_MemberDeclaration_WithName_Should_ContainMemberDeclaration()
+    public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data)
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
+        if (data[0] is not MemberDeclarationData testData)
+        {
+            throw new ArgumentException($"Data array must contain a {nameof(MemberDeclarationData)} instance.", nameof(data));
+        }
 
-        // Act
-        stringBuilder.MemberDeclaration("class", new ClassMember("data"));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class : data\n");
+        return $"MemberDeclaration with ClassName={testData.ClassName}, MemberName={testData.MemberName}, IsStatic={testData.IsStatic}, IsAbstract={testData.IsAbstract}, Visibility={testData.Visibility} should render as \"{testData.Expected}\\n\"";
     }
 
-
-    [TestMethod]
-    public void StringBuilderExtensions_MemberDeclaration_Should_ContainMemberDeclarationLine()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.MemberDeclaration("class", new ClassMember("member"));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class : member\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_MemberDeclaration_WithPublicVisibility_Should_ContainMemberDeclarationLineWithPublicAnnotation()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.MemberDeclaration("class", new ClassMember("member", visibility: VisibilityModifier.Public));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class : +member\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_MemberDeclaration_WithPackagePrivateVisibility_Should_ContainMemberDeclarationLineWithPackagePrivateAnnotation()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.MemberDeclaration("class", new ClassMember("member", visibility: VisibilityModifier.PackagePrivate));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class : ~member\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_MemberDeclaration_WithProtectedVisibility_Should_ContainMemberDeclarationLineWithProtectedAnnotation()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.MemberDeclaration("class", new ClassMember("member", visibility: VisibilityModifier.Protected));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class : #member\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_MemberDeclaration_WithPrivateVisibility_Should_ContainMemberDeclarationLineWithPrivateAnnotation()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.MemberDeclaration("class", new ClassMember("member", visibility: VisibilityModifier.Private));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class : -member\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_MemberDeclaration_IsAbstract_Should_ContainMemberDeclarationLineWithAbstractAnnotation()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.MemberDeclaration("class", new ClassMember("member", isAbstract: true));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class : {abstract}member\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_MemberDeclaration_IsStatic_Should_ContainMemberDeclarationLineWithStaticAnnotation()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.MemberDeclaration("class", new ClassMember("member", isStatic: true));
-
-        // Assert
-        stringBuilder.ToString().Should().Be("class : {static}member\n");
-    }
+    public record MemberDeclarationData(string Expected, string ClassName, string MemberName, bool IsStatic = false, bool IsAbstract = false, VisibilityModifier Visibility = VisibilityModifier.None);
 }

@@ -1,7 +1,4 @@
-using System;
-using System.Text;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static PlantUml.Builder.TestData;
 
 namespace PlantUml.Builder.SequenceDiagrams.Tests;
 
@@ -9,126 +6,66 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests;
 public class BoundaryTests
 {
     [TestMethod]
-    public void StringBuilderExtensions_Boundary_Null_Should_ThrowArgumentNullException()
+    public void BoundaryNameCannotBeNull()
     {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Boundary("boundaryA");
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Boundary_NullName_Should_ThrowArgumentException()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
         Action action = () => stringBuilder.Boundary(null);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName("name");
     }
 
+    [DataRow(EmptyString, DisplayName = "Boundary - Name argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "Boundary - Name argument cannot be any whitespace character")]
     [TestMethod]
-    public void StringBuilderExtensions_Boundary_EmptyName_Should_ThrowArgumentException()
+    public void BoundaryNameMustContainAValue(string name)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Boundary(string.Empty);
+        Action action = () => stringBuilder.Boundary(name);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("name");
     }
 
+    [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetValidNotationTestDisplayName))]
     [TestMethod]
-    public void StringBuilderExtensions_Boundary_WhitespaceName_Should_ThrowArgumentException()
+    public void BoundaryIsRenderedCorreclty(MethodExpectationTestData testData)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
+        var (method, parameters) = typeof(StringBuilderExtensions).GetExtensionMethodAndParameters(stringBuilder, testData.Method, testData.Parameters);
+
         // Act
-        Action action = () => stringBuilder.Boundary(" ");
+        method.Invoke(null, parameters);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Boundary_Should_ContainBoundaryLine()
+    private static IEnumerable<object[]> GetValidNotations()
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
+        // Define the valid notations and expected results for different overloads
+        yield return new object[] { new MethodExpectationTestData("Boundary", "boundary boundaryA", "boundaryA") };
+        yield return new object[] { new MethodExpectationTestData("Boundary", "boundary \"Boundary A\" as boundaryA", "boundaryA", "Boundary A") };
+        yield return new object[] { new MethodExpectationTestData("Boundary", "boundary boundaryA #AliceBlue", "boundaryA", null, (Color)"AliceBlue") };
+        yield return new object[] { new MethodExpectationTestData("Boundary", "boundary boundaryA order 10", "boundaryA", null, null, 10) };
 
-        // Act
-        stringBuilder.Boundary("boundaryA");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("boundary boundaryA\n");
+        yield return new object[] { new MethodExpectationTestData("CreateBoundary", "create boundary boundaryA", "boundaryA") };
+        yield return new object[] { new MethodExpectationTestData("CreateBoundary", "create boundary \"Boundary A\" as boundaryA", "boundaryA", "Boundary A") };
+        yield return new object[] { new MethodExpectationTestData("CreateBoundary", "create boundary boundaryA #AliceBlue", "boundaryA", null, (Color)"AliceBlue") };
+        yield return new object[] { new MethodExpectationTestData("CreateBoundary", "create boundary boundaryA order 10", "boundaryA", null, null, 10) };
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Boundary_WithDisplayName_Should_ContainBoundaryLineWithDisplayName()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Boundary("boundaryA", displayName: "Boundary A");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("boundary \"Boundary A\" as boundaryA\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Boundary_WithColor_Should_ContainBoundaryLineWithColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Boundary("boundaryA", color: "AliceBlue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("boundary boundaryA #AliceBlue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Boundary_WithColorWithHashtag_Should_ContainBoundaryLineWithColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Boundary("boundaryA", color: "#AliceBlue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("boundary boundaryA #AliceBlue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Boundary_WithOrder_Should_ContainBoundaryLineWithOrder()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Boundary("boundaryA", order: 10);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("boundary boundaryA order 10\n");
-    }
+    public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);
 }

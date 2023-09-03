@@ -1,7 +1,4 @@
-using System;
-using System.Text;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static PlantUml.Builder.TestData;
 
 namespace PlantUml.Builder.Tests;
 
@@ -9,87 +6,49 @@ namespace PlantUml.Builder.Tests;
 public class TextTests
 {
     [TestMethod]
-    public void StringBuilderExtensions_Text_Null_Should_ThrowArgumentNullException()
+    public void TextCannotBeNull()
     {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Text("text line");
-
-        // Assert
-        action.Should().ThrowExactly<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Text_NullText_Should_ThrowArgumentException()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
         Action action = () => stringBuilder.Text(null);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("text");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName("text");
     }
 
+    [DataRow(EmptyString, DisplayName = "Text - InputText argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "Text - InputText argument cannot be any whitespace character")]
     [TestMethod]
-    public void StringBuilderExtensions_Text_EmptyText_Should_ThrowArgumentException()
+    public void TextMustContainAValue(string text)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Text(string.Empty);
+        Action action = () => stringBuilder.Text(text);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("text");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("text");
     }
 
+    [DataRow("text line", "text line", DisplayName = "Text - Text line is provided")]
+    [DataRow("text line\nanother text line", "text line\\nanother text line", DisplayName = "Text - New line is escaped")]
     [TestMethod]
-    public void StringBuilderExtensions_Text_WhitespaceText_Should_ThrowArgumentException()
+    public void TextIsRenderedCorrectly(string inputText, string expected)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Text(" ");
+        stringBuilder.Text(inputText);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("text");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Text_WithText_Should_ContainTextLineWithText()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Text("text line");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("text line\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Text_WithNewLine_Should_EscapeNewLine()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Text("text line\nanother text line");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("text line\\nanother text line\n");
+        stringBuilder.ToString().Should().Be($"{expected}\n");
     }
 }

@@ -1,50 +1,20 @@
-﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Text;
-
-namespace PlantUml.Builder.Tests;
+﻿namespace PlantUml.Builder.Tests;
 
 [TestClass]
 public class UmlDiagramStartTests
 {
+    [DataRow(null, "@startuml", DisplayName = "UmlDiagramStart - No additional content")]
+    [DataRow("example.puml", "@startuml example.puml", DisplayName = "UmlDiagramStart - With filename")]
     [TestMethod]
-    public void StringBuilderExtensions_UmlDiagramStart_Null_Should_ThrowArgumentNullException()
+    public void CommentIsRenderedCorrectly(string comment, string expected)
     {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.UmlDiagramStart();
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_UmlDiagramStart_Should_ContainStartLineWithoutFileName()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        stringBuilder.UmlDiagramStart();
+        stringBuilder.UmlDiagramStart(comment);
 
         // Assert
-        stringBuilder.ToString().Should().Be("@startuml\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_UmlDiagramStart_WithFileName_Should_ContainStartLineWithFileName()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.UmlDiagramStart("example.puml");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("@startuml example.puml\n");
+        stringBuilder.ToString().Should().Be($"{expected}\n");
     }
 }

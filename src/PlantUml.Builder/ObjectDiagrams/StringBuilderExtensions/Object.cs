@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder.ObjectDiagrams;
 
 public static partial class StringBuilderExtensions
@@ -15,34 +12,33 @@ public static partial class StringBuilderExtensions
     /// <param name="backgroundColor">Optional background color.</param>
     public static void Object(this StringBuilder stringBuilder, string name, string displayName = default, string stereotype = default, Uri url = default, Color backgroundColor = default)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
+        ArgumentException.ThrowIfNullOrWhitespace(name);
 
-        if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
-
-        stringBuilder.Append(Constant.Object);
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Words.Object);
+        stringBuilder.Append(Constant.Symbols.Space);
 
         if (displayName is not null)
         {
-            stringBuilder.Append(Constant.Quote);
+            stringBuilder.Append(Constant.Symbols.Quote);
             stringBuilder.Append(displayName);
-            stringBuilder.Append(Constant.Quote);
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.As);
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Quote);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Words.As);
+            stringBuilder.Append(Constant.Symbols.Space);
         }
 
         stringBuilder.Append(name);
 
         if (stereotype is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.StereoType(stereotype);
         }
 
         if (url is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(Constant.UrlStart);
             stringBuilder.Append(url);
             stringBuilder.Append(Constant.UrlEnd);
@@ -50,7 +46,7 @@ public static partial class StringBuilderExtensions
 
         if (backgroundColor is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(backgroundColor);
         }
 
@@ -64,30 +60,30 @@ public static partial class StringBuilderExtensions
     /// <param name="displayName">Optional display name. The display name can contain spaces.</param>
     /// <param name="stereotype">Optional stereo type.</param>
     /// <param name="backgroundColor">Optional background color.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void ObjectStart(this StringBuilder stringBuilder, string name, string displayName = default, string stereotype = default, Uri url = default, Color backgroundColor = default)
     {
         stringBuilder.Object(name, displayName, stereotype, url, backgroundColor);
 
-        if (char.IsWhiteSpace(stringBuilder[stringBuilder.Length - 1]))
+        if (char.IsWhiteSpace(stringBuilder[^1]))
         {
             stringBuilder.Length--;
         }
 
-        stringBuilder.Append(Constant.Space);
-        stringBuilder.Append(Constant.ObjectStart);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Object.Start);
         stringBuilder.AppendNewLine();
     }
 
     /// <summary>
     /// Renders the end of an object.
     /// </summary>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void ObjectEnd(this StringBuilder stringBuilder)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.Append(Constant.ObjectEnd);
+        stringBuilder.Append(Constant.Object.End);
         stringBuilder.AppendNewLine();
     }
 }

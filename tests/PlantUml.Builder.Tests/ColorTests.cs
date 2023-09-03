@@ -1,45 +1,25 @@
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 namespace PlantUml.Builder.Tests;
 
 [TestClass]
 public class ColorTests
 {
+    [DataRow(null, "", DisplayName = "Color - Constructor with `null` should return empty string")]
+    [DataRow("AliceBlue", "#AliceBlue", DisplayName = "Color - Constructor without hash tag should return value with hash tag")]
+    [DataRow("#AliceBlue", "#AliceBlue", DisplayName = "Color - Constructor with hash tag should return value with hash tag")]
     [TestMethod]
-    public void Color_NullConstructor_ToString_Should_ReturnEmptyString()
+    public void ColorConstructedWithStringIsRenderedCorrectly(string input, string expected)
     {
-        // Assign
-        var color = new Color(null);
+        // Arrange & act
+        var color = new Color(input);
 
         // Assert
-        color.ToString().Should().Be("");
+        color.ToString().Should().Be(expected);
     }
 
     [TestMethod]
-    public void Color_StringConstructorWithHashTag_ToString_Should_ReturnValueWithHashTag()
+    public void ColorConstructedWithEnumValueIsRenderedCorrectly()
     {
-        // Assign
-        var color = new Color("#AliceBlue");
-
-        // Assert
-        color.ToString().Should().Be("#AliceBlue");
-    }
-
-    [TestMethod]
-    public void Color_StringConstructorWithoutHashTag_ToString_Should_ReturnValueWithHashTag()
-    {
-        // Assign
-        var color = new Color("AliceBlue");
-
-        // Assert
-        color.ToString().Should().Be("#AliceBlue");
-    }
-
-    [TestMethod]
-    public void Color_NamedColorEnumConstructor_ToString_Should_ReturnValueWithHashTag()
-    {
-        // Assign
+        // Arrange
         var color = new Color(NamedColor.AliceBlue);
 
         // Assert
@@ -47,9 +27,9 @@ public class ColorTests
     }
 
     [TestMethod]
-    public void Color_StringCast_ToString_Should_ReturnValueWithHashTag()
+    public void ColorCastedStringIsRenderedCorrectly()
     {
-        // Assign
+        // Arrange
         var value = "AliceBlue";
 
         // Act
@@ -60,9 +40,9 @@ public class ColorTests
     }
 
     [TestMethod]
-    public void Color_NamedColorEnumCast_ToString_Should_ReturnValueWithHashTag()
+    public void ColorCastedEnumValueIsRenderedCorrectly()
     {
-        // Assign
+        // Arrange
         var value = NamedColor.AliceBlue;
 
         // Act
@@ -73,28 +53,17 @@ public class ColorTests
     }
 
     [TestMethod]
-    public void Color_ToStringWithFormatEmpty_Should_ReturnColorWithBrackets()
+    [DataRow("", "#AliceBlue", DisplayName = "Color - ToString with empty format should return color without brackets")]
+    [DataRow("B", "[#AliceBlue]", DisplayName = "Color - ToString with 'B' format should return color with brackets")]
+    public void ColorToStringFormatIsRenderedCorrectly(string format, string expected)
     {
-        // Assign
+        // Arrange
         var color = new Color(NamedColor.AliceBlue);
 
         // Act
-        var value = color.ToString(string.Empty);
+        var value = color.ToString(format);
 
         // Assert
-        value.Should().Be("#AliceBlue");
-    }
-
-    [TestMethod]
-    public void Color_ToStringWithFormatB_Should_ReturnColorWithBrackets()
-    {
-        // Assign
-        var color = new Color(NamedColor.AliceBlue);
-
-        // Act
-        var value = color.ToString("B");
-
-        // Assert
-        value.Should().Be("[#AliceBlue]");
+        value.Should().Be(expected);
     }
 }

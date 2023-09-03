@@ -1,231 +1,183 @@
-using System;
-using System.Text;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static PlantUml.Builder.TestData;
 
 namespace PlantUml.Builder.SequenceDiagrams.Tests;
 
 [TestClass]
 public class RefTests
 {
+    [DataRow("participant", null, AnyString, DisplayName = "Ref - participant argument cannot be `null`")]
+    [DataRow("note", AnyString, null, DisplayName = "Ref - note argument cannot be `null`")]
     [TestMethod]
-    public void StringBuilderExtensions_Ref_Null_Should_ThrowArgumentNullException()
+    public void RefWithParticipantArgumentsCannotBeNull(string parameterName, string participant, string note)
     {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Ref("actorA", "note");
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Ref_NullWithMultipleParticipants_Should_ThrowArgumentNullException()
-    {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-        // Act
-        Action action = () => stringBuilder.Ref("actorA", "actorB", "note");
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Ref_NullParticipant_Should_ThrowArgumentException()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Ref(null, "note");
+        Action action = () => stringBuilder.Ref(participant, note);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("participant");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName(parameterName);
     }
 
     [TestMethod]
-    public void StringBuilderExtensions_Ref_EmptyParticipant_Should_ThrowArgumentException()
+    public void StartRefWithParticipantCannotBeNull()
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Ref(string.Empty, "note");
+        Action action = () => stringBuilder.StartRef(null);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("participant");
+        action.Should().ThrowExactly<ArgumentNullException>()
+            .WithParameterName("participant");
     }
 
+    [DataRow("participantA", null, AnyString, AnyString, DisplayName = "Ref - participantA argument cannot be `null`")]
+    [DataRow("participantB", AnyString, null, AnyString, DisplayName = "Ref - participantB argument cannot be `null`")]
+    [DataRow("note", AnyString, AnyString, null, DisplayName = "Ref - note argument cannot be `null`")]
     [TestMethod]
-    public void StringBuilderExtensions_Ref_WhitespaceParticipant_Should_ThrowArgumentException()
+    public void RefWithParticipantsArgumentsCannotBeNull(string parameterName, string participantA, string participantB, string note)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Ref(" ", "note");
+        Action action = () => stringBuilder.Ref(participantA, participantB, note);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("participant");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName(parameterName);
     }
 
+    [DataRow("participantA", null, AnyString, DisplayName = "StartRef - participantA argument cannot be `null`")]
+    [DataRow("participantB", AnyString, null, DisplayName = "StartRef - participantB argument cannot be `null`")]
     [TestMethod]
-    public void StringBuilderExtensions_Ref_NullNote_Should_ThrowArgumentException()
+    public void StartRefWithParticipantsCannotBeNull(string parameterName, string participantA, string participantB)
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
-        // Act
-        Action action = () => stringBuilder.Ref("actorA", null);
-        // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("note");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Ref_EmptyNote_Should_ThrowArgumentException()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-        // Act
-        Action action = () => stringBuilder.Ref("actorA", string.Empty);
-        // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("note");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Ref_WhitespaceNote_Should_ThrowArgumentException()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-        // Act
-        Action action = () => stringBuilder.Ref("actorA", " ");
-        // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("note");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Ref_NullParticipantB_Should_ThrowArgumentException()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-        // Act
-        Action action = () => stringBuilder.Ref("actorA", null, "note");
-        // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("participantB");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Ref_EmptyParticipantA_Should_ThrowArgumentException()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-        // Act
-        Action action = () => stringBuilder.Ref(string.Empty, "actorB", "note");
-        // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("participantA");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Ref_WhitespaceParticipantA_Should_ThrowArgumentException()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-        // Act
-        Action action = () => stringBuilder.Ref(" ", "actorB", "note");
-        // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("participantA");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Ref_NullParticipantA_Should_ThrowArgumentException()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-        // Act
-        Action action = () => stringBuilder.Ref(null, "actorB", "note");
-        // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("participantA");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Ref_EmptyParticipantB_Should_ThrowArgumentException()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-        // Act
-        Action action = () => stringBuilder.Ref("actorA", string.Empty, "note");
-        // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("participantB");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Ref_WhitespaceParticipantB_Should_ThrowArgumentException()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-        // Act
-        Action action = () => stringBuilder.Ref("actorA", " ", "note");
-        // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("participantB");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Ref_Should_ContainRefLine()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        stringBuilder.Ref("actorA", "note");
+        Action action = () => stringBuilder.StartRef(participantA, participantB);
 
         // Assert
-        stringBuilder.ToString().Should().Be("ref over actorA : note\n");
+        action.Should().ThrowExactly<ArgumentNullException>()
+            .WithParameterName(parameterName);
     }
 
+    [DataRow("participant", EmptyString, AnyString, DisplayName = "Ref - Participant argument cannot be empty")]
+    [DataRow("participant", AllWhitespace, AnyString, DisplayName = "Ref - Participant argument cannot be any whitespace character")]
+    [DataRow("note", AnyString, EmptyString, DisplayName = "Ref - Note argument cannot be empty")]
+    [DataRow("note", AnyString, AllWhitespace, DisplayName = "Ref - Note argument cannot be any whitespace character")]
     [TestMethod]
-    public void StringBuilderExtensions_Ref_WithMultiLineNote_Should_ContainRefLineWithMultilineNote()
+    public void RefWithParticipantArgumentsMustContainAValue(string parameterName, string participant, string note)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        stringBuilder.Ref("actorA", "Line1\nLine2");
+        Action action = () => stringBuilder.Ref(participant, note);
 
         // Assert
-        stringBuilder.ToString().Should().Be("ref over actorA : Line1\\nLine2\n");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName(parameterName);
+    }
+
+    [DataRow(EmptyString, DisplayName = "StartRef - Participant argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "StartRef - Participant argument cannot be any whitespace character")]
+    [TestMethod]
+    public void StartRefParticipantMustContainAValue(string participant)
+    {
+        // Arrange
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        Action action = () => stringBuilder.StartRef(participant);
+
+        // Assert
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("participant");
+    }
+
+    [DataRow("participantA", EmptyString, AnyString, AnyString, DisplayName = "Ref - ParticipantA argument cannot be empty")]
+    [DataRow("participantA", AllWhitespace, AnyString, AnyString, DisplayName = "Ref - ParticipantA argument cannot be any whitespace character")]
+    [DataRow("participantB", AnyString, EmptyString, AnyString, DisplayName = "Ref - ParticipantB argument cannot be empty")]
+    [DataRow("participantB", AnyString, AllWhitespace, AnyString, DisplayName = "Ref - ParticipantB argument cannot be any whitespace character")]
+    [DataRow("note", AnyString, AnyString, EmptyString, DisplayName = "Ref - Note argument cannot be empty")]
+    [DataRow("note", AnyString, AnyString, AllWhitespace, DisplayName = "Ref - Note argument cannot be any whitespace character")]
+    [TestMethod]
+    public void RefWithParticipantsArgumentsMustContainAValue(string parameterName, string participantA, string participantB, string note)
+    {
+        // Arrange
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        Action action = () => stringBuilder.Ref(participantA, participantB, note);
+
+        // Assert
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName(parameterName);
+    }
+
+    [DataRow("participantA", EmptyString, AnyString, DisplayName = "StartRef - ParticipantA argument cannot be empty")]
+    [DataRow("participantA", AllWhitespace, AnyString, DisplayName = "StartRef - ParticipantA argument cannot be any whitespace character")]
+    [DataRow("participantB", AnyString, EmptyString, DisplayName = "StartRef - ParticipantB argument cannot be empty")]
+    [DataRow("participantB", AnyString, AllWhitespace, DisplayName = "StartRef - ParticipantB argument cannot be any whitespace character")]
+    [TestMethod]
+    public void StartRefWithParticipantsMustContainAValue(string parameterName, string participantA, string participantB)
+    {
+        // Arrange
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        Action action = () => stringBuilder.StartRef(participantA, participantB);
+
+        // Assert
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName(parameterName);
+    }
+
+    [DataRow("actorA", "note", "ref over actorA : note", DisplayName = "Ref - Single line note should generate correct ref line")]
+    [DataRow("actorA", "Line1\nLine2", "ref over actorA : Line1\\nLine2", DisplayName = "Ref - Multi-line note should escape newlines")]
+    [TestMethod]
+    public void RefWithParticipantIsRenderedCorrectly(string actor, string note, string expected)
+    {
+        // Arrange
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.Ref(actor, note);
+
+        // Assert
+        stringBuilder.ToString().Should().Be($"{expected}\n");
     }
 
     [TestMethod]
-    public void StringBuilderExtensions_Ref_WithDisplayName_Should_ContainRefLineWithDisplayName()
+    public void StartRefWithParticipantIsRenderedCorrectly()
     {
-        // Assign
+        // Arrange
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.StartRef("actorA");
+
+        // Assert
+        stringBuilder.ToString().Should().Be("ref over actorA\n");
+    }
+
+    [TestMethod]
+    public void RefWithParticipantsIsRenderedCorrectly()
+    {
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
@@ -233,5 +185,31 @@ public class RefTests
 
         // Assert
         stringBuilder.ToString().Should().Be("ref over actorA,actorB : note\n");
+    }
+
+    [TestMethod]
+    public void StartRefWithParticipantsIsRenderedCorrectly()
+    {
+        // Arrange
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.StartRef("actorA", "actorB");
+
+        // Assert
+        stringBuilder.ToString().Should().Be("ref over actorA,actorB\n");
+    }
+
+    [TestMethod]
+    public void EndRefIsRenderedCorrectly()
+    {
+        // Arrange
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.EndRef();
+
+        // Assert
+        stringBuilder.ToString().Should().Be("end ref\n");
     }
 }

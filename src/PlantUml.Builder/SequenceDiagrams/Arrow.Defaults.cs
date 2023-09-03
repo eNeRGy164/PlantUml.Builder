@@ -1,5 +1,3 @@
-using System;
-
 namespace PlantUml.Builder.SequenceDiagrams;
 
 public partial class Arrow

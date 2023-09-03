@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder.ClassDiagrams;
 
 public static partial class StringBuilderExtensions
@@ -17,108 +14,106 @@ public static partial class StringBuilderExtensions
     /// <param name="url">Optional URL.</param>
     /// <param name="backgroundColor">Optional background color.</param>
     /// <param name="lineColor">Optional line color.</param>
-    /// <param name="lineStyle">Optional line style.</param>
+    /// <param name="lineStyle">Optional line style. See <see cref="LineStyle"/> for possible values.</param>
     /// <param name="extends">Optional extends.</param>
     /// <param name="implements">Optional implementations.</param>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <c>null</c>, empty of only white space.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <see langword="null"/>, empty of only white space.</exception>
     internal static void ClassBase(this StringBuilder stringBuilder, ClassType type, string name, string displayName, string generics, string stereotype, CustomSpot customSpot, string tag, Uri url, Color backgroundColor, Color lineColor, LineStyle lineStyle, string[] extends, string[] implements)
     {
-
-        if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("A non-empty value should be provided", nameof(name));
+        ArgumentException.ThrowIfNullOrWhitespace(name);
 
         stringBuilder.Append(type.ToString().ToLowerInvariant());
-        stringBuilder.Append(Constant.Space);
+        stringBuilder.Append(Constant.Symbols.Space);
 
-        if (!(displayName is null))
+        if (displayName is not null)
         {
-            stringBuilder.Append(Constant.Quote);
+            stringBuilder.Append(Constant.Symbols.Quote);
             stringBuilder.Append(displayName);
-            stringBuilder.Append(Constant.Quote);
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.As);
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Quote);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Words.As);
+            stringBuilder.Append(Constant.Symbols.Space);
         }
 
         stringBuilder.Append(name);
 
-        if (!(generics is null))
+        if (generics is not null)
         {
             stringBuilder.Append(Constant.GenericsStart);
             stringBuilder.Append(generics);
             stringBuilder.Append(Constant.GenericsEnd);
         }
 
-        if (!(stereotype is null))
+        if (stereotype is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.StereoType(stereotype, customSpot);
         }
 
-        if (!(tag is null))
+        if (tag is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(Constant.TagPrefix);
             stringBuilder.Append(tag);
         }
 
-        if (!(url is null))
+        if (url is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(Constant.UrlStart);
             stringBuilder.Append(url);
             stringBuilder.Append(Constant.UrlEnd);
         }
 
-        if (!(backgroundColor is null))
+        if (backgroundColor is not null)
         {
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.Append(backgroundColor);
         }
 
-        if (!(lineColor is null) || lineStyle != LineStyle.None)
+        if (lineColor is not null || lineStyle != LineStyle.None)
         {
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.ColorPrefix);
-            stringBuilder.Append(Constant.ColorPrefix);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Color.Prefix);
+            stringBuilder.Append(Constant.Color.Prefix);
 
             if (lineStyle > LineStyle.None)
             {
-                stringBuilder.Append(Constant.BorderStyleStart);
+                stringBuilder.Append(Constant.Styling.Border.Start);
                 stringBuilder.Append(lineStyle.ToString().ToLowerInvariant());
-                stringBuilder.Append(Constant.BorderStyleEnd);
+                stringBuilder.Append(Constant.Styling.Border.End);
             }
 
-            if (!(lineColor is null))
+            if (lineColor is not null)
             {
-                stringBuilder.Append(lineColor.ToString().TrimStart(Constant.ColorPrefix));
+                stringBuilder.Append(lineColor.ToString().TrimStart(Constant.Color.Prefix));
             }
         }
 
-        if (!(extends is null) && extends.Length > 0)
+        if (extends is not null && extends.Length > 0)
         {
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.Extends);
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Words.Extends);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.AppendJoin(',', extends);
         }
 
-        if (!(implements is null) && implements.Length > 0)
+        if (implements is not null && implements.Length > 0)
         {
-            stringBuilder.Append(Constant.Space);
-            stringBuilder.Append(Constant.Implements);
-            stringBuilder.Append(Constant.Space);
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.Append(Constant.Words.Implements);
+            stringBuilder.Append(Constant.Symbols.Space);
             stringBuilder.AppendJoin(',', implements);
         }
     }
 
-
     /// <summary>
-    /// Base for rendering the end of a class.
+    /// Base for rendering the start of a class.
     /// </summary>
     internal static void ClassBaseStart(this StringBuilder stringBuilder)
     {
-        stringBuilder.Append(Constant.Space);
-        stringBuilder.Append(Constant.ClassStart);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Class.Start);
         stringBuilder.AppendNewLine();
     }
 
@@ -127,7 +122,7 @@ public static partial class StringBuilderExtensions
     /// </summary>
     internal static void ClassBaseEnd(this StringBuilder stringBuilder)
     {
-        stringBuilder.Append(Constant.ClassEnd);
+        stringBuilder.Append(Constant.Class.End);
         stringBuilder.AppendNewLine();
     }
 }

@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-
 namespace PlantUml.Builder;
 
 public static partial class StringBuilderExtensions
@@ -8,14 +5,14 @@ public static partial class StringBuilderExtensions
     /// <summary>
     /// Allows mixing of chart types.
     /// </summary>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     public static void AllowMixing(this StringBuilder stringBuilder)
     {
-        if (stringBuilder is null) throw new ArgumentNullException(nameof(stringBuilder));
+        ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.Append(Constant.Allow);
-        stringBuilder.Append(Constant.Underscore);
-        stringBuilder.Append(Constant.Mixing);
+        stringBuilder.Append(Constant.Words.Allow);
+        stringBuilder.Append(Constant.Symbols.Underscore);
+        stringBuilder.Append(Constant.Words.Mixing);
 
         stringBuilder.AppendNewLine();
     }

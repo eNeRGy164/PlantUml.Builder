@@ -1,7 +1,4 @@
-using System;
-using System.Text;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static PlantUml.Builder.TestData;
 
 namespace PlantUml.Builder.SequenceDiagrams.Tests;
 
@@ -9,126 +6,66 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests;
 public class CollectionsTests
 {
     [TestMethod]
-    public void StringBuilderExtensions_Collections_Null_Should_ThrowArgumentNullException()
+    public void CollectionsNameCannotBeNull()
     {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Collections("collectionsA");
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Collections_NullName_Should_ThrowArgumentException()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
         Action action = () => stringBuilder.Collections(null);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName("name");
     }
 
+    [DataRow(EmptyString, DisplayName = "Collections - Name argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "Collections - Name argument cannot be any whitespace character")]
     [TestMethod]
-    public void StringBuilderExtensions_Collections_EmptyName_Should_ThrowArgumentException()
+    public void CollectionsNameMustContainAValue(string name)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Collections(string.Empty);
+        Action action = () => stringBuilder.Collections(name);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("name");
     }
 
+    [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetValidNotationTestDisplayName))]
     [TestMethod]
-    public void StringBuilderExtensions_Collections_WhitespaceName_Should_ThrowArgumentException()
+    public void BoundaryIsRenderedCorreclty(MethodExpectationTestData testData)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
+        var (method, parameters) = typeof(StringBuilderExtensions).GetExtensionMethodAndParameters(stringBuilder, testData.Method, testData.Parameters);
+
         // Act
-        Action action = () => stringBuilder.Collections(" ");
+        method.Invoke(null, parameters);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Collections_Should_ContainCollectionsLine()
+    private static IEnumerable<object[]> GetValidNotations()
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
+        // Define the valid notations and expected results for different overloads
+        yield return new object[] { new MethodExpectationTestData("Collections", "collections collectionsA", "collectionsA") };
+        yield return new object[] { new MethodExpectationTestData("Collections", "collections \"Collections A\" as collectionsA", "collectionsA", "Collections A") };
+        yield return new object[] { new MethodExpectationTestData("Collections", "collections collectionsA #AliceBlue", "collectionsA", null, (Color)"AliceBlue") };
+        yield return new object[] { new MethodExpectationTestData("Collections", "collections collectionsA order 10", "collectionsA", null, null, 10) };
 
-        // Act
-        stringBuilder.Collections("collectionsA");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("collections collectionsA\n");
+        yield return new object[] { new MethodExpectationTestData("CreateCollections", "create collections collectionsA", "collectionsA") };
+        yield return new object[] { new MethodExpectationTestData("CreateCollections", "create collections \"Collections A\" as collectionsA", "collectionsA", "Collections A") };
+        yield return new object[] { new MethodExpectationTestData("CreateCollections", "create collections collectionsA #AliceBlue", "collectionsA", null, (Color)"AliceBlue") };
+        yield return new object[] { new MethodExpectationTestData("CreateCollections", "create collections collectionsA order 10", "collectionsA", null, null, 10) };
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Collections_WithDisplayName_Should_ContainCollectionsLineWithDisplayName()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Collections("collectionsA", displayName: "Collections A");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("collections \"Collections A\" as collectionsA\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Collections_WithColor_Should_ContainCollectionsLineWithColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Collections("collectionsA", color: "AliceBlue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("collections collectionsA #AliceBlue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Collections_WithColorWithHashtag_Should_ContainCollectionsLineWithColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Collections("collectionsA", color: "#AliceBlue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("collections collectionsA #AliceBlue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Collections_WithOrder_Should_ContainCollectionsLineWithOrder()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Collections("collectionsA", order: 10);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("collections collectionsA order 10\n");
-    }
+    public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);
 }

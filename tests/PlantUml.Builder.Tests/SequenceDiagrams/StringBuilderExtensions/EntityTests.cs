@@ -1,7 +1,4 @@
-using System;
-using System.Text;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static PlantUml.Builder.TestData;
 
 namespace PlantUml.Builder.SequenceDiagrams.Tests;
 
@@ -9,126 +6,66 @@ namespace PlantUml.Builder.SequenceDiagrams.Tests;
 public class EntityTests
 {
     [TestMethod]
-    public void StringBuilderExtensions_Entity_Null_Should_ThrowArgumentNullException()
+    public void EntityNameCannotBeNull()
     {
-        // Assign
-        var stringBuilder = (StringBuilder)null;
-
-        // Act
-        Action action = () => stringBuilder.Entity("entityA");
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("stringBuilder");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_NullName_Should_ThrowArgumentException()
-    {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
         Action action = () => stringBuilder.Entity(null);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentNullException>()
+            .WithParameterName("name");
     }
 
+    [DataRow(EmptyString, DisplayName = "Entity - Name argument cannot be empty")]
+    [DataRow(AllWhitespace, DisplayName = "Entity - Name argument cannot be any whitespace character")]
     [TestMethod]
-    public void StringBuilderExtensions_Entity_EmptyName_Should_ThrowArgumentException()
+    public void EntityNameMustContainAValue(string name)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        Action action = () => stringBuilder.Entity(string.Empty);
+        Action action = () => stringBuilder.Entity(name);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        action.Should()
+            .ThrowExactly<ArgumentException>()
+            .WithParameterName("name");
     }
 
+    [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetValidNotationTestDisplayName))]
     [TestMethod]
-    public void StringBuilderExtensions_Entity_WhitespaceName_Should_ThrowArgumentException()
+    public void EntityIsRenderedCorreclty(MethodExpectationTestData testData)
     {
-        // Assign
+        // Arrange
         var stringBuilder = new StringBuilder();
 
+        var (method, parameters) = typeof(StringBuilderExtensions).GetExtensionMethodAndParameters(stringBuilder, testData.Method, testData.Parameters);
+
         // Act
-        Action action = () => stringBuilder.Entity(" ");
+        method.Invoke(null, parameters);
 
         // Assert
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("A non-empty value should be provided*")
-            .And.ParamName.Should().Be("name");
+        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_Should_ContainEntityLine()
+    private static IEnumerable<object[]> GetValidNotations()
     {
-        // Assign
-        var stringBuilder = new StringBuilder();
+        // Define the valid notations and expected results for different overloads
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA", "entityA") };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity \"Entity A\" as entityA", "entityA", "Entity A") };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA #AliceBlue", "entityA", null, (Color)"AliceBlue") };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA order 10", "entityA", null, null, 10) };
 
-        // Act
-        stringBuilder.Entity("entityA");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("entity entityA\n");
+        yield return new object[] { new MethodExpectationTestData("CreateEntity", "create entity entityA", "entityA") };
+        yield return new object[] { new MethodExpectationTestData("CreateEntity", "create entity \"Entity A\" as entityA", "entityA", "Entity A") };
+        yield return new object[] { new MethodExpectationTestData("CreateEntity", "create entity entityA #AliceBlue", "entityA", null, (Color)"AliceBlue") };
+        yield return new object[] { new MethodExpectationTestData("CreateEntity", "create entity entityA order 10", "entityA", null, null, 10) };
     }
 
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_WithDisplayName_Should_ContainEntityLineWithDisplayName()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Entity("entityA", displayName: "Entity A");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("entity \"Entity A\" as entityA\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_WithColor_Should_ContainEntityLineWithColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Entity("entityA", color: "AliceBlue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("entity entityA #AliceBlue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_WithColorWithHashtag_Should_ContainEntityLineWithColor()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Entity("entityA", color: "#AliceBlue");
-
-        // Assert
-        stringBuilder.ToString().Should().Be("entity entityA #AliceBlue\n");
-    }
-
-    [TestMethod]
-    public void StringBuilderExtensions_Entity_WithOrder_Should_ContainEntityLineWithOrder()
-    {
-        // Assign
-        var stringBuilder = new StringBuilder();
-
-        // Act
-        stringBuilder.Entity("entityA", order: 10);
-
-        // Assert
-        stringBuilder.ToString().Should().Be("entity entityA order 10\n");
-    }
+    public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);
 }
