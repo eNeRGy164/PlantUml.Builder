@@ -1887,6 +1887,110 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#94190c2f242a5df2"/>
+    [TestMethod]
+    public void StereotypesAndSpots01()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+
+            participant "Famous Bob" as Bob << Generated >>
+            participant Alice <<(C,#ADD1B2) Testable>>
+
+            Bob -> Alice : First message
+
+            @enduml
+
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.AppendNewLine();
+        stringBuilder.Participant("Bob", "Famous Bob", stereotype: " Generated ");
+        stringBuilder.Participant("Alice",stereotype: " Testable", customSpot: new CustomSpot('C', "#ADD1B2"));
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Bob", "->", "Alice", "First message");
+        stringBuilder.AppendNewLine();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#94190c2f242a5df2"/>
+    [TestMethod]
+    public void StereotypesAndSpots02()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+
+            skinparam guillemet false
+            participant "Famous Bob" as Bob << Generated >>
+            participant Alice <<(C,#ADD1B2) Testable>>
+
+            Bob -> Alice : First message
+
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.AppendNewLine();
+        stringBuilder.SkinParameter("guillemet", false);
+        stringBuilder.Participant("Bob", "Famous Bob", stereotype: " Generated ");
+        stringBuilder.Participant("Alice", stereotype: " Testable", customSpot: new CustomSpot('C', "#ADD1B2"));
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Bob", "->", "Alice", "First message");
+        stringBuilder.AppendNewLine();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#94190c2f242a5df2"/>
+    [TestMethod]
+    public void StereotypesAndSpots03()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+
+            participant Bob <<(C,#ADD1B2) >>
+            participant Alice <<(C,#ADD1B2) >>
+
+            Bob -> Alice : First message
+
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.AppendNewLine();
+        stringBuilder.Participant("Bob", stereotype: " ", customSpot: new CustomSpot('C', "#ADD1B2"));
+        stringBuilder.Participant("Alice", stereotype: " ", customSpot: new CustomSpot('C', "#ADD1B2"));
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Bob", "->", "Alice", "First message");
+        stringBuilder.AppendNewLine();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
     /// <seealso href=""/>
     [TestMethod]
     public void Template()

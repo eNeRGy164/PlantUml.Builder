@@ -59,6 +59,8 @@ public class ParticipantTests
         yield return new object[] { new MethodExpectationTestData("Participant", "participant actorA #AliceBlue", "actorA", null, (Color)"AliceBlue").WithDisplayName("Participant - With color") };
         yield return new object[] { new MethodExpectationTestData("Participant", "participant actorA #AliceBlue", "actorA", null, (Color)"#AliceBlue").WithDisplayName("Participant - With color (with hashtag)") };
         yield return new object[] { new MethodExpectationTestData("Participant", "participant actorA order 10", "actorA", null, null, 10).WithDisplayName("Participant - With order") };
+        yield return new object[] { new MethodExpectationTestData("Participant", "participant actorA <<Stereo>>", "actorA", null, null, null, "Stereo").WithDisplayName("Participant - With sterotype") };
+        yield return new object[] { new MethodExpectationTestData("Participant", "participant actorA <<(C,#336699)Stereo>>", "actorA", null, null, null, "Stereo", new CustomSpot('C', "336699")).WithDisplayName("Participant - With custom spot") };
     }
 
     public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);

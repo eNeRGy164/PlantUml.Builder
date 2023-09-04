@@ -60,11 +60,15 @@ public class EntityTests
         yield return new object[] { new MethodExpectationTestData("Entity", "entity \"Entity A\" as entityA", "entityA", "Entity A") };
         yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA #AliceBlue", "entityA", null, (Color)"AliceBlue") };
         yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA order 10", "entityA", null, null, 10) };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA <<Stereo>>", "entityA", null, null, null, "Stereo").WithDisplayName("Participant - With sterotype") };
+        yield return new object[] { new MethodExpectationTestData("Entity", "entity entityA <<(C,#336699)Stereo>>", "entityA", null, null, null, "Stereo", new CustomSpot('C', "336699")).WithDisplayName("Participant - With custom spot") };
 
         yield return new object[] { new MethodExpectationTestData("CreateEntity", "create entity entityA", "entityA") };
         yield return new object[] { new MethodExpectationTestData("CreateEntity", "create entity \"Entity A\" as entityA", "entityA", "Entity A") };
         yield return new object[] { new MethodExpectationTestData("CreateEntity", "create entity entityA #AliceBlue", "entityA", null, (Color)"AliceBlue") };
         yield return new object[] { new MethodExpectationTestData("CreateEntity", "create entity entityA order 10", "entityA", null, null, 10) };
+        yield return new object[] { new MethodExpectationTestData("CreateEntity", "create entity entityA <<Stereo>>", "entityA", null, null, null, "Stereo").WithDisplayName("Participant - With sterotype") };
+        yield return new object[] { new MethodExpectationTestData("CreateEntity", "create entity entityA <<(C,#336699)Stereo>>", "entityA", null, null, null, "Stereo", new CustomSpot('C', "336699")).WithDisplayName("Participant - With custom spot") };
     }
 
     public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);

@@ -60,11 +60,15 @@ public class ActorTests
         yield return new object[] { new MethodExpectationTestData("Actor", "actor \"Actor A\" as actorA", "actorA", "Actor A") };
         yield return new object[] { new MethodExpectationTestData("Actor", "actor actorA #AliceBlue", "actorA", null, (Color)"AliceBlue") };
         yield return new object[] { new MethodExpectationTestData("Actor", "actor actorA order 10", "actorA", null, null, 10) };
+        yield return new object[] { new MethodExpectationTestData("Actor", "actor actorA <<Stereo>>", "actorA", null, null, null, "Stereo").WithDisplayName("Participant - With sterotype") };
+        yield return new object[] { new MethodExpectationTestData("Actor", "actor actorA <<(C,#336699)Stereo>>", "actorA", null, null, null, "Stereo", new CustomSpot('C', "336699")).WithDisplayName("Participant - With custom spot") };
 
         yield return new object[] { new MethodExpectationTestData("CreateActor", "create actor actorA", "actorA") };
         yield return new object[] { new MethodExpectationTestData("CreateActor", "create actor \"Actor A\" as actor", "actor", "Actor A") };
         yield return new object[] { new MethodExpectationTestData("CreateActor", "create actor actorA #AliceBlue", "actorA", null, (Color)"AliceBlue") };
         yield return new object[] { new MethodExpectationTestData("CreateActor", "create actor actorA order 10", "actorA", null, null, 10) };
+        yield return new object[] { new MethodExpectationTestData("CreateActor", "create actor actorA <<Stereo>>", "actorA", null, null, null, "Stereo").WithDisplayName("Participant - With sterotype") };
+        yield return new object[] { new MethodExpectationTestData("CreateActor", "create actor actorA <<(C,#336699)Stereo>>", "actorA", null, null, null, "Stereo", new CustomSpot('C', "336699")).WithDisplayName("Participant - With custom spot") };
     }
 
     public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);

@@ -60,11 +60,15 @@ public class BoundaryTests
         yield return new object[] { new MethodExpectationTestData("Boundary", "boundary \"Boundary A\" as boundaryA", "boundaryA", "Boundary A") };
         yield return new object[] { new MethodExpectationTestData("Boundary", "boundary boundaryA #AliceBlue", "boundaryA", null, (Color)"AliceBlue") };
         yield return new object[] { new MethodExpectationTestData("Boundary", "boundary boundaryA order 10", "boundaryA", null, null, 10) };
+        yield return new object[] { new MethodExpectationTestData("Boundary", "boundary boundaryA <<Stereo>>", "boundaryA", null, null, null, "Stereo").WithDisplayName("Participant - With sterotype") };
+        yield return new object[] { new MethodExpectationTestData("Boundary", "boundary boundaryA <<(C,#336699)Stereo>>", "boundaryA", null, null, null, "Stereo", new CustomSpot('C', "336699")).WithDisplayName("Participant - With custom spot") };
 
         yield return new object[] { new MethodExpectationTestData("CreateBoundary", "create boundary boundaryA", "boundaryA") };
         yield return new object[] { new MethodExpectationTestData("CreateBoundary", "create boundary \"Boundary A\" as boundaryA", "boundaryA", "Boundary A") };
         yield return new object[] { new MethodExpectationTestData("CreateBoundary", "create boundary boundaryA #AliceBlue", "boundaryA", null, (Color)"AliceBlue") };
         yield return new object[] { new MethodExpectationTestData("CreateBoundary", "create boundary boundaryA order 10", "boundaryA", null, null, 10) };
+        yield return new object[] { new MethodExpectationTestData("CreateBoundary", "create boundary boundaryA <<Stereo>>", "boundaryA", null, null, null, "Stereo").WithDisplayName("Participant - With sterotype") };
+        yield return new object[] { new MethodExpectationTestData("CreateBoundary", "create boundary boundaryA <<(C,#336699)Stereo>>", "boundaryA", null, null, null, "Stereo", new CustomSpot('C', "336699")).WithDisplayName("Participant - With custom spot") };
     }
 
     public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);

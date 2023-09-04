@@ -60,11 +60,16 @@ public class QueueTests
         yield return new object[] { new MethodExpectationTestData("Queue", "queue \"Queue A\" as queueA", "queueA", "Queue A").WithDisplayName("Queue - With display name") };
         yield return new object[] { new MethodExpectationTestData("Queue", "queue queueA #AliceBlue", "queueA", null, (Color)"AliceBlue").WithDisplayName("Queue - With color") };
         yield return new object[] { new MethodExpectationTestData("Queue", "queue queueA order 10", "queueA", null, null, 10).WithDisplayName("Queue - With order 10") };
+        yield return new object[] { new MethodExpectationTestData("Queue", "queue queueA <<Stereo>>", "queueA", null, null, null, "Stereo").WithDisplayName("Queue - With sterotype") };
+        yield return new object[] { new MethodExpectationTestData("Queue", "queue queueA <<(C,#336699)Stereo>>", "queueA", null, null, null, "Stereo", new CustomSpot('C', "336699")).WithDisplayName("Queue - With custom spot") };
+
 
         yield return new object[] { new MethodExpectationTestData("CreateQueue", "create queue queueA", "queueA").WithDisplayName("CreateQueue - Basic notation") };
         yield return new object[] { new MethodExpectationTestData("CreateQueue", "create queue \"Queue A\" as queueA", "queueA", "Queue A").WithDisplayName("CreateQueue - With display name") };
         yield return new object[] { new MethodExpectationTestData("CreateQueue", "create queue queueA #AliceBlue", "queueA", null, (Color)"AliceBlue").WithDisplayName("CreateQueue - With color") };
         yield return new object[] { new MethodExpectationTestData("CreateQueue", "create queue queueA order 10", "queueA", null, null, 10).WithDisplayName("CreateQueue - With order 10") };
+        yield return new object[] { new MethodExpectationTestData("CreateQueue", "create queue queueA <<Stereo>>", "queueA", null, null, null, "Stereo").WithDisplayName("CreateQueue - With sterotype") };
+        yield return new object[] { new MethodExpectationTestData("CreateQueue", "create queue queueA <<(C,#336699)Stereo>>", "queueA", null, null, null, "Stereo", new CustomSpot('C', "336699")).WithDisplayName("CreateQueue - With custom spot") };
     }
 
     public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);

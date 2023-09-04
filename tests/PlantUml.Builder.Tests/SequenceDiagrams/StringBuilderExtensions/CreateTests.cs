@@ -56,7 +56,9 @@ public class CreateTests
     {
         yield return new object[] { new MethodExpectationTestData("Create", "create actorA", "actorA").WithDisplayName("Create - Default create line") };
         yield return new object[] { new MethodExpectationTestData("Create", "create actorA order 10", "actorA", null, null, 10).WithDisplayName("Create - Create line with order") };
-    }
+        yield return new object[] { new MethodExpectationTestData("Create", "create actorA <<Stereo>>", "actorA", null, null, null, "Stereo").WithDisplayName("Participant - With sterotype") };
+        yield return new object[] { new MethodExpectationTestData("Create", "create actorA <<(C,#336699)Stereo>>", "actorA", null, null, null, "Stereo", new CustomSpot('C', "336699")).WithDisplayName("Participant - With custom spot") };
+    }    
 
     public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);
 }
