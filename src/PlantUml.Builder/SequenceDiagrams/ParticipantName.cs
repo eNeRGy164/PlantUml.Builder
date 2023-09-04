@@ -1,17 +1,16 @@
 using System.Text.RegularExpressions;
+using static System.Text.RegularExpressions.RegexOptions;
 
 namespace PlantUml.Builder.SequenceDiagrams;
 
 public class ParticipantName
 {
-    private static readonly Regex nameAlias = new("^(?:[\"]?(?<Name>[^\"]+)(?:[\"][\\s]*|[\\s]+)as[\\s]+(?<Alias>[^\"\\s]+)|(?<Alias>[^\"\\s]+)[\\s]+as(?:[\\s]*[\"]|[\\s]+)(?<Name>[^\"]+)[\"]?|[\"]?(?<Name>[^\"]+)[\"]?)$", RegexOptions.Singleline | RegexOptions.Compiled);
-    private const string ValidNameChars = "0123456789_@.";
+    private static readonly Regex nameAlias = new("^(?:[\"]?(?<Name>[^\"]+)(?:[\"][\\s]*|[\\s]+)as[\\s]+(?<Alias>[^\"\\s]+)|(?<Alias>[^\"\\s]+)[\\s]+as(?:[\\s]*[\"]|[\\s]+)(?<Name>[^\"]+)[\"]?|[\"]?(?<Name>[^\"]+)[\"]?)$", Singleline | Compiled);
+    private static readonly HashSet<char> validNameChars = new("0123456789_@.".ToCharArray());
 
     public string Name { get; private set; }
 
     public string Alias { get; private set; } = string.Empty;
-
-    internal static readonly ParticipantName Outside = new(string.Empty + ArrowParts.LeftExternal + ArrowParts.RightExternal);
 
     public ParticipantName(string name)
         : this(name, default)
@@ -80,9 +79,11 @@ public class ParticipantName
 
     private static bool MustBeQuoted(string name)
     {
-        foreach (var c in name)
+        for (int i = 0; i < name.Length; i++)
         {
-            if (char.IsLetter(c) || ValidNameChars.IndexOf(c) > -1)
+            char c = name[i];
+
+            if (char.IsLetter(c) || validNameChars.Contains(c))
             {
                 continue;
             }
