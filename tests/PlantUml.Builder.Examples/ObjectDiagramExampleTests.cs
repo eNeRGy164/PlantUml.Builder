@@ -8,6 +8,7 @@ namespace PlantUml.Builder.Examples;
 [TestClass]
 public class ObjectDiagramExampleTests
 {
+    /// <seealso href="https://plantuml.com/object-diagram#29df1b044e936302"/>
     [TestMethod]
     public void DefinitionOfObjects()
     {
@@ -33,6 +34,7 @@ public class ObjectDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/object-diagram#e79e7df1fbafe644"/>
     [TestMethod]
     public void RelationsBetweenObjects()
     {
@@ -80,6 +82,7 @@ public class ObjectDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/object-diagram#5f6416a7e094d77e"/>
     [TestMethod]
     public void AssociationsObjects()
     {
@@ -117,6 +120,7 @@ public class ObjectDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/object-diagram#60a833de4109a30e"/>
     [TestMethod]
     public void AddingFields01()
     {
@@ -150,6 +154,7 @@ public class ObjectDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/object-diagram#60a833de4109a30e"/>
     [TestMethod]
     public void AddingFields02()
     {
@@ -183,6 +188,7 @@ public class ObjectDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/object-diagram#6c738a9019f7ac08"/>
     [TestMethod]
     public void MapTableOrAssociativeArray01()
     {
@@ -214,6 +220,7 @@ public class ObjectDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/object-diagram#6c738a9019f7ac08"/>
     [TestMethod]
     public void MapTableOrAssociativeArray02()
     {
@@ -245,6 +252,7 @@ public class ObjectDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/object-diagram#6c738a9019f7ac08"/>
     [TestMethod]
     public void MapTableOrAssociativeArray03()
     {
@@ -276,6 +284,7 @@ public class ObjectDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/object-diagram#6c738a9019f7ac08"/>
     [TestMethod]
     public void MapTableOrAssociativeArray04()
     {
@@ -311,6 +320,7 @@ public class ObjectDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/object-diagram#6c738a9019f7ac08"/>
     [TestMethod]
     public void MapTableOrAssociativeArray05()
     {

@@ -8,6 +8,7 @@ namespace PlantUml.Builder.Examples;
 [TestClass]
 public class SequenceDiagramExampleTests
 {
+    /// <seealso href="https://plantuml.com/sequence-diagram#5e05164bff244555"/>
     [TestMethod]
     public void BasicExamples()
     {
@@ -39,6 +40,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#5d2ed256d73a7298"/>
     [TestMethod]
     public void DeclaringParticipant01()
     {
@@ -90,6 +92,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#5d2ed256d73a7298"/>
     [TestMethod]
     public void DeclaringParticipant02()
     {
@@ -133,6 +136,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().BeEquivalentTo(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#5d2ed256d73a7298"/>
     [TestMethod]
     public void DeclaringParticipant03()
     {
@@ -160,6 +164,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#2210ebadb5117709"/>
     [TestMethod]
     public void UseNonLettersInParticipants()
     {
@@ -191,6 +196,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#f5050860884ddf31"/>
     [TestMethod]
     public void MessageToSelf01()
     {
@@ -214,6 +220,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#f5050860884ddf31"/>
     [TestMethod]
     public void MessageToSelf02()
     {
@@ -237,6 +244,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#bf6bee6d96403148"/>
     [TestMethod]
     public void TextAlignment01()
     {
@@ -264,6 +272,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().BeEquivalentTo(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#bf6bee6d96403148"/>
     [TestMethod]
     public void TextAlignment02()
     {
@@ -291,6 +300,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().BeEquivalentTo(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#efeda651e89e596c"/>
     [TestMethod]
     public void ChangeArrowStyle01()
     {
@@ -336,6 +346,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#efeda651e89e596c"/>
     [TestMethod]
     public void ChangeArrowStyle02()
     {
@@ -360,6 +371,7 @@ public class SequenceDiagramExampleTests
             """;
 
         var stringBuilder = new StringBuilder();
+
         var bob = new Bob();
         var alice = new Alice();
 
@@ -383,6 +395,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#0b2e57c3d4eafdda"/>
     [TestMethod]
     public void ChangeArrowColor()
     {
@@ -408,6 +421,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#ce3f7eb577ad5f4d"/>
     [TestMethod]
     public void MessageSequenceNumbering01()
     {
@@ -435,6 +449,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#ce3f7eb577ad5f4d"/>
     [TestMethod]
     public void MessageSequenceNumbering02()
     {
@@ -480,6 +495,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#ce3f7eb577ad5f4d"/>
     [TestMethod]
     public void MessageSequenceNumbering03()
     {
@@ -525,6 +541,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#ce3f7eb577ad5f4d"/>
     [TestMethod]
     public void MessageSequenceNumbering04()
     {
@@ -580,6 +597,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#ce3f7eb577ad5f4d"/>
     [TestMethod]
     public void MessageSequenceNumbering05()
     {
@@ -641,6 +659,43 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#ce3f7eb577ad5f4d"/>
+    [TestMethod]
+    public void MessageSequenceNumbering06()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            autonumber 10
+            Alice -> Bob
+            note right
+              the <U+0025>autonumber<U+0025> works everywhere.
+              Here, its value is ** %autonumber% **
+            end note
+            Bob --> Alice : //This is the response %autonumber%//
+            @enduml
+
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.AutoNumber(10);
+        stringBuilder.Arrow("Alice", "->", "Bob");
+        stringBuilder.StartNote(NotePosition.Right);
+        stringBuilder.Text("  the <U+0025>autonumber<U+0025> works everywhere.");
+        stringBuilder.Text("  Here, its value is ** %autonumber% **");
+        stringBuilder.EndNote();
+        stringBuilder.Arrow("Bob", "-->", "Alice", "//This is the response %autonumber%//");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#77852febc7dde952"/>
     [TestMethod]
     public void PageTitleHeaderAndFooter()
     {
@@ -680,6 +735,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#45d7d5b32d17a0f9"/>
     [TestMethod]
     public void SplittingDiagrams()
     {
@@ -725,6 +781,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#efeda651e89e596c"/>
     [TestMethod]
     public void GroupingMessages()
     {
@@ -790,6 +847,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#7aad256d9e87308c"/>
     [TestMethod]
     public void SecondaryGroupLabel()
     {
@@ -829,6 +887,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#012d3e8694a98cc1"/>
     [TestMethod]
     public void NotesOnMessages()
     {
@@ -874,6 +933,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#f8c59a77112b60e7"/>
     [TestMethod]
     public void SomeOtherNotes()
     {
@@ -931,6 +991,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().BeEquivalentTo(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#84de38ea1ca38165"/>
     [TestMethod]
     public void ChangingNotesShape()
     {
@@ -986,6 +1047,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#39755e6414c00844"/>
     [TestMethod]
     public void NoteOverAllParticipants()
     {
@@ -1019,6 +1081,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#39755e6414c00844"/>
     [TestMethod]
     public void SeveralNotesAlignedAtTheSameLevel01()
     {
@@ -1046,6 +1109,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#39755e6414c00844"/>
     [TestMethod]
     public void SeveralNotesAlignedAtTheSameLevel02()
     {
@@ -1073,6 +1137,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#28881bae78acd047"/>
     [TestMethod]
     public void CreoleAndHtml()
     {
@@ -1148,6 +1213,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#d4b2df53a72661cc"/>
     [TestMethod]
     public void DividerOrSeparator()
     {
@@ -1191,6 +1257,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#63d5049791d9d79d"/>
     [TestMethod]
     public void Reference()
     {
@@ -1234,6 +1301,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#8f497c1a3d15af9e"/>
     [TestMethod]
     public void Delay()
     {
@@ -1269,6 +1337,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#8659eac9bf4c2629"/>
     [TestMethod]
     public void TextWrapping()
     {
@@ -1300,6 +1369,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#d511f8439ecde366"/>
     [TestMethod]
     public void Space()
     {
@@ -1341,6 +1411,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#5cc0040514e70f7b"/>
     [TestMethod]
     public void LifelineActivationAndDestruction01()
     {
@@ -1400,6 +1471,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#5cc0040514e70f7b"/>
     [TestMethod]
     public void LifelineActivationAndDestruction02()
     {
@@ -1455,6 +1527,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#5cc0040514e70f7b"/>
     [TestMethod]
     public void LifelineActivationAndDestruction03()
     {
@@ -1496,6 +1569,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#988fd738de9c6d17"/>
     [TestMethod]
     public void Return()
     {
@@ -1525,6 +1599,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#b2c1d43bde93c643"/>
     [TestMethod]
     public void ParticipantCreation()
     {
@@ -1568,8 +1643,9 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#35480215b426d170"/>
     [TestMethod]
-    public void ShortcutSyntaxForActivationDeactivationCreation()
+    public void ShortcutSyntaxForActivationDeactivationCreation01()
     {
         // Arrange
         var example =
@@ -1605,8 +1681,9 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#35480215b426d170"/>
     [TestMethod]
-    public void MixActivationAndDeactivationOnSameLine01()
+    public void ShortcutSyntaxForActivationDeactivationCreation02()
     {
         // Arrange
         var example =
@@ -1632,8 +1709,9 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#35480215b426d170"/>
     [TestMethod]
-    public void MixActivationAndDeactivationOnSameLine02()
+    public void ShortcutSyntaxForActivationDeactivationCreation03()
     {
         // Arrange
         var example =
@@ -1661,6 +1739,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#05984b1743e67542"/>
     [TestMethod]
     public void IncomingAndOutgoingMessages01()
     {
@@ -1708,6 +1787,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#05984b1743e67542"/>
     [TestMethod]
     public void IncomingAndOutgoingMessages02()
     {
@@ -1771,6 +1851,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#098797a007f231ea"/>
     [TestMethod]
     public void ShortArrowsForIncomingAndOutgoingMessages()
     {
@@ -1806,6 +1887,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href=""/>
     [TestMethod]
     public void Template()
     {
