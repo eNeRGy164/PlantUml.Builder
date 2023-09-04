@@ -37,16 +37,18 @@ public class TitleTests
             .WithParameterName("title");
     }
 
+    [DataRow("Title", "title Title", DisplayName = "Title - Simple title")]
+    [DataRow("Title\nNewLine", "title Title\\nNewLine", DisplayName = "Title - Newlines are escaped")]
     [TestMethod]
-    public void TitleIsRenderedCorrectly()
+    public void TitleIsRenderedCorrectly(string title, string expected)
     {
         // Arrange
         var stringBuilder = new StringBuilder();
 
         // Act
-        stringBuilder.Title("Title");
+        stringBuilder.Title(title);
 
         // Assert
-        stringBuilder.ToString().Should().Be("title Title\n");
+        stringBuilder.ToString().Should().Be($"{expected}\n");
     }
 }

@@ -1991,6 +1991,75 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#a21f56b1869e89e5"/>
+    [TestMethod]
+    public void MoreInformationOnTitles01()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+
+            title __Simple__ **communication** example
+
+            Alice -> Bob : Authentication Request
+            Bob -> Alice : Authentication Response
+
+            @enduml
+
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.AppendNewLine();
+        stringBuilder.Title("__Simple__ **communication** example");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Alice", "->", "Bob", "Authentication Request");
+        stringBuilder.Arrow("Bob", "->", "Alice", "Authentication Response");
+        stringBuilder.AppendNewLine();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#a21f56b1869e89e5"/>
+    [TestMethod]
+    public void MoreInformationOnTitles02()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+
+            title __Simple__ communication example\non several lines
+
+            Alice -> Bob : Authentication Request
+            Bob -> Alice : Authentication Response
+
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.AppendNewLine();
+        stringBuilder.Title("__Simple__ communication example\non several lines");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Alice", "->", "Bob", "Authentication Request");
+        stringBuilder.Arrow("Bob", "->", "Alice", "Authentication Response");
+        stringBuilder.AppendNewLine();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+
     /// <seealso href=""/>
     [TestMethod]
     public void Template()
