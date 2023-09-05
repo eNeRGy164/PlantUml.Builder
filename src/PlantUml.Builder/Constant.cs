@@ -64,10 +64,12 @@ public class Constant
         public const string Alt = "alt";
         public const string As = "as";
         public const string Auto = "auto";
+        public const string Bottom = "bottom";
         public const string Box = "box";
         public const string Create = "create";
         public const string Deactivate = "deactivate";
         public const string Destroy = "destroy";
+        public const string Direction = "direction";
         public const string Else = "else";
         public const string Empty = "empty";
         public const string End = "end";
@@ -79,6 +81,7 @@ public class Constant
         public const string Hide = "hide";
         public const string Implements = "implements";
         public const string Increase = "inc";
+        public const string Left = "left";
         public const string Loop = "loop";
         public const string Map = "map";
         public const string Mixing = "mixing";
@@ -96,6 +99,7 @@ public class Constant
         public const string Ref = "ref";
         public const string Resume = "resume";
         public const string Return = "return";
+        public const string Right = "right";
         public const string Separator = "separator";
         public const string Set = "set";
         public const string Show = "show";
@@ -104,6 +108,8 @@ public class Constant
         public const string Static = "static";
         public const string Stop = "stop";
         public const string Title = "title";
+        public const string To = "to";
+        public const string Top = "top";
         public const string Unlinked = "unlinked";
         public const string Uml = "uml";
     }

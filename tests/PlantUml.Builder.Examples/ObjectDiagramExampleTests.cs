@@ -405,4 +405,84 @@ public class ObjectDiagramExampleTests
         // Assert
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
+
+    /// <seealso href="https://plantuml.com/object-diagram#d1f08bf69f3d9b45"/>
+    [TestMethod]
+    public void ProgramEvaluationAndReviewTechniqueWithMap()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml PERT
+            left to right direction
+            ' Horizontal lines: -->, <--, <-->
+            ' Vertical lines: ->, <-, <->
+            title PERT: Project Name
+
+            map Kick.Off {
+            }
+            map task.1 {
+            Start => End
+            }
+            map task.2 {
+            Start => End
+            }
+            map task.3 {
+            Start => End
+            }
+            map task.4 {
+            Start => End
+            }
+            map task.5 {
+            Start => End
+            }
+            Kick.Off --> task.1 : Label 1
+            Kick.Off --> task.2 : Label 2
+            Kick.Off --> task.3 : Label 3
+            task.1 --> task.4
+            task.2 --> task.4
+            task.3 --> task.4
+            task.4 --> task.5 : Label 4
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart("PERT");
+        stringBuilder.Direction(DiagramDirection.LeftToRight);
+        stringBuilder.Comment("Horizontal lines: -->, <--, <-->");
+        stringBuilder.Comment("Vertical lines: ->, <-, <->");
+        stringBuilder.Title("PERT: Project Name");
+        stringBuilder.AppendNewLine();
+        stringBuilder.MapStart("Kick.Off");
+        stringBuilder.MapEnd();
+        stringBuilder.MapStart("task.1");
+        stringBuilder.InlineClassMember("Start => End");
+        stringBuilder.MapEnd();
+        stringBuilder.MapStart("task.2");
+        stringBuilder.InlineClassMember("Start => End");
+        stringBuilder.MapEnd();
+        stringBuilder.MapStart("task.3");
+        stringBuilder.InlineClassMember("Start => End");
+        stringBuilder.MapEnd();
+        stringBuilder.MapStart("task.4");
+        stringBuilder.InlineClassMember("Start => End");
+        stringBuilder.MapEnd();
+        stringBuilder.MapStart("task.5");
+        stringBuilder.InlineClassMember("Start => End");
+        stringBuilder.MapEnd();
+        stringBuilder.Relationship("Kick.Off", "-->", "task.1", "Label 1");
+        stringBuilder.Relationship("Kick.Off", "-->", "task.2", "Label 2");
+        stringBuilder.Relationship("Kick.Off", "-->", "task.3", "Label 3");
+        stringBuilder.Relationship("task.1", "-->", "task.4");
+        stringBuilder.Relationship("task.2", "-->", "task.4");
+        stringBuilder.Relationship("task.3", "-->", "task.4");
+        stringBuilder.Relationship("task.4", "-->", "task.5", "Label 4");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
 }

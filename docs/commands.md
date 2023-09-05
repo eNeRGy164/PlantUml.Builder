@@ -31,6 +31,8 @@ Following the PlantUML source code.
 | endlegend                           | no          |                |
 | skinparam \<NAME> \<VALUE>          | yes         | `SkinParam`    |
 | skinparam \<PREFIX> {               | no          |                |
+| left to right direction             | yes         | `Direction`    |
+| top to bottom direction             | yes         | `Direction`    |
 
 ## Activity Diagrams
 
