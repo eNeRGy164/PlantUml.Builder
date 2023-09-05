@@ -104,6 +104,7 @@ public class Constant
         public const string Static = "static";
         public const string Stop = "stop";
         public const string Title = "title";
+        public const string Unlinked = "unlinked";
         public const string Uml = "uml";
     }
 

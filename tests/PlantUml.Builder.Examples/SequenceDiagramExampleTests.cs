@@ -2691,6 +2691,72 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#fc006eba0d9dcacc"/>
+    [TestMethod]
+    public void HideUnlinkedParticipant01()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            participant Alice
+            participant Bob
+            participant Carol
+
+            Alice -> Bob : hello
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.Participant("Alice");
+        stringBuilder.Participant("Bob");
+        stringBuilder.Participant("Carol");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Alice", "->", "Bob", "hello");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#fc006eba0d9dcacc"/>
+    [TestMethod]
+    public void HideUnlinkedParticipant02()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            hide unlinked
+            participant Alice
+            participant Bob
+            participant Carol
+
+            Alice -> Bob : hello
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.HideUnlinked();
+        stringBuilder.Participant("Alice");
+        stringBuilder.Participant("Bob");
+        stringBuilder.Participant("Carol");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Alice", "->", "Bob", "hello");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
     /// <seealso href=""/>
     [TestMethod]
     public void Template()
