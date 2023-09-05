@@ -2059,6 +2059,43 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#21380379ba44081d"/>
+    [TestMethod]
+    public void RemovingFootBoxes()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+
+            hide footbox
+            title Foot Box removed
+
+            Alice -> Bob : Authentication Request
+            Bob --> Alice : Authentication Response
+
+            @enduml
+        
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.AppendNewLine();
+        stringBuilder.HideFootBox();
+        stringBuilder.Title("Foot Box removed");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Alice", "->", "Bob", "Authentication Request");
+        stringBuilder.Arrow("Bob", "-->", "Alice", "Authentication Response");
+        stringBuilder.AppendNewLine();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+
 
     /// <seealso href=""/>
     [TestMethod]

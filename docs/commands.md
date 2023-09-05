@@ -102,8 +102,8 @@ Following the PlantUML source code.
 | end box                                                                         | yes         | `BoxEnd`             |
 | delay [\<LABEL>]                                                                | yes         | `Delay`              |
 | divider [\<LABEL>]                                                              | yes         | `Divider`            |
-| hide footbox                                                                    | no          |                      |
-| show footbox                                                                    | no          |                      |
+| hide footbox                                                                    | yes         | `HideFootBox`        |
+| show footbox                                                                    | yes         | `ShowFootBox`        |
 | opt [\<COLOR>] [\<COMMENT>]                                                     | no          |                      |
 | end                                                                             | yes         | `GroupEnd`           |
 | alt [\<COLOR>] [\<COMMENT>]                                                     | partial     | `AltStart`           |

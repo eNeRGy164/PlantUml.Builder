@@ -52,6 +52,7 @@ public class StringBuilderExtensionMethodTests
         yield return new object[] { new MethodWithArgumentData("EndLoop") };
         yield return new object[] { new MethodWithArgumentData("EndRef") };
         yield return new object[] { new MethodWithArgumentData("Entity", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("HideFootBox") };
         yield return new object[] { new MethodWithArgumentData("GroupEnd") };
         yield return new object[] { new MethodWithArgumentData("GroupStart") };
         yield return new object[] { new MethodWithArgumentData("IncreaseAutoNumber") };
@@ -64,6 +65,7 @@ public class StringBuilderExtensionMethodTests
         yield return new object[] { new MethodWithArgumentData("ResumeAutoNumber") };
         yield return new object[] { new MethodWithArgumentData("Return") };
         yield return new object[] { new MethodWithArgumentData("Return", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("ShowFootBox") };
         yield return new object[] { new MethodWithArgumentData("Space") };
         yield return new object[] { new MethodWithArgumentData("StartLoop") };
         yield return new object[] { new MethodWithArgumentData("StartRef", AnyString) };

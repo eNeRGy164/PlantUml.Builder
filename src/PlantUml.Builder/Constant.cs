@@ -72,6 +72,7 @@ public class Constant
         public const string Empty = "empty";
         public const string End = "end";
         public const string Extends = "extends";
+        public const string Footbox = "footbox";
         public const string Footer = "footer";
         public const string Group = "group";
         public const string Header = "header";
@@ -97,6 +98,7 @@ public class Constant
         public const string Return = "return";
         public const string Separator = "separator";
         public const string Set = "set";
+        public const string Show = "show";
         public const string SkinParam = "skinparam";
         public const string Start = "start";
         public const string Static = "static";
