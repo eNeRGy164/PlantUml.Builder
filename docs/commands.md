@@ -29,6 +29,8 @@ Following the PlantUML source code.
 | caption \<CAPTION>                  | no          |                |
 | legend [\<ALIGN>]                   | no          |                |
 | endlegend                           | no          |                |
+| skinparam \<NAME> \<VALUE>          | yes         | `SkinParam`    |
+| skinparam \<PREFIX> {               | no          |                |
 
 ## Activity Diagrams
 

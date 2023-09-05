@@ -2059,6 +2059,102 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#f52672a8f74a07df"/>
+    [TestMethod]
+    public void ParticipantsEncompass01()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+
+            box "Internal Service" #LightBlue
+            participant Bob
+            participant Alice
+            end box
+            participant Other
+
+            Bob -> Alice : hello
+            Alice -> Other : hello
+
+            @enduml
+
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.AppendNewLine();
+        stringBuilder.BoxStart("Internal Service", "#LightBlue");
+        stringBuilder.Participant("Bob");
+        stringBuilder.Participant("Alice");
+        stringBuilder.BoxEnd();
+        stringBuilder.Participant("Other");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Bob", "->", "Alice", "hello");
+        stringBuilder.Arrow("Alice", "->", "Other", "hello");
+        stringBuilder.AppendNewLine();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#f52672a8f74a07df"/>
+    [TestMethod]
+    public void ParticipantsEncompass02()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+
+            !pragma teoz true
+            box "Internal Service" #LightBlue
+            participant Bob
+            box "Subteam"
+            participant Alice
+            participant John
+            end box
+
+            end box
+            participant Other
+
+            Bob -> Alice : hello
+            Alice -> John : hello
+            John -> Other : Hello
+
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.AppendNewLine();
+        stringBuilder.Text("!pragma teoz true");
+        stringBuilder.BoxStart("Internal Service", "#LightBlue");
+        stringBuilder.Participant("Bob");
+        stringBuilder.BoxStart("Subteam");
+        stringBuilder.Participant("Alice");
+        stringBuilder.Participant("John");
+        stringBuilder.BoxEnd();
+        stringBuilder.AppendNewLine();
+        stringBuilder.BoxEnd();
+        stringBuilder.Participant("Other");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Bob", "->", "Alice", "hello");
+        stringBuilder.Arrow("Alice", "->", "John", "hello");
+        stringBuilder.Arrow("John", "->", "Other", "Hello");
+        stringBuilder.AppendNewLine();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
     /// <seealso href="https://plantuml.com/sequence-diagram#21380379ba44081d"/>
     [TestMethod]
     public void RemovingFootBoxes()
@@ -2095,7 +2191,505 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#7aa53dbdfc2137bf"/>
+    [TestMethod]
+    public void Skinparam01()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            skinparam sequenceArrowThickness 2
+            skinparam roundcorner 20
+            skinparam maxmessagesize 60
+            skinparam sequenceParticipant underline
 
+            actor User
+            participant "First Class" as A
+            participant "Second Class" as B
+            participant "Last Class" as C
+
+            User -> A : DoWork
+            activate A
+
+            A -> B : Create Request
+            activate B
+
+            B -> C : DoWork
+            activate C
+            C --> B : WorkDone
+            destroy C
+
+            B --> A : Request Created
+            deactivate B
+
+            A --> User : Done
+            deactivate A
+
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.SkinParameter("sequenceArrowThickness", 2);
+        stringBuilder.SkinParameter("roundcorner", 20);
+        stringBuilder.SkinParameter("maxmessagesize", 60);
+        stringBuilder.SkinParameter("sequenceParticipant", "underline");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Actor("User");
+        stringBuilder.Participant("A", "First Class");
+        stringBuilder.Participant("B", "Second Class");
+        stringBuilder.Participant("C", "Last Class");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("User", "->", "A", "DoWork");
+        stringBuilder.Activate("A");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("A", "->", "B", "Create Request");
+        stringBuilder.Activate("B");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("B", "->", "C", "DoWork");
+        stringBuilder.Activate("C");
+        stringBuilder.Arrow("C", "-->", "B", "WorkDone");
+        stringBuilder.Destroy("C");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("B", "-->", "A", "Request Created");
+        stringBuilder.Deactivate("B");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("A", "-->", "User", "Done");
+        stringBuilder.Deactivate("A");
+        stringBuilder.AppendNewLine();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#33cee7c2521befd3"/>
+    [TestMethod]
+    public void ChangingPadding()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            skinparam ParticipantPadding 20
+            skinparam BoxPadding 10
+
+            box "Foo1"
+            participant Alice1
+            participant Alice2
+            end box
+            box "Foo2"
+            participant Bob1
+            participant Bob2
+            end box
+            Alice1 -> Bob1 : hello
+            Alice1 -> Out : out
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.SkinParameter(SkinParameter.ParticipantPadding, 20);
+        stringBuilder.SkinParameter(SkinParameter.BoxPadding, 10);
+        stringBuilder.AppendNewLine();
+        stringBuilder.BoxStart("Foo1");
+        stringBuilder.Participant("Alice1");
+        stringBuilder.Participant("Alice2");
+        stringBuilder.BoxEnd();
+        stringBuilder.BoxStart("Foo2");
+        stringBuilder.Participant("Bob1");
+        stringBuilder.Participant("Bob2");
+        stringBuilder.BoxEnd();
+        stringBuilder.Arrow("Alice1", "->", "Bob1", "hello");
+        stringBuilder.Arrow("Alice1", "->", "Out", "out");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#4764f83f72ed032f"/>
+    [TestMethod]
+    public void ExamplesOfAllArrowType_NormalArrow()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            participant Alice as a
+            participant Bob as b
+            a -> b : ""->   ""
+            a ->> b : ""->>  ""
+            a -\ b : ""-\   ""
+            a -\\ b : ""-\\\\""
+            a -/ b : ""-/   ""
+            a -// b : ""-//  ""
+            a ->x b : ""->x  ""
+            a x-> b : ""x->  ""
+            a o-> b : ""o->  ""
+            a ->o b : ""->o  ""
+            a o->o b : ""o->o ""
+            a <-> b : ""<->  ""
+            a o<->o b : ""o<->o""
+            a x<->x b : ""x<->x""
+            a ->>o b : ""->>o ""
+            a -\o b : ""-\o  ""
+            a -\\o b : ""-\\\\o""
+            a -/o b : ""-/o  ""
+            a -//o b : ""-//o ""
+            a x->o b : ""x->o ""
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.Participant("a", "Alice");
+        stringBuilder.Participant("b", "Bob");
+        stringBuilder.Arrow("a", Arrow.AsyncRight, "b", "\"\"->   \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinRight, "b", "\"\"->>  \"\"");
+        stringBuilder.Arrow("a", Arrow.TopRight, "b", "\"\"-\\   \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinTopRight, "b", "\"\"-\\\\\\\\\"\"");
+        stringBuilder.Arrow("a", Arrow.BottomRight, "b", "\"\"-/   \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinBottomRight, "b", "\"\"-//  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.Destroy(), "b", "\"\"->x  \"\"");
+        stringBuilder.Arrow("a", "x->", "b", "\"\"x->  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.LostLeft(), "b", "\"\"o->  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.Lost(), "b", "\"\"->o  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.LostLeft().LostRight(), "b", "\"\"o->o \"\"");
+        stringBuilder.Arrow("a", Arrow.LeftRight, "b", "\"\"<->  \"\"");
+        stringBuilder.Arrow("a", Arrow.LeftRight.LostLeft().LostRight(), "b", "\"\"o<->o\"\"");
+        stringBuilder.Arrow("a", "x<->x", "b", "\"\"x<->x\"\"");
+        stringBuilder.Arrow("a", Arrow.ThinRight.Lost(), "b", "\"\"->>o \"\"");
+        stringBuilder.Arrow("a", Arrow.TopRight.Lost(), "b", "\"\"-\\o  \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinTopRight.Lost(), "b", "\"\"-\\\\\\\\o\"\"");
+        stringBuilder.Arrow("a", Arrow.BottomRight.Lost(), "b", "\"\"-/o  \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinBottomRight.Lost(), "b", "\"\"-//o \"\"");
+        stringBuilder.Arrow("a", "x->o", "b", "\"\"x->o \"\"");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#4764f83f72ed032f"/>
+    [TestMethod]
+    public void ExamplesOfAllArrowType_ItselfArrow()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            participant Alice as a
+            participant Bob as b
+            a -> a : ""->   ""
+            a ->> a : ""->>  ""
+            a -\ a : ""-\   ""
+            a -\\ a : ""-\\\\""
+            a -/ a : ""-/   ""
+            a -// a : ""-//  ""
+            a ->x a : ""->x  ""
+            a x-> a : ""x->  ""
+            a o-> a : ""o->  ""
+            a ->o a : ""->o  ""
+            a o->o a : ""o->o ""
+            a <-> a : ""<->  ""
+            a o<->o a : ""o<->o""
+            a x<->x a : ""x<->x""
+            a ->>o a : ""->>o ""
+            a -\o a : ""-\o  ""
+            a -\\o a : ""-\\\\o""
+            a -/o a : ""-/o  ""
+            a -//o a : ""-//o ""
+            a x->o a : ""x->o ""
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.Participant("a", "Alice");
+        stringBuilder.Participant("b", "Bob");
+        stringBuilder.Arrow("a", Arrow.AsyncRight, "a", "\"\"->   \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinRight, "a", "\"\"->>  \"\"");
+        stringBuilder.Arrow("a", Arrow.TopRight, "a", "\"\"-\\   \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinTopRight, "a", "\"\"-\\\\\\\\\"\"");
+        stringBuilder.Arrow("a", Arrow.BottomRight, "a", "\"\"-/   \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinBottomRight, "a", "\"\"-//  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.Destroy(), "a", "\"\"->x  \"\"");
+        stringBuilder.Arrow("a", "x->", "a", "\"\"x->  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.LostLeft(), "a", "\"\"o->  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.Lost(), "a", "\"\"->o  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.LostLeft().LostRight(), "a", "\"\"o->o \"\"");
+        stringBuilder.Arrow("a", Arrow.LeftRight, "a", "\"\"<->  \"\"");
+        stringBuilder.Arrow("a", Arrow.LeftRight.LostLeft().LostRight(), "a", "\"\"o<->o\"\"");
+        stringBuilder.Arrow("a", "x<->x", "a", "\"\"x<->x\"\"");
+        stringBuilder.Arrow("a", Arrow.ThinRight.Lost(), "a", "\"\"->>o \"\"");
+        stringBuilder.Arrow("a", Arrow.TopRight.Lost(), "a", "\"\"-\\o  \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinTopRight.Lost(), "a", "\"\"-\\\\\\\\o\"\"");
+        stringBuilder.Arrow("a", Arrow.BottomRight.Lost(), "a", "\"\"-/o  \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinBottomRight.Lost(), "a", "\"\"-//o \"\"");
+        stringBuilder.Arrow("a", "x->o", "a", "\"\"x->o \"\"");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#4764f83f72ed032f"/>
+    [TestMethod]
+    public void ExamplesOfAllArrowType_IncomingMessages()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            participant Alice as a
+            participant Bob as b
+            [-> b : ""[->   ""
+            [->> b : ""[->>  ""
+            [-\ b : ""[-\   ""
+            [-\\ b : ""[-\\\\""
+            [-/ b : ""[-/   ""
+            [-// b : ""[-//  ""
+            [->x b : ""[->x  ""
+            [x-> b : ""[x->  ""
+            [o-> b : ""[o->  ""
+            [->o b : ""[->o  ""
+            [o->o b : ""[o->o ""
+            [<-> b : ""[<->  ""
+            [o<->o b : ""[o<->o""
+            [x<->x b : ""[x<->x""
+            [->>o b : ""[->>o ""
+            [-\o b : ""[-\o  ""
+            [-\\o b : ""[-\\\\o""
+            [-/o b : ""[-/o  ""
+            [-//o b : ""[-//o ""
+            [x->o b : ""[x->o ""
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.Participant("a", "Alice");
+        stringBuilder.Participant("b", "Bob");
+        stringBuilder.Arrow(Participant.Outside, Arrow.AsyncRight, "b", "\"\"[->   \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.ThinRight, "b", "\"\"[->>  \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.TopRight, "b", "\"\"[-\\   \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.ThinTopRight, "b", "\"\"[-\\\\\\\\\"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.BottomRight, "b", "\"\"[-/   \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.ThinBottomRight, "b", "\"\"[-//  \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.Right.Destroy(), "b", "\"\"[->x  \"\"");
+        stringBuilder.Arrow(Participant.Outside, "x->", "b", "\"\"[x->  \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.Right.LostLeft(), "b", "\"\"[o->  \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.Right.Lost(), "b", "\"\"[->o  \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.Right.LostLeft().LostRight(), "b", "\"\"[o->o \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.LeftRight, "b", "\"\"[<->  \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.LeftRight.LostLeft().LostRight(), "b", "\"\"[o<->o\"\"");
+        stringBuilder.Arrow(Participant.Outside, "x<->x", "b", "\"\"[x<->x\"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.ThinRight.Lost(), "b", "\"\"[->>o \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.TopRight.Lost(), "b", "\"\"[-\\o  \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.ThinTopRight.Lost(), "b", "\"\"[-\\\\\\\\o\"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.BottomRight.Lost(), "b", "\"\"[-/o  \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.ThinBottomRight.Lost(), "b", "\"\"[-//o \"\"");
+        stringBuilder.Arrow(Participant.Outside, "x->o", "b", "\"\"[x->o \"\"");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#4764f83f72ed032f"/>
+    [TestMethod]
+    public void ExamplesOfAllArrowType_OutgoingMessages()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            participant Alice as a
+            participant Bob as b
+            a ->] : ""->]   ""
+            a ->>] : ""->>]  ""
+            a -\] : ""-\]   ""
+            a -\\] : ""-\\\\]""
+            a -/] : ""-/]   ""
+            a -//] : ""-//]  ""
+            a ->x] : ""->x]  ""
+            a x->] : ""x->]  ""
+            a o->] : ""o->]  ""
+            a ->o] : ""->o]  ""
+            a o->o] : ""o->o] ""
+            a <->] : ""<->]  ""
+            a o<->o] : ""o<->o]""
+            a x<->x] : ""x<->x]""
+            a ->>o] : ""->>o] ""
+            a -\o] : ""-\o]  ""
+            a -\\o] : ""-\\\\o]""
+            a -/o] : ""-/o]  ""
+            a -//o] : ""-//o] ""
+            a x->o] : ""x->o] ""
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.Participant("a", "Alice");
+        stringBuilder.Participant("b", "Bob");
+        stringBuilder.Arrow("a", Arrow.AsyncRight, Participant.Outside, "\"\"->]   \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinRight, Participant.Outside, "\"\"->>]  \"\"");
+        stringBuilder.Arrow("a", Arrow.TopRight, Participant.Outside, "\"\"-\\]   \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinTopRight, Participant.Outside, "\"\"-\\\\\\\\]\"\"");
+        stringBuilder.Arrow("a", Arrow.BottomRight, Participant.Outside, "\"\"-/]   \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinBottomRight, Participant.Outside, "\"\"-//]  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.Destroy(), Participant.Outside, "\"\"->x]  \"\"");
+        stringBuilder.Arrow("a", "x->", Participant.Outside, "\"\"x->]  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.LostLeft(), Participant.Outside, "\"\"o->]  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.Lost(), Participant.Outside, "\"\"->o]  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.LostLeft().LostRight(), Participant.Outside, "\"\"o->o] \"\"");
+        stringBuilder.Arrow("a", Arrow.LeftRight, Participant.Outside, "\"\"<->]  \"\"");
+        stringBuilder.Arrow("a", Arrow.LeftRight.LostLeft().LostRight(), Participant.Outside, "\"\"o<->o]\"\"");
+        stringBuilder.Arrow("a", "x<->x", Participant.Outside, "\"\"x<->x]\"\"");
+        stringBuilder.Arrow("a", Arrow.ThinRight.Lost(), Participant.Outside, "\"\"->>o] \"\"");
+        stringBuilder.Arrow("a", Arrow.TopRight.Lost(), Participant.Outside, "\"\"-\\o]  \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinTopRight.Lost(), Participant.Outside, "\"\"-\\\\\\\\o]\"\"");
+        stringBuilder.Arrow("a", Arrow.BottomRight.Lost(), Participant.Outside, "\"\"-/o]  \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinBottomRight.Lost(), Participant.Outside, "\"\"-//o] \"\"");
+        stringBuilder.Arrow("a", "x->o", Participant.Outside, "\"\"x->o] \"\"");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#75b4984abd04b14f"/>
+    [TestMethod]
+    public void SpecificSkinParameter_Default()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            Bob -> Alice : hello
+            Alice -> Bob : ok
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.Arrow("Bob", "->", "Alice", "hello");
+        stringBuilder.Arrow("Alice", "->", "Bob", "ok");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#75b4984abd04b14f"/>
+    [TestMethod]
+    public void SpecificSkinParameter_LifelineStrategy01()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            skinparam lifelineStrategy nosolid
+            Bob -> Alice : hello
+            Alice -> Bob : ok
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.SkinParameter("lifelineStrategy", "nosolid");
+        stringBuilder.Arrow("Bob", "->", "Alice", "hello");
+        stringBuilder.Arrow("Alice", "->", "Bob", "ok");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#75b4984abd04b14f"/>
+    [TestMethod]
+    public void SpecificSkinParameter_LifelineStrategy02()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            skinparam lifelineStrategy solid
+            Bob -> Alice : hello
+            Alice -> Bob : ok
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.SkinParameter("lifelineStrategy", "solid");
+        stringBuilder.Arrow("Bob", "->", "Alice", "hello");
+        stringBuilder.Arrow("Alice", "->", "Bob", "ok");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#75b4984abd04b14f"/>
+    [TestMethod]
+    public void SpecificSkinParameter_StyleStrictuml()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            skinparam style strictuml
+            Bob -> Alice : hello
+            Alice -> Bob : ok
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.SkinParameter("style", "strictuml");
+        stringBuilder.Arrow("Bob", "->", "Alice", "hello");
+        stringBuilder.Arrow("Alice", "->", "Bob", "ok");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
 
     /// <seealso href=""/>
     [TestMethod]

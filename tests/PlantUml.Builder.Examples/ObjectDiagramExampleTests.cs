@@ -365,4 +365,44 @@ public class ObjectDiagramExampleTests
         // Assert
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
+
+    /// <seealso href="https://plantuml.com/object-diagram#6c738a9019f7ac08"/>
+    [TestMethod]
+    public void MapTableOrAssociativeArray06()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            object Foo
+            map Bar {
+            abc=>
+            def=>
+            }
+            object Baz
+
+            Bar::abc --> Baz : Label one
+            Foo --> Bar::def : Label two
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.Object("Foo");
+        stringBuilder.MapStart("Bar");
+        stringBuilder.InlineClassMember("abc=>");
+        stringBuilder.InlineClassMember("def=>");
+        stringBuilder.MapEnd();
+        stringBuilder.Object("Baz");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Relationship("Bar::abc", "-->", "Baz", "Label one");
+        stringBuilder.Relationship("Foo", "-->", "Bar::def", "Label two");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
 }
