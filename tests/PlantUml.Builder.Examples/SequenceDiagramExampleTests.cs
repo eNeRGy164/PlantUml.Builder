@@ -8,18 +8,22 @@ namespace PlantUml.Builder.Examples;
 [TestClass]
 public class SequenceDiagramExampleTests
 {
+    /// <seealso href="https://plantuml.com/sequence-diagram#5e05164bff244555"/>
     [TestMethod]
     public void BasicExamples()
     {
         // Arrange
-        var example = @"@startuml
-Alice -> Bob : Authentication Request
-Bob --> Alice : Authentication Response
+        var example =
+            """
+            @startuml
+            Alice -> Bob : Authentication Request
+            Bob --> Alice : Authentication Response
 
-Alice -> Bob : Another authentication Request
-Alice <-- Bob : Another authentication Response
-@enduml
-";
+            Alice -> Bob : Another authentication Request
+            Alice <-- Bob : Another authentication Response
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -36,28 +40,32 @@ Alice <-- Bob : Another authentication Response
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#5d2ed256d73a7298"/>
     [TestMethod]
     public void DeclaringParticipant01()
     {
         // Arrange
-        var example = @"@startuml
-participant participant as Foo
-actor actor as Foo1
-boundary boundary as Foo2
-control control as Foo3
-entity entity as Foo4
-database database as Foo5
-collections collections as Foo6
-queue queue as Foo7
-Foo -> Foo1 : To actor
-Foo -> Foo2 : To boundary
-Foo -> Foo3 : To control
-Foo -> Foo4 : To entity
-Foo -> Foo5 : To database
-Foo -> Foo6 : To collections
-Foo -> Foo7 : To queue
-@enduml
-";
+        var example =
+            """
+            @startuml
+            participant participant as Foo
+            actor actor as Foo1
+            boundary boundary as Foo2
+            control control as Foo3
+            entity entity as Foo4
+            database database as Foo5
+            collections collections as Foo6
+            queue queue as Foo7
+            Foo -> Foo1 : To actor
+            Foo -> Foo2 : To boundary
+            Foo -> Foo3 : To control
+            Foo -> Foo4 : To entity
+            Foo -> Foo5 : To database
+            Foo -> Foo6 : To collections
+            Foo -> Foo7 : To queue
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -84,25 +92,29 @@ Foo -> Foo7 : To queue
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#5d2ed256d73a7298"/>
     [TestMethod]
     public void DeclaringParticipant02()
     {
         // Arrange
-        var example = @"@startuml
-actor Bob #red
-' The only difference between actor
-' and participant is the drawing
-participant Alice
-participant ""I have a really\nlong name"" as L #99FF99
-/' You can also declare:
-   participant L as ""I have a really\nlong name""  #99FF99
-  '/
+        var example =
+            """
+            @startuml
+            actor Bob #red
+            ' The only difference between actor
+            ' and participant is the drawing
+            participant Alice
+            participant "I have a really\nlong name" as L #99FF99
+            /' You can also declare:
+               participant L as "I have a really\nlong name"  #99FF99
+              '/
 
-Alice -> Bob : Authentication Request
-Bob -> Alice : Authentication Response
-Bob -> L : Log transaction
-@enduml
-";
+            Alice -> Bob : Authentication Request
+            Bob -> Alice : Authentication Response
+            Bob -> L : Log transaction
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -124,16 +136,20 @@ Bob -> L : Log transaction
         stringBuilder.ToString().Should().BeEquivalentTo(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#5d2ed256d73a7298"/>
     [TestMethod]
     public void DeclaringParticipant03()
     {
         // Arrange
-        var example = @"@startuml
-participant Last order 30
-participant Middle order 20
-participant First order 10
-@enduml
-";
+        var example =
+            """
+            @startuml
+            participant Last order 30
+            participant Middle order 20
+            participant First order 10
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -148,18 +164,22 @@ participant First order 10
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#2210ebadb5117709"/>
     [TestMethod]
     public void UseNonLettersInParticipants()
     {
         // Arrange
-        var example = @"@startuml
-Alice -> ""Bob()"" : Hello
-""Bob()"" -> ""This is very\nlong"" as Long
-' You can also declare:
-' ""Bob()"" -> Long as ""This is very\nlong""
-Long --> ""Bob()"" : ok
-@enduml
-";
+        var example =
+            """
+            @startuml
+            Alice -> "Bob()" : Hello
+            "Bob()" -> "This is very\nlong" as Long
+            ' You can also declare:
+            ' "Bob()" -> Long as "This is very\nlong"
+            Long --> "Bob()" : ok
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -176,14 +196,18 @@ Long --> ""Bob()"" : ok
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#f5050860884ddf31"/>
     [TestMethod]
     public void MessageToSelf01()
     {
         // Arrange
-        var example = @"@startuml
-Alice -> Alice : This is a signal to self.\nIt also demonstrates\nmultiline \ntext
-@enduml
-";
+        var example =
+            """
+            @startuml
+            Alice -> Alice : This is a signal to self.\nIt also demonstrates\nmultiline \ntext
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -196,14 +220,18 @@ Alice -> Alice : This is a signal to self.\nIt also demonstrates\nmultiline \nte
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#f5050860884ddf31"/>
     [TestMethod]
     public void MessageToSelf02()
     {
         // Arrange
-        var example = @"@startuml
-Alice <- Alice : This is a signal to self.\nIt also demonstrates\nmultiline \ntext
-@enduml
-";
+        var example =
+            """
+            @startuml
+            Alice <- Alice : This is a signal to self.\nIt also demonstrates\nmultiline \ntext
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -216,16 +244,20 @@ Alice <- Alice : This is a signal to self.\nIt also demonstrates\nmultiline \nte
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#bf6bee6d96403148"/>
     [TestMethod]
     public void TextAlignment01()
     {
         // Arrange
-        var example = @"@startuml
-skinparam sequenceMessageAlignment right
-Bob -> Alice : Request
-Alice -> Bob : Response
-@enduml
-";
+        var example =
+            """
+            @startuml
+            skinparam sequenceMessageAlignment right
+            Bob -> Alice : Request
+            Alice -> Bob : Response
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -240,16 +272,20 @@ Alice -> Bob : Response
         stringBuilder.ToString().Should().BeEquivalentTo(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#bf6bee6d96403148"/>
     [TestMethod]
     public void TextAlignment02()
     {
         // Arrange
-        var example = @"@startuml
-skinparam responseMessageBelowArrow true
-Bob -> Alice : hello
-Alice -> Bob : ok
-@enduml
-";
+        var example =
+            """
+            @startuml
+            skinparam responseMessageBelowArrow true
+            Bob -> Alice : hello
+            Alice -> Bob : ok
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -264,25 +300,29 @@ Alice -> Bob : ok
         stringBuilder.ToString().Should().BeEquivalentTo(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#efeda651e89e596c"/>
     [TestMethod]
     public void ChangeArrowStyle01()
     {
         // Arrange
-        var example = @"@startuml
-Bob ->x Alice
-Bob -> Alice
-Bob ->> Alice
-Bob -\ Alice
-Bob \\- Alice
-Bob //-- Alice
+        var example =
+            """
+            @startuml
+            Bob ->x Alice
+            Bob -> Alice
+            Bob ->> Alice
+            Bob -\ Alice
+            Bob \\- Alice
+            Bob //-- Alice
 
-Bob ->o Alice
-Bob o\\-- Alice
+            Bob ->o Alice
+            Bob o\\-- Alice
 
-Bob <-> Alice
-Bob <->o Alice
-@enduml
-";
+            Bob <-> Alice
+            Bob <->o Alice
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -306,27 +346,32 @@ Bob <->o Alice
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#efeda651e89e596c"/>
     [TestMethod]
     public void ChangeArrowStyle02()
     {
         // Arrange
-        var example = @"@startuml
-Bob ->x Alice
-Bob -> Alice
-Bob ->> Alice
-Bob -\ Alice
-Bob \\- Alice
-Bob //-- Alice
+        var example =
+            """
+            @startuml
+            Bob ->x Alice
+            Bob -> Alice
+            Bob ->> Alice
+            Bob -\ Alice
+            Bob \\- Alice
+            Bob //-- Alice
 
-Bob ->o Alice
-Bob o\\-- Alice
+            Bob ->o Alice
+            Bob o\\-- Alice
 
-Bob <-> Alice
-Bob <->o Alice
-@enduml
-";
+            Bob <-> Alice
+            Bob <->o Alice
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
+
         var bob = new Bob();
         var alice = new Alice();
 
@@ -350,15 +395,19 @@ Bob <->o Alice
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#0b2e57c3d4eafdda"/>
     [TestMethod]
     public void ChangeArrowColor()
     {
         // Arrange
-        var example = @"@startuml
-Bob -[#red]> Alice : hello
-Alice --[#0000FF]> Bob : ok
-@enduml
-";
+        var example =
+            """
+            @startuml
+            Bob -[#red]> Alice : hello
+            Alice --[#0000FF]> Bob : ok
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -372,16 +421,20 @@ Alice --[#0000FF]> Bob : ok
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#ce3f7eb577ad5f4d"/>
     [TestMethod]
     public void MessageSequenceNumbering01()
     {
         // Arrange
-        var example = @"@startuml
-autonumber
-Bob -> Alice : Authentication Request
-Bob <- Alice : Authentication Response
-@enduml
-";
+        var example =
+            """
+            @startuml
+            autonumber
+            Bob -> Alice : Authentication Request
+            Bob <- Alice : Authentication Response
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -396,25 +449,29 @@ Bob <- Alice : Authentication Response
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#ce3f7eb577ad5f4d"/>
     [TestMethod]
     public void MessageSequenceNumbering02()
     {
         // Arrange
-        var example = @"@startuml
-autonumber
-Bob -> Alice : Authentication Request
-Bob <- Alice : Authentication Response
+        var example =
+            """
+            @startuml
+            autonumber
+            Bob -> Alice : Authentication Request
+            Bob <- Alice : Authentication Response
 
-autonumber 15
-Bob -> Alice : Another authentication Request
-Bob <- Alice : Another authentication Response
+            autonumber 15
+            Bob -> Alice : Another authentication Request
+            Bob <- Alice : Another authentication Response
 
-autonumber 40 10
-Bob -> Alice : Yet another authentication Request
-Bob <- Alice : Yet another authentication Response
+            autonumber 40 10
+            Bob -> Alice : Yet another authentication Request
+            Bob <- Alice : Yet another authentication Response
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -438,25 +495,29 @@ Bob <- Alice : Yet another authentication Response
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#ce3f7eb577ad5f4d"/>
     [TestMethod]
     public void MessageSequenceNumbering03()
     {
         // Arrange
-        var example = @"@startuml
-autonumber ""<b>[000]""
-Bob -> Alice : Authentication Request
-Bob <- Alice : Authentication Response
+        var example =
+            """
+            @startuml
+            autonumber "<b>[000]"
+            Bob -> Alice : Authentication Request
+            Bob <- Alice : Authentication Response
 
-autonumber 15 ""<b>(<u>##</u>)""
-Bob -> Alice : Another authentication Request
-Bob <- Alice : Another authentication Response
+            autonumber 15 "<b>(<u>##</u>)"
+            Bob -> Alice : Another authentication Request
+            Bob <- Alice : Another authentication Response
 
-autonumber 40 10 ""<font color=red><b>Message 0  ""
-Bob -> Alice : Yet another authentication Request
-Bob <- Alice : Yet another authentication Response
+            autonumber 40 10 "<font color=red><b>Message 0  "
+            Bob -> Alice : Yet another authentication Request
+            Bob <- Alice : Yet another authentication Response
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -480,30 +541,34 @@ Bob <- Alice : Yet another authentication Response
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#ce3f7eb577ad5f4d"/>
     [TestMethod]
     public void MessageSequenceNumbering04()
     {
         // Arrange
-        var example = @"@startuml
-autonumber 10 10 ""<b>[000]""
-Bob -> Alice : Authentication Request
-Bob <- Alice : Authentication Response
+        var example =
+            """
+            @startuml
+            autonumber 10 10 "<b>[000]"
+            Bob -> Alice : Authentication Request
+            Bob <- Alice : Authentication Response
 
-autonumber stop
-Bob -> Alice : dummy
+            autonumber stop
+            Bob -> Alice : dummy
 
-autonumber resume ""<font color=red><b>Message 0  ""
-Bob -> Alice : Yet another authentication Request
-Bob <- Alice : Yet another authentication Response
+            autonumber resume "<font color=red><b>Message 0  "
+            Bob -> Alice : Yet another authentication Request
+            Bob <- Alice : Yet another authentication Response
 
-autonumber stop
-Bob -> Alice : dummy
+            autonumber stop
+            Bob -> Alice : dummy
 
-autonumber resume 1 ""<font color=blue><b>Message 0  ""
-Bob -> Alice : Yet another authentication Request
-Bob <- Alice : Yet another authentication Response
-@enduml
-";
+            autonumber resume 1 "<font color=blue><b>Message 0  "
+            Bob -> Alice : Yet another authentication Request
+            Bob <- Alice : Yet another authentication Response
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -532,33 +597,37 @@ Bob <- Alice : Yet another authentication Response
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#ce3f7eb577ad5f4d"/>
     [TestMethod]
     public void MessageSequenceNumbering05()
     {
         // Arrange
-        var example = @"@startuml
-autonumber 1.1.1
-Alice -> Bob : Authentication request
-Bob --> Alice : Response
+        var example =
+            """
+            @startuml
+            autonumber 1.1.1
+            Alice -> Bob : Authentication request
+            Bob --> Alice : Response
 
-autonumber inc A
-' Now we have 2.1.1
-Alice -> Bob : Another authentication request
-Bob --> Alice : Response
+            autonumber inc A
+            ' Now we have 2.1.1
+            Alice -> Bob : Another authentication request
+            Bob --> Alice : Response
 
-autonumber inc B
-' Now we have 2.2.1
-Alice -> Bob : Another authentication request
-Bob --> Alice : Response
+            autonumber inc B
+            ' Now we have 2.2.1
+            Alice -> Bob : Another authentication request
+            Bob --> Alice : Response
 
-autonumber inc A
-' Now we have 3.1.1
-Alice -> Bob : Another authentication request
-autonumber inc B
-' Now we have 3.2.1
-Bob --> Alice : Response
-@enduml
-";
+            autonumber inc A
+            ' Now we have 3.1.1
+            Alice -> Bob : Another authentication request
+            autonumber inc B
+            ' Now we have 3.2.1
+            Bob --> Alice : Response
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -590,22 +659,62 @@ Bob --> Alice : Response
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#ce3f7eb577ad5f4d"/>
+    [TestMethod]
+    public void MessageSequenceNumbering06()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            autonumber 10
+            Alice -> Bob
+            note right
+              the <U+0025>autonumber<U+0025> works everywhere.
+              Here, its value is ** %autonumber% **
+            end note
+            Bob --> Alice : //This is the response %autonumber%//
+            @enduml
+
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.AutoNumber(10);
+        stringBuilder.Arrow("Alice", "->", "Bob");
+        stringBuilder.StartNote(NotePosition.Right);
+        stringBuilder.Text("  the <U+0025>autonumber<U+0025> works everywhere.");
+        stringBuilder.Text("  Here, its value is ** %autonumber% **");
+        stringBuilder.EndNote();
+        stringBuilder.Arrow("Bob", "-->", "Alice", "//This is the response %autonumber%//");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#77852febc7dde952"/>
     [TestMethod]
     public void PageTitleHeaderAndFooter()
     {
         // Arrange
-        var example = @"@startuml
+        var example =
+            """
+            @startuml
 
-header Page Header
-footer Page %page% of %lastpage%
+            header Page Header
+            footer Page %page% of %lastpage%
 
-title Example Title
+            title Example Title
 
-Alice -> Bob : message 1
-Alice -> Bob : message 2
+            Alice -> Bob : message 1
+            Alice -> Bob : message 2
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -626,25 +735,29 @@ Alice -> Bob : message 2
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#45d7d5b32d17a0f9"/>
     [TestMethod]
     public void SplittingDiagrams()
     {
         // Arrange
-        var example = @"@startuml
-Alice -> Bob : message 1
-Alice -> Bob : message 2
+        var example =
+            """
+            @startuml
+            Alice -> Bob : message 1
+            Alice -> Bob : message 2
 
-newpage
+            newpage
 
-Alice -> Bob : message 3
-Alice -> Bob : message 4
+            Alice -> Bob : message 3
+            Alice -> Bob : message 4
 
-newpage A title for the\nlast page
+            newpage A title for the\nlast page
 
-Alice -> Bob : message 5
-Alice -> Bob : message 6
-@enduml
-";
+            Alice -> Bob : message 5
+            Alice -> Bob : message 6
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -668,35 +781,39 @@ Alice -> Bob : message 6
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#efeda651e89e596c"/>
     [TestMethod]
     public void GroupingMessages()
     {
         // Arrange
-        var example = @"@startuml
-Alice -> Bob : Authentication Request
+        var example =
+            """
+            @startuml
+            Alice -> Bob : Authentication Request
 
-alt successful case
+            alt successful case
 
-Bob -> Alice : Authentication Accepted
+            Bob -> Alice : Authentication Accepted
 
-else some kind of failure
+            else some kind of failure
 
-Bob -> Alice : Authentication Failure
-group My own label
-Alice -> Log : Log attack start
-loop 1000 times
-Alice -> Bob : DNS Attack
-end
-Alice -> Log : Log attack end
-end
+            Bob -> Alice : Authentication Failure
+            group My own label
+            Alice -> Log : Log attack start
+            loop 1000 times
+            Alice -> Bob : DNS Attack
+            end
+            Alice -> Log : Log attack end
+            end
 
-else Another type of failure
+            else Another type of failure
 
-Bob -> Alice : Please repeat
+            Bob -> Alice : Please repeat
 
-end
-@enduml
-";
+            end
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -730,22 +847,26 @@ end
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#7aad256d9e87308c"/>
     [TestMethod]
     public void SecondaryGroupLabel()
     {
         // Arrange
-        var example = @"@startuml
-Alice -> Bob : Authentication Request
-Bob -> Alice : Authentication Failure
-group My own label [My own label 2]
-Alice -> Log : Log attack start
-loop 1000 times
-Alice -> Bob : DNS Attack
-end
-Alice -> Log : Log attack end
-end
-@enduml
-";
+        var example =
+            """
+            @startuml
+            Alice -> Bob : Authentication Request
+            Bob -> Alice : Authentication Failure
+            group My own label [My own label 2]
+            Alice -> Log : Log attack start
+            loop 1000 times
+            Alice -> Bob : DNS Attack
+            end
+            Alice -> Log : Log attack end
+            end
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -766,25 +887,29 @@ end
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#012d3e8694a98cc1"/>
     [TestMethod]
     public void NotesOnMessages()
     {
         // Arrange
-        var example = @"@startuml
-Alice -> Bob : hello
-note left : this is a first note
+        var example =
+            """
+            @startuml
+            Alice -> Bob : hello
+            note left : this is a first note
 
-Bob -> Alice : ok
-note right : this is another note
+            Bob -> Alice : ok
+            note right : this is another note
 
-Bob -> Bob : I am thinking
-note left
-a note
-can also be defined
-on several lines
-end note
-@enduml
-";
+            Bob -> Bob : I am thinking
+            note left
+            a note
+            can also be defined
+            on several lines
+            end note
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -808,31 +933,35 @@ end note
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#f8c59a77112b60e7"/>
     [TestMethod]
     public void SomeOtherNotes()
     {
         // Arrange
-        var example = @"@startuml
-participant Alice
-participant Bob
-note left of Alice #aqua
-This is displayed
-left of Alice.
-end note
+        var example =
+            """
+            @startuml
+            participant Alice
+            participant Bob
+            note left of Alice #aqua
+            This is displayed
+            left of Alice.
+            end note
 
-note right of Alice : This is displayed right of Alice.
+            note right of Alice : This is displayed right of Alice.
 
-note over Alice : This is displayed over Alice.
+            note over Alice : This is displayed over Alice.
 
-note over Alice,Bob #FFAAAA : This is displayed\n over Bob and Alice.
+            note over Alice,Bob #FFAAAA : This is displayed\n over Bob and Alice.
 
-note over Bob,Alice
-This is yet another
-example of
-a long note.
-end note
-@enduml
-";
+            note over Bob,Alice
+            This is yet another
+            example of
+            a long note.
+            end note
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -862,30 +991,34 @@ end note
         stringBuilder.ToString().Should().BeEquivalentTo(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#84de38ea1ca38165"/>
     [TestMethod]
     public void ChangingNotesShape()
     {
         // Arrange
-        var example = @"@startuml
-caller -> server : conReq
-hnote over caller : idle
-caller <- server : conConf
-rnote over server
- ""r"" as rectangle
- ""h"" as hexagon
-end rnote
-rnote over server
- this is
- on several
- lines
-end rnote
-hnote over caller
- this is
- on several
- lines
-end hnote
-@enduml
-";
+        var example =
+            """
+            @startuml
+            caller -> server : conReq
+            hnote over caller : idle
+            caller <- server : conConf
+            rnote over server
+             "r" as rectangle
+             "h" as hexagon
+            end rnote
+            rnote over server
+             this is
+             on several
+             lines
+            end rnote
+            hnote over caller
+             this is
+             on several
+             lines
+            end hnote
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -914,19 +1047,23 @@ end hnote
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#39755e6414c00844"/>
     [TestMethod]
     public void NoteOverAllParticipants()
     {
         // Arrange
-        var example = @"@startuml
-Alice -> Bob : m1
-Bob -> Charlie : m2
-note over Alice,Charlie : Old method for note over all part. with:\n """"note over //FirstPart, LastPart//"""".
-note across : New method with:\n""""note across""""
-Bob -> Alice
-hnote across : Note across all part.
-@enduml
-";
+        var example =
+            """
+            @startuml
+            Alice -> Bob : m1
+            Bob -> Charlie : m2
+            note over Alice,Charlie : Old method for note over all part. with:\n ""note over //FirstPart, LastPart//"".
+            note across : New method with:\n""note across""
+            Bob -> Alice
+            hnote across : Note across all part.
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -944,16 +1081,20 @@ hnote across : Note across all part.
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#39755e6414c00844"/>
     [TestMethod]
     public void SeveralNotesAlignedAtTheSameLevel01()
     {
         // Arrange
-        var example = @"@startuml
-note over Alice : initial state of Alice
-note over Bob : initial state of Bob
-Bob -> Alice : hello
-@enduml
-";
+        var example =
+            """
+            @startuml
+            note over Alice : initial state of Alice
+            note over Bob : initial state of Bob
+            Bob -> Alice : hello
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -968,16 +1109,20 @@ Bob -> Alice : hello
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#39755e6414c00844"/>
     [TestMethod]
     public void SeveralNotesAlignedAtTheSameLevel02()
     {
         // Arrange
-        var example = @"@startuml
-note over Alice : initial state of Alice
-/ note over Bob : initial state of Bob
-Bob -> Alice : hello
-@enduml
-";
+        var example =
+            """
+            @startuml
+            note over Alice : initial state of Alice
+            / note over Bob : initial state of Bob
+            Bob -> Alice : hello
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -992,40 +1137,44 @@ Bob -> Alice : hello
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#28881bae78acd047"/>
     [TestMethod]
     public void CreoleAndHtml()
     {
         // Arrange
-        var example = @"@startuml
-participant Alice
-participant ""The **Famous** Bob"" as Bob
+        var example =
+            """
+            @startuml
+            participant Alice
+            participant "The **Famous** Bob" as Bob
 
-Alice -> Bob : hello --there--
-... Some ~~long delay~~ ...
-Bob -> Alice : ok
-note left
-  This is **bold**
-  This is //italics//
-  This is """"monospaced""""
-  This is --stroked--
-  This is __underlined__
-  This is ~~waved~~
-end note
+            Alice -> Bob : hello --there--
+            ... Some ~~long delay~~ ...
+            Bob -> Alice : ok
+            note left
+              This is **bold**
+              This is //italics//
+              This is ""monospaced""
+              This is --stroked--
+              This is __underlined__
+              This is ~~waved~~
+            end note
 
-Alice -> Bob : A //well formatted// message
-note right of Alice
- This is <back:cadetblue><size:18>displayed</size></back>
- __left of__ Alice.
-end note
-note left of Bob
- <u:red>This</u> is <color #118888>displayed</color>
- **<color purple>left of</color> <s:red>Alice</strike> Bob**.
-end note
-note over Alice,Bob
- <w:#FF33FF>This is hosted</w> by <img sourceforge.jpg>
-end note
-@enduml
-";
+            Alice -> Bob : A //well formatted// message
+            note right of Alice
+             This is <back:cadetblue><size:18>displayed</size></back>
+             __left of__ Alice.
+            end note
+            note left of Bob
+             <u:red>This</u> is <color #118888>displayed</color>
+             **<color purple>left of</color> <s:red>Alice</strike> Bob**.
+            end note
+            note over Alice,Bob
+             <w:#FF33FF>This is hosted</w> by <img sourceforge.jpg>
+            end note
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1064,24 +1213,28 @@ end note
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#d4b2df53a72661cc"/>
     [TestMethod]
     public void DividerOrSeparator()
     {
         // Arrange
-        var example = @"@startuml
+        var example =
+            """
+            @startuml
 
-== Initialization ==
+            == Initialization ==
 
-Alice -> Bob : Authentication Request
-Bob --> Alice : Authentication Response
+            Alice -> Bob : Authentication Request
+            Bob --> Alice : Authentication Response
 
-== Repetition ==
+            == Repetition ==
 
-Alice -> Bob : Another authentication Request
-Alice <-- Bob : another authentication Response
+            Alice -> Bob : Another authentication Request
+            Alice <-- Bob : another authentication Response
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1104,24 +1257,28 @@ Alice <-- Bob : another authentication Response
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#63d5049791d9d79d"/>
     [TestMethod]
     public void Reference()
     {
         // Arrange
-        var example = @"@startuml
-participant Alice
-actor Bob
+        var example =
+            """
+            @startuml
+            participant Alice
+            actor Bob
 
-ref over Alice,Bob : init
+            ref over Alice,Bob : init
 
-Alice -> Bob : hello
+            Alice -> Bob : hello
 
-ref over Bob
-  This can be on
-  several lines
-end ref
-@enduml
-";
+            ref over Bob
+              This can be on
+              several lines
+            end ref
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1144,20 +1301,24 @@ end ref
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#8f497c1a3d15af9e"/>
     [TestMethod]
     public void Delay()
     {
         // Arrange
-        var example = @"@startuml
+        var example =
+            """
+            @startuml
 
-Alice -> Bob : Authentication Request
-...
-Bob --> Alice : Authentication Response
-...5 minutes later...
-Bob --> Alice : Good Bye !
+            Alice -> Bob : Authentication Request
+            ...
+            Bob --> Alice : Authentication Response
+            ...5 minutes later...
+            Bob --> Alice : Good Bye !
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1176,18 +1337,22 @@ Bob --> Alice : Good Bye !
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#8659eac9bf4c2629"/>
     [TestMethod]
     public void TextWrapping()
     {
         // Arrange
-        var example = @"@startuml
-skinparam MaxMessageSize 50
-participant a
-participant b
-a -> b : this\nis\nmanually\ndone
-a -> b : this is a very long message on several words
-@enduml
-";
+        var example =
+            """
+            @startuml
+            skinparam MaxMessageSize 50
+            participant a
+            participant b
+            a -> b : this\nis\nmanually\ndone
+            a -> b : this is a very long message on several words
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1204,23 +1369,27 @@ a -> b : this is a very long message on several words
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#d511f8439ecde366"/>
     [TestMethod]
     public void Space()
     {
         // Arrange
-        var example = @"@startuml
+        var example =
+            """
+            @startuml
 
-Alice -> Bob : message 1
-Bob --> Alice : ok
-|||
-Alice -> Bob : message 2
-Bob --> Alice : ok
-||45||
-Alice -> Bob : message 3
-Bob --> Alice : ok
+            Alice -> Bob : message 1
+            Bob --> Alice : ok
+            |||
+            Alice -> Bob : message 2
+            Bob --> Alice : ok
+            ||45||
+            Alice -> Bob : message 3
+            Bob --> Alice : ok
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1242,32 +1411,36 @@ Bob --> Alice : ok
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#5cc0040514e70f7b"/>
     [TestMethod]
     public void LifelineActivationAndDestruction01()
     {
         // Arrange
-        var example = @"@startuml
-participant User
+        var example =
+            """
+            @startuml
+            participant User
 
-User -> A : DoWork
-activate A
+            User -> A : DoWork
+            activate A
 
-A -> B : << createRequest >>
-activate B
+            A -> B : << createRequest >>
+            activate B
 
-B -> C : DoWork
-activate C
-C --> B : WorkDone
-destroy C
+            B -> C : DoWork
+            activate C
+            C --> B : WorkDone
+            destroy C
 
-B --> A : RequestCreated
-deactivate B
+            B --> A : RequestCreated
+            deactivate B
 
-A -> User : Done
-deactivate A
+            A -> User : Done
+            deactivate A
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1298,30 +1471,34 @@ deactivate A
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#5cc0040514e70f7b"/>
     [TestMethod]
     public void LifelineActivationAndDestruction02()
     {
         // Arrange
-        var example = @"@startuml
-participant User
+        var example =
+            """
+            @startuml
+            participant User
 
-User -> A : DoWork
-activate A #FFBBBB
+            User -> A : DoWork
+            activate A #FFBBBB
 
-A -> A : Internal call
-activate A #DarkSalmon
+            A -> A : Internal call
+            activate A #DarkSalmon
 
-A -> B : << createRequest >>
-activate B
+            A -> B : << createRequest >>
+            activate B
 
-B --> A : RequestCreated
-deactivate B
-deactivate A
-A -> User : Done
-deactivate A
+            B --> A : RequestCreated
+            deactivate B
+            deactivate A
+            A -> User : Done
+            deactivate A
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1350,23 +1527,27 @@ deactivate A
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#5cc0040514e70f7b"/>
     [TestMethod]
     public void LifelineActivationAndDestruction03()
     {
         // Arrange
-        var example = @"@startuml
-autoactivate on
-alice -> bob : hello
-bob -> bob : self call
-bill -> bob #005500 : hello from thread 2
-bob -> george ** : create
-return done in thread 2
-return rc
-bob -> george !! : delete
-return success
+        var example =
+            """
+            @startuml
+            autoactivate on
+            alice -> bob : hello
+            bob -> bob : self call
+            bill -> bob #005500 : hello from thread 2
+            bob -> george ** : create
+            return done in thread 2
+            return rc
+            bob -> george !! : delete
+            return success
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1388,17 +1569,21 @@ return success
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#988fd738de9c6d17"/>
     [TestMethod]
     public void Return()
     {
         // Arrange
-        var example = @"@startuml
-Bob -> Alice : hello
-activate Alice
-Alice -> Alice : some action
-return bye
-@enduml
-";
+        var example =
+            """
+            @startuml
+            Bob -> Alice : hello
+            activate Alice
+            Alice -> Alice : some action
+            return bye
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1414,24 +1599,28 @@ return bye
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#b2c1d43bde93c643"/>
     [TestMethod]
     public void ParticipantCreation()
     {
         // Arrange
-        var example = @"@startuml
-Bob -> Alice : hello
+        var example =
+            """
+            @startuml
+            Bob -> Alice : hello
 
-create Other
-Alice -> Other : new
+            create Other
+            Alice -> Other : new
 
-create control String
-Alice -> String
-note right : You can also put notes!
+            create control String
+            Alice -> String
+            note right : You can also put notes!
 
-Alice --> Bob : ok
+            Alice --> Bob : ok
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1454,21 +1643,25 @@ Alice --> Bob : ok
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#35480215b426d170"/>
     [TestMethod]
-    public void ShortcutSyntaxForActivationDeactivationCreation()
+    public void ShortcutSyntaxForActivationDeactivationCreation01()
     {
         // Arrange
-        var example = @"@startuml
-alice -> bob ++ : hello
-bob -> bob ++ : self call
-bob -> bib ++ #005500 : hello
-bob -> george ** : create
-return done
-return rc
-bob -> george !! : delete
-return success
-@enduml
-";
+        var example =
+            """
+            @startuml
+            alice -> bob ++ : hello
+            bob -> bob ++ : self call
+            bob -> bib ++ #005500 : hello
+            bob -> george ** : create
+            return done
+            return rc
+            bob -> george !! : delete
+            return success
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1488,16 +1681,20 @@ return success
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#35480215b426d170"/>
     [TestMethod]
-    public void MixActivationAndDeactivationOnSameLine01()
+    public void ShortcutSyntaxForActivationDeactivationCreation02()
     {
         // Arrange
-        var example = @"@startuml
-alice -> bob ++ : hello1
-bob -> charlie --++ : hello2
-charlie --> alice -- : ok
-@enduml
-";
+        var example =
+            """
+            @startuml
+            alice -> bob ++ : hello1
+            bob -> charlie --++ : hello2
+            charlie --> alice -- : ok
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1512,17 +1709,21 @@ charlie --> alice -- : ok
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#35480215b426d170"/>
     [TestMethod]
-    public void MixActivationAndDeactivationOnSameLine02()
+    public void ShortcutSyntaxForActivationDeactivationCreation03()
     {
         // Arrange
-        var example = @"@startuml
-alice -> bob --++ #Gold : hello
-bob -> alice --++ #Gold : you too
-alice -> bob -- : step1
-alice -> bob : step2
-@enduml
-";
+        var example =
+            """
+            @startuml
+            alice -> bob --++ #Gold : hello
+            bob -> alice --++ #Gold : you too
+            alice -> bob -- : step1
+            alice -> bob : step2
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1538,26 +1739,30 @@ alice -> bob : step2
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#05984b1743e67542"/>
     [TestMethod]
     public void IncomingAndOutgoingMessages01()
     {
         // Arrange
-        var example = @"@startuml
-[-> A : DoWork
+        var example =
+            """
+            @startuml
+            [-> A : DoWork
 
-activate A
+            activate A
 
-A -> A : Internal call
-activate A
+            A -> A : Internal call
+            activate A
 
-A ->] : << createRequest >>
+            A ->] : << createRequest >>
 
-A <--] : RequestCreated
-deactivate A
-[<- A : Done
-deactivate A
-@enduml
-";
+            A <--] : RequestCreated
+            deactivate A
+            [<- A : Done
+            deactivate A
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1582,34 +1787,38 @@ deactivate A
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#05984b1743e67542"/>
     [TestMethod]
     public void IncomingAndOutgoingMessages02()
     {
         // Arrange
-        var example = @"@startuml
-participant Alice
-participant Bob #lightblue
-Alice -> Bob
-Bob -> Carol
-...
-[-> Bob
-[o-> Bob
-[o->o Bob
-[x-> Bob
-...
-[<- Bob
-[x<- Bob
-...
-Bob ->]
-Bob ->o]
-Bob o->o]
-Bob ->x]
-...
-Bob <-]
-Bob x<-]
+        var example =
+            """
+            @startuml
+            participant Alice
+            participant Bob #lightblue
+            Alice -> Bob
+            Bob -> Carol
+            ...
+            [-> Bob
+            [o-> Bob
+            [o->o Bob
+            [x-> Bob
+            ...
+            [<- Bob
+            [x<- Bob
+            ...
+            Bob ->]
+            Bob ->o]
+            Bob o->o]
+            Bob ->x]
+            ...
+            Bob <-]
+            Bob x<-]
 
-@enduml
-";
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1642,20 +1851,24 @@ Bob x<-]
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#098797a007f231ea"/>
     [TestMethod]
     public void ShortArrowsForIncomingAndOutgoingMessages()
     {
         // Arrange
-        var example = @"@startuml
-?-> Alice : """"?->""""\n**short** to actor1
-[-> Alice : """"[->""""\n**from start** to actor1
-[-> Bob : """"[->""""\n**from start** to actor2
-?-> Bob : """"?->""""\n**short** to actor2
-Alice ->] : """"->]""""\nfrom actor1 **to end**
-Alice ->? : """"->?""""\n**short** from actor1
-Alice -> Bob : """"->"""" \nfrom actor1 to actor2
-@enduml
-";
+        var example =
+            """
+            @startuml
+            ?-> Alice : ""?->""\n**short** to actor1
+            [-> Alice : ""[->""\n**from start** to actor1
+            [-> Bob : ""[->""\n**from start** to actor2
+            ?-> Bob : ""?->""\n**short** to actor2
+            Alice ->] : ""->]""\nfrom actor1 **to end**
+            Alice ->? : ""->?""\n**short** from actor1
+            Alice -> Bob : ""->"" \nfrom actor1 to actor2
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 
@@ -1674,13 +1887,887 @@ Alice -> Bob : """"->"""" \nfrom actor1 to actor2
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#94190c2f242a5df2"/>
+    [TestMethod]
+    public void StereotypesAndSpots01()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+
+            participant "Famous Bob" as Bob << Generated >>
+            participant Alice <<(C,#ADD1B2) Testable>>
+
+            Bob -> Alice : First message
+
+            @enduml
+
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.AppendNewLine();
+        stringBuilder.Participant("Bob", "Famous Bob", stereotype: " Generated ");
+        stringBuilder.Participant("Alice",stereotype: " Testable", customSpot: new CustomSpot('C', "#ADD1B2"));
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Bob", "->", "Alice", "First message");
+        stringBuilder.AppendNewLine();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#94190c2f242a5df2"/>
+    [TestMethod]
+    public void StereotypesAndSpots02()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+
+            skinparam guillemet false
+            participant "Famous Bob" as Bob << Generated >>
+            participant Alice <<(C,#ADD1B2) Testable>>
+
+            Bob -> Alice : First message
+
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.AppendNewLine();
+        stringBuilder.SkinParameter("guillemet", false);
+        stringBuilder.Participant("Bob", "Famous Bob", stereotype: " Generated ");
+        stringBuilder.Participant("Alice", stereotype: " Testable", customSpot: new CustomSpot('C', "#ADD1B2"));
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Bob", "->", "Alice", "First message");
+        stringBuilder.AppendNewLine();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#94190c2f242a5df2"/>
+    [TestMethod]
+    public void StereotypesAndSpots03()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+
+            participant Bob <<(C,#ADD1B2) >>
+            participant Alice <<(C,#ADD1B2) >>
+
+            Bob -> Alice : First message
+
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.AppendNewLine();
+        stringBuilder.Participant("Bob", stereotype: " ", customSpot: new CustomSpot('C', "#ADD1B2"));
+        stringBuilder.Participant("Alice", stereotype: " ", customSpot: new CustomSpot('C', "#ADD1B2"));
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Bob", "->", "Alice", "First message");
+        stringBuilder.AppendNewLine();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#a21f56b1869e89e5"/>
+    [TestMethod]
+    public void MoreInformationOnTitles01()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+
+            title __Simple__ **communication** example
+
+            Alice -> Bob : Authentication Request
+            Bob -> Alice : Authentication Response
+
+            @enduml
+
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.AppendNewLine();
+        stringBuilder.Title("__Simple__ **communication** example");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Alice", "->", "Bob", "Authentication Request");
+        stringBuilder.Arrow("Bob", "->", "Alice", "Authentication Response");
+        stringBuilder.AppendNewLine();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#a21f56b1869e89e5"/>
+    [TestMethod]
+    public void MoreInformationOnTitles02()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+
+            title __Simple__ communication example\non several lines
+
+            Alice -> Bob : Authentication Request
+            Bob -> Alice : Authentication Response
+
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.AppendNewLine();
+        stringBuilder.Title("__Simple__ communication example\non several lines");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Alice", "->", "Bob", "Authentication Request");
+        stringBuilder.Arrow("Bob", "->", "Alice", "Authentication Response");
+        stringBuilder.AppendNewLine();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#f52672a8f74a07df"/>
+    [TestMethod]
+    public void ParticipantsEncompass01()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+
+            box "Internal Service" #LightBlue
+            participant Bob
+            participant Alice
+            end box
+            participant Other
+
+            Bob -> Alice : hello
+            Alice -> Other : hello
+
+            @enduml
+
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.AppendNewLine();
+        stringBuilder.BoxStart("Internal Service", "#LightBlue");
+        stringBuilder.Participant("Bob");
+        stringBuilder.Participant("Alice");
+        stringBuilder.BoxEnd();
+        stringBuilder.Participant("Other");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Bob", "->", "Alice", "hello");
+        stringBuilder.Arrow("Alice", "->", "Other", "hello");
+        stringBuilder.AppendNewLine();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#f52672a8f74a07df"/>
+    [TestMethod]
+    public void ParticipantsEncompass02()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+
+            !pragma teoz true
+            box "Internal Service" #LightBlue
+            participant Bob
+            box "Subteam"
+            participant Alice
+            participant John
+            end box
+
+            end box
+            participant Other
+
+            Bob -> Alice : hello
+            Alice -> John : hello
+            John -> Other : Hello
+
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.AppendNewLine();
+        stringBuilder.Text("!pragma teoz true");
+        stringBuilder.BoxStart("Internal Service", "#LightBlue");
+        stringBuilder.Participant("Bob");
+        stringBuilder.BoxStart("Subteam");
+        stringBuilder.Participant("Alice");
+        stringBuilder.Participant("John");
+        stringBuilder.BoxEnd();
+        stringBuilder.AppendNewLine();
+        stringBuilder.BoxEnd();
+        stringBuilder.Participant("Other");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Bob", "->", "Alice", "hello");
+        stringBuilder.Arrow("Alice", "->", "John", "hello");
+        stringBuilder.Arrow("John", "->", "Other", "Hello");
+        stringBuilder.AppendNewLine();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#21380379ba44081d"/>
+    [TestMethod]
+    public void RemovingFootBoxes()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+
+            hide footbox
+            title Foot Box removed
+
+            Alice -> Bob : Authentication Request
+            Bob --> Alice : Authentication Response
+
+            @enduml
+        
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.AppendNewLine();
+        stringBuilder.HideFootBox();
+        stringBuilder.Title("Foot Box removed");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Alice", "->", "Bob", "Authentication Request");
+        stringBuilder.Arrow("Bob", "-->", "Alice", "Authentication Response");
+        stringBuilder.AppendNewLine();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#7aa53dbdfc2137bf"/>
+    [TestMethod]
+    public void Skinparam01()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            skinparam sequenceArrowThickness 2
+            skinparam roundcorner 20
+            skinparam maxmessagesize 60
+            skinparam sequenceParticipant underline
+
+            actor User
+            participant "First Class" as A
+            participant "Second Class" as B
+            participant "Last Class" as C
+
+            User -> A : DoWork
+            activate A
+
+            A -> B : Create Request
+            activate B
+
+            B -> C : DoWork
+            activate C
+            C --> B : WorkDone
+            destroy C
+
+            B --> A : Request Created
+            deactivate B
+
+            A --> User : Done
+            deactivate A
+
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.SkinParameter("sequenceArrowThickness", 2);
+        stringBuilder.SkinParameter("roundcorner", 20);
+        stringBuilder.SkinParameter("maxmessagesize", 60);
+        stringBuilder.SkinParameter("sequenceParticipant", "underline");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Actor("User");
+        stringBuilder.Participant("A", "First Class");
+        stringBuilder.Participant("B", "Second Class");
+        stringBuilder.Participant("C", "Last Class");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("User", "->", "A", "DoWork");
+        stringBuilder.Activate("A");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("A", "->", "B", "Create Request");
+        stringBuilder.Activate("B");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("B", "->", "C", "DoWork");
+        stringBuilder.Activate("C");
+        stringBuilder.Arrow("C", "-->", "B", "WorkDone");
+        stringBuilder.Destroy("C");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("B", "-->", "A", "Request Created");
+        stringBuilder.Deactivate("B");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("A", "-->", "User", "Done");
+        stringBuilder.Deactivate("A");
+        stringBuilder.AppendNewLine();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#33cee7c2521befd3"/>
+    [TestMethod]
+    public void ChangingPadding()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            skinparam ParticipantPadding 20
+            skinparam BoxPadding 10
+
+            box "Foo1"
+            participant Alice1
+            participant Alice2
+            end box
+            box "Foo2"
+            participant Bob1
+            participant Bob2
+            end box
+            Alice1 -> Bob1 : hello
+            Alice1 -> Out : out
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.SkinParameter(SkinParameter.ParticipantPadding, 20);
+        stringBuilder.SkinParameter(SkinParameter.BoxPadding, 10);
+        stringBuilder.AppendNewLine();
+        stringBuilder.BoxStart("Foo1");
+        stringBuilder.Participant("Alice1");
+        stringBuilder.Participant("Alice2");
+        stringBuilder.BoxEnd();
+        stringBuilder.BoxStart("Foo2");
+        stringBuilder.Participant("Bob1");
+        stringBuilder.Participant("Bob2");
+        stringBuilder.BoxEnd();
+        stringBuilder.Arrow("Alice1", "->", "Bob1", "hello");
+        stringBuilder.Arrow("Alice1", "->", "Out", "out");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#4764f83f72ed032f"/>
+    [TestMethod]
+    public void ExamplesOfAllArrowType_NormalArrow()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            participant Alice as a
+            participant Bob as b
+            a -> b : ""->   ""
+            a ->> b : ""->>  ""
+            a -\ b : ""-\   ""
+            a -\\ b : ""-\\\\""
+            a -/ b : ""-/   ""
+            a -// b : ""-//  ""
+            a ->x b : ""->x  ""
+            a x-> b : ""x->  ""
+            a o-> b : ""o->  ""
+            a ->o b : ""->o  ""
+            a o->o b : ""o->o ""
+            a <-> b : ""<->  ""
+            a o<->o b : ""o<->o""
+            a x<->x b : ""x<->x""
+            a ->>o b : ""->>o ""
+            a -\o b : ""-\o  ""
+            a -\\o b : ""-\\\\o""
+            a -/o b : ""-/o  ""
+            a -//o b : ""-//o ""
+            a x->o b : ""x->o ""
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.Participant("a", "Alice");
+        stringBuilder.Participant("b", "Bob");
+        stringBuilder.Arrow("a", Arrow.AsyncRight, "b", "\"\"->   \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinRight, "b", "\"\"->>  \"\"");
+        stringBuilder.Arrow("a", Arrow.TopRight, "b", "\"\"-\\   \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinTopRight, "b", "\"\"-\\\\\\\\\"\"");
+        stringBuilder.Arrow("a", Arrow.BottomRight, "b", "\"\"-/   \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinBottomRight, "b", "\"\"-//  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.Destroy(), "b", "\"\"->x  \"\"");
+        stringBuilder.Arrow("a", "x->", "b", "\"\"x->  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.LostLeft(), "b", "\"\"o->  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.Lost(), "b", "\"\"->o  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.LostLeft().LostRight(), "b", "\"\"o->o \"\"");
+        stringBuilder.Arrow("a", Arrow.LeftRight, "b", "\"\"<->  \"\"");
+        stringBuilder.Arrow("a", Arrow.LeftRight.LostLeft().LostRight(), "b", "\"\"o<->o\"\"");
+        stringBuilder.Arrow("a", "x<->x", "b", "\"\"x<->x\"\"");
+        stringBuilder.Arrow("a", Arrow.ThinRight.Lost(), "b", "\"\"->>o \"\"");
+        stringBuilder.Arrow("a", Arrow.TopRight.Lost(), "b", "\"\"-\\o  \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinTopRight.Lost(), "b", "\"\"-\\\\\\\\o\"\"");
+        stringBuilder.Arrow("a", Arrow.BottomRight.Lost(), "b", "\"\"-/o  \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinBottomRight.Lost(), "b", "\"\"-//o \"\"");
+        stringBuilder.Arrow("a", "x->o", "b", "\"\"x->o \"\"");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#4764f83f72ed032f"/>
+    [TestMethod]
+    public void ExamplesOfAllArrowType_ItselfArrow()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            participant Alice as a
+            participant Bob as b
+            a -> a : ""->   ""
+            a ->> a : ""->>  ""
+            a -\ a : ""-\   ""
+            a -\\ a : ""-\\\\""
+            a -/ a : ""-/   ""
+            a -// a : ""-//  ""
+            a ->x a : ""->x  ""
+            a x-> a : ""x->  ""
+            a o-> a : ""o->  ""
+            a ->o a : ""->o  ""
+            a o->o a : ""o->o ""
+            a <-> a : ""<->  ""
+            a o<->o a : ""o<->o""
+            a x<->x a : ""x<->x""
+            a ->>o a : ""->>o ""
+            a -\o a : ""-\o  ""
+            a -\\o a : ""-\\\\o""
+            a -/o a : ""-/o  ""
+            a -//o a : ""-//o ""
+            a x->o a : ""x->o ""
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.Participant("a", "Alice");
+        stringBuilder.Participant("b", "Bob");
+        stringBuilder.Arrow("a", Arrow.AsyncRight, "a", "\"\"->   \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinRight, "a", "\"\"->>  \"\"");
+        stringBuilder.Arrow("a", Arrow.TopRight, "a", "\"\"-\\   \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinTopRight, "a", "\"\"-\\\\\\\\\"\"");
+        stringBuilder.Arrow("a", Arrow.BottomRight, "a", "\"\"-/   \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinBottomRight, "a", "\"\"-//  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.Destroy(), "a", "\"\"->x  \"\"");
+        stringBuilder.Arrow("a", "x->", "a", "\"\"x->  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.LostLeft(), "a", "\"\"o->  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.Lost(), "a", "\"\"->o  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.LostLeft().LostRight(), "a", "\"\"o->o \"\"");
+        stringBuilder.Arrow("a", Arrow.LeftRight, "a", "\"\"<->  \"\"");
+        stringBuilder.Arrow("a", Arrow.LeftRight.LostLeft().LostRight(), "a", "\"\"o<->o\"\"");
+        stringBuilder.Arrow("a", "x<->x", "a", "\"\"x<->x\"\"");
+        stringBuilder.Arrow("a", Arrow.ThinRight.Lost(), "a", "\"\"->>o \"\"");
+        stringBuilder.Arrow("a", Arrow.TopRight.Lost(), "a", "\"\"-\\o  \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinTopRight.Lost(), "a", "\"\"-\\\\\\\\o\"\"");
+        stringBuilder.Arrow("a", Arrow.BottomRight.Lost(), "a", "\"\"-/o  \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinBottomRight.Lost(), "a", "\"\"-//o \"\"");
+        stringBuilder.Arrow("a", "x->o", "a", "\"\"x->o \"\"");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#4764f83f72ed032f"/>
+    [TestMethod]
+    public void ExamplesOfAllArrowType_IncomingMessages()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            participant Alice as a
+            participant Bob as b
+            [-> b : ""[->   ""
+            [->> b : ""[->>  ""
+            [-\ b : ""[-\   ""
+            [-\\ b : ""[-\\\\""
+            [-/ b : ""[-/   ""
+            [-// b : ""[-//  ""
+            [->x b : ""[->x  ""
+            [x-> b : ""[x->  ""
+            [o-> b : ""[o->  ""
+            [->o b : ""[->o  ""
+            [o->o b : ""[o->o ""
+            [<-> b : ""[<->  ""
+            [o<->o b : ""[o<->o""
+            [x<->x b : ""[x<->x""
+            [->>o b : ""[->>o ""
+            [-\o b : ""[-\o  ""
+            [-\\o b : ""[-\\\\o""
+            [-/o b : ""[-/o  ""
+            [-//o b : ""[-//o ""
+            [x->o b : ""[x->o ""
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.Participant("a", "Alice");
+        stringBuilder.Participant("b", "Bob");
+        stringBuilder.Arrow(Participant.Outside, Arrow.AsyncRight, "b", "\"\"[->   \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.ThinRight, "b", "\"\"[->>  \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.TopRight, "b", "\"\"[-\\   \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.ThinTopRight, "b", "\"\"[-\\\\\\\\\"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.BottomRight, "b", "\"\"[-/   \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.ThinBottomRight, "b", "\"\"[-//  \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.Right.Destroy(), "b", "\"\"[->x  \"\"");
+        stringBuilder.Arrow(Participant.Outside, "x->", "b", "\"\"[x->  \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.Right.LostLeft(), "b", "\"\"[o->  \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.Right.Lost(), "b", "\"\"[->o  \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.Right.LostLeft().LostRight(), "b", "\"\"[o->o \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.LeftRight, "b", "\"\"[<->  \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.LeftRight.LostLeft().LostRight(), "b", "\"\"[o<->o\"\"");
+        stringBuilder.Arrow(Participant.Outside, "x<->x", "b", "\"\"[x<->x\"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.ThinRight.Lost(), "b", "\"\"[->>o \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.TopRight.Lost(), "b", "\"\"[-\\o  \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.ThinTopRight.Lost(), "b", "\"\"[-\\\\\\\\o\"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.BottomRight.Lost(), "b", "\"\"[-/o  \"\"");
+        stringBuilder.Arrow(Participant.Outside, Arrow.ThinBottomRight.Lost(), "b", "\"\"[-//o \"\"");
+        stringBuilder.Arrow(Participant.Outside, "x->o", "b", "\"\"[x->o \"\"");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#4764f83f72ed032f"/>
+    [TestMethod]
+    public void ExamplesOfAllArrowType_OutgoingMessages()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            participant Alice as a
+            participant Bob as b
+            a ->] : ""->]   ""
+            a ->>] : ""->>]  ""
+            a -\] : ""-\]   ""
+            a -\\] : ""-\\\\]""
+            a -/] : ""-/]   ""
+            a -//] : ""-//]  ""
+            a ->x] : ""->x]  ""
+            a x->] : ""x->]  ""
+            a o->] : ""o->]  ""
+            a ->o] : ""->o]  ""
+            a o->o] : ""o->o] ""
+            a <->] : ""<->]  ""
+            a o<->o] : ""o<->o]""
+            a x<->x] : ""x<->x]""
+            a ->>o] : ""->>o] ""
+            a -\o] : ""-\o]  ""
+            a -\\o] : ""-\\\\o]""
+            a -/o] : ""-/o]  ""
+            a -//o] : ""-//o] ""
+            a x->o] : ""x->o] ""
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.Participant("a", "Alice");
+        stringBuilder.Participant("b", "Bob");
+        stringBuilder.Arrow("a", Arrow.AsyncRight, Participant.Outside, "\"\"->]   \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinRight, Participant.Outside, "\"\"->>]  \"\"");
+        stringBuilder.Arrow("a", Arrow.TopRight, Participant.Outside, "\"\"-\\]   \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinTopRight, Participant.Outside, "\"\"-\\\\\\\\]\"\"");
+        stringBuilder.Arrow("a", Arrow.BottomRight, Participant.Outside, "\"\"-/]   \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinBottomRight, Participant.Outside, "\"\"-//]  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.Destroy(), Participant.Outside, "\"\"->x]  \"\"");
+        stringBuilder.Arrow("a", "x->", Participant.Outside, "\"\"x->]  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.LostLeft(), Participant.Outside, "\"\"o->]  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.Lost(), Participant.Outside, "\"\"->o]  \"\"");
+        stringBuilder.Arrow("a", Arrow.Right.LostLeft().LostRight(), Participant.Outside, "\"\"o->o] \"\"");
+        stringBuilder.Arrow("a", Arrow.LeftRight, Participant.Outside, "\"\"<->]  \"\"");
+        stringBuilder.Arrow("a", Arrow.LeftRight.LostLeft().LostRight(), Participant.Outside, "\"\"o<->o]\"\"");
+        stringBuilder.Arrow("a", "x<->x", Participant.Outside, "\"\"x<->x]\"\"");
+        stringBuilder.Arrow("a", Arrow.ThinRight.Lost(), Participant.Outside, "\"\"->>o] \"\"");
+        stringBuilder.Arrow("a", Arrow.TopRight.Lost(), Participant.Outside, "\"\"-\\o]  \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinTopRight.Lost(), Participant.Outside, "\"\"-\\\\\\\\o]\"\"");
+        stringBuilder.Arrow("a", Arrow.BottomRight.Lost(), Participant.Outside, "\"\"-/o]  \"\"");
+        stringBuilder.Arrow("a", Arrow.ThinBottomRight.Lost(), Participant.Outside, "\"\"-//o] \"\"");
+        stringBuilder.Arrow("a", "x->o", Participant.Outside, "\"\"x->o] \"\"");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#75b4984abd04b14f"/>
+    [TestMethod]
+    public void SpecificSkinParameter_Default()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            Bob -> Alice : hello
+            Alice -> Bob : ok
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.Arrow("Bob", "->", "Alice", "hello");
+        stringBuilder.Arrow("Alice", "->", "Bob", "ok");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#75b4984abd04b14f"/>
+    [TestMethod]
+    public void SpecificSkinParameter_LifelineStrategy01()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            skinparam lifelineStrategy nosolid
+            Bob -> Alice : hello
+            Alice -> Bob : ok
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.SkinParameter("lifelineStrategy", "nosolid");
+        stringBuilder.Arrow("Bob", "->", "Alice", "hello");
+        stringBuilder.Arrow("Alice", "->", "Bob", "ok");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#75b4984abd04b14f"/>
+    [TestMethod]
+    public void SpecificSkinParameter_LifelineStrategy02()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            skinparam lifelineStrategy solid
+            Bob -> Alice : hello
+            Alice -> Bob : ok
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.SkinParameter("lifelineStrategy", "solid");
+        stringBuilder.Arrow("Bob", "->", "Alice", "hello");
+        stringBuilder.Arrow("Alice", "->", "Bob", "ok");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#75b4984abd04b14f"/>
+    [TestMethod]
+    public void SpecificSkinParameter_StyleStrictuml()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            skinparam style strictuml
+            Bob -> Alice : hello
+            Alice -> Bob : ok
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.SkinParameter("style", "strictuml");
+        stringBuilder.Arrow("Bob", "->", "Alice", "hello");
+        stringBuilder.Arrow("Alice", "->", "Bob", "ok");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#fc006eba0d9dcacc"/>
+    [TestMethod]
+    public void HideUnlinkedParticipant01()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            participant Alice
+            participant Bob
+            participant Carol
+
+            Alice -> Bob : hello
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.Participant("Alice");
+        stringBuilder.Participant("Bob");
+        stringBuilder.Participant("Carol");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Alice", "->", "Bob", "hello");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/sequence-diagram#fc006eba0d9dcacc"/>
+    [TestMethod]
+    public void HideUnlinkedParticipant02()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            hide unlinked
+            participant Alice
+            participant Bob
+            participant Carol
+
+            Alice -> Bob : hello
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.HideUnlinked();
+        stringBuilder.Participant("Alice");
+        stringBuilder.Participant("Bob");
+        stringBuilder.Participant("Carol");
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Alice", "->", "Bob", "hello");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href=""/>
     [TestMethod]
     public void Template()
     {
         // Arrange
-        var example = @"@startuml
-@enduml
-";
+        var example =
+            """
+            @startuml
+            @enduml
+
+            """;
 
         var stringBuilder = new StringBuilder();
 

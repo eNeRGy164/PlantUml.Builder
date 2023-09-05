@@ -15,7 +15,7 @@ public static partial class StringBuilderExtensions
 
         stringBuilder.Append(Constant.Words.Title);
         stringBuilder.Append(Constant.Symbols.Space);
-        stringBuilder.Append(title);
+        stringBuilder.Append(title.Replace("\n", "\\n"));
         stringBuilder.AppendNewLine();
     }
 }

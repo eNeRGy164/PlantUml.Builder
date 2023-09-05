@@ -29,6 +29,10 @@ Following the PlantUML source code.
 | caption \<CAPTION>                  | no          |                |
 | legend [\<ALIGN>]                   | no          |                |
 | endlegend                           | no          |                |
+| skinparam \<NAME> \<VALUE>          | yes         | `SkinParam`    |
+| skinparam \<PREFIX> {               | no          |                |
+| left to right direction             | yes         | `Direction`    |
+| top to bottom direction             | yes         | `Direction`    |
 
 ## Activity Diagrams
 
@@ -102,8 +106,10 @@ Following the PlantUML source code.
 | end box                                                                         | yes         | `BoxEnd`             |
 | delay [\<LABEL>]                                                                | yes         | `Delay`              |
 | divider [\<LABEL>]                                                              | yes         | `Divider`            |
-| hide footbox                                                                    | no          |                      |
-| show footbox                                                                    | no          |                      |
+| hide footbox                                                                    | yes         | `HideFootBox`        |
+| show footbox                                                                    | yes         | `ShowFootBox`        |
+| hide unlinked                                                                   | yes         | `HideUnlinked`       |
+| show unlinked                                                                   | yes         | `ShowUnlinked`       |
 | opt [\<COLOR>] [\<COMMENT>]                                                     | no          |                      |
 | end                                                                             | yes         | `GroupEnd`           |
 | alt [\<COLOR>] [\<COMMENT>]                                                     | partial     | `AltStart`           |
@@ -127,21 +133,21 @@ Following the PlantUML source code.
 | ignore newpage                                                                  | no          |                      |
 | newpage [\<TITLE>]                                                              | yes         | `NewPage`            |
 | create [order \<ORDER>] [\<URL>] [\<COLOR>]                                     | partial     | `Create`             |
-| participant \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                        | partial     | `Participant`        |
-| actor \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                              | partial     | `Actor`              |
-| create actor \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                       | partial     | `CreateActor`        |
-| boundary \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                           | partial     | `Boundary`           |
-| create boundary \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                    | partial     | `CreateBoundary`     |
-| collections \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                        | partial     | `Collections`        |
-| create collections \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                 | partial     | `CreateCollections`  |
-| control \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                            | partial     | `Control`            |
-| create control \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                     | partial     | `CreateControl`      |
-| entity \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                             | partial     | `Entity`             |
-| create entity \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                      | partial     | `CreateEntity`       |
-| database \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                           | partial     | `Database`           |
-| create database \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                    | partial     | `CreateDatabase`     |
-| queue \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                              | partial     | `Queue`              |
-| create queue \<NAME> [order \<ORDER>] [\<URL>] [\<COLOR>]                       | partial     | `CreateQueue`        |
+| participant \<NAME> [\<STEREO>] [order \<ORDER>] [\<URL>] [\<COLOR>]            | partial     | `Participant`        |
+| actor \<NAME> [\<STEREO>] [order \<ORDER>] [\<URL>] [\<COLOR>]                  | partial     | `Actor`              |
+| create actor \<NAME> [\<STEREO>] [order \<ORDER>] [\<URL>] [\<COLOR>]           | partial     | `CreateActor`        |
+| boundary \<NAME> [\<STEREO>] [order \<ORDER>] [\<URL>] [\<COLOR>]               | partial     | `Boundary`           |
+| create boundary \<NAME> [\<STEREO>] [order \<ORDER>] [\<URL>] [\<COLOR>]        | partial     | `CreateBoundary`     |
+| collections \<NAME> [\<STEREO>] [order \<ORDER>] [\<URL>] [\<COLOR>]            | partial     | `Collections`        |
+| create collections \<NAME> [\<STEREO>] [order \<ORDER>] [\<URL>] [\<COLOR>]     | partial     | `CreateCollections`  |
+| control \<NAME> [\<STEREO>] [order \<ORDER>] [\<URL>] [\<COLOR>]                | partial     | `Control`            |
+| create control \<NAME> [\<STEREO>] [order \<ORDER>] [\<URL>] [\<COLOR>]         | partial     | `CreateControl`      |
+| entity \<NAME> [\<STEREO>] [order \<ORDER>] [\<URL>] [\<COLOR>]                 | partial     | `Entity`             |
+| create entity \<NAME> [\<STEREO>] [order \<ORDER>] [\<URL>] [\<COLOR>]          | partial     | `CreateEntity`       |
+| database \<NAME> [\<STEREO>] [order \<ORDER>] [\<URL>] [\<COLOR>]               | partial     | `Database`           |
+| create database \<NAME> [\<STEREO>] [order \<ORDER>] [\<URL>] [\<COLOR>]        | partial     | `CreateDatabase`     |
+| queue \<NAME> [\<STEREO>] [order \<ORDER>] [\<URL>] [\<COLOR>]                  | partial     | `Queue`              |
+| create queue \<NAME> [\<STEREO>] [order \<ORDER>] [\<URL>] [\<COLOR>]           | partial     | `CreateQueue`        |
 | ref[\<COLOR>] over \<NAME>[,\<NAME>] : [\<URL>] [\<TEXT>]                       | partial     | `Ref`                |
 | ref[\<COLOR>] over \<NAME>[,\<NAME>]                                            | partial     | `StartRef`           |
 | end ref                                                                         | yes         | `EndRef`             |

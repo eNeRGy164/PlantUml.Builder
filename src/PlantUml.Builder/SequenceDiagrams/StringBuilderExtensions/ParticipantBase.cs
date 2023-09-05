@@ -7,11 +7,13 @@ public static partial class StringBuilderExtensions
     /// </summary>
     /// <param name="participantType">The type of participant.</param>
     /// <param name="name">The name of the participant.</param>
-    /// <param name="color">Optional color for the participant.</param>
-    /// <param name="order">Optional order of the participant.</param>
+    /// <param name="color">Color for the participant.</param>
+    /// <param name="order">Order of the participant.</param>
+    /// <param name="stereotype">Stereotype of the participant.</param>
+    /// <param name="customSpot">Custom spot of the stereotype.</param>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <see langword="null"/>, empty of only white space.</exception>
-    internal static void ParticipantBase(this StringBuilder stringBuilder, ParticipantType participantType, ParticipantName name, Color color, int? order)
+    internal static void ParticipantBase(this StringBuilder stringBuilder, ParticipantType participantType, ParticipantName name, Color color, int? order, string stereotype, CustomSpot customSpot)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
@@ -22,6 +24,12 @@ public static partial class StringBuilderExtensions
         }
 
         stringBuilder.Append(name);
+
+        if (stereotype is not null)
+        {
+            stringBuilder.Append(Constant.Symbols.Space);
+            stringBuilder.StereoType(stereotype, customSpot);
+        }
 
         if (order.HasValue)
         {
@@ -45,16 +53,18 @@ public static partial class StringBuilderExtensions
     /// </summary>
     /// <param name="name">The name of the participant.</param>
     /// <param name="participantType">The type of participant.</param>
-    /// <param name="color">Optional color for the participant.</param>
-    /// <param name="order">Optional order of the participant.</param>
+    /// <param name="color">Color for the participant.</param>
+    /// <param name="order">Order of the participant.</param>
+    /// <param name="stereotype">Stereotype of the participant.</param>
+    /// <param name="customSpot">Custom spot of the stereotype.</param>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <see langword="null"/>, empty of only white space.</exception>
-    internal static void CreateParticipantBase(this StringBuilder stringBuilder, ParticipantName name, ParticipantType participantType = ParticipantType.None, Color color = null, int? order = null)
+    internal static void CreateParticipantBase(this StringBuilder stringBuilder, ParticipantName name, ParticipantType participantType, Color color, int? order, string stereotype, CustomSpot customSpot)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
         stringBuilder.Append(Constant.Words.Create);
         stringBuilder.Append(Constant.Symbols.Space);
-        stringBuilder.ParticipantBase(participantType, name, color, order);
+        stringBuilder.ParticipantBase(participantType, name, color, order, stereotype, customSpot);
     }
 }
