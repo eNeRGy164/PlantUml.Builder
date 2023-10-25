@@ -37,7 +37,7 @@ public static class TestHelpers
             throw new ArgumentException($"Data array must contain a {nameof(MethodWithArgumentData)} instance.", nameof(data));
         }
 
-        return $"Method \"{testData.Method}\" should throw an argument exception when StringBuilder is `null`";
+        return $"{testData.Method} - Method \"{testData.Method}\" should throw an argument exception when StringBuilder is `null`";
     }
 
     /// <summary>
@@ -69,6 +69,6 @@ public static class TestHelpers
 
         var pluralS = testData.Parameters.Length == 1 ? "" : "s";
 
-        return $"Method \"{testData.Method}({types})\" with parameter{pluralS} ({values}) should render as \"{testData.Expected}\\n\"";
+        return $"{testData.Method} - Method \"{testData.Method}({types})\" with parameter{pluralS} ({values}) should render as \"{testData.Expected}\\n\"";
     }
 }
