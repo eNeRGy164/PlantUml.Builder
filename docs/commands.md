@@ -64,6 +64,7 @@ Following the PlantUML source code.
 | [\<VISIBILITY>] entity \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]] {           | yes         | `EntityStart`           |
 | }                                                                                                                                                                                                       | yes         | `EntityEnd`             |
 | circle \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                             | no          |                         |
+| diamond \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                            | yes         | `Diamond`               |
 | hide [\<NAME>] [empty] \<PORTION>                                                                                                                                                                       | yes         | `HideEntityPortion`     |
 | show [\<NAME>] [empty] \<PORTION>                                                                                                                                                                       | no          |                         |
 | hide \<VISIBILITY>[,\<VISIBILITY>*] \<PORTION>                                                                                                                                                          | yes         | `HideEntityPortion`     |
@@ -72,18 +73,17 @@ Following the PlantUML source code.
 
 ## Object Diagrams
 
-| Command                                                                                                                                                                      | Implemented | Method              |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------------------- |
-| object \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>]                                                                                         | yes         | `Object`            |
-| \<OBJECT> : [\<VISIBILITY>] \<MEMBER>                                                                                                                                        | yes         | `MemberDeclaration` |
-| object \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] {                                                                                       | yes         | `ObjectStart`       |
-| [\<VISIBILITY>] \<MEMBER>                                                                                                                                                    | yes         | `InlineClassMember` |
-| }                                                                                                                                                                            | yes         | `ObjectEnd`         |
-| diamond \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]] | yes         | `Diamond`           |
-| map \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] {                                                                                          | yes         | `MapStart`          |
-| \<COLUMNA> => \<COLUMNB>                                                                                                                                                     | yes         | `InlineClassMember` |
-| \<COLUMN> *-> \<OBJECT>                                                                                                                                                      | yes         | `InlineClassMember` |
-| }                                                                                                                                                                            | yes         | `MapEnd`            |
+| Command                                                                                | Implemented | Method              |
+| -------------------------------------------------------------------------------------- | ----------- | ------------------- |
+| object \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>]   | yes         | `Object`            |
+| \<OBJECT> : [\<VISIBILITY>] \<MEMBER>                                                  | yes         | `MemberDeclaration` |
+| object \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] { | yes         | `ObjectStart`       |
+| [\<VISIBILITY>] \<MEMBER>                                                              | yes         | `InlineClassMember` |
+| }                                                                                      | yes         | `ObjectEnd`         |
+| map \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] {    | yes         | `MapStart`          |
+| \<COLUMNA> => \<COLUMNB>                                                               | yes         | `InlineClassMember` |
+| \<COLUMN> *-> \<OBJECT>                                                                | yes         | `InlineClassMember` |
+| }                                                                                      | yes         | `MapEnd`            |
 
 ## Sequence Diagrams
 

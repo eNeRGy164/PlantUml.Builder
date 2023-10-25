@@ -1,6 +1,6 @@
 using static PlantUml.Builder.TestData;
 
-namespace PlantUml.Builder.ObjectDiagrams.Tests;
+namespace PlantUml.Builder.ClassDiagrams.Tests;
 
 [TestClass]
 public class DiamondTests

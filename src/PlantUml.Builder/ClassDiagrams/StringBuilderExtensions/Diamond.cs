@@ -1,6 +1,4 @@
-using PlantUml.Builder.ClassDiagrams;
-
-namespace PlantUml.Builder.ObjectDiagrams;
+namespace PlantUml.Builder.ClassDiagrams;
 
 public static partial class StringBuilderExtensions
 {

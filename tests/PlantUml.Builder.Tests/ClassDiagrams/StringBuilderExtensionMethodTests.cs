@@ -28,6 +28,7 @@ public class StringBuilderExtensionMethodTests
         yield return new object[] { new MethodWithArgumentData("Class", AnyString) };
         yield return new object[] { new MethodWithArgumentData("ClassStart", AnyString) };
         yield return new object[] { new MethodWithArgumentData("ClassEnd") };
+        yield return new object[] { new MethodWithArgumentData("Diamond", AnyString) };
         yield return new object[] { new MethodWithArgumentData("Entity", AnyString) };
         yield return new object[] { new MethodWithArgumentData("EntityStart", AnyString) };
         yield return new object[] { new MethodWithArgumentData("EntityEnd") };
