@@ -22,7 +22,23 @@ public static partial class StringBuilderExtensions
     {
         ArgumentException.ThrowIfNullOrWhitespace(name);
 
-        stringBuilder.Append(type.ToString().ToLowerInvariant());
+        switch (type)
+        {
+            case ClassType.ShortCircle:
+                stringBuilder.Append('(');
+                stringBuilder.Append(')');
+                break;
+
+            case ClassType.ShortDiamond:
+                stringBuilder.Append('<');
+                stringBuilder.Append('>');
+                break;
+
+            default:
+                stringBuilder.Append(type.ToString().ToLowerInvariant());
+                break;
+        }
+
         stringBuilder.Append(Constant.Symbols.Space);
 
         if (displayName is not null)

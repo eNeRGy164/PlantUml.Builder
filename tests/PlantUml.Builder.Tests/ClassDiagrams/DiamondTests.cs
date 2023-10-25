@@ -60,7 +60,7 @@ public class DiamondTests
         yield return new object[] { new MethodExpectationTestData("Diamond", "diamond \"Display Name\" as name", "name", "Display Name") };
         yield return new object[] { new MethodExpectationTestData("Diamond", "diamond name<generic>", "name", null, "generic") };
         yield return new object[] { new MethodExpectationTestData("Diamond", "diamond name <<stereotype>>", "name", null, null, "stereotype") };
-        yield return new object[] { new MethodExpectationTestData("Diamond", "diamond name <<(A,#Blue)stereotype>>", "name", null, null, "stereotype", new CustomSpot('A', NamedColor.Blue)) };
+        yield return new object[] { new MethodExpectationTestData("Diamond", "diamond name <<(A,#AABBCC)stereotype>>", "name", null, null, "stereotype", new CustomSpot('A', "AABBCC")) };
         yield return new object[] { new MethodExpectationTestData("Diamond", "diamond name $tag", "name", null, null, null, null, "tag") };
         yield return new object[] { new MethodExpectationTestData("Diamond", "diamond name [[https://blog.hompus.nl/]]", "name", null, null, null, null, null, new Uri("https://blog.hompus.nl")) };
         yield return new object[] { new MethodExpectationTestData("Diamond", "diamond name #Blue", "name", null, null, null, null, null, null, (Color)NamedColor.Blue) };
@@ -68,7 +68,9 @@ public class DiamondTests
         yield return new object[] { new MethodExpectationTestData("Diamond", "diamond name ##[dashed]", "name", null, null, null, null, null, null, null, null, LineStyle.Dashed) };
         yield return new object[] { new MethodExpectationTestData("Diamond", "diamond name extends extend1,extend2", "name", null, null, null, null, null, null, null, null, null, new[] { "extend1", "extend2" }) };
         yield return new object[] { new MethodExpectationTestData("Diamond", "diamond name implements implement1,implement2", "name", null, null, null, null, null, null, null, null, null, null, new[] { "implement1", "implement2" }) };
-        yield return new object[] { new MethodExpectationTestData("Diamond", "diamond \"Display Name\" as name<generic> <<(A,#Blue)stereotype>> $tag [[https://blog.hompus.nl/]] #Blue ##[dashed]Blue extends extend1,extend2 implements implement1,implement2", "name", "Display Name", "generic", "stereotype", new CustomSpot('A', NamedColor.Blue), "tag", new Uri("https://blog.hompus.nl"), (Color)NamedColor.Blue, (Color)NamedColor.Blue, LineStyle.Dashed, new[] { "extend1", "extend2" }, new[] { "implement1", "implement2" }) };
+        yield return new object[] { new MethodExpectationTestData("Diamond", "diamond \"Display Name\" as name<generic> <<(A,#AABBCC)stereotype>> $tag [[https://blog.hompus.nl/]] #Blue ##[dashed]Blue extends extend1,extend2 implements implement1,implement2", "name", "Display Name", "generic", "stereotype", new CustomSpot('A', "AABBCC"), "tag", new Uri("https://blog.hompus.nl"), (Color)NamedColor.Blue, (Color)NamedColor.Blue, LineStyle.Dashed, new[] { "extend1", "extend2" }, new[] { "implement1", "implement2" }) };
+        yield return new object[] { new MethodExpectationTestData("Diamond", "<> name", "name", null, null, null, null, null, null, null, null, null, null, null, true) };
+        yield return new object[] { new MethodExpectationTestData("Diamond", "<> \"Display Name\" as name<generic> <<(A,#AABBCC)stereotype>> $tag [[https://blog.hompus.nl/]] #Blue ##[dashed]Blue extends extend1,extend2 implements implement1,implement2", "name", "Display Name", "generic", "stereotype", new CustomSpot('A', "AABBCC"), "tag", new Uri("https://blog.hompus.nl"), (Color)NamedColor.Blue, (Color)NamedColor.Blue, LineStyle.Dashed, new[] { "extend1", "extend2" }, new[] { "implement1", "implement2" }, true) };
     }
 
     public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);

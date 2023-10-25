@@ -39,5 +39,15 @@ public enum ClassType
     /// <summary>
     /// Represents a diamond shape, often used to denote decisions or aggregations.
     /// </summary>
-    Diamond
+    Diamond,
+
+    /// <summary>
+    /// Represents a circle shape in short form. This can be useful for specific diagram types or custom representations.
+    /// </summary>
+    ShortCircle,
+
+    /// <summary>
+    /// Represents a diamond shape in short form, often used to denote decisions or aggregations.
+    /// </summary>
+    ShortDiamond,
 }
