@@ -70,6 +70,7 @@ Following the PlantUML source code.
 | hide \<VISIBILITY>[,\<VISIBILITY>*] \<PORTION>                                                                                                                                                          | yes         | `HideEntityPortion`     |
 | show \<VISIBILITY>[,\<VISIBILITY>*] \<PORTION>                                                                                                                                                          | no          |                         |
 | set namespaceseparator \<SEPARATOR>                                                                                                                                                                     | yes         | `SetNamespaceSeparator` |
+| remove \<WHAT>                                                                                                                                                                                          | yes         | `Remove`                |
 
 ## Object Diagrams
 
