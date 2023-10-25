@@ -51,7 +51,16 @@ public static partial class StringBuilderExtensions
             stringBuilder.Append(Constant.Symbols.Space);
         }
 
-        stringBuilder.Append(name);
+        if (name.Contains(Constant.Symbols.Space))
+        {
+            stringBuilder.Append(Constant.Symbols.Quote);
+            stringBuilder.Append(name);
+            stringBuilder.Append(Constant.Symbols.Quote);
+        }
+        else
+        {
+            stringBuilder.Append(name);
+        }
 
         if (generics is not null)
         {

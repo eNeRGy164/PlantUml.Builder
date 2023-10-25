@@ -57,6 +57,7 @@ public class ClassTests
     {
         // Define the valid notations and expected results for different overloads
         yield return new object[] { new MethodExpectationTestData("Class", "class classA", "classA") };
+        yield return new object[] { new MethodExpectationTestData("Class", "class \"class A\"", "class A") };
         yield return new object[] { new MethodExpectationTestData("Class", "class \"Class A\" as classA", "classA", "Class A") };
         yield return new object[] { new MethodExpectationTestData("Class", "abstract class classA", "classA", null, true) };
         yield return new object[] { new MethodExpectationTestData("Class", "class classA<Object>", "classA", null, null, "Object") };
