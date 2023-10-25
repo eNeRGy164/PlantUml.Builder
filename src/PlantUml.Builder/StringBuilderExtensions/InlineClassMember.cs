@@ -18,6 +18,7 @@ public static partial class StringBuilderExtensions
             stringBuilder.Append(Constant.Modifiers.Start);
             stringBuilder.Append(Constant.Words.Abstract);
             stringBuilder.Append(Constant.Modifiers.End);
+            stringBuilder.Append(Constant.Symbols.Space);
         }
 
         if (classMember.IsStatic)
@@ -25,6 +26,7 @@ public static partial class StringBuilderExtensions
             stringBuilder.Append(Constant.Modifiers.Start);
             stringBuilder.Append(Constant.Words.Static);
             stringBuilder.Append(Constant.Modifiers.End);
+            stringBuilder.Append(Constant.Symbols.Space);
         }
 
         stringBuilder.VisibilityChar(classMember.Visibility);

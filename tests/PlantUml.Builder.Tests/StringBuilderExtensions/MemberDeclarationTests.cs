@@ -58,8 +58,8 @@ public class MemberDeclarationTests
     {
         yield return new object[] { new MemberDeclarationData("class : data", "class", "data") };
         yield return new object[] { new MemberDeclarationData("class : member", "class", "member") };
-        yield return new object[] { new MemberDeclarationData("class : {abstract}member", "class", "member", IsAbstract: true) };
-        yield return new object[] { new MemberDeclarationData("class : {static}member", "class", "member", IsStatic: true) };
+        yield return new object[] { new MemberDeclarationData("class : {abstract} member", "class", "member", IsAbstract: true) };
+        yield return new object[] { new MemberDeclarationData("class : {static} member", "class", "member", IsStatic: true) };
         yield return new object[] { new MemberDeclarationData("class : +member", "class", "member", Visibility: VisibilityModifier.Public) };
         yield return new object[] { new MemberDeclarationData("class : ~member", "class", "member", Visibility: VisibilityModifier.PackagePrivate) };
         yield return new object[] { new MemberDeclarationData("class : #member", "class", "member", Visibility: VisibilityModifier.Protected) };
