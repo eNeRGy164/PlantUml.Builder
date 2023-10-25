@@ -17,14 +17,15 @@ public static partial class StringBuilderExtensions
     /// <param name="lineStyle">Optional line style. See <see cref="LineStyle"/> for possible values.</param>
     /// <param name="extends">Optional extends.</param>
     /// <param name="implements">Optional implementations.</param>
+    /// <param name="shortForm">Indicates whether to use the short form. Default is <see langword="false"/>.</param>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> is <see langword="null"/>, empty of only white space.</exception>
     /// <seealso href="https://github.com/plantuml/plantuml/blob/master/src/net/sourceforge/plantuml/classdiagram/command/CommandCreateClass.java"/>
-    public static void Circle(this StringBuilder stringBuilder, string name, string displayName = default, string generics = default, string stereotype = default, CustomSpot customSpot = default, string tag = default, Uri url = default, Color backgroundColor = default, Color lineColor = default, LineStyle lineStyle = LineStyle.None, string[] extends = default, string[] implements = default)
+    public static void Circle(this StringBuilder stringBuilder, string name, string displayName = default, string generics = default, string stereotype = default, CustomSpot customSpot = default, string tag = default, Uri url = default, Color backgroundColor = default, Color lineColor = default, LineStyle lineStyle = LineStyle.None, string[] extends = default, string[] implements = default, bool shortForm = false)
     {
         ArgumentNullException.ThrowIfNull(stringBuilder);
 
-        stringBuilder.ClassBase(ClassType.Circle, name, displayName, generics, stereotype, customSpot, tag, url, backgroundColor, lineColor, lineStyle, extends, implements);
+        stringBuilder.ClassBase(!shortForm ? ClassType.Circle : ClassType.ShortCircle, name, displayName, generics, stereotype, customSpot, tag, url, backgroundColor, lineColor, lineStyle, extends, implements);
         stringBuilder.AppendNewLine();
     }
 }
