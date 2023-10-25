@@ -25,6 +25,7 @@ public class StringBuilderExtensionMethodTests
     private static IEnumerable<object[]> GetStringBuilderExtensionMethods()
     {
         // Define the valid notations and expected results for different overloads
+        yield return new object[] { new MethodWithArgumentData("Circle", AnyString) };
         yield return new object[] { new MethodWithArgumentData("Class", AnyString) };
         yield return new object[] { new MethodWithArgumentData("ClassStart", AnyString) };
         yield return new object[] { new MethodWithArgumentData("ClassEnd") };
