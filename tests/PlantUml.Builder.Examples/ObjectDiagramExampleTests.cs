@@ -1,4 +1,5 @@
 using PlantUml.Builder.ObjectDiagrams;
+using PlantUml.Builder.ClassDiagrams;
 
 namespace PlantUml.Builder.Examples;
 
