@@ -40,6 +40,7 @@ public class StringBuilderExtensionMethodTests
         yield return new object[] { new MethodWithArgumentData("InterfaceEnd") };
         yield return new object[] { new MethodWithArgumentData("NamespaceStart", AnyString) };
         yield return new object[] { new MethodWithArgumentData("NamespaceEnd") };
+        yield return new object[] { new MethodWithArgumentData("Remove", AnyString) };
     }
 
     public static string GetStringBuilderExtensionMethodTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetStringBuilderExtensionMethodTestDisplayName(data);

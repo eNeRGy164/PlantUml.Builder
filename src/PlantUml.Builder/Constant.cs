@@ -97,6 +97,7 @@ public class Constant
         public const string Over = "over";
         public const string Page = "page";
         public const string Ref = "ref";
+        public const string Remove = "remove";
         public const string Resume = "resume";
         public const string Return = "return";
         public const string Right = "right";
