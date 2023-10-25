@@ -36,8 +36,8 @@ public class InlineClassMemberTests
     private static IEnumerable<object[]> GetValidNotations()
     {
         yield return new object[] { new ClassMemberData("member", "member") };
-        yield return new object[] { new ClassMemberData("{abstract}member", "member", IsAbstract: true) };
-        yield return new object[] { new ClassMemberData("{static}member", "member", IsStatic: true) };
+        yield return new object[] { new ClassMemberData("{abstract} member", "member", IsAbstract: true) };
+        yield return new object[] { new ClassMemberData("{static} member", "member", IsStatic: true) };
         yield return new object[] { new ClassMemberData("+member", "member", Visibility: VisibilityModifier.Public) };
         yield return new object[] { new ClassMemberData("~member", "member", Visibility: VisibilityModifier.PackagePrivate) };
         yield return new object[] { new ClassMemberData("#member", "member", Visibility: VisibilityModifier.Protected) };
