@@ -1,21 +1,39 @@
-name: .NET Core
+name: Continuous
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main           # Only run on pushes to main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main           # Only run on PRs targeting main
+  release:
+    types: [created]   # Run when a release is created
+
+# Least privilege permissions for the workflow by default
+permissions:
+  contents: read
+  packages: none
+  id-token: none
+  attestations: none
 
 jobs:
   build:
+    name: Build & Push
+    runs-on: ubuntu-24.04 # Use a modern, stable Ubuntu runner
 
-    runs-on: ubuntu-latest
+    # This job needs to publish, attest, and sign—so grant only here
+    permissions:
+      contents: read       # Allow only reading repo content
+      packages: write      # Allow publishing to GitHub Packages
+      id-token: write      # For OIDC-based signing/provenance
+      attestations: write  # For attest-sbom (SBOM attestation)
 
     steps:
     - name: Fetch all history for all tags and branches
-      uses: actions/checkout@v3
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
       with:
-        fetch-depth: 0
+        fetch-depth: 0    # Fetch full history, so GitVersion and clean git state work
 
     - name: Install GitVersion
       uses: gittools/actions/gitversion/setup@v0
@@ -26,12 +44,12 @@ jobs:
       id: gitversion
       uses: gittools/actions/gitversion/execute@v0
 
-    - name: Setup .NET Core
+    - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: |
           6.x
-          7.x
+          10.x
 
     - name: Install dependencies
       run: dotnet restore
@@ -50,21 +68,20 @@ jobs:
         outputFormat: lcov
         excludes: '[PlantUml.Builder.Tests]*'
 
-    - name: coveralls
-      uses: coverallsapp/github-action@v2
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: tests/PlantUml.Builder.Tests/lcov.info
+    # Report test coverage to Coveralls
+    - name: Report Coveralls
+      uses: coverallsapp/github-action@648a8eb78e6d50909eff900e4ec85cab4524a45b
 
     - name: Pack
       run: dotnet pack -v normal --configuration Release --no-restore --include-symbols --include-source -p:PackageVersion=${{ steps.gitversion.outputs.NuGetVersion }} src/PlantUml.Builder/PlantUml.Builder.csproj
 
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v3
+    # Upload all build artifacts (NuGet packages, hash files, etc.) for inspection or later release
+    - name: 'Publish: Artifacts'
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
       with:
         name: nupkg
         path: ./src/PlantUml.Builder/bin/Release/*.nupkg
- 
+
     - name: Push NuGet
       if: ${{ github.ref == 'refs/heads/main' }}
       run: dotnet nuget push ./src/PlantUml.Builder/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
