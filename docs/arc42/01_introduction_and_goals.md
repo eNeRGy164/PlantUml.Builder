@@ -1,6 +1,8 @@
 # 1. Introduction and Goals
 
-PlantUML Builder is a .NET library that provides [StringBuilder][stringbuilder-docs] extension methods to generate PlantUML diagrams programmatically. It helps teams produce consistent diagram source text as part of code, tooling, or documentation workflows. A developer can keep architectural diagrams in sync with code by generating PlantUML text alongside application builds and documentation updates.
+PlantUML Builder is a .NET library that provides [StringBuilder][stringbuilder-docs] extension methods to generate PlantUML diagrams programmatically.
+It helps teams produce consistent diagram source text as part of code, tooling, or documentation workflows.
+A developer can keep architectural diagrams in sync with code by generating PlantUML text alongside application builds and documentation updates.
 
 **Key requirements and driving forces:**
 
