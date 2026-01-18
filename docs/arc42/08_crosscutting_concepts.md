@@ -75,6 +75,18 @@ The `docs/commands.md` document is used as the canonical overview of implemented
 For example syntax and behavior, consult the official [PlantUML website][plantuml-site] and the [PlantUML source repository][plantuml-repo],
 which often reveals options that are not fully documented.
 
+## 8.5 Value Objects
+
+Small value objects model PlantUML primitives that have formatting rules or common string shapes. These are used to avoid ad-hoc string handling in
+extension methods and keep formatting consistent across commands.
+
+Examples:
+
+- [`Color`][color] normalizes color values, ensuring the `#` prefix and providing a `B` format that wraps with `[]` when required.
+- [`Alignment`][alignment] normalizes horizontal alignment values and returns an empty string for unsupported values to avoid emitting invalid commands.
+
+Use these value objects in public extension method signatures where possible to keep APIs typed and self-describing.
+
 [stringbuilder-docs]: https://learn.microsoft.com/dotnet/api/system.text.stringbuilder?view=net-10.0&wt.mc_id=AZ-MVP-5004268
 [argument-null-exception-docs]: https://learn.microsoft.com/dotnet/api/system.argumentnullexception?view=net-10.0&wt.mc_id=AZ-MVP-5004268
 [argument-exception-docs]: https://learn.microsoft.com/dotnet/api/system.argumentexception?view=net-10.0&wt.mc_id=AZ-MVP-5004268
@@ -86,6 +98,7 @@ which often reveals options that are not fully documented.
 [line-style]: ../../src/PlantUml.Builder/LineStyle.cs
 [visibility-modifier]: ../../src/PlantUml.Builder/VisibilityModifier.cs
 [color]: ../../src/PlantUml.Builder/Color.cs
+[alignment]: ../../src/PlantUml.Builder/Alignment.cs
 [class-tests]: ../../tests/PlantUml.Builder.Tests/ClassDiagrams/ClassTests.cs
 [auto-number-tests]: ../../tests/PlantUml.Builder.Tests/SequenceDiagrams/StringBuilderExtensions/AutoNumberTests.cs
 [namespace-tests]: ../../tests/PlantUml.Builder.Tests/ClassDiagrams/NamespaceTests.cs

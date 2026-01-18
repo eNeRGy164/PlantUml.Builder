@@ -16,6 +16,12 @@ methods to emit valid PlantUML diagram text.
     consistency, and provide XML docs for public extensions with parameter constraints and
     exceptions.
 
+> [WARNING]
+> The arc42 documentation is the source of truth for architecture decisions.
+> You are not allowed to create non-conforming code or documentation without
+> explicit approval from the architecture owner. Always confirm, and put out a warning
+> if you see non-conforming code or documentation.
+
 ## Repository layout
 
 - `src/PlantUml.Builder`: library source.
@@ -38,6 +44,7 @@ methods to emit valid PlantUML diagram text.
   the official PlantUML documentation (for example, [Sequence Diagram][plantuml-sequence-diagram]).
   These examples should both showcase usage and verify the emitted text matches the
   published samples exactly.
-- Run the test suite after adding or modifying tests (use `dotnet test PlantUml.Builder.sln`).
+- Use reference-style links when linking to source code files in documentation.
+- Run the test suite after every code change (use `dotnet test PlantUml.Builder.sln`).
 
 [plantuml-sequence-diagram]: https://plantuml.com/sequence-diagram
