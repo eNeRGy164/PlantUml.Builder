@@ -66,6 +66,7 @@ public class Constant
         public const string As = "as";
         public const string Auto = "auto";
         public const string Bottom = "bottom";
+        public const string Center = "center";
         public const string Box = "box";
         public const string Create = "create";
         public const string Deactivate = "deactivate";
