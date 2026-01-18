@@ -57,7 +57,7 @@ Following the PlantUML source code.
 | enum \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                               | yes         | `Enum`                  |
 | [\<VISIBILITY>] enum \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]] {             | yes         | `EnumStart`             |
 | }                                                                                                                                                                                                       | yes         | `EnumEnd`               |
-| annotation \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>]  [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                        | no          |                         |
+| annotation \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                         | no          |                         |
 | [abstract] class \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                   | yes         | `Class`                 |
 | [\<VISIBILITY>] [abstract] class \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]] { | yes         | `ClassStart`            |
 | }                                                                                                                                                                                                       | yes         | `ClassEnd`              |
@@ -66,12 +66,12 @@ Following the PlantUML source code.
 | }                                                                                                                                                                                                       | yes         | `EntityEnd`             |
 | circle \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                             | yes         | `Circle`                |
 | diamond \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                            | yes         | `Diamond`               |
-| abstract \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>]  [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                        | no          |                         |
-| exception \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>]  [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                        | no          |                         |
-| metaclass \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>]  [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                        | no          |                         |
-| protocol \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>]  [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                        | no          |                         |
-| stereotype \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>]  [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                        | no          |                         |
-| struct \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>]  [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                        | no          |                         |
+| abstract \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                           | no          |                         |
+| exception \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                          | no          |                         |
+| metaclass \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                          | no          |                         |
+| protocol \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                           | no          |                         |
+| stereotype \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                         | no          |                         |
+| struct \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] [##\<LINESTYLE>\<LINECOLOR>] [\<EXTENDS>[,\<EXTENDS>]] [\<IMPLEMENTS>[,\<IMPLEMENTS>]]                             | no          |                         |
 | hide [\<NAME>] [empty] \<PORTION>                                                                                                                                                                       | yes         | `HideEntityPortion`     |
 | show [\<NAME>] [empty] \<PORTION>                                                                                                                                                                       | no          |                         |
 | hide \<VISIBILITY>[,\<VISIBILITY>*] \<PORTION>                                                                                                                                                          | yes         | `HideEntityPortion`     |
@@ -90,7 +90,7 @@ Following the PlantUML source code.
 | }                                                                                      | yes         | `ObjectEnd`         |
 | map \<NAME> [as \<DISPLAY>] [\<GENERIC>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<BACK>] {    | yes         | `MapStart`          |
 | \<COLUMNA> => \<COLUMNB>                                                               | yes         | `InlineClassMember` |
-| \<COLUMN> *-> \<OBJECT>                                                                | yes         | `InlineClassMember` |
+| \<COLUMN> \*-> \<OBJECT>                                                               | yes         | `InlineClassMember` |
 | }                                                                                      | yes         | `MapEnd`            |
 
 ## Sequence Diagrams
@@ -183,3 +183,139 @@ Following the PlantUML source code.
 | end note                                                                        | yes         | `EndNote`            |
 | end hnote                                                                       | yes         | `EndHNote`           |
 | end rnote                                                                       | yes         | `EndRNote`           |
+
+## Use Case Diagrams
+
+| Command                                                | Implemented | Method      |
+| ------------------------------------------------------ | ----------- | ----------- |
+| actor \<NAME> [as \<DISPLAY>] [\<STEREO>] [\<COLOR>]   | no          |             |
+| usecase \<NAME> [as \<DISPLAY>] [\<STEREO>] [\<COLOR>] | no          |             |
+| (Use Case)                                             | no          |             |
+| :Actor:                                                | no          |             |
+| \<ACTOR> -- \<USECASE>                                 | no          |             |
+| \<USECASE> ..> \<USECASE> : <<include>>                | no          |             |
+| \<USECASE> ..> \<USECASE> : <<extend>>                 | no          |             |
+| left to right direction                                | yes         | `Direction` |
+| package \<NAME> {                                      | no          |             |
+| }                                                      | no          |             |
+| note \<POSITION> [\<BGCOLOR>] : \<NOTE>                | yes         | `Note`      |
+
+## Component Diagrams
+
+| Command                                                                     | Implemented | Method |
+| --------------------------------------------------------------------------- | ----------- | ------ |
+| component \<NAME> [as \<DISPLAY>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<COLOR>] | no          |        |
+| interface \<NAME> [as \<DISPLAY>] [\<STEREO>] [\<TAGS>] [\<URL>] [\<COLOR>] | no          |        |
+| () \<NAME>                                                                  | no          |        |
+| [\<COMPONENT>]                                                              | no          |        |
+| \<COMPONENT> -- \<COMPONENT>                                                | no          |        |
+| \<COMPONENT> ..> \<COMPONENT>                                               | no          |        |
+| port \<NAME>                                                                | no          |        |
+| portin \<NAME>                                                              | no          |        |
+| portout \<NAME>                                                             | no          |        |
+| hide \<NAME>                                                                | no          |        |
+| show \<NAME>                                                                | no          |        |
+
+## Deployment Diagrams
+
+| Command                                                 | Implemented | Method |
+| ------------------------------------------------------- | ----------- | ------ |
+| node \<NAME> [as \<DISPLAY>] [\<STEREO>] [\<COLOR>]     | no          |        |
+| artifact \<NAME> [as \<DISPLAY>] [\<STEREO>] [\<COLOR>] | no          |        |
+| \<NODE> -- \<NODE>                                      | no          |        |
+| \<NODE> -- \<ARTIFACT>                                  | no          |        |
+| package \<NAME> {                                       | no          |        |
+| }                                                       | no          |        |
+
+## State Diagrams
+
+| Command                          | Implemented | Method |
+| -------------------------------- | ----------- | ------ |
+| [*] --> \<STATE>                 | no          |        |
+| \<STATE> --> \<STATE> : \<EVENT> | no          |        |
+| state \<NAME> {                  | no          |        |
+| }                                | no          |        |
+| hide empty description           | no          |        |
+
+## Timing Diagrams
+
+| Command               | Implemented | Method |
+| --------------------- | ----------- | ------ |
+| robust \<NAME>        | no          |        |
+| binary \<NAME>        | no          |        |
+| clock \<NAME>         | no          |        |
+| @\<TIME>              | no          |        |
+| \<SIGNAL> is \<VALUE> | no          |        |
+
+## Gantt Diagrams
+
+| Command                     | Implemented | Method |
+| --------------------------- | ----------- | ------ |
+| project starts \<DATE>      | no          |        |
+| [\<TASK>] lasts \<DURATION> | no          |        |
+| [\<TASK>] starts \<DATE>    | no          |        |
+| [\<TASK>] ends \<DATE>      | no          |        |
+| milestone \<NAME>           | no          |        |
+
+## MindMap Diagrams
+
+| Command                 | Implemented | Method      |
+| ----------------------- | ----------- | ----------- |
+| \* \<TEXT>              | no          |             |
+| \*\* \<TEXT>            | no          |             |
+| \*\*\* \<TEXT>          | no          |             |
+| left to right direction | yes         | `Direction` |
+
+## WBS Diagrams
+
+| Command                 | Implemented | Method      |
+| ----------------------- | ----------- | ----------- |
+| \* \<TEXT>              | no          |             |
+| \*\* \<TEXT>            | no          |             |
+| \*\*\* \<TEXT>          | no          |             |
+| left to right direction | yes         | `Direction` |
+
+## Network Diagrams
+
+| Command             | Implemented | Method |
+| ------------------- | ----------- | ------ |
+| \<NODE> -- \<NODE>  | no          |        |
+| \<NODE> ..> \<NODE> | no          |        |
+| \<NODE> --> \<NODE> | no          |        |
+
+## ER Diagrams
+
+| Command                        | Implemented | Method |
+| ------------------------------ | ----------- | ------ |
+| entity \<NAME>                 | no          |        |
+| \<ENTITY> }\|--\|\| \<ENTITY>  | no          |        |
+| \<ENTITY> \|\|--o{ \<ENTITY>   | no          |        |
+| \<ENTITY> \|\|--\|\| \<ENTITY> | no          |        |
+
+## C4 Diagrams
+
+| Command                                         | Implemented | Method |
+| ----------------------------------------------- | ----------- | ------ |
+| Container(\<ALIAS>, \<LABEL>, \<TECH>, \<DESC>) | no          |        |
+| Component(\<ALIAS>, \<LABEL>, \<TECH>, \<DESC>) | no          |        |
+| System(\<ALIAS>, \<LABEL>, \<DESC>)             | no          |        |
+| Person(\<ALIAS>, \<LABEL>, \<DESC>)             | no          |        |
+| Rel(\<FROM>, \<TO>, \<LABEL>)                   | no          |        |
+
+## Wireframe (SALT)
+
+| Command     | Implemented | Method |
+| ----------- | ----------- | ------ |
+| salt        | no          |        |
+| {           | no          |        |
+| }           | no          |        |
+| [\<WIDGET>] | no          |        |
+
+## JSON/YAML Diagrams
+
+| Command        | Implemented | Method |
+| -------------- | ----------- | ------ |
+| json \<NAME> { | no          |        |
+| }              | no          |        |
+| yaml \<NAME> { | no          |        |
+| }              | no          |        |
