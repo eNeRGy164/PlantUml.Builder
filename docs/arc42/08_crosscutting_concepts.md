@@ -47,8 +47,11 @@ Recommended detail level:
 ### 8.3.3 Unit Testing Guidance
 
 Add tests alongside the PlantUML commands.
-Use the existing expectation helpers to assert the exact PlantUML output for the new
-method and cover representative input combinations.
+Use the existing expectation helpers to assert the exact PlantUML output for method and cover representative input combinations.
+In addition, maintain example tests in `tests/PlantUml.Builder.Examples` that mirror the official PlantUML documentation samples
+(for example, [Sequence Diagram][plantuml-sequence-diagram]) and verify the output matches the published text exactly.
+Treat formatting as part of the contract: example tests should keep the exact spacing and punctuation from the PlantUML samples,
+even when PlantUML itself is whitespace-tolerant.
 
 There are two primary patterns:
 
@@ -76,6 +79,7 @@ which often reveals options that are not fully documented.
 [argument-null-exception-docs]: https://learn.microsoft.com/dotnet/api/system.argumentnullexception?view=net-10.0&wt.mc_id=AZ-MVP-5004268
 [argument-exception-docs]: https://learn.microsoft.com/dotnet/api/system.argumentexception?view=net-10.0&wt.mc_id=AZ-MVP-5004268
 [plantuml-site]: https://plantuml.com/
+[plantuml-sequence-diagram]: https://plantuml.com/sequence-diagram
 [plantuml-repo]: https://github.com/plantuml/plantuml
 [class-stringbuilderextensions]: ../../src/PlantUml.Builder/ClassDiagrams/StringBuilderExtensions/Class.cs
 [namespace-stringbuilderextensions]: ../../src/PlantUml.Builder/ClassDiagrams/StringBuilderExtensions/Namespace.cs
