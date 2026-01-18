@@ -45,6 +45,7 @@ public class Constant
         public const char Comma = ',';
         public const char Dot = '.';
         public const char Equal = '=';
+        public const char Exclamation = '!';
         public const char NewLine = '\n';
         public const char Pipe = '|';
         public const char Quote = '\"';
@@ -97,6 +98,7 @@ public class Constant
         public const string Order = "order";
         public const string Over = "over";
         public const string Page = "page";
+        public const string Pragma = "pragma";
         public const string Ref = "ref";
         public const string Remove = "remove";
         public const string Resume = "resume";

@@ -29,6 +29,7 @@ Following the PlantUML source code.
 | caption \<CAPTION>                  | no          |                |
 | legend [\<ALIGN>]                   | no          |                |
 | endlegend                           | no          |                |
+| !pragma \<NAME> \<VALUE>            | yes         | `Pragma`       |
 | skinparam \<NAME> \<VALUE>          | yes         | `SkinParam`    |
 | skinparam \<PREFIX> {               | no          |                |
 | left to right direction             | yes         | `Direction`    |
