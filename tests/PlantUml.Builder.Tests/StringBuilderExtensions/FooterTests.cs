@@ -36,7 +36,7 @@ public class FooterTests
     }
 
     [TestMethod]
-    public void FooterIsRenderedCorrectlyv()
+    public void FooterIsRenderedCorrectly()
     {
         // Arrange
         var stringBuilder = new StringBuilder();
@@ -46,5 +46,102 @@ public class FooterTests
 
         // Assert
         stringBuilder.ToString().Should().Be("footer Footer\n");
+    }
+
+    [TestMethod("Footer - Newlines are escaped")]
+    public void FooterEscapesNewLines()
+    {
+        // Arrange
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.Footer("Footer\nLine");
+
+        // Assert
+        stringBuilder.ToString().Should().Be("footer Footer\\nLine\n");
+    }
+
+    [DataRow("left", "left footer Footer\n", DisplayName = "Footer - Left alignment")]
+    [DataRow("center", "center footer Footer\n", DisplayName = "Footer - Center alignment")]
+    [DataRow("right", "right footer Footer\n", DisplayName = "Footer - Right alignment")]
+    [TestMethod]
+    public void FooterAlignmentIsRenderedCorrectly(string alignment, string expected)
+    {
+        // Arrange
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.Footer("Footer", new Alignment(alignment));
+
+        // Assert
+        stringBuilder.ToString().Should().Be(expected);
+    }
+
+    [TestMethod("Footer - Invalid alignment is ignored")]
+    public void FooterAlignmentIgnoresInvalidValues()
+    {
+        // Arrange
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.Footer("Footer", new Alignment("invalid"));
+
+        // Assert
+        stringBuilder.ToString().Should().Be("footer Footer\n");
+    }
+
+    [TestMethod("FooterStart - renders footer block start")]
+    public void FooterStartIsRenderedCorrectly()
+    {
+        // Arrange
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.FooterStart();
+
+        // Assert
+        stringBuilder.ToString().Should().Be("footer\n");
+    }
+
+    [DataRow("left", "left footer\n", DisplayName = "FooterStart - Left alignment")]
+    [DataRow("center", "center footer\n", DisplayName = "FooterStart - Center alignment")]
+    [DataRow("right", "right footer\n", DisplayName = "FooterStart - Right alignment")]
+    [TestMethod]
+    public void FooterStartAlignmentIsRenderedCorrectly(string alignment, string expected)
+    {
+        // Arrange
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.FooterStart(new Alignment(alignment));
+
+        // Assert
+        stringBuilder.ToString().Should().Be(expected);
+    }
+
+    [TestMethod("FooterStart - Invalid alignment is ignored")]
+    public void FooterStartAlignmentIgnoresInvalidValues()
+    {
+        // Arrange
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.FooterStart(new Alignment("invalid"));
+
+        // Assert
+        stringBuilder.ToString().Should().Be("footer\n");
+    }
+
+    [TestMethod("EndFooter - renders footer block end")]
+    public void EndFooterIsRenderedCorrectly()
+    {
+        // Arrange
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.EndFooter();
+
+        // Assert
+        stringBuilder.ToString().Should().Be("end footer\n");
     }
 }

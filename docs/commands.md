@@ -16,12 +16,12 @@ Following the PlantUML source code.
 | \<TEXT>                             | yes         | `Text`         |
 | ' [\<COMMENT>]                      | yes         | `Comment`      |
 | /' [\<COMMENT>] '/                  | yes         | `CommentBlock` |
-| [\<ALIGN>] header \<HEADER>         | partial     | `Header`       |
-| [\<ALIGN>] footer \<FOOTER>         | partial     | `Footer`       |
-| [\<ALIGN>] header                   | no          |                |
-| endheader                           | no          |                |
-| [\<ALIGN>] footer                   | no          |                |
-| endfooter                           | no          |                |
+| [\<ALIGN>] header \<HEADER>         | yes         | `Header`       |
+| [\<ALIGN>] footer \<FOOTER>         | yes         | `Footer`       |
+| [\<ALIGN>] header                   | yes         | `HeaderStart`  |
+| end header                          | yes         | `EndHeader`    |
+| [\<ALIGN>] footer                   | yes         | `FooterStart`  |
+| end footer                          | yes         | `EndFooter`    |
 | scale [max] \<SCALE> [\<DIMENSION>] | no          |                |
 | title \<TITLE>                      | yes         | `Title`        |
 | title                               | no          |                |
