@@ -1,0 +1,30 @@
+default: true
+
+line-length:
+  line_length: 160
+  heading_line_length: 80
+  code_block_line_length: 160
+  stern: false
+  tables: false
+
+no-duplicate-heading:
+  siblings_only: true
+
+no-trailing-punctuation:
+  punctuation: '.,;:'
+
+heading-style:
+  style: atx
+
+ul-style:
+  style: dash
+
+ol-prefix:
+  style: ordered
+
+no-inline-html:
+  allowed_elements:
+    - details
+    - summary
+
+no-blanks-blockquote: false
