@@ -2757,6 +2757,32 @@ public class SequenceDiagramExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/sequence-diagram#5640ee4b2a998e5e"/>
+    [TestMethod]
+    public void MainframeExample()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            mainframe This is a **mainframe**
+            Alice->Bob : Hello
+            @enduml
+            
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.Mainframe("This is a **mainframe**");
+        stringBuilder.Text("Alice->Bob : Hello");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
     /// <seealso href=""/>
     [TestMethod]
     public void Template()

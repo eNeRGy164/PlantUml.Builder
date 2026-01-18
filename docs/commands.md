@@ -115,6 +115,7 @@ Following the PlantUML source code.
 | divider [\<LABEL>]                                                              | yes         | `Divider`            |
 | hide footbox                                                                    | yes         | `HideFootBox`        |
 | show footbox                                                                    | yes         | `ShowFootBox`        |
+| mainframe \<TITLE>                                                              | yes         | `Mainframe`          |
 | hide unlinked                                                                   | yes         | `HideUnlinked`       |
 | show unlinked                                                                   | yes         | `ShowUnlinked`       |
 | opt [\<COLOR>] [\<COMMENT>]                                                     | no          |                      |
