@@ -38,5 +38,6 @@ methods to emit valid PlantUML diagram text.
   the official PlantUML documentation (for example, [Sequence Diagram][plantuml-sequence-diagram]).
   These examples should both showcase usage and verify the emitted text matches the
   published samples exactly.
+- Run the test suite after adding or modifying tests (use `dotnet test PlantUml.Builder.sln`).
 
 [plantuml-sequence-diagram]: https://plantuml.com/sequence-diagram
