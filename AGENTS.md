@@ -3,6 +3,11 @@
 This repository is PlantUML Builder, a .NET library that exposes `StringBuilder` extension
 methods to emit valid PlantUML diagram text.
 
+> [!IMPORTANT]
+> Always read the arc42 documentation in `docs/arc42` before contributing code or
+> documentation. The arc42 docs are the source of truth for architecture decisions,
+> repository layout, and contribution guidelines.
+
 ## Architecture alignment (arc42)
 
 - Follow the arc42 documentation in `docs/arc42`, especially:
@@ -16,7 +21,7 @@ methods to emit valid PlantUML diagram text.
     consistency, and provide XML docs for public extensions with parameter constraints and
     exceptions.
 
-> [WARNING]
+> [!WARNING]
 > The arc42 documentation is the source of truth for architecture decisions.
 > You are not allowed to create non-conforming code or documentation without
 > explicit approval from the architecture owner. Always confirm, and put out a warning
