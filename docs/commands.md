@@ -24,11 +24,7 @@ Following the PlantUML source code.
 | end footer                          | yes         | `EndFooter`    |
 | scale [max] \<SCALE> [\<DIMENSION>] | no          |                |
 | title \<TITLE>                      | yes         | `Title`        |
-| title                               | no          |                |
-| end title                           | no          |                |
-| caption \<CAPTION>                  | no          |                |
-| legend [\<ALIGN>]                   | no          |                |
-| endlegend                           | no          |                |
+| mainframe \<TITLE>                  | yes         | `Mainframe`    |
 | !pragma \<NAME> \<VALUE>            | yes         | `Pragma`       |
 | skinparam \<NAME> \<VALUE>          | yes         | `SkinParam`    |
 | skinparam \<PREFIX> {               | no          |                |
@@ -116,7 +112,6 @@ Following the PlantUML source code.
 | divider [\<LABEL>]                                                              | yes         | `Divider`            |
 | hide footbox                                                                    | yes         | `HideFootBox`        |
 | show footbox                                                                    | yes         | `ShowFootBox`        |
-| mainframe \<TITLE>                                                              | yes         | `Mainframe`          |
 | hide unlinked                                                                   | yes         | `HideUnlinked`       |
 | show unlinked                                                                   | yes         | `ShowUnlinked`       |
 | opt [\<COLOR>] [\<COMMENT>]                                                     | no          |                      |

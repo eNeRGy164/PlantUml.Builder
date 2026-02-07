@@ -1,6 +1,6 @@
 using static PlantUml.Builder.TestData;
 
-namespace PlantUml.Builder.SequenceDiagrams.Tests;
+namespace PlantUml.Builder.Tests;
 
 [TestClass]
 public class MainframeTests

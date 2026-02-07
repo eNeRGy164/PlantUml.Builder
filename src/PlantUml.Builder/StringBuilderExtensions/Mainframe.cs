@@ -1,4 +1,4 @@
-namespace PlantUml.Builder.SequenceDiagrams;
+namespace PlantUml.Builder;
 
 public static partial class StringBuilderExtensions
 {
