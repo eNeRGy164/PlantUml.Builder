@@ -1,3 +1,5 @@
+using PlantUml.Builder.SequenceDiagrams;
+
 namespace PlantUml.Builder.Examples;
 
 /// <summary>
@@ -163,6 +165,46 @@ public class CommonExampleTests
         stringBuilder.AppendNewLine();
         stringBuilder.Arrow("Alice", Arrow.Right, "Bob", "Authentication Request");
         stringBuilder.Arrow("Bob", Arrow.AsyncReplyRight, "Alice", "Authentication Response");
+        stringBuilder.AppendNewLine();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/commons#title"/>
+    [TestMethod]
+    public void Title02()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+
+            title
+             <u>Simple</u> communication example
+             on <i>several</i> lines and using <back:cadetblue>creole tags</back>
+            end title
+
+            Alice -> Bob : Authentication Request
+            Bob -> Alice : Authentication Response
+
+            @enduml
+
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.AppendNewLine();
+        stringBuilder.TitleStart();
+        stringBuilder.Text(" <u>Simple</u> communication example");
+        stringBuilder.Text(" on <i>several</i> lines and using <back:cadetblue>creole tags</back>");
+        stringBuilder.EndTitle();
+        stringBuilder.AppendNewLine();
+        stringBuilder.Arrow("Alice", Arrow.Right, "Bob", "Authentication Request");
+        stringBuilder.Arrow("Bob", Arrow.Right, "Alice", "Authentication Response");
         stringBuilder.AppendNewLine();
         stringBuilder.UmlDiagramEnd();
 

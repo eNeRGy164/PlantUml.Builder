@@ -24,6 +24,8 @@ Following the PlantUML source code.
 | end footer                          | yes         | `EndFooter`    |
 | scale [max] \<SCALE> [\<DIMENSION>] | no          |                |
 | title \<TITLE>                      | yes         | `Title`        |
+| title                               | yes         | `TitleStart`   |
+| end title                           | yes         | `EndTitle`     |
 | mainframe \<TITLE>                  | yes         | `Mainframe`    |
 | !pragma \<NAME> \<VALUE>            | yes         | `Pragma`       |
 | skinparam \<NAME> \<VALUE>          | yes         | `SkinParam`    |

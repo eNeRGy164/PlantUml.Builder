@@ -36,6 +36,7 @@ public class StringBuilderExtensionMethodTests
         yield return new object[] { new MethodWithArgumentData("AllowMixing") };
         yield return new object[] { new MethodWithArgumentData("Comment") };
         yield return new object[] { new MethodWithArgumentData("CommentBlock") };
+        yield return new object[] { new MethodWithArgumentData("EndTitle") };
         yield return new object[] { new MethodWithArgumentData("Footer", AnyString) };
         yield return new object[] { new MethodWithArgumentData("Header", AnyString) };
         yield return new object[] { new MethodWithArgumentData("HideEntityPortion", AnyString, EntityPortion.Members) };
@@ -48,6 +49,7 @@ public class StringBuilderExtensionMethodTests
         yield return new object[] { new MethodWithArgumentData("StereoType") };
         yield return new object[] { new MethodWithArgumentData("Text", AnyString) };
         yield return new object[] { new MethodWithArgumentData("Title", AnyString) };
+        yield return new object[] { new MethodWithArgumentData("TitleStart") };
         yield return new object[] { new MethodWithArgumentData("UmlDiagramEnd") };
         yield return new object[] { new MethodWithArgumentData("UmlDiagramStart") };
 

@@ -51,4 +51,30 @@ public class TitleTests
         // Assert
         stringBuilder.ToString().Should().Be($"{expected}\n");
     }
+
+    [TestMethod]
+    public void TitleStartIsRenderedCorrectly()
+    {
+        // Arrange
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.TitleStart();
+
+        // Assert
+        stringBuilder.ToString().Should().Be("title\n");
+    }
+
+    [TestMethod]
+    public void EndTitleIsRenderedCorrectly()
+    {
+        // Arrange
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.EndTitle();
+
+        // Assert
+        stringBuilder.ToString().Should().Be("end title\n");
+    }
 }

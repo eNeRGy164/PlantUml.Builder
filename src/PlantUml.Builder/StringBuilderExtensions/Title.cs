@@ -18,4 +18,30 @@ public static partial class StringBuilderExtensions
         stringBuilder.Append(title.Replace("\n", "\\n"));
         stringBuilder.AppendNewLine();
     }
+
+    /// <summary>
+    /// Renders the start of a title block.
+    /// </summary>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    public static void TitleStart(this StringBuilder stringBuilder)
+    {
+        ArgumentNullException.ThrowIfNull(stringBuilder);
+
+        stringBuilder.Append(Constant.Words.Title);
+        stringBuilder.AppendNewLine();
+    }
+
+    /// <summary>
+    /// Renders the end of a title block.
+    /// </summary>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="stringBuilder"/> is <see langword="null"/>.</exception>
+    public static void EndTitle(this StringBuilder stringBuilder)
+    {
+        ArgumentNullException.ThrowIfNull(stringBuilder);
+
+        stringBuilder.Append(Constant.Words.End);
+        stringBuilder.Append(Constant.Symbols.Space);
+        stringBuilder.Append(Constant.Words.Title);
+        stringBuilder.AppendNewLine();
+    }
 }
