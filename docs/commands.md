@@ -26,6 +26,7 @@ Following the PlantUML source code.
 | title \<TITLE>                      | yes         | `Title`        |
 | title                               | yes         | `TitleStart`   |
 | end title                           | yes         | `EndTitle`     |
+| caption \<CAPTION>                  | yes         | `Caption`      |
 | legend [\<ALIGN>]                   | yes         | `LegendStart`  |
 | endlegend                           | yes         | `EndLegend`    |
 | mainframe \<TITLE>                  | yes         | `Mainframe`    |

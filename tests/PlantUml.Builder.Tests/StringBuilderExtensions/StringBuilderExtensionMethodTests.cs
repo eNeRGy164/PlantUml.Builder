@@ -34,6 +34,7 @@ public class StringBuilderExtensionMethodTests
         yield return new object[] { new MethodWithArgumentData("EndHNote") };
         yield return new object[] { new MethodWithArgumentData("EndRNote") };
         yield return new object[] { new MethodWithArgumentData("AllowMixing") };
+        yield return new object[] { new MethodWithArgumentData("Caption", AnyString) };
         yield return new object[] { new MethodWithArgumentData("Comment") };
         yield return new object[] { new MethodWithArgumentData("CommentBlock") };
         yield return new object[] { new MethodWithArgumentData("EndLegend") };

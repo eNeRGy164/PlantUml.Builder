@@ -212,6 +212,36 @@ public class CommonExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/commons#caption"/>
+    [TestMethod]
+    public void Caption()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+
+            caption figure 1
+            Alice -> Bob : Hello
+
+            @enduml
+
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.AppendNewLine();
+        stringBuilder.Caption("figure 1");
+        stringBuilder.Arrow("Alice", Arrow.Right, "Bob", "Hello");
+        stringBuilder.AppendNewLine();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
     /// <seealso href="https://plantuml.com/commons#footer-and-header"/>
     [TestMethod]
     public void FooterAndHeader()
