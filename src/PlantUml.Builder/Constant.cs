@@ -84,6 +84,7 @@ public class Constant
         public const string Implements = "implements";
         public const string Increase = "inc";
         public const string Left = "left";
+        public const string Legend = "legend";
         public const string Loop = "loop";
         public const string Mainframe = "mainframe";
         public const string Map = "map";

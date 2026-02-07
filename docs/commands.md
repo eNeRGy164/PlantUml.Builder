@@ -26,6 +26,8 @@ Following the PlantUML source code.
 | title \<TITLE>                      | yes         | `Title`        |
 | title                               | yes         | `TitleStart`   |
 | end title                           | yes         | `EndTitle`     |
+| legend [\<ALIGN>]                   | yes         | `LegendStart`  |
+| endlegend                           | yes         | `EndLegend`    |
 | mainframe \<TITLE>                  | yes         | `Mainframe`    |
 | !pragma \<NAME> \<VALUE>            | yes         | `Pragma`       |
 | skinparam \<NAME> \<VALUE>          | yes         | `SkinParam`    |

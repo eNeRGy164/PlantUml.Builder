@@ -36,11 +36,13 @@ public class StringBuilderExtensionMethodTests
         yield return new object[] { new MethodWithArgumentData("AllowMixing") };
         yield return new object[] { new MethodWithArgumentData("Comment") };
         yield return new object[] { new MethodWithArgumentData("CommentBlock") };
+        yield return new object[] { new MethodWithArgumentData("EndLegend") };
         yield return new object[] { new MethodWithArgumentData("EndTitle") };
         yield return new object[] { new MethodWithArgumentData("Footer", AnyString) };
         yield return new object[] { new MethodWithArgumentData("Header", AnyString) };
         yield return new object[] { new MethodWithArgumentData("HideEntityPortion", AnyString, EntityPortion.Members) };
         yield return new object[] { new MethodWithArgumentData("InlineClassMember", (ClassMember)AnyString) };
+        yield return new object[] { new MethodWithArgumentData("LegendStart") };
         yield return new object[] { new MethodWithArgumentData("Mainframe", AnyString) };
         yield return new object[] { new MethodWithArgumentData("MemberDeclaration", AnyString, (ClassMember)AnyString) };
         yield return new object[] { new MethodWithArgumentData("Relationship", AnyString, AnyString, AnyString) };

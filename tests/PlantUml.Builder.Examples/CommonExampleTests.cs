@@ -252,6 +252,70 @@ public class CommonExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/commons#legend-the-diagram"/>
+    [TestMethod]
+    public void LegendTheDiagram01()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            Alice -> Bob : Hello
+            legend right
+              Short
+              legend
+            end legend
+            @enduml
+
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.Arrow("Alice", Arrow.Right, "Bob", "Hello");
+        stringBuilder.LegendStart(LegendAlignment.Right);
+        stringBuilder.Text("  Short");
+        stringBuilder.Text("  legend");
+        stringBuilder.EndLegend();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
+    /// <seealso href="https://plantuml.com/commons#legend-the-diagram"/>
+    [TestMethod]
+    public void LegendTheDiagram02()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            Alice -> Bob : Hello
+            legend top left
+              Short
+              legend
+            end legend
+            @enduml
+
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.Arrow("Alice", Arrow.Right, "Bob", "Hello");
+        stringBuilder.LegendStart(LegendAlignment.TopLeft);
+        stringBuilder.Text("  Short");
+        stringBuilder.Text("  legend");
+        stringBuilder.EndLegend();
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
     /// <seealso href="https://plantuml.com/commons#mainframe"/>
     [TestMethod]
     public void Mainframe()
