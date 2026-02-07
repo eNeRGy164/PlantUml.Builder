@@ -47,6 +47,7 @@ public class StringBuilderExtensionMethodTests
         yield return new object[] { new MethodWithArgumentData("Mainframe", AnyString) };
         yield return new object[] { new MethodWithArgumentData("MemberDeclaration", AnyString, (ClassMember)AnyString) };
         yield return new object[] { new MethodWithArgumentData("Relationship", AnyString, AnyString, AnyString) };
+        yield return new object[] { new MethodWithArgumentData("Scale", AnyString) };
         yield return new object[] { new MethodWithArgumentData("SetNamespaceSeparator") };
         yield return new object[] { new MethodWithArgumentData("SkinParameter", AnyString, AnyString) };
         yield return new object[] { new MethodWithArgumentData("StereoType") };

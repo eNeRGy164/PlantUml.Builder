@@ -22,7 +22,7 @@ Following the PlantUML source code.
 | end header                          | yes         | `EndHeader`    |
 | [\<ALIGN>] footer                   | yes         | `FooterStart`  |
 | end footer                          | yes         | `EndFooter`    |
-| scale [max] \<SCALE> [\<DIMENSION>] | no          |                |
+| scale [max] \<SCALE> [\<DIMENSION>] | yes         | `Scale`        |
 | title \<TITLE>                      | yes         | `Title`        |
 | title                               | yes         | `TitleStart`   |
 | end title                           | yes         | `EndTitle`     |

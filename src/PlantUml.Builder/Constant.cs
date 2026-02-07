@@ -89,6 +89,7 @@ public class Constant
         public const string Loop = "loop";
         public const string Mainframe = "mainframe";
         public const string Map = "map";
+        public const string Max = "max";
         public const string Mixing = "mixing";
         public const string Namespace = "namespace";
         public const string New = "new";
@@ -107,6 +108,7 @@ public class Constant
         public const string Resume = "resume";
         public const string Return = "return";
         public const string Right = "right";
+        public const string Scale = "scale";
         public const string Separator = "separator";
         public const string Set = "set";
         public const string Show = "show";

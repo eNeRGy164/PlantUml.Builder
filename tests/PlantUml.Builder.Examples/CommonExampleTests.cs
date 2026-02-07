@@ -130,6 +130,32 @@ public class CommonExampleTests
         stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
     }
 
+    /// <seealso href="https://plantuml.com/commons#zoom-or-scale"/>
+    [TestMethod]
+    public void ZoomOrScale()
+    {
+        // Arrange
+        var example =
+            """
+            @startuml
+            scale 180*90
+            Bob -> Alice : hello
+            @enduml
+
+            """;
+
+        var stringBuilder = new StringBuilder();
+
+        // Act
+        stringBuilder.UmlDiagramStart();
+        stringBuilder.Scale(180, 90);
+        stringBuilder.Arrow("Bob", Arrow.Right, "Alice", "hello");
+        stringBuilder.UmlDiagramEnd();
+
+        // Assert
+        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+    }
+
     /// <seealso href="https://plantuml.com/commons#title"/>
     [TestMethod]
     public void Title01()
