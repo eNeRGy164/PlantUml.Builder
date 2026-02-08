@@ -15,7 +15,7 @@ public class NewPageTests
         Action action = () => stringBuilder.NewPage(null);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName("title");
     }
 
@@ -31,8 +31,7 @@ public class NewPageTests
         Action action = () => stringBuilder.NewPage(name);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName("title");
     }
 
@@ -56,6 +55,6 @@ public class NewPageTests
         }
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{expected}\n");
+        stringBuilder.ToString().ShouldBe($"{expected}\n");
     }
 }

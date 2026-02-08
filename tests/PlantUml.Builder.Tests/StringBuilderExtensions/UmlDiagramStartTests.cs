@@ -1,4 +1,4 @@
-﻿namespace PlantUml.Builder.Tests;
+namespace PlantUml.Builder.Tests;
 
 [TestClass]
 public class UmlDiagramStartTests
@@ -15,6 +15,6 @@ public class UmlDiagramStartTests
         stringBuilder.UmlDiagramStart(comment);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{expected}\n");
+        stringBuilder.ToString().ShouldBe($"{expected}\n");
     }
 }

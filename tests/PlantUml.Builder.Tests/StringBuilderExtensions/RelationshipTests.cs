@@ -18,8 +18,7 @@ public class RelationshipTests
         Action action = () => stringBuilder.Relationship(left, type, right);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName(parameterName);
     }
 
@@ -39,8 +38,7 @@ public class RelationshipTests
         Action action = () => stringBuilder.Relationship(left, type, right);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName(parameterName);
     }
 
@@ -57,7 +55,7 @@ public class RelationshipTests
         method.Invoke(null, parameters);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
+        stringBuilder.ToString().ShouldBe($"{testData.Expected}\n");
     }
 
     public static IEnumerable<object[]> GetValidNotations()

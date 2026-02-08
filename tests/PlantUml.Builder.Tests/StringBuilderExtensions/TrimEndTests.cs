@@ -17,7 +17,7 @@ public class TrimEndTests
         stringBuilder.TrimEnd();
 
         // Assert
-        stringBuilder.ToString().Should().BeEmpty();
+        stringBuilder.ToString().ShouldBeEmpty();
     }
 
     [DataRow(AnyString, AnyString, DisplayName = "TrimEnd - Text without trailing whitespace remains unaltered")]
@@ -32,6 +32,6 @@ public class TrimEndTests
         stringBuilder.TrimEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(expected);
+        stringBuilder.ToString().ShouldBe(expected);
     }
 }

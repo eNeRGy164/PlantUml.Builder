@@ -15,7 +15,7 @@ public class PragmaTests
         stringBuilder.Pragma("teoz", "true");
 
         // Assert
-        stringBuilder.ToString().Should().Be("!pragma teoz true\n");
+        stringBuilder.ToString().ShouldBe("!pragma teoz true\n");
     }
 
     [TestMethod]
@@ -28,7 +28,7 @@ public class PragmaTests
         stringBuilder.Pragma("teoz", true);
 
         // Assert
-        stringBuilder.ToString().Should().Be("!pragma teoz true\n");
+        stringBuilder.ToString().ShouldBe("!pragma teoz true\n");
     }
 
     [DataRow("name", null, "true", DisplayName = "Pragma - Name argument cannot be `null`")]
@@ -43,8 +43,7 @@ public class PragmaTests
         Action action = () => stringBuilder.Pragma(name, value);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName(parameterName);
     }
 
@@ -62,8 +61,7 @@ public class PragmaTests
         Action action = () => stringBuilder.Pragma(name, value);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName(parameterName);
     }
 }

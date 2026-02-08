@@ -11,7 +11,7 @@ public class AlignmentDefaultsTests
         var alignment = typeof(Alignment).GetProperty(name).GetValue(null);
 
         // Assert
-        alignment.ToString().Should().Be(expected);
+        alignment.ToString().ShouldBe(expected);
     }
 
     private static IEnumerable<object[]> GetDefaultAlignments()

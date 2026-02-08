@@ -13,7 +13,7 @@ public class AutoActivateTests
         Action action = () => stringBuilder.AutoActivate((OnOff)byte.MaxValue);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentOutOfRangeException>()
+        action.ShouldThrowExactly<ArgumentOutOfRangeException>()
             .WithMessage("A defined enum value should be provided*")
             .WithParameterName("mode");
     }
@@ -38,6 +38,6 @@ public class AutoActivateTests
         }
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{expected}\n");
+        stringBuilder.ToString().ShouldBe($"{expected}\n");
     }
 }

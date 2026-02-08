@@ -18,9 +18,8 @@ public class ArrowExtensionsTests
         Action action = () => method.Invoke(null, parameters.ToArray());
 
         // Assert
-        action.Should()
-            .ThrowExactly<TargetInvocationException>()
-            .WithInnerExceptionExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<TargetInvocationException>()
+            .ShouldHaveInnerExceptionExactly<ArgumentNullException>()
             .WithParameterName("arrow");
     }
 
@@ -55,7 +54,7 @@ public class ArrowExtensionsTests
         var arrow = originalArrow.Color(color);
 
         // Assert
-        arrow.ToString().Should().Be(expected);
+        arrow.ToString().ShouldBe(expected);
     }
 
     [DataRow("->", "-->", DisplayName = "A solid arrow line should become a dotted line")]
@@ -72,7 +71,7 @@ public class ArrowExtensionsTests
         var arrow = originalArrow.Dotted();
 
         // Assert
-        arrow.ToString().Should().Be(expected);
+        arrow.ToString().ShouldBe(expected);
     }
 
     [DataRow("x<-", "Lost", DisplayName = "If the left side is already deleted, it can't become lost")]
@@ -98,8 +97,7 @@ public class ArrowExtensionsTests
         Action action = () => lostFunction(originalArrow);
 
         // Assert
-        action.Should()
-            .ThrowExactly<NotSupportedException>()
+        action.ShouldThrowExactly<NotSupportedException>()
             .WithMessage("You cannot combine the \"lost\" and \"deleted\" message notation in the same arrow head.");
     }
 
@@ -133,7 +131,7 @@ public class ArrowExtensionsTests
         var arrow = function(originalArrow);
 
         // Assert
-        arrow.ToString().Should().Be(expected);
+        arrow.ToString().ShouldBe(expected);
     }
 
     [DataRow("->", "->", DisplayName = "A solid arrow line should stay a solid line")]
@@ -150,7 +148,7 @@ public class ArrowExtensionsTests
         var arrow = originalArrow.Solid();
 
         // Assert
-        arrow.ToString().Should().Be(expected);
+        arrow.ToString().ShouldBe(expected);
     }
 
     [DataRow("->", "->x", DisplayName = "A message to the right is deleted")]
@@ -172,7 +170,7 @@ public class ArrowExtensionsTests
         var arrow = originalArrow.Destroy();
 
         // Assert
-        arrow.ToString().Should().Be(expected);
+        arrow.ToString().ShouldBe(expected);
     }
 
     [DataRow("<->", "Lost", DisplayName = "A left-right arrow has both directions")]
@@ -194,8 +192,7 @@ public class ArrowExtensionsTests
         Action act = () => function(originalArrow);
 
         // Assert
-        act.Should()
-            .ThrowExactly<NotSupportedException>()
+        act.ShouldThrowExactly<NotSupportedException>()
             .WithMessage("This method only * an arrow if it is in a clear left or right direction.");
     }
 
@@ -221,6 +218,6 @@ public class ArrowExtensionsTests
         var arrow = function(originalArrow);
 
         // Assert
-        arrow.ToString().Should().Be(expected);
+        arrow.ToString().ShouldBe(expected);
     }
 }

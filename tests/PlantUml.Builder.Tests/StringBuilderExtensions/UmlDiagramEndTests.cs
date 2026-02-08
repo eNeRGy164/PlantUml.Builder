@@ -1,4 +1,4 @@
-﻿namespace PlantUml.Builder.Tests;
+namespace PlantUml.Builder.Tests;
 
 [TestClass]
 public class UmlDiagramEndTests
@@ -13,6 +13,6 @@ public class UmlDiagramEndTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be("@enduml\n");
+        stringBuilder.ToString().ShouldBe("@enduml\n");
     }
 }

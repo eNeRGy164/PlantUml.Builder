@@ -13,7 +13,7 @@ public class UnlinkedTests
         stringBuilder.HideUnlinked();
 
         // Assert
-        stringBuilder.ToString().Should().Be("hide unlinked\n");
+        stringBuilder.ToString().ShouldBe("hide unlinked\n");
     }
 
     [TestMethod]
@@ -26,6 +26,6 @@ public class UnlinkedTests
         stringBuilder.ShowUnlinked();
 
         // Assert
-        stringBuilder.ToString().Should().Be("show unlinked\n");
+        stringBuilder.ToString().ShouldBe("show unlinked\n");
     }
 }

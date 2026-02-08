@@ -17,8 +17,7 @@ public class RefTests
         Action action = () => stringBuilder.Ref(participant, note);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName(parameterName);
     }
 
@@ -32,7 +31,7 @@ public class RefTests
         Action action = () => stringBuilder.StartRef(null);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName("participant");
     }
 
@@ -49,8 +48,7 @@ public class RefTests
         Action action = () => stringBuilder.Ref(participantA, participantB, note);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName(parameterName);
     }
 
@@ -66,7 +64,7 @@ public class RefTests
         Action action = () => stringBuilder.StartRef(participantA, participantB);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName(parameterName);
     }
 
@@ -84,8 +82,7 @@ public class RefTests
         Action action = () => stringBuilder.Ref(participant, note);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName(parameterName);
     }
 
@@ -101,8 +98,7 @@ public class RefTests
         Action action = () => stringBuilder.StartRef(participant);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName("participant");
     }
 
@@ -122,8 +118,7 @@ public class RefTests
         Action action = () => stringBuilder.Ref(participantA, participantB, note);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName(parameterName);
     }
 
@@ -141,8 +136,7 @@ public class RefTests
         Action action = () => stringBuilder.StartRef(participantA, participantB);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName(parameterName);
     }
 
@@ -158,7 +152,7 @@ public class RefTests
         stringBuilder.Ref(actor, note);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{expected}\n");
+        stringBuilder.ToString().ShouldBe($"{expected}\n");
     }
 
     [TestMethod]
@@ -171,7 +165,7 @@ public class RefTests
         stringBuilder.StartRef("actorA");
 
         // Assert
-        stringBuilder.ToString().Should().Be("ref over actorA\n");
+        stringBuilder.ToString().ShouldBe("ref over actorA\n");
     }
 
     [TestMethod]
@@ -184,7 +178,7 @@ public class RefTests
         stringBuilder.Ref("actorA", "actorB", "note");
 
         // Assert
-        stringBuilder.ToString().Should().Be("ref over actorA,actorB : note\n");
+        stringBuilder.ToString().ShouldBe("ref over actorA,actorB : note\n");
     }
 
     [TestMethod]
@@ -197,7 +191,7 @@ public class RefTests
         stringBuilder.StartRef("actorA", "actorB");
 
         // Assert
-        stringBuilder.ToString().Should().Be("ref over actorA,actorB\n");
+        stringBuilder.ToString().ShouldBe("ref over actorA,actorB\n");
     }
 
     [TestMethod]
@@ -210,6 +204,6 @@ public class RefTests
         stringBuilder.EndRef();
 
         // Assert
-        stringBuilder.ToString().Should().Be("end ref\n");
+        stringBuilder.ToString().ShouldBe("end ref\n");
     }
 }

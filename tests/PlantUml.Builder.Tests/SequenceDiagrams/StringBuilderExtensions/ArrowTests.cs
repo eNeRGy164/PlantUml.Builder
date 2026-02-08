@@ -18,7 +18,7 @@ public class ArrowTests
         Action action = () => stringBuilder.Arrow(left, arrow, right);
 
         // Assert
-        action.Should().ThrowExactly<NotSupportedException>()
+        action.ShouldThrowExactly<NotSupportedException>()
             .WithMessage("It is not possible for both partipants to be outside the diagram.");
     }
 
@@ -34,7 +34,7 @@ public class ArrowTests
         stringBuilder.Arrow(left, "->", right);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{expected}\n");
+        stringBuilder.ToString().ShouldBe($"{expected}\n");
     }
 
     [DynamicData(nameof(GetValidNotations), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(GetValidNotationTestDisplayName))]
@@ -50,7 +50,7 @@ public class ArrowTests
         method.Invoke(null, parameters);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
+        stringBuilder.ToString().ShouldBe($"{testData.Expected}\n");
     }
 
     private static IEnumerable<object[]> GetValidNotations()

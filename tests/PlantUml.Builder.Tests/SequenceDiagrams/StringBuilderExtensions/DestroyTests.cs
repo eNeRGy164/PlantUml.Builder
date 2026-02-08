@@ -15,8 +15,7 @@ public class DestroyTests
         Action action = () => stringBuilder.Destroy(null);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName("name");
     }
 
@@ -32,8 +31,7 @@ public class DestroyTests
         Action action = () => stringBuilder.Destroy(name);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName("name");
     }
 
@@ -47,6 +45,6 @@ public class DestroyTests
         stringBuilder.Destroy("actorA");
 
         // Assert
-        stringBuilder.ToString().Should().Be("destroy actorA\n");
+        stringBuilder.ToString().ShouldBe("destroy actorA\n");
     }
 }

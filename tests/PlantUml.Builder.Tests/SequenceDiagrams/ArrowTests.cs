@@ -12,8 +12,7 @@ public class ArrowClassTests
         Action action = () => _ = new Arrow((string)null);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName("arrow");
     }
 
@@ -24,8 +23,7 @@ public class ArrowClassTests
         Action action = () => _ = new Arrow((char[])null);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName("arrow");
     }
 
@@ -38,8 +36,7 @@ public class ArrowClassTests
         Action action = () => _ = new Arrow(value);
 
         // Assert
-        action.Should()
-              .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
               .WithParameterName("arrow");
     }
 
@@ -50,7 +47,7 @@ public class ArrowClassTests
         Action action = () => _ = new Arrow("-");
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithMessage("The arrow type must be at least 2 characters long*")
             .WithParameterName("arrow");
     }
@@ -62,7 +59,7 @@ public class ArrowClassTests
         Action action = () => _ = new Arrow("<>");
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithMessage("The arrow must contain at least 1 line character*")
             .WithParameterName("arrow");
     }
@@ -74,7 +71,7 @@ public class ArrowClassTests
         Action action = () => _ = new Arrow("--");
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithMessage("The arrow must contain at least 1 arrow head character ('>', '<', 'o', '/', '\\', 'x', ']', '[', '?').*")
             .WithParameterName("arrow");
     }
@@ -86,7 +83,7 @@ public class ArrowClassTests
         var arrow = new Arrow('-', '>');
 
         // Assert
-        arrow.ToString().Should().Be("->");
+        arrow.ToString().ShouldBe("->");
     }
 
     [DataRow("->")]
@@ -99,7 +96,7 @@ public class ArrowClassTests
         var arrow = new Arrow(input);
 
         // Assert
-        arrow.ToString().Should().Be(input);
+        arrow.ToString().ShouldBe(input);
     }
 
     [TestMethod]
@@ -112,7 +109,7 @@ public class ArrowClassTests
         var arrow = new Arrow(originalArrow, NamedColor.AliceBlue);
 
         // Assert
-        arrow.ToString().Should().Be("-[#AliceBlue]>");
+        arrow.ToString().ShouldBe("-[#AliceBlue]>");
     }
 
     [TestMethod]
@@ -125,7 +122,7 @@ public class ArrowClassTests
         var arrow = new Arrow(originalArrow, dottedLine: true);
 
         // Assert
-        arrow.ToString().Should().Be("--[#red]>");
+        arrow.ToString().ShouldBe("--[#red]>");
     }
 
     [TestMethod]
@@ -138,7 +135,7 @@ public class ArrowClassTests
         var arrow = new Arrow(originalArrow, dottedLine: false);
 
         // Assert
-        arrow.ToString().Should().Be("-[#red]>");
+        arrow.ToString().ShouldBe("-[#red]>");
     }
 
     [TestMethod]
@@ -148,7 +145,7 @@ public class ArrowClassTests
         var arrow = new Arrow("<", dottedLine: false, ">", NamedColor.AliceBlue);
 
         // Assert
-        arrow.ToString().Should().Be("<-[#AliceBlue]>");
+        arrow.ToString().ShouldBe("<-[#AliceBlue]>");
     }
 
     [TestMethod]
@@ -158,7 +155,7 @@ public class ArrowClassTests
         var arrow = new Arrow("[#red]->");
 
         // Assert
-        arrow.ToString().Should().Be("-[#red]>");
+        arrow.ToString().ShouldBe("-[#red]>");
     }
 
     [TestMethod]
@@ -168,7 +165,7 @@ public class ArrowClassTests
         var arrow = new Arrow("[#red]->");
 
         // Assert
-        arrow.LeftHead.Should().BeEmpty();
+        arrow.LeftHead.ShouldBeEmpty();
     }
 
     [TestMethod]
@@ -178,7 +175,7 @@ public class ArrowClassTests
         var arrow = new Arrow("<[#red]-");
 
         // Assert
-        arrow.Color.ToString().Should().Be("#red");
+        arrow.Color.ToString().ShouldBe("#red");
     }
 
     [TestMethod]
@@ -188,7 +185,7 @@ public class ArrowClassTests
         var arrow = new Arrow("<-[");
 
         // Assert
-        arrow.Color.Should().BeNull();
+        arrow.Color.ShouldBeNull();
     }
 
     [TestMethod]
@@ -198,7 +195,7 @@ public class ArrowClassTests
         var arrow = new Arrow("[->");
 
         // Assert
-        arrow.Color.Should().BeNull();
+        arrow.Color.ShouldBeNull();
     }
 
     [TestMethod]
@@ -208,7 +205,7 @@ public class ArrowClassTests
         var arrow = new Arrow("->]");
 
         // Assert
-        arrow.RightHead.Should().Be(">]");
+        arrow.RightHead.ShouldBe(">]");
     }
 
     [TestMethod]
@@ -218,7 +215,7 @@ public class ArrowClassTests
         var arrow = new Arrow("->");
 
         // Assert
-        arrow.LeftHead.Should().BeEmpty();
+        arrow.LeftHead.ShouldBeEmpty();
     }
 
     [TestMethod]
@@ -228,7 +225,7 @@ public class ArrowClassTests
         var arrow = new Arrow("<-");
 
         // Assert
-        arrow.RightHead.Should().BeEmpty();
+        arrow.RightHead.ShouldBeEmpty();
     }
 
     [TestMethod]
@@ -238,7 +235,7 @@ public class ArrowClassTests
         var arrow = new Arrow("[#red]->");
 
         // Assert
-        arrow.Color.ToString().Should().Be("#red");
+        arrow.Color.ToString().ShouldBe("#red");
     }
 
     [TestMethod]
@@ -248,7 +245,7 @@ public class ArrowClassTests
         var arrow = Arrow.Right;
 
         // Assert
-        arrow.ToString().Should().Be("->");
+        arrow.ToString().ShouldBe("->");
     }
 
     [TestMethod]
@@ -258,7 +255,7 @@ public class ArrowClassTests
         var arrow = Arrow.Right.Color(NamedColor.AliceBlue);
 
         // Assert
-        arrow.ToString().Should().Be("-[#AliceBlue]>");
+        arrow.ToString().ShouldBe("-[#AliceBlue]>");
     }
 
     [TestMethod]
@@ -271,7 +268,7 @@ public class ArrowClassTests
         var arrow = (Arrow)value;
 
         // Assert
-        arrow.ToString().Should().Be("->");
+        arrow.ToString().ShouldBe("->");
     }
 
     [TestMethod]
@@ -284,6 +281,6 @@ public class ArrowClassTests
         var value = (string)arrow;
 
         // Assert
-        value.Should().Be("->");
+        value.ShouldBe("->");
     }
 }

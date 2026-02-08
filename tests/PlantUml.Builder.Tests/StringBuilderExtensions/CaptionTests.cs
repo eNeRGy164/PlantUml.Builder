@@ -15,7 +15,7 @@ public class CaptionTests
         Action action = () => stringBuilder.Caption(null);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName("caption");
     }
 
@@ -31,7 +31,7 @@ public class CaptionTests
         Action action = () => stringBuilder.Caption(caption);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName("caption");
     }
 
@@ -45,7 +45,7 @@ public class CaptionTests
         stringBuilder.Caption("this is a caption");
 
         // Assert
-        stringBuilder.ToString().Should().Be("caption this is a caption\n");
+        stringBuilder.ToString().ShouldBe("caption this is a caption\n");
     }
 
     [TestMethod]
@@ -58,6 +58,6 @@ public class CaptionTests
         stringBuilder.Caption("caption\nline");
 
         // Assert
-        stringBuilder.ToString().Should().Be("caption caption\\nline\n");
+        stringBuilder.ToString().ShouldBe("caption caption\\nline\n");
     }
 }

@@ -13,7 +13,7 @@ public class LegendTests
         stringBuilder.LegendStart();
 
         // Assert
-        stringBuilder.ToString().Should().Be("legend\n");
+        stringBuilder.ToString().ShouldBe("legend\n");
     }
 
     [DataRow(LegendAlignment.Left, "legend left\n", DisplayName = "LegendStart - Left alignment")]
@@ -37,7 +37,7 @@ public class LegendTests
         stringBuilder.LegendStart(alignment);
 
         // Assert
-        stringBuilder.ToString().Should().Be(expected);
+        stringBuilder.ToString().ShouldBe(expected);
     }
 
     [TestMethod]
@@ -51,7 +51,7 @@ public class LegendTests
         stringBuilder.LegendStart(alignment);
 
         // Assert
-        stringBuilder.ToString().Should().Be("legend top left\n");
+        stringBuilder.ToString().ShouldBe("legend top left\n");
     }
 
     [DataRow((LegendAlignment)byte.MaxValue, DisplayName = "LegendStart - Undefined enum value is rejected")]
@@ -67,7 +67,7 @@ public class LegendTests
         Action action = () => stringBuilder.LegendStart(alignment);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentOutOfRangeException>()
+        action.ShouldThrowExactly<ArgumentOutOfRangeException>()
             .WithMessage("A defined enum value should be provided*")
             .WithParameterName("alignment");
     }
@@ -82,6 +82,6 @@ public class LegendTests
         stringBuilder.EndLegend();
 
         // Assert
-        stringBuilder.ToString().Should().Be("end legend\n");
+        stringBuilder.ToString().ShouldBe("end legend\n");
     }
 }

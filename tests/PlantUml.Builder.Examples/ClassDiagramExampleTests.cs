@@ -34,7 +34,7 @@ public class ClassDiagramExampleTests
             stereotype stereotype
             struct struct
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -61,7 +61,7 @@ public class ClassDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/class-diagram#9dd2a6eca0c2a0e7"/>
@@ -78,7 +78,7 @@ public class ClassDiagramExampleTests
             Class07 .. Class08
             Class09 -- Class10
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -93,7 +93,7 @@ public class ClassDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/class-diagram#9dd2a6eca0c2a0e7"/>
@@ -110,7 +110,7 @@ public class ClassDiagramExampleTests
             Class17 ..|> Class18
             Class19 <--* Class20
             @enduml
-        
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -125,7 +125,7 @@ public class ClassDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/class-diagram#9dd2a6eca0c2a0e7"/>
@@ -142,7 +142,7 @@ public class ClassDiagramExampleTests
             Class27 +-- Class28
             Class29 ^-- Class30
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -157,7 +157,7 @@ public class ClassDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/class-diagram#4a705b44651caa59"/>
@@ -176,7 +176,7 @@ public class ClassDiagramExampleTests
             Class05 --> "1" Class06
 
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -193,7 +193,7 @@ public class ClassDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/class-diagram#4a705b44651caa59"/>
@@ -211,7 +211,7 @@ public class ClassDiagramExampleTests
             Car -- Person : < owns
 
             @enduml
-        
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -227,7 +227,7 @@ public class ClassDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/class-diagram#bd62ba9333d08763"/>
@@ -243,7 +243,7 @@ public class ClassDiagramExampleTests
 
             class2 *-- "foo/dummy" : use
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -257,7 +257,7 @@ public class ClassDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/class-diagram#bd62ba9333d08763"/>
@@ -275,7 +275,7 @@ public class ClassDiagramExampleTests
             remove $C2
             remove dollarC2
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -291,7 +291,7 @@ public class ClassDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/class-diagram#090967fbee930909"/>
@@ -309,7 +309,7 @@ public class ClassDiagramExampleTests
             ArrayList : size()
 
             @enduml
-        
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -325,7 +325,7 @@ public class ClassDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/class-diagram#090967fbee930909"/>
@@ -346,7 +346,7 @@ public class ClassDiagramExampleTests
             departureTime : Date
             }
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -365,7 +365,7 @@ public class ClassDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/class-diagram#090967fbee930909"/>
@@ -382,7 +382,7 @@ public class ClassDiagramExampleTests
             }
 
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -397,7 +397,7 @@ public class ClassDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/class-diagram#3644720244dd6c6a"/>
@@ -417,7 +417,7 @@ public class ClassDiagramExampleTests
             }
 
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -435,7 +435,7 @@ public class ClassDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/class-diagram#3644720244dd6c6a"/>
@@ -455,7 +455,7 @@ public class ClassDiagramExampleTests
             }
 
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -473,7 +473,7 @@ public class ClassDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/class-diagram#3644720244dd6c6a"/>
@@ -492,7 +492,7 @@ public class ClassDiagramExampleTests
             }
 
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -509,7 +509,7 @@ public class ClassDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/class-diagram#3644720244dd6c6a"/>
@@ -527,7 +527,7 @@ public class ClassDiagramExampleTests
             }
 
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -543,7 +543,7 @@ public class ClassDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/class-diagram#9fd9d25be2fbb118"/>
@@ -559,7 +559,7 @@ public class ClassDiagramExampleTests
             {abstract} void methods()
             }
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -573,6 +573,6 @@ public class ClassDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 }

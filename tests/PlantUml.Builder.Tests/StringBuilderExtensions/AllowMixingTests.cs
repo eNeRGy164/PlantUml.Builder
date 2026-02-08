@@ -13,6 +13,6 @@ public class AllowMixingTests
         stringBuilder.AllowMixing();
 
         // Assert
-        stringBuilder.ToString().Should().Be("allow_mixing\n");
+        stringBuilder.ToString().ShouldBe("allow_mixing\n");
     }
 }

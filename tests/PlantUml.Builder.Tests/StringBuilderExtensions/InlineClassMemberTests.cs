@@ -13,8 +13,7 @@ public class InlineClassMemberTests
         Action action = () => stringBuilder.InlineClassMember(null);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName("classMember");
     }
 
@@ -30,7 +29,7 @@ public class InlineClassMemberTests
         stringBuilder.InlineClassMember(classMember);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
+        stringBuilder.ToString().ShouldBe($"{testData.Expected}\n");
     }
 
     private static IEnumerable<object[]> GetValidNotations()

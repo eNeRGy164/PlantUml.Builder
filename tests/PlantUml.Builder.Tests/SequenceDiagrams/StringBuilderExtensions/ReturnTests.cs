@@ -15,8 +15,7 @@ public class ReturnTests
         Action action = () => stringBuilder.Return(null);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName("message");
     }
 
@@ -32,8 +31,7 @@ public class ReturnTests
         Action action = () => stringBuilder.Return(participant);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName("message");
     }
 
@@ -47,7 +45,7 @@ public class ReturnTests
         stringBuilder.Return();
 
         // Assert
-        stringBuilder.ToString().Should().Be("return\n");
+        stringBuilder.ToString().ShouldBe("return\n");
     }
 
     [TestMethod("Return - With message is rendered correctly")]
@@ -60,6 +58,6 @@ public class ReturnTests
         stringBuilder.Return("Result");
 
         // Assert
-        stringBuilder.ToString().Should().Be("return Result\n");
+        stringBuilder.ToString().ShouldBe("return Result\n");
     }
 }

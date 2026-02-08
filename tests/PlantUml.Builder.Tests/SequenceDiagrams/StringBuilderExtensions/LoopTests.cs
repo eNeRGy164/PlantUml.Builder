@@ -15,7 +15,7 @@ public class LoopTests
         stringBuilder.StartLoop(label);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{expected}\n");
+        stringBuilder.ToString().ShouldBe($"{expected}\n");
     }
 
     [TestMethod]
@@ -28,6 +28,6 @@ public class LoopTests
         stringBuilder.EndLoop();
 
         // Assert
-        stringBuilder.ToString().Should().Be("end\n");
+        stringBuilder.ToString().ShouldBe("end\n");
     }
 }

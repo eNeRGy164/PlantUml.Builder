@@ -15,8 +15,7 @@ public class EnumTests
         Action action = () => stringBuilder.Enum(null);
 
         // Assert
-        action.Should().
-            ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName("name");
     }
 
@@ -32,8 +31,7 @@ public class EnumTests
         Action action = () => stringBuilder.Enum(name);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName("name");
     }
 
@@ -50,7 +48,7 @@ public class EnumTests
         method.Invoke(null, parameters);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
+        stringBuilder.ToString().ShouldBe($"{testData.Expected}\n");
     }
 
     private static IEnumerable<object[]> GetValidNotations()

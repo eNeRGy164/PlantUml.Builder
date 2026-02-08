@@ -13,7 +13,7 @@ public class RelationshipDefaultsTests
         var relationship = typeof(Relationship).GetField(name).GetValue(null);
 
         // Assert
-        relationship.ToString().Should().Be(expected);
+        relationship.ToString().ShouldBe(expected);
     }
 
     private static IEnumerable<object[]> GetDefaultRelationships()

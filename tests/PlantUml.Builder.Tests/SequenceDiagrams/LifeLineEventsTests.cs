@@ -11,7 +11,7 @@ public class LifeLineEventsTests
         var lifeLineEvents = typeof(LifeLineEvents).GetProperty(name).GetValue(null);
 
         // Assert
-        lifeLineEvents.ToString().Should().Be(expected);
+        lifeLineEvents.ToString().ShouldBe(expected);
     }
 
     private static IEnumerable<object[]> GetLifeLineEvents()

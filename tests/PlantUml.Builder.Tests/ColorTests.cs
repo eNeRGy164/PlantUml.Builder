@@ -13,7 +13,7 @@ public class ColorTests
         var color = new Color(input);
 
         // Assert
-        color.ToString().Should().Be(expected);
+        color.ToString().ShouldBe(expected);
     }
 
     [TestMethod]
@@ -23,7 +23,7 @@ public class ColorTests
         var color = new Color(NamedColor.AliceBlue);
 
         // Assert
-        color.ToString().Should().Be("#AliceBlue");
+        color.ToString().ShouldBe("#AliceBlue");
     }
 
     [TestMethod]
@@ -36,7 +36,7 @@ public class ColorTests
         var color = (Color)value;
 
         // Assert
-        color.ToString().Should().Be("#AliceBlue");
+        color.ToString().ShouldBe("#AliceBlue");
     }
 
     [TestMethod]
@@ -49,7 +49,7 @@ public class ColorTests
         var color = (Color)value;
 
         // Assert
-        color.ToString().Should().Be("#AliceBlue");
+        color.ToString().ShouldBe("#AliceBlue");
     }
 
     [TestMethod]
@@ -64,6 +64,6 @@ public class ColorTests
         var value = color.ToString(format);
 
         // Assert
-        value.Should().Be(expected);
+        value.ShouldBe(expected);
     }
 }

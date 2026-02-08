@@ -15,7 +15,7 @@ public class AlignmentTests
         var alignment = new Alignment(input);
 
         // Assert
-        alignment.ToString().Should().Be(expected);
+        alignment.ToString().ShouldBe(expected);
     }
 
     [TestMethod]
@@ -28,6 +28,6 @@ public class AlignmentTests
         var alignment = (Alignment)value;
 
         // Assert
-        alignment.ToString().Should().Be("left");
+        alignment.ToString().ShouldBe("left");
     }
 }

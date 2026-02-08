@@ -15,8 +15,7 @@ public class TextTests
         Action action = () => stringBuilder.Text(null);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName("text");
     }
 
@@ -32,8 +31,7 @@ public class TextTests
         Action action = () => stringBuilder.Text(text);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName("text");
     }
 
@@ -49,6 +47,6 @@ public class TextTests
         stringBuilder.Text(inputText);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{expected}\n");
+        stringBuilder.ToString().ShouldBe($"{expected}\n");
     }
 }

@@ -16,7 +16,7 @@ public class NoteTests
         method.Invoke(null, parameters);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
+        stringBuilder.ToString().ShouldBe($"{testData.Expected}\n");
     }
 
     private static IEnumerable<object[]> GetValidNotations()

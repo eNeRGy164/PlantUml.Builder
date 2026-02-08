@@ -15,7 +15,7 @@ public class ScaleTests
         Action action = () => stringBuilder.Scale(null);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName("scale");
     }
 
@@ -31,7 +31,7 @@ public class ScaleTests
         Action action = () => stringBuilder.Scale(scale);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName("scale");
     }
 
@@ -47,7 +47,7 @@ public class ScaleTests
         stringBuilder.Scale(scale);
 
         // Assert
-        stringBuilder.ToString().Should().Be(expected);
+        stringBuilder.ToString().ShouldBe(expected);
     }
 
     [DataRow(180, 90, false, "scale 180*90\n", DisplayName = "Scale(width,height)")]
@@ -62,7 +62,7 @@ public class ScaleTests
         stringBuilder.Scale(width, height, max);
 
         // Assert
-        stringBuilder.ToString().Should().Be(expected);
+        stringBuilder.ToString().ShouldBe(expected);
     }
 
     [DataRow(0, 90, "width", DisplayName = "Scale(width,height) - Width must be positive")]
@@ -79,7 +79,7 @@ public class ScaleTests
         Action action = () => stringBuilder.Scale(width, height);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentOutOfRangeException>()
+        action.ShouldThrowExactly<ArgumentOutOfRangeException>()
             .WithParameterName(paramName);
     }
 
@@ -104,7 +104,7 @@ public class ScaleTests
         }
 
         // Assert
-        stringBuilder.ToString().Should().Be(expected);
+        stringBuilder.ToString().ShouldBe(expected);
     }
 
     [DataRow(0, DisplayName = "Scale(pixels,dimension) - Pixels must be positive")]
@@ -119,7 +119,7 @@ public class ScaleTests
         Action action = () => stringBuilder.Scale(pixels, ScaleDimension.Width);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentOutOfRangeException>()
+        action.ShouldThrowExactly<ArgumentOutOfRangeException>()
             .WithParameterName("pixels");
     }
 
@@ -133,7 +133,7 @@ public class ScaleTests
         Action action = () => stringBuilder.Scale(200, (ScaleDimension)99);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentOutOfRangeException>()
+        action.ShouldThrowExactly<ArgumentOutOfRangeException>()
             .WithParameterName("dimension");
     }
 }

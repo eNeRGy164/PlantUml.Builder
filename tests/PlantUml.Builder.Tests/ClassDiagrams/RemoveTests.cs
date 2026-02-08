@@ -15,8 +15,7 @@ public class RemoveTests
         Action action = () => stringBuilder.Remove(null);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName("what");
     }
 
@@ -32,8 +31,7 @@ public class RemoveTests
         Action action = () => stringBuilder.Remove(name);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName("what");
     }
 
@@ -47,6 +45,6 @@ public class RemoveTests
         stringBuilder.Remove("name");
 
         // Assert
-        stringBuilder.ToString().Should().Be("remove name\n");
+        stringBuilder.ToString().ShouldBe("remove name\n");
     }
 }

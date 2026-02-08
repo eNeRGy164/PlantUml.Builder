@@ -15,7 +15,7 @@ public class ParticipantTests
         Action action = () => stringBuilder.Participant(null);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName("name");
     }
 
@@ -31,8 +31,7 @@ public class ParticipantTests
         Action action = () => stringBuilder.Participant(name);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName("name");
     }
 
@@ -49,7 +48,7 @@ public class ParticipantTests
         method.Invoke(null, parameters);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
+        stringBuilder.ToString().ShouldBe($"{testData.Expected}\n");
     }
 
     private static IEnumerable<object[]> GetValidNotations()

@@ -15,8 +15,7 @@ public class HideEntityPortionTests
         Action action = () => stringBuilder.HideEntityPortion(null, EntityPortion.Members);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName("name");
     }
 
@@ -33,12 +32,10 @@ public class HideEntityPortionTests
         Action action2 = () => stringBuilder.HideEntityPortion((EntityPortion)portion);
 
         // Assert
-        action1.Should()
-            .ThrowExactly<ArgumentOutOfRangeException>()
+        action1.ShouldThrowExactly<ArgumentOutOfRangeException>()
             .WithParameterName("portion");
 
-        action2.Should()
-            .ThrowExactly<ArgumentOutOfRangeException>()
+        action2.ShouldThrowExactly<ArgumentOutOfRangeException>()
             .WithParameterName("portion");
     }
 
@@ -54,8 +51,7 @@ public class HideEntityPortionTests
         Action action = () => stringBuilder.HideEntityPortion(name, EntityPortion.Members);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName("name");
     }
 
@@ -72,7 +68,7 @@ public class HideEntityPortionTests
         method.Invoke(null, parameters);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
+        stringBuilder.ToString().ShouldBe($"{testData.Expected}\n");
     }
 
     private static IEnumerable<object[]> GetValidNotations()

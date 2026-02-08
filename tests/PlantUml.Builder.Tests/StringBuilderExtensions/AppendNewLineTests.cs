@@ -1,4 +1,4 @@
-﻿namespace PlantUml.Builder.Tests;
+namespace PlantUml.Builder.Tests;
 
 [TestClass]
 public class AppendNewLineTests
@@ -13,6 +13,6 @@ public class AppendNewLineTests
         stringBuilder.AppendNewLine();
 
         // Assert
-        stringBuilder.ToString().Should().Be("\n");
+        stringBuilder.ToString().ShouldBe("\n");
     }
 }

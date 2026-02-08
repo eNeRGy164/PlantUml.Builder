@@ -32,7 +32,7 @@ public class ObjectDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/object-diagram#e79e7df1fbafe644"/>
@@ -80,7 +80,7 @@ public class ObjectDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/object-diagram#5f6416a7e094d77e"/>
@@ -118,7 +118,7 @@ public class ObjectDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/object-diagram#60a833de4109a30e"/>
@@ -152,7 +152,7 @@ public class ObjectDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/object-diagram#60a833de4109a30e"/>
@@ -186,7 +186,7 @@ public class ObjectDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/object-diagram#6c738a9019f7ac08"/>
@@ -218,7 +218,7 @@ public class ObjectDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/object-diagram#6c738a9019f7ac08"/>
@@ -250,7 +250,7 @@ public class ObjectDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/object-diagram#6c738a9019f7ac08"/>
@@ -282,7 +282,7 @@ public class ObjectDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/object-diagram#6c738a9019f7ac08"/>
@@ -318,7 +318,7 @@ public class ObjectDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/object-diagram#6c738a9019f7ac08"/>
@@ -364,7 +364,7 @@ public class ObjectDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/object-diagram#6c738a9019f7ac08"/>
@@ -385,7 +385,7 @@ public class ObjectDiagramExampleTests
             Bar::abc --> Baz : Label one
             Foo --> Bar::def : Label two
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -404,7 +404,7 @@ public class ObjectDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/object-diagram#d1f08bf69f3d9b45"/>
@@ -445,7 +445,7 @@ public class ObjectDiagramExampleTests
             task.3 --> task.4
             task.4 --> task.5 : Label 4
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -484,6 +484,6 @@ public class ObjectDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 }

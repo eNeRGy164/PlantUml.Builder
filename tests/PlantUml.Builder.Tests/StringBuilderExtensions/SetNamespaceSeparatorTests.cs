@@ -15,7 +15,7 @@ public class SetNamespaceSeparatorTests
         stringBuilder.SetNamespaceSeparator("::");
 
         // Assert
-        stringBuilder.ToString().Should().Be("set namespaceSeparator ::\n");
+        stringBuilder.ToString().ShouldBe("set namespaceSeparator ::\n");
     }
 
     [DataRow(null, DisplayName = "SetNamespaceSeparator - Separator is ignored if it is `null`")]
@@ -31,6 +31,6 @@ public class SetNamespaceSeparatorTests
         stringBuilder.SetNamespaceSeparator(separator);
 
         // Assert
-        stringBuilder.ToString().Should().Be("set namespaceSeparator none\n");
+        stringBuilder.ToString().ShouldBe("set namespaceSeparator none\n");
     }
 }

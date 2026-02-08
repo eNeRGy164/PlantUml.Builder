@@ -37,7 +37,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#5d2ed256d73a7298"/>
@@ -89,7 +89,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#5d2ed256d73a7298"/>
@@ -133,7 +133,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().BeEquivalentTo(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""), StringCompareShould.IgnoreCase);
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#5d2ed256d73a7298"/>
@@ -161,7 +161,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#2210ebadb5117709"/>
@@ -193,7 +193,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#f5050860884ddf31"/>
@@ -217,7 +217,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#f5050860884ddf31"/>
@@ -241,7 +241,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#bf6bee6d96403148"/>
@@ -269,7 +269,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().BeEquivalentTo(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""), StringCompareShould.IgnoreCase);
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#bf6bee6d96403148"/>
@@ -297,7 +297,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().BeEquivalentTo(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""), StringCompareShould.IgnoreCase);
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#efeda651e89e596c"/>
@@ -343,7 +343,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#efeda651e89e596c"/>
@@ -392,7 +392,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#0b2e57c3d4eafdda"/>
@@ -418,7 +418,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#ce3f7eb577ad5f4d"/>
@@ -446,7 +446,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#ce3f7eb577ad5f4d"/>
@@ -492,7 +492,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#ce3f7eb577ad5f4d"/>
@@ -538,7 +538,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#ce3f7eb577ad5f4d"/>
@@ -594,7 +594,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#ce3f7eb577ad5f4d"/>
@@ -656,7 +656,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#ce3f7eb577ad5f4d"/>
@@ -692,7 +692,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#77852febc7dde952"/>
@@ -732,7 +732,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#45d7d5b32d17a0f9"/>
@@ -778,7 +778,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#efeda651e89e596c"/>
@@ -844,7 +844,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#7aad256d9e87308c"/>
@@ -884,7 +884,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#012d3e8694a98cc1"/>
@@ -930,7 +930,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#f8c59a77112b60e7"/>
@@ -988,7 +988,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().BeEquivalentTo(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""), StringCompareShould.IgnoreCase);
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#84de38ea1ca38165"/>
@@ -1044,7 +1044,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#39755e6414c00844"/>
@@ -1078,7 +1078,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#39755e6414c00844"/>
@@ -1106,7 +1106,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#39755e6414c00844"/>
@@ -1134,7 +1134,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#28881bae78acd047"/>
@@ -1210,7 +1210,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#d4b2df53a72661cc"/>
@@ -1254,7 +1254,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#63d5049791d9d79d"/>
@@ -1298,7 +1298,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#8f497c1a3d15af9e"/>
@@ -1334,7 +1334,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#8659eac9bf4c2629"/>
@@ -1366,7 +1366,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#d511f8439ecde366"/>
@@ -1408,7 +1408,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#5cc0040514e70f7b"/>
@@ -1468,7 +1468,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#5cc0040514e70f7b"/>
@@ -1524,7 +1524,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#5cc0040514e70f7b"/>
@@ -1566,7 +1566,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#988fd738de9c6d17"/>
@@ -1596,7 +1596,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#b2c1d43bde93c643"/>
@@ -1640,7 +1640,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#35480215b426d170"/>
@@ -1678,7 +1678,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#35480215b426d170"/>
@@ -1706,7 +1706,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#35480215b426d170"/>
@@ -1736,7 +1736,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#05984b1743e67542"/>
@@ -1784,7 +1784,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#05984b1743e67542"/>
@@ -1848,7 +1848,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#098797a007f231ea"/>
@@ -1884,7 +1884,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#94190c2f242a5df2"/>
@@ -1918,7 +1918,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#94190c2f242a5df2"/>
@@ -1937,7 +1937,7 @@ public class SequenceDiagramExampleTests
             Bob -> Alice : First message
 
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -1954,7 +1954,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#94190c2f242a5df2"/>
@@ -1972,7 +1972,7 @@ public class SequenceDiagramExampleTests
             Bob -> Alice : First message
 
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -1988,7 +1988,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#a21f56b1869e89e5"/>
@@ -2022,7 +2022,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#a21f56b1869e89e5"/>
@@ -2040,7 +2040,7 @@ public class SequenceDiagramExampleTests
             Bob -> Alice : Authentication Response
 
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -2056,7 +2056,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#f52672a8f74a07df"/>
@@ -2098,7 +2098,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#f52672a8f74a07df"/>
@@ -2126,7 +2126,7 @@ public class SequenceDiagramExampleTests
             John -> Other : Hello
 
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -2152,7 +2152,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#21380379ba44081d"/>
@@ -2171,7 +2171,7 @@ public class SequenceDiagramExampleTests
             Bob --> Alice : Authentication Response
 
             @enduml
-        
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -2188,7 +2188,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#7aa53dbdfc2137bf"/>
@@ -2227,7 +2227,7 @@ public class SequenceDiagramExampleTests
             deactivate A
 
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -2264,7 +2264,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#33cee7c2521befd3"/>
@@ -2289,7 +2289,7 @@ public class SequenceDiagramExampleTests
             Alice1 -> Bob1 : hello
             Alice1 -> Out : out
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -2312,7 +2312,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#4764f83f72ed032f"/>
@@ -2346,7 +2346,7 @@ public class SequenceDiagramExampleTests
             a -//o b : ""-//o ""
             a x->o b : ""x->o ""
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -2378,7 +2378,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#4764f83f72ed032f"/>
@@ -2412,7 +2412,7 @@ public class SequenceDiagramExampleTests
             a -//o a : ""-//o ""
             a x->o a : ""x->o ""
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -2444,7 +2444,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#4764f83f72ed032f"/>
@@ -2478,7 +2478,7 @@ public class SequenceDiagramExampleTests
             [-//o b : ""[-//o ""
             [x->o b : ""[x->o ""
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -2510,7 +2510,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
 
@@ -2546,7 +2546,7 @@ public class SequenceDiagramExampleTests
             a -//o] : ""-//o] ""
             a x->o] : ""x->o] ""
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -2578,7 +2578,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#75b4984abd04b14f"/>
@@ -2592,7 +2592,7 @@ public class SequenceDiagramExampleTests
             Bob -> Alice : hello
             Alice -> Bob : ok
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -2604,7 +2604,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#75b4984abd04b14f"/>
@@ -2619,7 +2619,7 @@ public class SequenceDiagramExampleTests
             Bob -> Alice : hello
             Alice -> Bob : ok
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -2632,7 +2632,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#75b4984abd04b14f"/>
@@ -2647,7 +2647,7 @@ public class SequenceDiagramExampleTests
             Bob -> Alice : hello
             Alice -> Bob : ok
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -2660,7 +2660,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#75b4984abd04b14f"/>
@@ -2675,7 +2675,7 @@ public class SequenceDiagramExampleTests
             Bob -> Alice : hello
             Alice -> Bob : ok
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -2688,7 +2688,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#fc006eba0d9dcacc"/>
@@ -2705,7 +2705,7 @@ public class SequenceDiagramExampleTests
 
             Alice -> Bob : hello
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -2720,7 +2720,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#fc006eba0d9dcacc"/>
@@ -2738,7 +2738,7 @@ public class SequenceDiagramExampleTests
 
             Alice -> Bob : hello
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -2754,7 +2754,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/sequence-diagram#5640ee4b2a998e5e"/>
@@ -2768,7 +2768,7 @@ public class SequenceDiagramExampleTests
             mainframe This is a **mainframe**
             Alice->Bob : Hello
             @enduml
-            
+
             """;
 
         var stringBuilder = new StringBuilder();
@@ -2780,7 +2780,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href=""/>
@@ -2802,7 +2802,7 @@ public class SequenceDiagramExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     public class Bob : ParticipantName

@@ -12,8 +12,7 @@ public class ClassMemberTests
         Action action = () => _ = new ClassMember(null);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName("name");
     }
 
@@ -26,8 +25,7 @@ public class ClassMemberTests
         Action action = () => _ = new ClassMember(name);
 
         // Assert
-        action.Should()
-              .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
               .WithParameterName("name");
     }
 
@@ -53,7 +51,7 @@ public class ClassMemberTests
         ClassMember member = value;
 
         // Assert
-        member.Name.Should().Be(expected);
+        member.Name.ShouldBe(expected);
     }
 
     [DataRow("member", false, DisplayName = "Instance member should not be static")]
@@ -70,7 +68,7 @@ public class ClassMemberTests
         ClassMember member = value;
 
         // Assert
-        member.IsStatic.Should().Be(expected);
+        member.IsStatic.ShouldBe(expected);
     }
 
     [DataRow("member", false, DisplayName = "Instance member should not be abstract")]
@@ -87,7 +85,7 @@ public class ClassMemberTests
         ClassMember member = value;
 
         // Assert
-        member.IsAbstract.Should().Be(expected);
+        member.IsAbstract.ShouldBe(expected);
     }
 
     [DataRow("member", VisibilityModifier.None, DisplayName = "No modifiers")]
@@ -105,6 +103,6 @@ public class ClassMemberTests
         ClassMember member = value;
 
         // Assert
-        member.Visibility.Should().Be(expected);
+        member.Visibility.ShouldBe(expected);
     }
 }

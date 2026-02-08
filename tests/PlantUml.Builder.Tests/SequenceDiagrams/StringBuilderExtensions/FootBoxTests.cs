@@ -13,7 +13,7 @@ public class FootBoxTests
         stringBuilder.HideFootBox();
 
         // Assert
-        stringBuilder.ToString().Should().Be("hide footbox\n");
+        stringBuilder.ToString().ShouldBe("hide footbox\n");
     }
 
     [TestMethod]
@@ -26,6 +26,6 @@ public class FootBoxTests
         stringBuilder.ShowFootBox();
 
         // Assert
-        stringBuilder.ToString().Should().Be("show footbox\n");
+        stringBuilder.ToString().ShouldBe("show footbox\n");
     }
 }

@@ -15,8 +15,7 @@ public class TitleTests
         Action action = () => stringBuilder.Title(null);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName("title");
     }
 
@@ -32,8 +31,7 @@ public class TitleTests
         Action action = () => stringBuilder.Title(text);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName("title");
     }
 
@@ -49,7 +47,7 @@ public class TitleTests
         stringBuilder.Title(title);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{expected}\n");
+        stringBuilder.ToString().ShouldBe($"{expected}\n");
     }
 
     [TestMethod]
@@ -62,7 +60,7 @@ public class TitleTests
         stringBuilder.TitleStart();
 
         // Assert
-        stringBuilder.ToString().Should().Be("title\n");
+        stringBuilder.ToString().ShouldBe("title\n");
     }
 
     [TestMethod]
@@ -75,6 +73,6 @@ public class TitleTests
         stringBuilder.EndTitle();
 
         // Assert
-        stringBuilder.ToString().Should().Be("end title\n");
+        stringBuilder.ToString().ShouldBe("end title\n");
     }
 }

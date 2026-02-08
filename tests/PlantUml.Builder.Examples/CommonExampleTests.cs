@@ -29,7 +29,7 @@ public class CommonExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/commons#comments"/>
@@ -59,7 +59,7 @@ public class CommonExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/commons#comments"/>
@@ -87,7 +87,7 @@ public class CommonExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/commons#comments"/>
@@ -127,7 +127,7 @@ public class CommonExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/commons#zoom-or-scale"/>
@@ -153,7 +153,7 @@ public class CommonExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/commons#title"/>
@@ -195,7 +195,7 @@ public class CommonExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/commons#title"/>
@@ -235,7 +235,7 @@ public class CommonExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/commons#caption"/>
@@ -265,7 +265,7 @@ public class CommonExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/commons#footer-and-header"/>
@@ -305,7 +305,7 @@ public class CommonExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/commons#legend-the-diagram"/>
@@ -337,7 +337,7 @@ public class CommonExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/commons#legend-the-diagram"/>
@@ -369,7 +369,7 @@ public class CommonExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 
     /// <seealso href="https://plantuml.com/commons#mainframe"/>
@@ -395,6 +395,6 @@ public class CommonExampleTests
         stringBuilder.UmlDiagramEnd();
 
         // Assert
-        stringBuilder.ToString().Should().Be(example.Replace("\r", ""));
+        stringBuilder.ToString().ShouldBe(example.Replace("\r", ""));
     }
 }

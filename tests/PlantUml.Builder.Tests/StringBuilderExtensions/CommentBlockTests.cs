@@ -16,6 +16,6 @@ public class CommentBlockTests
         stringBuilder.CommentBlock(comment);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{expected}\n");
+        stringBuilder.ToString().ShouldBe($"{expected}\n");
     }
 }

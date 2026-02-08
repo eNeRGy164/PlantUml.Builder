@@ -17,8 +17,7 @@ public class MemberDeclarationTests
         Action action = () => stringBuilder.MemberDeclaration(name, (ClassMember)member);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName(parameterName);
     }
 
@@ -34,8 +33,7 @@ public class MemberDeclarationTests
         Action action = () => stringBuilder.MemberDeclaration(name, (ClassMember)AnyString);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName("name");
     }
 
@@ -51,7 +49,7 @@ public class MemberDeclarationTests
         stringBuilder.MemberDeclaration(testData.ClassName, classMember);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
+        stringBuilder.ToString().ShouldBe($"{testData.Expected}\n");
     }
 
     private static IEnumerable<object[]> GetValidNotations()

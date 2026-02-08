@@ -16,7 +16,7 @@ public class StereoTypeTests
         method.Invoke(null, parameters);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{testData.Expected}");
+        stringBuilder.ToString().ShouldBe($"{testData.Expected}");
     }
 
     public static IEnumerable<object[]> GetValidNotations()

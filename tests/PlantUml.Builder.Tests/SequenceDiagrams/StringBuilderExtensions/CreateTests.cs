@@ -15,8 +15,7 @@ public class CreateTests
         Action action = () => stringBuilder.Create(null);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName("name");
     }
 
@@ -32,8 +31,7 @@ public class CreateTests
         Action action = () => stringBuilder.Create(name);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName("name");
     }
 
@@ -49,7 +47,7 @@ public class CreateTests
         method.Invoke(null, parameters);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
+        stringBuilder.ToString().ShouldBe($"{testData.Expected}\n");
     }
 
     private static IEnumerable<object[]> GetValidNotations()
@@ -58,7 +56,7 @@ public class CreateTests
         yield return new object[] { new MethodExpectationTestData("Create", "create actorA order 10", "actorA", null, null, 10).WithDisplayName("Create - Create line with order") };
         yield return new object[] { new MethodExpectationTestData("Create", "create actorA <<Stereo>>", "actorA", null, null, null, "Stereo").WithDisplayName("Participant - With sterotype") };
         yield return new object[] { new MethodExpectationTestData("Create", "create actorA <<(C,#336699)Stereo>>", "actorA", null, null, null, "Stereo", new CustomSpot('C', "336699")).WithDisplayName("Participant - With custom spot") };
-    }    
+    }
 
     public static string GetValidNotationTestDisplayName(MethodInfo _, object[] data) => TestHelpers.GetValidNotationTestDisplayName(data);
 }

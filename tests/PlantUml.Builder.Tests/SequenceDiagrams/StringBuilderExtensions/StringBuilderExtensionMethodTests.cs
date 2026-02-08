@@ -16,8 +16,8 @@ public class StringBuilderExtensionMethodTests
         Action action = () => method.Invoke(null, parameters);
 
         // Assert
-        action.Should().ThrowExactly<TargetInvocationException>()
-            .WithInnerExceptionExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<TargetInvocationException>()
+            .ShouldHaveInnerExceptionExactly<ArgumentNullException>()
             .WithParameterName("stringBuilder");
     }
 

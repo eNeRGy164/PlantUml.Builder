@@ -17,8 +17,7 @@ public class SkinParameterTests
         Action action = () => stringBuilder.SkinParameter(name, value);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName(parameterName);
     }
 
@@ -36,8 +35,7 @@ public class SkinParameterTests
         Action action = () => stringBuilder.SkinParameter(name, value);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName(parameterName);
     }
 
@@ -51,8 +49,7 @@ public class SkinParameterTests
         Action action = () => stringBuilder.SkinParameter((SkinParameter)ushort.MaxValue, AnyString);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentOutOfRangeException>()
+        action.ShouldThrowExactly<ArgumentOutOfRangeException>()
             .WithMessage("A defined enum value should be provided*")
             .WithParameterName("skinParameter");
     }
@@ -70,7 +67,7 @@ public class SkinParameterTests
         method.Invoke(null, parameters);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{testData.Expected}\n");
+        stringBuilder.ToString().ShouldBe($"{testData.Expected}\n");
     }
     private static IEnumerable<object[]> GetValidNotations()
     {

@@ -19,8 +19,7 @@ public class AutoNumberTests
         Action action = () => stringBuilder.AutoNumber(start, default, format);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName(parameterName);
     }
 
@@ -46,7 +45,7 @@ public class AutoNumberTests
         method.Invoke(null, parameters);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{expected}\n");
+        stringBuilder.ToString().ShouldBe($"{expected}\n");
     }
 
     [TestMethod]
@@ -59,7 +58,7 @@ public class AutoNumberTests
         stringBuilder.StopAutoNumber();
 
         // Assert
-        stringBuilder.ToString().Should().Be("autonumber stop\n");
+        stringBuilder.ToString().ShouldBe("autonumber stop\n");
     }
 
     [DataRow(EmptyString, DisplayName = "ResumeAutoNumber - Format argument cannot be empty")]
@@ -74,8 +73,7 @@ public class AutoNumberTests
         Action action = () => stringBuilder.ResumeAutoNumber(default, format);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName("format");
     }
 
@@ -93,7 +91,7 @@ public class AutoNumberTests
         stringBuilder.ResumeAutoNumber(step, format);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{expected}\n");
+        stringBuilder.ToString().ShouldBe($"{expected}\n");
     }
 
     [DataRow('1', DisplayName = "IncreaseAutoNumber - Position argument cannot be a numeric character")]
@@ -113,8 +111,7 @@ public class AutoNumberTests
         Action action = () => stringBuilder.IncreaseAutoNumber(position);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentOutOfRangeException>()
+        action.ShouldThrowExactly<ArgumentOutOfRangeException>()
             .WithMessage("Only the characters A - Z are allowed*")
             .WithParameterName("position");
     }
@@ -133,6 +130,6 @@ public class AutoNumberTests
         stringBuilder.IncreaseAutoNumber(position);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{expected}\n");
+        stringBuilder.ToString().ShouldBe($"{expected}\n");
     }
 }

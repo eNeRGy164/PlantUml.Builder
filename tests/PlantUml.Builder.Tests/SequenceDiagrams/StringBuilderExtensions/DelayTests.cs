@@ -15,6 +15,6 @@ public class DelayTests
         stringBuilder.Delay(message);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{expected}\n");
+        stringBuilder.ToString().ShouldBe($"{expected}\n");
     }
 }

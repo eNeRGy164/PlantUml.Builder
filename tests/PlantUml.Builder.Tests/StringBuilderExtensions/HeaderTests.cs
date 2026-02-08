@@ -15,8 +15,7 @@ public class HeaderTests
         Action action = () => stringBuilder.Header(null);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName("header");
     }
 
@@ -32,8 +31,7 @@ public class HeaderTests
         Action action = () => stringBuilder.Header(header);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName("header");
     }
 
@@ -47,7 +45,7 @@ public class HeaderTests
         stringBuilder.Header("Header");
 
         // Assert
-        stringBuilder.ToString().Should().Be("header Header\n");
+        stringBuilder.ToString().ShouldBe("header Header\n");
     }
 
     [TestMethod("Header - Newlines are escaped")]
@@ -60,7 +58,7 @@ public class HeaderTests
         stringBuilder.Header("Header\nLine");
 
         // Assert
-        stringBuilder.ToString().Should().Be("header Header\\nLine\n");
+        stringBuilder.ToString().ShouldBe("header Header\\nLine\n");
     }
 
     [DataRow("left", "left header Header\n", DisplayName = "Header - Left alignment")]
@@ -76,7 +74,7 @@ public class HeaderTests
         stringBuilder.Header("Header", new Alignment(alignment));
 
         // Assert
-        stringBuilder.ToString().Should().Be(expected);
+        stringBuilder.ToString().ShouldBe(expected);
     }
 
     [TestMethod("Header - Invalid alignment is ignored")]
@@ -89,7 +87,7 @@ public class HeaderTests
         stringBuilder.Header("Header", new Alignment("invalid"));
 
         // Assert
-        stringBuilder.ToString().Should().Be("header Header\n");
+        stringBuilder.ToString().ShouldBe("header Header\n");
     }
 
     [TestMethod("HeaderStart - renders header block start")]
@@ -102,7 +100,7 @@ public class HeaderTests
         stringBuilder.HeaderStart();
 
         // Assert
-        stringBuilder.ToString().Should().Be("header\n");
+        stringBuilder.ToString().ShouldBe("header\n");
     }
 
     [DataRow("left", "left header\n", DisplayName = "HeaderStart - Left alignment")]
@@ -118,7 +116,7 @@ public class HeaderTests
         stringBuilder.HeaderStart(new Alignment(alignment));
 
         // Assert
-        stringBuilder.ToString().Should().Be(expected);
+        stringBuilder.ToString().ShouldBe(expected);
     }
 
     [TestMethod("HeaderStart - Invalid alignment is ignored")]
@@ -131,7 +129,7 @@ public class HeaderTests
         stringBuilder.HeaderStart(new Alignment("invalid"));
 
         // Assert
-        stringBuilder.ToString().Should().Be("header\n");
+        stringBuilder.ToString().ShouldBe("header\n");
     }
 
     [TestMethod("EndHeader - renders header block end")]
@@ -144,6 +142,6 @@ public class HeaderTests
         stringBuilder.EndHeader();
 
         // Assert
-        stringBuilder.ToString().Should().Be("end header\n");
+        stringBuilder.ToString().ShouldBe("end header\n");
     }
 }

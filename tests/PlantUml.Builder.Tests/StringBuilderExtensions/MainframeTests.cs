@@ -15,7 +15,7 @@ public class MainframeTests
         stringBuilder.Mainframe("This is a **mainframe**");
 
         // Assert
-        stringBuilder.ToString().Should().Be("mainframe This is a **mainframe**\n");
+        stringBuilder.ToString().ShouldBe("mainframe This is a **mainframe**\n");
     }
 
     [TestMethod]
@@ -28,8 +28,7 @@ public class MainframeTests
         Action action = () => stringBuilder.Mainframe(null);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName("title");
     }
 
@@ -45,8 +44,7 @@ public class MainframeTests
         Action action = () => stringBuilder.Mainframe(title);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithParameterName("title");
     }
 }

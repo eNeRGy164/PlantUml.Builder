@@ -11,7 +11,7 @@ public class ArrowDefaultsTests
         var arrow = typeof(Arrow).GetProperty(name).GetValue(null);
 
         // Assert
-        arrow.ToString().Should().Be(expected);
+        arrow.ToString().ShouldBe(expected);
     }
 
     private static IEnumerable<object[]> GetDefaultArrows()

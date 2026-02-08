@@ -15,6 +15,6 @@ public class AltTests
         stringBuilder.AltStart(text);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{expected}\n");
+        stringBuilder.ToString().ShouldBe($"{expected}\n");
     }
 }

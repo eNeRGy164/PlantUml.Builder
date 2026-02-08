@@ -15,6 +15,6 @@ public class ElseTests
         stringBuilder.ElseStart(text);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{expected}\n");
+        stringBuilder.ToString().ShouldBe($"{expected}\n");
     }
 }

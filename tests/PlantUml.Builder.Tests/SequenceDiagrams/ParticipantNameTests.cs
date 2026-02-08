@@ -21,6 +21,6 @@ public class ParticipantNameTests
         ParticipantName participantName = original;
 
         // Assert
-        participantName.ToString().Should().Be(expected);
+        participantName.ToString().ShouldBe(expected);
     }
 }

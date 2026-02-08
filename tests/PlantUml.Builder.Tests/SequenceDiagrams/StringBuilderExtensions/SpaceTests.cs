@@ -15,6 +15,6 @@ public class SpaceTests
         stringBuilder.Space(size);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{expected}\n");
+        stringBuilder.ToString().ShouldBe($"{expected}\n");
     }
 }

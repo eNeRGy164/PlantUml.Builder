@@ -13,7 +13,7 @@ public class DirectionTests
         Action action = () => stringBuilder.Direction((DiagramDirection)byte.MaxValue);
 
         // Assert
-        action.Should().ThrowExactly<ArgumentOutOfRangeException>()
+        action.ShouldThrowExactly<ArgumentOutOfRangeException>()
             .WithMessage("A defined enum value should be provided*")
             .WithParameterName("direction");
     }
@@ -30,6 +30,6 @@ public class DirectionTests
         stringBuilder.Direction(direction);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{expected}\n");
+        stringBuilder.ToString().ShouldBe($"{expected}\n");
     }
 }

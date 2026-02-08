@@ -15,6 +15,6 @@ public class DividerTests
         stringBuilder.Divider(title);
 
         // Assert
-        stringBuilder.ToString().Should().Be($"{expected}\n");
+        stringBuilder.ToString().ShouldBe($"{expected}\n");
     }
 }

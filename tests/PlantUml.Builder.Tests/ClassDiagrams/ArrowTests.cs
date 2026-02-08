@@ -12,8 +12,7 @@ public class ArrowClassTests
         Action action = () => _ = new Arrow(null);
 
         // Assert
-        action.Should()
-            .ThrowExactly<ArgumentNullException>()
+        action.ShouldThrowExactly<ArgumentNullException>()
             .WithParameterName("arrow");
     }
 
@@ -26,8 +25,7 @@ public class ArrowClassTests
         Action action = () => _ = new Arrow(value);
 
         // Assert
-        action.Should()
-              .ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
               .WithParameterName("arrow");
     }
 
@@ -38,7 +36,7 @@ public class ArrowClassTests
         Action action = () => _ = new Arrow("-");
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithMessage("The arrow type must be at least 2 characters long*")
             .WithParameterName("arrow");
     }
@@ -50,7 +48,7 @@ public class ArrowClassTests
         Action action = () => _ = new Arrow("<>");
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithMessage("The arrow must contain at least 1 line character*")
             .WithParameterName("arrow");
     }
@@ -62,7 +60,7 @@ public class ArrowClassTests
         Action action = () => _ = new Arrow(".-");
 
         // Assert
-        action.Should().ThrowExactly<ArgumentException>()
+        action.ShouldThrowExactly<ArgumentException>()
             .WithMessage("The arrow must contain either a dashed line ('.') or a solid line ('-'), but not both.*")
             .WithParameterName("arrow");
     }
@@ -79,7 +77,7 @@ public class ArrowClassTests
         var arrow = new Arrow(input);
 
         // Assert
-        arrow.ToString().Should().Be(input);
+        arrow.ToString().ShouldBe(input);
     }
 
     [TestMethod]
@@ -89,7 +87,7 @@ public class ArrowClassTests
         var arrow = new Arrow("->");
 
         // Assert
-        arrow.LeftHead.Should().BeEmpty();
+        arrow.LeftHead.ShouldBeEmpty();
     }
 
     [TestMethod]
@@ -99,7 +97,7 @@ public class ArrowClassTests
         var arrow = new Arrow("<-");
 
         // Assert
-        arrow.RightHead.Should().BeEmpty();
+        arrow.RightHead.ShouldBeEmpty();
     }
 
     [TestMethod]
@@ -112,7 +110,7 @@ public class ArrowClassTests
         var arrow = (Arrow)value;
 
         // Assert
-        arrow.ToString().Should().Be("-->");
+        arrow.ToString().ShouldBe("-->");
     }
 
     [TestMethod]
@@ -125,6 +123,6 @@ public class ArrowClassTests
         var value = (string)arrow;
 
         // Assert
-        value.Should().Be("-->");
+        value.ShouldBe("-->");
     }
 }
